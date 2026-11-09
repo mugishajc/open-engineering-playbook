@@ -12,7 +12,12 @@
 #
 # Actions are pinned to full commit SHAs, with the version in a comment, so a
 # moved tag cannot change what runs. Let Dependabot or Renovate update them.
-# For private repositories, set publish_results to false.
+# Private repositories: the job is skipped by default, because Scorecard cannot
+# read a private repository with the default token and code scanning on private
+# repositories needs GitHub Advanced Security. To run it anyway, create a
+# fine-grained read-only token as the SCORECARD_TOKEN secret, set the repository
+# variable SCORECARD_PRIVATE to true, and remove the upload step if you do not
+# have Advanced Security.
 
 name: Scorecard supply-chain security
 
@@ -31,6 +36,7 @@ permissions: read-all
 jobs:
   analysis:
     name: Scorecard analysis
+    if: ${{ !github.event.repository.private || vars.SCORECARD_PRIVATE == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       # Upload results to code scanning.
@@ -50,7 +56,9 @@ jobs:
         with:
           results_file: results.sarif
           results_format: sarif
-          publish_results: true
+          repo_token: ${{ secrets.SCORECARD_TOKEN || github.token }}
+          # Publishing to the public Scorecard API works only for public repositories.
+          publish_results: ${{ !github.event.repository.private }}
 
       - name: Keep results as a build artifact
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2

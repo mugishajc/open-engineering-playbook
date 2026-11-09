@@ -49,6 +49,8 @@ concurrency:
 
 jobs:
   release-please:
+    # Skipped, not failed, until the release App is set up (see the top of this file).
+    if: ${{ vars.RELEASE_APP_CLIENT_ID != '' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
     # The App token does the writing, so GITHUB_TOKEN needs nothing.

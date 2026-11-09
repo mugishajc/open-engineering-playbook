@@ -32,18 +32,19 @@ updates:
       actions:
         patterns: ["*"]
 
-  # Container base images in Dockerfiles.
-  - package-ecosystem: docker
-    directory: /
-    schedule:
-      interval: weekly
-      day: monday
-    cooldown:
-      default-days: 3
-    commit-message:
-      prefix: build
-      include: scope
-    labels: [dependencies]
+  # Container base images. Uncomment only if the repository has a Dockerfile,
+  # otherwise Dependabot reports a failed update run every week.
+  # - package-ecosystem: docker
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
+  #     day: monday
+  #   cooldown:
+  #     default-days: 3
+  #   commit-message:
+  #     prefix: build
+  #     include: scope
+  #   labels: [dependencies]
 
   # Example: npm packages. Minor and patch updates grouped into one pull request.
   # - package-ecosystem: npm
