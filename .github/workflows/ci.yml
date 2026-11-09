@@ -1,0 +1,77 @@
+name: ci
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  plain-language:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python3 tools/plain_lint.py
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: assessment tool
+        run: python3 -m unittest discover -s assessment/tests -v
+      - name: plain-language check
+        run: python3 -m unittest discover -s tools/tests -v
+      - name: assessment runs on the example answers
+        run: python3 assessment/assess.py --questions assessment/questions.toml --answers assessment/example-answers.toml
+
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: check relative links between pages
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --offline --no-progress --include-fragments=false './**/*.md'
+          fail: true
+
+  templates:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: YAML and JSON parse
+        run: |
+          pip install --quiet pyyaml
+          python3 - <<'PY'
+          import json, pathlib, sys, yaml
+          bad = 0
+          for p in pathlib.Path(".").rglob("*"):
+              if ".git" in p.parts or not p.is_file():
+                  continue
+              try:
+                  if p.suffix in {".yml", ".yaml"}:
+                      list(yaml.safe_load_all(p.read_text()))
+                  elif p.suffix == ".json":
+                      json.loads(p.read_text())
+              except Exception as e:
+                  print(f"{p}: {e}")
+                  bad += 1
+          sys.exit(1 if bad else 0)
+          PY
+      - name: actionlint on workflow templates
+        run: |
+          bash <(curl -sSLf https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          ./actionlint -color .github/workflows/*.yml templates/github/workflows/*.yml templates/security/workflows/*.yml
+      - name: shellcheck
+        run: shellcheck tools/*.sh
+      - name: init script copies templates into an empty repo
+        run: |
+          tmp=$(mktemp -d)
+          tools/adopt.sh --target "$tmp" --platform github --with-security
+          test -f "$tmp/.github/PULL_REQUEST_TEMPLATE.md"
