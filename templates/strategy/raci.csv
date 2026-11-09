@@ -1,0 +1,7 @@
+id,decision,team,tech_lead,staff_principal,engineering_manager,head_of_engineering,cto,ciso,platform_team,product_manager,procurement_legal
+EXAMPLE-01,Library or framework within an Adopt standard,R,A,I,,,,,,,
+EXAMPLE-02,New language or database not on the tech radar,R,R,A,C,I,,C,C,,
+EXAMPLE-03,Release to production (normal change),R,A,,I,,,,,I,
+EXAMPLE-04,Accept a security risk (waiver),R,R,C,C,I,,A,,C,
+EXAMPLE-05,Adopt a new third-party product or supplier,R,C,C,C,A,I,C,C,C,R
+EXAMPLE-06,Data residency or hosting jurisdiction,C,C,C,,C,A,C,C,,R

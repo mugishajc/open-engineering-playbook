@@ -1,0 +1,86 @@
+# Argo CD project and application for one service.
+# Two documents: an AppProject that limits what the team may deploy and where,
+# and an Application that keeps the cluster in sync with git.
+# Replace every value in angle brackets. Apply to the namespace where Argo CD runs.
+# Reference: https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/
+#
+# Air-gapped: point repoURL at the internal git server, and make sure every
+# image the manifests reference is in the internal registry.
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: team-orders
+  namespace: argocd
+spec:
+  description: Services owned by the orders team.
+  # Only these repositories may be deployed from this project.
+  sourceRepos:
+    - https://git.example.org/<org>/orders-deploy.git
+  # Only these clusters and namespaces may receive them.
+  destinations:
+    - server: https://kubernetes.default.svc
+      namespace: orders
+  # Teams may not create cluster-wide resources such as ClusterRoles or CRDs.
+  clusterResourceWhitelist: []
+  # Namespaced resource kinds the team may manage.
+  namespaceResourceWhitelist:
+    - group: apps
+      kind: Deployment
+    - group: ""
+      kind: Service
+    - group: ""
+      kind: ConfigMap
+    - group: ""
+      kind: ServiceAccount
+    - group: policy
+      kind: PodDisruptionBudget
+    - group: autoscaling
+      kind: HorizontalPodAutoscaler
+    - group: networking.k8s.io
+      kind: NetworkPolicy
+  # Optional: block automatic syncs to production outside agreed hours.
+  # syncWindows:
+  #   - kind: deny
+  #     schedule: "0 18 * * 5"
+  #     duration: 62h
+  #     applications: ["*"]
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: orders-service-production
+  namespace: argocd
+  labels:
+    team: orders
+    environment: production
+  # Remove the cluster resources when the Application is deleted.
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: team-orders
+  source:
+    repoURL: https://git.example.org/<org>/orders-deploy.git
+    # Pin production to a tag or commit so promotion is an explicit change in git.
+    targetRevision: <release-tag>
+    path: environments/production/orders-service
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: orders
+  syncPolicy:
+    automated:
+      # Delete resources that were removed from git.
+      prune: true
+      # Revert manual changes made directly in the cluster (drift).
+      selfHeal: true
+    syncOptions:
+      # The namespace is created by the platform with its labels and policies.
+      - CreateNamespace=false
+      - PruneLast=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m
+  # Keep the last 10 synced revisions for rollback.
+  revisionHistoryLimit: 10

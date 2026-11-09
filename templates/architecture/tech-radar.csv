@@ -1,0 +1,13 @@
+name,ring,quadrant,isNew,description
+Trunk-based development,adopt,techniques,FALSE,"Short-lived branches merged to main at least daily. Default for all teams. See playbook/delivery/source-control.md."
+Architecture decision records,adopt,techniques,FALSE,"MADR 4.0 records in docs/decisions next to the code. Required for decisions that are costly to reverse."
+OpenTelemetry,adopt,tools,FALSE,"SDKs and Collector for traces, metrics and logs over OTLP. Runs on cloud, on-premises and air-gapped. Owner: platform team."
+Kubernetes,adopt,platforms,FALSE,"Managed service on public cloud, self-managed distribution on-premises and air-gapped. Golden path templates target it."
+Harbor,adopt,platforms,FALSE,"Internal OCI registry with replication, vulnerability scanning and signature checks. Required for air-gapped sites."
+Argo CD,trial,tools,TRUE,"GitOps deployment for Kubernetes. Two teams in trial until end of Q2. Works fully offline from an internal git server."
+Cosign key-pair signing,adopt,tools,TRUE,"Sign images and SBOMs with keys held in an HSM or KMS. Used where keyless signing cannot reach public Sigstore services."
+OpenBao,assess,platforms,TRUE,"Open source secrets manager forked from HashiCorp Vault. Assess licence, support options and migration effort before any production use."
+Self-hosted code assistant models,assess,tools,TRUE,"Open-weight models served inside our network for code classified Confidential or above. Assess quality, GPU cost and licence terms."
+Go,adopt,languages & frameworks,FALSE,"Default language for new backend services and command-line tools. Service template available."
+Rust,trial,languages & frameworks,FALSE,"Allowed for performance-critical and memory-safety-critical components. Owner and code review pool required."
+Long-lived feature branches,hold,techniques,FALSE,"Feature branches that live for weeks cause painful merges and hide integration problems. Use trunk-based development and feature flags."
