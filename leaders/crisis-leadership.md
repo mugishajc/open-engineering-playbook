@@ -30,20 +30,22 @@ Times are from the moment the crisis team is called. Starting points; rehearse a
 |---|---|---|
 | 0 to 10 | Confirm an incident commander is in place. Name the executive crisis lead and the executive liaison. | CTO or CIO |
 | 0 to 10 | Open the decision log (template below). Record the time of awareness: regulatory clocks start from it. | Crisis lead |
+| 0 to 10 | Inform the CEO by phone, so the CEO can take any decision with major revenue impact in the next 30 minutes. | CTO or CIO |
 | 10 to 20 | Move to the out-of-band channel if chat, email or single sign-on may be compromised. | Crisis lead, CISO |
-| 10 to 20 | Call legal counsel and the data protection officer. Ask: is personal data, a regulated service or a product with digital elements involved? | Crisis lead |
+| 10 to 20 | Call legal counsel and the data protection officer. Ask: is personal data, a regulated service or a product with digital elements involved? Ask counsel whether outside responders should be engaged through them, and how to mark legal advice. | Crisis lead |
 | 15 to 30 | Agree the first assessment: what is affected, who is harmed, is it still spreading, is it criminal? | Crisis lead with IC via liaison |
 | 20 to 30 | Decide containment trade-offs the IC cannot: take a revenue system offline, cut a supplier connection, disable customer logins. | Crisis lead, CEO for major revenue impact |
 | 20 to 40 | Notify the insurer (if a cyber policy exists) and check its requirements before engaging outside responders. | Legal, finance |
 | 30 to 45 | Engage outside incident response or forensic support if needed. Preserve evidence before rebuilding. | CISO |
 | 30 to 60 | First internal message to all staff: what we know, what to do, what not to say, where updates will come from. | Communications |
 | 30 to 60 | First holding statement for customers and the status page. | Communications, approved by crisis lead |
-| 45 to 60 | Brief the CEO and the board chair. Set the update schedule. | CTO or CIO |
+| 45 to 60 | Brief the board chair and set the update schedule, through the CEO or company secretary as your escalation policy says. | CEO, CTO or CIO |
 | By 60 | List the regulatory clocks that may apply and their deadlines. | Legal |
+| By 60 | If the company is listed: start the materiality assessment with the general counsel and company secretary, and record the time. The disclosure clock can run from the materiality decision. | Legal |
 
 ## Decision log
 
-Write every executive decision as it is made: time, decision, options considered, information available, who decided, who was consulted, and when it will be reviewed. The log protects people later, because it shows what was knowable at the time (see [decision making](decision-making.md)). It is also evidence for regulators, insurers and the after-action review. Keep a copy outside the affected systems.
+Write every executive decision as it is made: time, decision, options considered, information available, who decided, who was consulted, and when it will be reviewed. The log shows what was knowable at the time (see [decision making](decision-making.md)). It is also evidence for regulators, insurers and the after-action review, and courts can order it produced. Write facts, decisions and reasons, not guesses about cause or blame. Assume regulators and courts may read every line. Keep legal advice separate and marked as counsel tells you. Keep a copy outside the affected systems.
 
 ## Communication
 
@@ -57,6 +59,7 @@ Write every executive decision as it is made: time, decision, options considered
 | Law enforcement and national CERT or cyber security centre | As soon as crime is suspected | As agreed | Official channel | Legal, CISO |
 | Media | Only through the communications lead | When there is something new to say | Statement, not interviews, in the first day | CEO and legal |
 | Key suppliers and partners | When their systems or data may be affected | As needed | Named contacts | Crisis lead |
+| Investors and the market (listed companies) | As soon as materiality is decided | As securities law requires | Securities disclosure, for example a US SEC Form 8-K Item 1.05 within 4 business days of deciding an incident is material, or EU Market Abuse Regulation Article 17 for inside information | Disclosure committee, legal |
 
 Rules for every message: say what you know, what you do not know yet, what people should do, and when the next update will come. Never guess at cause or scale. Never blame a supplier or an individual in public.
 
@@ -72,12 +75,14 @@ These are executive decisions. Take legal advice before each one.
 2. **Know the official position.** The UK NCSC and US CISA advise against paying. Paying does not guarantee that data will be decrypted or that stolen data will be deleted.
 3. **Sanctions risk.** The US Treasury's Office of Foreign Assets Control (OFAC) published an advisory in 2021 warning that facilitating ransomware payments can breach sanctions rules. Other countries have similar rules. Legal must check this before any discussion of payment.
 4. **Recovery first.** The decision usually depends on whether you can restore from immutable backups (see [backup and recovery](../playbook/reliability/backup-and-recovery.md)). Know your restore time for tier 1 services before a crisis.
-5. **Report.** Report to law enforcement and the national cyber security agency, and meet the regulatory clocks, whatever you decide about payment.
-6. **Record the reasoning** in the decision log, including advice received.
+5. **Recover without reinfection.** Choose the restore point from the investigation: before the earliest sign of attacker access, not the latest clean-looking backup. Recover identity first: reset privileged credentials, reset the Active Directory KRBTGT account twice, and revoke identity provider sessions and tokens. Then restore systems, and scan restored data before reconnecting it. Do not contact the attacker directly; if contact is needed, use a specialist through counsel or the insurer.
+6. **Report.** Report to law enforcement and the national cyber security agency, and meet the regulatory clocks, whatever you decide about payment.
+7. **Payment reporting and bans.** Some countries require a report when a ransom is paid: in Australia, within 72 hours of making the payment or learning it was made, under the Cyber Security Act 2024, for businesses with annual turnover of AUD 3 million or more and for critical infrastructure. Some governments restrict payment by public bodies. Legal checks both before any payment is discussed.
+8. **Record the reasoning** in the decision log, including advice received.
 
 ## Crisis exercises twice a year
 
-- **Tabletop, twice a year, 2 to 3 hours.** The executive team, communications, legal, the CISO and an incident commander. Use a realistic scenario: ransomware with data theft, a supplier compromise, a cloud region outage, a failed release that corrupts data. Alternate scenarios.
+- **Tabletop, twice a year, 2 to 3 hours.** The board joins at least one of them each year. The executive team, communications, legal, the CISO and an incident commander. Use a realistic scenario: ransomware with data theft, a supplier compromise, a cloud region outage, a failed release that corrupts data. Alternate scenarios.
 - **Inject real constraints.** Email is down. The CEO is unreachable. A journalist calls at minute 40. The regulator's deadline falls on a public holiday.
 - **Test the tools.** The out-of-band channel, the offline contact list, the status page and the decision log template.
 - **Measure.** Time to name the crisis lead, time to notify legal, time to first staff and customer message. Targets: 10, 20 and 60 minutes, as starting points.
@@ -114,5 +119,9 @@ Within 10 working days of the crisis ending, hold an after-action review of the 
 - UK NCSC, Board Toolkit: https://www.ncsc.gov.uk/collection/board-toolkit
 - CISA, StopRansomware: https://www.cisa.gov/stopransomware
 - CISA, Tabletop Exercise Packages: https://www.cisa.gov/resources-tools/services/cisa-tabletop-exercise-packages
+- US SEC, Cybersecurity Risk Management, Strategy, Governance, and Incident Disclosure (Form 8-K Item 1.05), 26 July 2023: https://www.sec.gov/newsroom/press-releases/2023-139
+- Regulation (EU) No 596/2014 (Market Abuse Regulation), Article 17: https://eur-lex.europa.eu/eli/reg/2014/596/oj
+- Australian Department of Home Affairs, ransomware payment reporting under the Cyber Security Act 2024: https://www.homeaffairs.gov.au/cyber-security-subsite/files/factsheet-ransomware-payment-reporting.pdf
+- CISA and partners, #StopRansomware Guide (response checklist): https://www.cisa.gov/resources-tools/resources/stopransomware-guide
 - US Treasury OFAC, Updated Advisory on Potential Sanctions Risks for Facilitating Ransomware Payments, 21 September 2021: https://ofac.treasury.gov/recent-actions/20210921
 - NIST SP 800-61 Rev. 3, Incident Response Recommendations and Considerations for Cybersecurity Risk Management: https://csrc.nist.gov/pubs/sp/800/61/r3/final

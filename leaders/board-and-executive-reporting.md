@@ -1,8 +1,8 @@
 # Board and executive reporting
 
-Give the board one page: a scorecard of 8 to 12 measures with a trend and a threshold, the top risks in business terms, the status of key programmes, and the one or two decisions you need from them. Boards govern risk and investment; they cannot govern what they cannot read in ten minutes. Report bad news early, in the same format as good news, with what you are doing about it.
+Give the board one page: a scorecard of no more than 12 measures, one per row, each with a trend and a threshold, the top risks in business terms, the status of key programmes, and the one or two decisions you need from them. Boards govern risk and investment; they cannot govern what they cannot read in ten minutes. Report bad news early, in the same format as good news, with what you are doing about it.
 
-This page is for the CTO, CIO and chief architect who report to a board, an executive committee, an audit committee, or an accounting officer in government. It builds on the board measures in [IT governance](../playbook/operating-model/it-governance.md).
+This page is for the CTO, CIO and chief architect who report to a board, an executive committee, an audit committee, or an accounting officer in government. This page is the single source for the board scorecard; [IT governance](../playbook/operating-model/it-governance.md) explains the governance model behind it.
 
 ## When to use this
 
@@ -22,28 +22,31 @@ This page is for the CTO, CIO and chief architect who report to a board, an exec
 | To know the organisation can keep running | Resilience tests done, results, and gaps | Assurances without evidence |
 | To make decisions | A clear ask, options and your recommendation | Information with no ask |
 
-The UK NCSC Board Toolkit is written for board members, not technologists. It groups cyber security into topics such as risk management, the threat, suppliers, culture and incident response, each with questions boards should ask. Read it before your first report, so you answer the questions your board will be told to ask.
+In the UK, the Cyber Governance Code of Practice (DSIT and NCSC, April 2025) sets out the actions boards and directors should take on cyber risk, in five areas: risk management, strategy, people, incident planning and response, and assurance and oversight. The NCSC Board Toolkit supports it with questions boards should ask. Read both before your first report, so you answer the questions your board will be told to ask. Outside the UK, use them as a checklist even where they are not expected.
 
 ## The one-page scorecard
 
-Show each measure with the last 4 quarters, the threshold from the risk appetite, and a status. Thresholds below are illustrative starting points; set your own with the board.
+Show each measure with the last 4 quarters, the threshold from the risk appetite, and a status. Thresholds below are illustrative starting points; set your own with the board. One measure per row, no more than 12 rows.
 
 | Area | Measure | Example threshold |
 |---|---|---|
-| Delivery | Change lead time and deployment frequency for tier 1 services (DORA) | Lead time under 1 week |
-| Delivery | Key programmes on track against their forecast range | At least 80% |
+| Programmes | Major programmes: forecast cost to complete against approved budget | Within 10% of the approved budget, or a revised budget approved |
+| Programmes | Major programmes: forecast date range (85% confidence) against plan | Inside the plan, or a re-plan approved |
 | Reliability | Tier 1 services that met their SLO for the quarter | 100%, with a recovery plan for any miss |
-| Reliability | Major incidents (SEV1) and customer hours lost | No more than 2 per quarter |
-| Security | Critical vulnerabilities on internet-facing systems past their fix deadline | Zero older than 7 days |
-| Security | Privileged accounts without phishing-resistant multi-factor authentication | Zero |
-| Resilience | Tier 1 services with a successful restore and failover test in the last 6 months | 100% |
-| Cost | Run cost against budget and unit cost trend | Within 5% of budget |
-| People | Attrition, key-person risks and critical open roles | Attrition below the agreed rate; no critical role open over 90 days |
-| Major risks | Risks outside appetite | Zero without an approved treatment plan |
-| AI | AI systems in production by risk tier, and those overdue for review | Zero overdue |
-| End of life | Systems on unsupported software | Each has a funded retirement date |
+| Reliability | Major incidents (SEV1) | No more than 2 per quarter |
+| Security | Actively exploited (CISA KEV) or critical vulnerabilities on internet-facing systems past their fix deadline | Zero: exploited ones fixed within 72 hours, other critical ones within 7 days |
+| Security | Privileged accounts protected by phishing-resistant MFA (security keys or passkeys) | 100% |
+| Resilience | Tier 1 services with a full restore exercise in the last quarter, within the recovery time objective | 100% (see [backup and recovery](../playbook/reliability/backup-and-recovery.md)) |
+| Cost | Run cost against budget | Within 5% of budget |
+| People | Critical roles with no successor, or open for more than 90 days | Zero without a plan |
+| Risk | Risks outside appetite | Zero without an approved treatment plan |
+| Audit and regulatory findings | Overdue findings, and the age of the oldest | Zero overdue by more than 90 days |
+| AI | AI systems in production overdue for review | Zero |
+| End of life | Systems on unsupported software without a funded retirement date | Zero |
 
-Below the table, write three sentences: what changed since last time, what worries you, and what you need from the board.
+Below the table, write three sentences: what changed since last time, what worries you, and what you need from the board. Put customer hours lost, incident detail and the risk register extract in the appendix.
+
+**DORA metrics belong in the executive committee pack, not on the board scorecard.** Boards govern risk, investment and outcomes; they cannot act on change lead time or deployment frequency, and a board target on them invites gaming. The executive committee pack also carries privileged access without phishing-resistant multi-factor authentication, unit cost trends and attrition. Boards see these only as context for a programme or a risk.
 
 ## Explaining risk in business terms
 
@@ -65,7 +68,7 @@ A risk appetite statement tells the organisation how much of a given risk the bo
 
 | Weak | Measurable |
 |---|---|
-| "We have a low appetite for cyber risk." | "No critical vulnerability on an internet-facing system remains unpatched for more than 7 days without an approved exception." |
+| "We have a low appetite for cyber risk." | "No actively exploited vulnerability on an internet-facing system stays open for more than 72 hours, and no other critical one for more than 7 days, without an approved exception." |
 | "Systems should be highly available." | "Tier 1 services lose no more than 4 hours of unplanned downtime per quarter." |
 | "We manage supplier risk." | "No single supplier supports more than two critical services without a tested exit plan." |
 | "We use AI responsibly." | "No AI system makes a decision with legal or similar effect on a person without human review." |
@@ -74,11 +77,19 @@ Write 5 to 10 statements, have the board approve them, review them every year, a
 
 ## How to report bad news
 
-1. **Early.** Tell the chair or the CEO within 24 hours of a material incident or a programme going off track. Do not wait for the next meeting.
+1. **Early.** Tell the CEO within 24 hours of a material incident or a programme going off track. Do not wait for the next meeting. Agree in advance, in writing, when the chair or the audit committee chair is told directly.
 2. **In the same format.** A red status in the scorecard, not a separate slide that looks like an excuse.
 3. **Facts, impact, actions, asks.** What happened, what it means for the business, what you are doing with dates, and what you need from the board.
 4. **Own it.** Say what you could have done differently. Do not name individuals.
 5. **Follow up.** Report progress on the actions at every meeting until they close.
+
+## Listed companies
+
+If the company is listed, add three things to the reporting rhythm. Agree each with the general counsel and the company secretary.
+
+- **Disclosure clocks.** A material incident can start a market disclosure duty. In the US, SEC Form 8-K Item 1.05 requires disclosure within four business days of determining that a cybersecurity incident is material. In the EU, the Market Abuse Regulation (Article 17) requires inside information to be disclosed as soon as possible. Write down who runs the materiality assessment, how fast, and how the time of the decision is recorded. See [crisis leadership](crisis-leadership.md).
+- **Internal controls declaration.** Under the UK Corporate Governance Code 2024, Provision 29, the board declares in the annual report whether its material controls were effective, for financial years beginning on or after 1 January 2026. Agree with the audit committee which technology controls count as material (access to financial systems, change control, backup and recovery are common) and report on them each quarter.
+- **Annual report.** Cyber risk and major technology programmes appear in the principal risks section. Use the same wording and numbers as the scorecard.
 
 ## Audit committee questions to expect
 
@@ -101,6 +112,7 @@ Prepare written answers with evidence for each.
 |---|---|
 | 30-slide technical update | One page plus an appendix the board can skip |
 | Measures without thresholds | Every measure links to a risk appetite statement or a target |
+| Delivery metrics on the board scorecard | Keep DORA metrics in the executive committee pack |
 | Only green | A report that is always green is not believed. Show the reds and the plan. |
 | Jargon | Test the page on a non-technical colleague before it goes out |
 | No ask | End with the decision or guidance you need, or say "for information only" |
@@ -115,8 +127,12 @@ Prepare written answers with evidence for each.
 
 ## Sources
 
+- UK DSIT and NCSC, Cyber Governance Code of Practice, April 2025: https://www.gov.uk/government/publications/cyber-governance-code-of-practice
 - UK NCSC, Board Toolkit: https://www.ncsc.gov.uk/collection/board-toolkit
-- ISO/IEC 38500, Governance of IT for the organization: https://www.iso.org
+- US SEC, Form 8-K Item 1.05, Material Cybersecurity Incidents (final rule, 2023): https://www.sec.gov/rules-regulations/2023/07/s7-09-22
+- Regulation (EU) No 596/2014 (Market Abuse Regulation), Article 17: https://eur-lex.europa.eu/eli/reg/2014/596/oj
+- Financial Reporting Council, UK Corporate Governance Code 2024: https://www.frc.org.uk/library/standards-codes-policy/corporate-governance/uk-corporate-governance-code/
+- ISO/IEC 38500:2024, Governance of IT for the organization: https://www.iso.org/standard/81684.html
 - DORA software delivery metrics: https://dora.dev/guides/dora-metrics-four-keys/
 - Google SRE book, service level objectives: https://sre.google/sre-book/service-level-objectives/
 - NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework

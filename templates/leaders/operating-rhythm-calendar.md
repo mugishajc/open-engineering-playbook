@@ -27,8 +27,10 @@ where their work went. Review this calendar every quarter. Guidance: leaders/ope
 | Cost and capacity review | Monthly, [week, day] | [name] | | Spend against budget, hiring plan | [link] | 60 min |
 | Strategy and portfolio review | Quarterly, [weeks] | [name] | | Strategy one-pager, portfolio, OKRs | [updated strategy link] | Half day |
 | Quarterly engineering review | Quarterly, [weeks] | [name] | | Self-assessment, metrics trend, people data | [published review link] | 2 hours |
+| Talent and succession review | Quarterly, [weeks] | [name] | [HR partner, direct reports] | Successors, key-person risks, promotion proposals | [succession plan link, private] | 2 hours |
+| Strategic supplier review | Quarterly, [one slot per supplier] | [supplier owner] | [procurement, service owners] | Service levels, incidents, licence use, renewal status | [supplier register link] | 60 min per supplier |
 | Board or executive report | Quarterly, [board dates] | [name] | | Scorecard, top risks, programmes | [board paper link] | [minutes on agenda] |
-| Crisis exercise | Twice a year, [months] | [name] | | Scenario | [after-action actions link] | 2 to 3 hours |
+| Crisis exercise | Twice a year, [months] | [name] | [executive team; board joins one a year] | Scenario | [after-action actions link] | 2 to 3 hours |
 | Annual planning and budget | Annual, [start and end dates] | [name] | | Strategy, run cost, demand, horizon scan | [budget and plan link] | 4 to 8 weeks elapsed |
 
 ## Year view

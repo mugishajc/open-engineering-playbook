@@ -63,7 +63,7 @@ See [skills gap](../playbook/people/skills-gap.md), [career framework](../playbo
 ## Measuring impact with data, not anecdotes
 
 1. **Baseline first.** Record each team's DORA metrics, cost and user outcome measures for at least one quarter before rollout.
-2. **Controlled rollout.** Roll out in waves by team, so teams not yet using a tool act as a comparison group for a few months.
+2. **Controlled rollout.** Roll out in waves by team. Assign teams to waves by a rule you write down before you start (for example alternate teams in the service catalogue), not by volunteering: early volunteers are usually the strongest teams and make any tool look good. Compare the change in each wave with the change in teams not yet started over the same period (a difference-in-differences comparison).
 3. **Measure stability, not only speed.** Track all five DORA metrics. Watch change fail rate and rework rate most closely: rework rate is the share of deployments that are unplanned and caused by a production incident.
 4. **Cost per outcome.** Tool and model spend divided by something the business values: cost per resolved support case, per processed claim, per change shipped without rework.
 5. **User outcomes.** Task success, time to complete, complaints and escalations to a person.
@@ -79,6 +79,21 @@ See [skills gap](../playbook/people/skills-gap.md), [career framework](../playbo
 
 The [metrics](../playbook/measurement/metrics.md) page explains how to collect these. Never use them to rate individuals.
 
+Public evidence is mixed: a 2025 randomised trial by METR found experienced open source developers were slower with AI tools while feeling faster, and DORA's 2024 and 2025 reports found AI adoption associated with lower delivery stability. See [agile in the AI era](../playbook/ways-of-working/agile-in-the-ai-era.md#what-the-evidence-says). Your own baseline is the only result that counts.
+
+**Consult before you collect.** Assistant telemetry and delivery dashboards are built from individual events. Where employee representatives have rights over systems that can monitor performance or behaviour (in Germany, for example, the works council co-determines under section 87(1) no. 6 of the Works Constitution Act), agree the metric definitions, aggregation level and retention with them before collection starts. Everywhere, report at team level and delete individual event data you do not need.
+
+## When the gain is real
+
+The board will ask what happens to a measured gain. Decide the rule before the review, not after.
+
+1. **Express the gain as capacity per team**, against the baseline, with the stability measures alongside. A gain with rising change fail rate is not a gain.
+2. **Use it in this order:** first, the backlog the business already wants; second, growth absorbed without new hiring; third, less contractor and supplier spend; only then permanent roles, with HR and legal involved from the start.
+3. **Do not announce role reductions before the measured review.** An announcement before the evidence gives people a reason to hide gains, and commits you to a number the data may not support.
+4. **Consult where the law or agreements require it.** In the EU, Directive 2002/14/EC sets general duties to inform and consult employees, and some countries add more. Plan the time for consultation into the decision.
+5. **Renegotiate effort-priced supplier contracts.** Under time-and-materials pricing, the supplier decides whether faster work means fewer billed days. Move to capacity or outcome pricing at renewal so the gain is not billed back to you. See [suppliers and contracts](../playbook/strategy/suppliers-and-contracts.md).
+6. **Watch two warning measures for two quarters after any change:** attrition of senior engineers, and the number of junior engineers hired and promoted. If either falls sharply, slow down.
+
 ## Governance that enables
 
 Governance works when the safe path is also the fast path. Keep one register of AI use, give low-risk uses a decision within 5 working days, and spend review effort on the few high-risk ones. Provide approved tools quickly, so nobody needs a personal account. Details: [AI governance](../playbook/ai/ai-governance.md).
@@ -91,7 +106,7 @@ Governance works when the safe path is also the fast path. Keep one register of 
 | Measure lines or share of code generated | Counts activity. More code is usually more cost and more to review. | DORA metrics, cost per outcome, user outcomes |
 | Cut reviewers and testers to fund tools | Generation is cheap; verification is now the constraint | Protect and plan review capacity explicitly |
 | Ban everything | Staff use personal accounts in secret, with no data controls | Approve one safe option fast and block the rest |
-| Promise headcount savings before measuring | Locks the organisation into a number that the data may not support | Commit to a measured review after two quarters |
+| Promise headcount savings before measuring | Locks the organisation into a number that the data may not support | Commit to a measured review after two quarters, with the rule in [when the gain is real](#when-the-gain-is-real) agreed in advance |
 | Let every team build its own model integration | Duplicate cost, no central view of data flows or spend | One gateway once two teams need models |
 
 ## A 12-month plan
@@ -142,6 +157,9 @@ See [board and executive reporting](board-and-executive-reporting.md) for how to
 
 - DORA research programme, including the 2025 report "State of AI-assisted Software Development": https://dora.dev/research/
 - DORA metrics guide: https://dora.dev/guides/dora-metrics-four-keys/
+- METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", July 2025: https://arxiv.org/abs/2507.09089
+- Directive 2002/14/EC on informing and consulting employees: https://eur-lex.europa.eu/eli/dir/2002/14/oj
+- Betriebsverfassungsgesetz (German Works Constitution Act), section 87: https://www.gesetze-im-internet.de/betrvg/__87.html
 - NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework
 - ISO/IEC 42001:2023, AI management systems: https://www.iso.org/standard/81230.html
 - EU Artificial Intelligence Act, Regulation (EU) 2024/1689: https://eur-lex.europa.eu/eli/reg/2024/1689/oj

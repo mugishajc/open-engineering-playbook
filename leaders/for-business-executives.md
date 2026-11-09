@@ -1,6 +1,6 @@
 # For business executives and board members
 
-You do not need to understand the technology to govern it well. Ask a small set of questions every quarter, insist on answers backed by a few trend numbers, and fund technology the way you fund any other capability that the business depends on: persistent teams with clear outcomes, not one-off projects that end at launch. The goal is not to second-guess your technology leader. It is to know early when speed, safety or cost is drifting, while the fix is still cheap.
+You do not need to understand the technology to govern it well. Ask a small set of questions every quarter and insist on answers backed by a few trend numbers. Fund technology like any capability the business depends on: persistent teams with clear outcomes, not projects that end at launch. The goal is not to second-guess your technology leader. It is to see early when speed, safety or cost is drifting, while the fix is still cheap.
 
 ## When to use this
 
@@ -67,12 +67,22 @@ Use the [business case](../playbook/strategy/business-case.md) method and check 
 
 ## How to fund technology
 
-- **Fund teams, not projects.** A persistent team that owns a service keeps improving it. A project team that disbands at launch leaves a system nobody understands.
+- **Fund teams, not projects.** A persistent team that owns a service keeps improving it. A project team that disbands at launch leaves a system nobody understands. Agree with finance how team funding is capitalised before you change it: see [technology budget and cost](../playbook/strategy/technology-budget-and-cost.md).
 - **Fund outcomes in stages.** Release money at each gate based on evidence, not on the original plan.
 - **Make the capacity split explicit.** Agree each year what share of engineering goes to new features, reliability, technical debt and platforms. Starting point from [portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md): 10 to 20% each for reliability and for technical debt, and 5 to 15% for platform work. Review it each quarter.
 - **Fund platforms as shared services.** A platform that many teams use (identity, hosting, data, payments) saves money only if it is funded once and adopted widely. See [developer platform](../playbook/platform/developer-platform.md).
 - **Count technical debt as a cost.** Ask for the [debt register](../templates/docs/tech-debt-register.csv): what each item costs today in time, incidents or risk, and what fixing it costs. See [technical debt](../playbook/architecture/technical-debt.md).
 - **Watch running costs.** Cloud costs grow with use. Ask for cost per customer or per transaction, not only the total bill. See [FinOps](../playbook/platform/finops.md).
+
+## Hiring and reviewing your technology leader
+
+| Step | Starting point |
+|---|---|
+| Decide the role first | CTO (builds the product and the engineering organisation), CIO (runs the systems the business uses), or both. Where technology is core to what you sell, the role reports to the CEO, not to the CFO or COO. |
+| Ask for evidence in interviews | a strategy they wrote and what happened to it; a programme they stopped, and why; a major incident they led, and what changed after it |
+| Set a work sample | give shortlisted candidates last quarter's board pack and ask for a one-page diagnosis: what is wrong, what they would do first, what they need to know. Score it against a written scorecard, see [hiring](../playbook/people/hiring.md). |
+| Agree objectives | three to five outcomes for the first year, taken from the ten questions above, plus the [first 90 days](first-90-days.md) plan |
+| Review each year | judge trends across the ten questions and the quarterly report, never one metric. Ask the leader's peers and teams as well as the leader. |
 
 ## Red flags
 
@@ -83,19 +93,19 @@ Use the [business case](../playbook/strategy/business-case.md) method and check 
 | "We have backups" without a restore date | the backup has never been proven | the date and duration of the last full restore test |
 | The same programme has been "90% done" for two quarters | scope, estimates or ownership are broken | a forecast as a range, and what has been cut |
 | Most of the budget goes to one supplier with no exit plan | lock-in and concentration risk | the exit plan, its cost and when it was last tested |
-| Two or three engineers are needed for every problem | key-person risk | a skills matrix and a plan to spread knowledge |
+| The same two or three engineers are called for every serious problem | key-person risk | a skills matrix and a plan to spread knowledge |
 | Security is reported only as "no incidents" | absence of evidence, not evidence of control | overdue critical vulnerabilities and the last test of incident response |
 | Technology reports are mostly activity (projects started, tickets closed) | no link to outcomes | the outcome measures from question 1 |
 
 ## What good looks like
 
-- The technology leader brings a short report each quarter with 8 to 12 measures, trends and two or three decisions for the board. See [board and executive reporting](board-and-executive-reporting.md).
+- The technology leader brings a short report each quarter with no more than 12 measures, one per row, with trends and two or three decisions for the board. See [board and executive reporting](board-and-executive-reporting.md).
 - Small changes reach customers in days, and the change fail rate is stable or falling.
 - Important services have reliability targets agreed with the business, and the board sees attainment.
 - Restores and failovers of critical systems are tested on a schedule, with measured times.
 - Major incidents lead to a written review within 5 working days and actions that get done.
 - Every critical supplier has an owner and an exit plan.
-- The board has rehearsed a serious cyber incident at least once a year. The UK NCSC Board Toolkit is a good starting point. See also [crisis leadership](crisis-leadership.md).
+- The executive team exercises a serious cyber incident twice a year, and the board joins at least one of those exercises. The UK NCSC Board Toolkit is a good starting point. See also [crisis leadership](crisis-leadership.md).
 
 ## Common mistakes
 

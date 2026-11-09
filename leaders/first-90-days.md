@@ -2,7 +2,7 @@
 
 Spend the first 30 days listening and measuring, the next 30 diagnosing and securing a few early wins, and the last 30 publishing a one-page technical strategy that the organisation can act on. Change little in the first month except what is unsafe. Acting on a diagnosis you have not checked costs more credibility than moving a few weeks later.
 
-This page is for a new CTO, CIO, head of engineering or chief architect, whether hired from outside or promoted. Michael Watkins's The First 90 Days (2003) argues that the right plan depends on the situation you inherit; the paths below adapt the plan to turnaround, scale-up and public-sector appointments.
+This page is for a new CTO, CIO, head of engineering or chief architect, whether hired from outside or promoted. Michael Watkins's The First 90 Days (2003) argues that the right plan depends on the situation you inherit; the paths below adapt the plan to turnaround, scale-up, realignment and public-sector appointments.
 
 ## When to use this
 
@@ -28,6 +28,7 @@ Meet at least 30 people, or everyone if the function has fewer than 30. Include 
 | Engineering managers | Which teams are healthy and which are struggling, and why? Where are we one resignation away from trouble? What decisions take too long? |
 | Product and business leaders | What has technology promised and not delivered? What do customers complain about? What would you stop funding? |
 | CISO, risk, audit, compliance | What are the top 3 technology risks? Which audit findings are open, and for how long? What would a regulator ask us tomorrow? |
+| Audit committee chair, external auditor's IT audit lead, head of internal audit | What did the last audit say about technology? Which findings worry you most? What do you expect in my first report? |
 | Finance | What does technology cost, and is the trend acceptable? Which spend is hardest to explain? |
 | Customers or citizens (where possible) | What fails, and how often? What do you work around? |
 | Key suppliers | What do we make hard for you? Where is our contract or integration fragile? |
@@ -60,7 +61,7 @@ Write a diagnosis: the 3 to 5 problems that matter most, each backed by evidence
 
 | Early wins (do now) | Leave alone for now (unless unsafe) |
 |---|---|
-| Fix the top annoyance from the listening tour that costs under 2 weeks | The org structure. Reorganise only after the strategy is written. |
+| Fix the top annoyance from the listening tour that costs under 2 weeks | The org structure. Reorganise only after the strategy is written, and then follow [running a reorganisation](../playbook/operating-model/team-topology.md#running-a-reorganisation). |
 | Close any critical security gap: an untested backup, an exposed admin interface, a shared root credential | Core technology choices such as language, cloud provider or main database |
 | Make one decision that has been stuck for months | People's titles and levels |
 | Start the weekly metrics review (see [operating rhythm](operating-rhythm.md)) | Processes that work, even if they are not how you did it before |
@@ -83,14 +84,16 @@ By day 90 you should have:
 
 ## Paths by situation
 
-| | Turnaround | Scale-up | Public-sector appointment |
-|---|---|---|---|
-| Typical signal | Frequent outages, missed commitments, a failed programme, a serious incident or audit finding | Fast hiring, systems and processes built for a smaller company, rising incidents | Legacy estate, supplier dependence, budget years, assurance gates, ministerial or public scrutiny |
-| First 30 days | Shorten listening to 2 weeks. Stabilise first: incident process, backups, the riskiest change paths. | Full listening tour. Measure where growth is breaking things. | Full listening tour, including the senior responsible owner, the finance director, the central digital authority and key suppliers |
-| What to do early | Stop work that cannot succeed. Freeze non-essential change to the most fragile systems. Be visible in incidents. | Decision rights, onboarding, golden paths, a hiring plan. Protect the teams that are working. | Map contracts and their end dates, spend controls and assurance gates. Learn the budget calendar. |
-| What to avoid | Promising dates before the diagnosis is done | Reorganising in month 1; adding process that slows the teams that work | Announcing a big programme before you understand procurement lead times and the political calendar |
-| Strategy horizon | 6 to 12 months, focused on stability | 12 to 24 months, focused on scale | Aligned to the spending review or budget cycle, typically 1 to 3 years |
-| Read next | [Crisis leadership](crisis-leadership.md), [incident management](../playbook/reliability/incident-management.md) | [Team topology](../playbook/operating-model/team-topology.md), [golden paths](../playbook/platform/golden-paths.md) | [Public sector](../playbook/compliance/public-sector.md), [IT governance](../playbook/operating-model/it-governance.md) |
+| | Turnaround | Scale-up | Public-sector appointment | Realignment |
+|---|---|---|---|---|
+| Typical signal | Frequent outages, missed commitments, a failed programme, a serious incident or audit finding | Fast hiring, systems and processes built for a smaller company, rising incidents | Legacy estate, supplier dependence, budget years, assurance gates, ministerial or public scrutiny | Delivery works, but strategy, cost or architecture is drifting; the organisation does not yet see a problem |
+| First 30 days | Shorten listening to 2 weeks. Stabilise first: incident process, backups, the riskiest change paths. | Full listening tour. Measure where growth is breaking things. | Full listening tour, including the senior responsible owner, the finance director, the central digital authority and key suppliers | Full listening tour. Gather evidence of the drift: run cost trend, debt, end-of-life systems, missed outcomes |
+| What to do early | Stop work that cannot succeed. Freeze non-essential change to the most fragile systems. Be visible in incidents. | Decision rights, onboarding, golden paths, a hiring plan. Protect the teams that are working. | Map contracts and their end dates, spend controls and assurance gates. Learn the budget calendar. | Make the drift visible with data in the first board or executive report. Win allies before proposing change. |
+| What to avoid | Promising dates before the diagnosis is done | Reorganising in month 1; adding process that slows the teams that work | Announcing a big programme before you understand procurement lead times and the political calendar | Treating it as a turnaround; disrupting teams that deliver well |
+| Strategy horizon | 6 to 12 months, focused on stability | 12 to 24 months, focused on scale | Aligned to the spending review or budget cycle, typically 1 to 3 years | 12 to 24 months, focused on cost and direction |
+| Read next | [Crisis leadership](crisis-leadership.md), [incident management](../playbook/reliability/incident-management.md) | [Team topology](../playbook/operating-model/team-topology.md), [golden paths](../playbook/platform/golden-paths.md) | [Public sector](../playbook/compliance/public-sector.md), [IT governance](../playbook/operating-model/it-governance.md) | [Portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md), [technology budget and cost](../playbook/strategy/technology-budget-and-cost.md) |
+
+**Sustaining success** (things work well): use the realignment column but change less. Your first job is to learn why it works and protect it.
 
 ## Common mistakes
 

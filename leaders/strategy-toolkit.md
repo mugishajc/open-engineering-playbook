@@ -113,9 +113,11 @@ Example axes: "data must stay in-country" against "data may move freely", crosse
 
 **How to run it (60 to 90 minutes).**
 
-1. Estimate cost of delay per week in money where you can. Otherwise score three parts on a relative scale (1, 2, 3, 5, 8, 13): value to users or the business, time criticality (a regulatory date, a contract end, a market window) and risk reduction.
+1. Estimate cost of delay per week in money. This is Reinertsen's method. When you cannot, a common shortcut, used in the Scaled Agile Framework (SAFe), scores three parts on a relative scale (1, 2, 3, 5, 8, 13): value to users or the business, time criticality (a regulatory date, a contract end, a market window) and risk reduction. Reinertsen's method and the relative shortcut can rank items differently, so move to money estimates for the top items.
 2. Estimate duration or size on the same relative scale.
 3. Divide cost of delay by duration. Do the highest ratio first. Reinertsen calls this "weighted shortest job first".
+
+The table uses the relative shortcut.
 
 | Item (illustrative) | Value | Time criticality | Risk reduction | Cost of delay | Size | Ratio |
 |---|---|---|---|---|---|---|
@@ -170,4 +172,5 @@ A suggested yearly calendar: scenarios and capability map before the annual budg
 - Andy Grove, "High Output Management", Random House, 1983.
 - John Doerr, "Measure What Matters", Portfolio, 2018.
 - Donald G. Reinertsen, "The Principles of Product Development Flow", Celeritas Publishing, 2009.
+- Scaled Agile Framework, "Weighted Shortest Job First": https://framework.scaledagile.com/wsjf
 - Richard Rumelt, "Good Strategy Bad Strategy", Crown Business, 2011.

@@ -83,12 +83,14 @@ Use a trade-off matrix when two or three options compete and the team keeps argu
 
 | Attribute (weight) | Baseline: synchronous API calls | Option B: events through a message broker | Option C: shared database |
 |---|---|---|---|
-| Reliability (30) | 0 | +2 | -1 |
+| Reliability (30) | 0 | +1 | -1 |
 | Maintainability (25) | 0 | +1 | -2 |
 | Performance efficiency (20) | 0 | -1 | +1 |
 | Security (15) | 0 | 0 | -1 |
 | Operability skills (10) | 0 | -1 | +1 |
-| **Weighted total** | **0** | **+55** | **-65** |
+| **Weighted total** | **0** | **+25** | **-65** |
+
+Option B is more reliable only with a transactional outbox, idempotent consumers and a dead-letter queue; without them it loses or duplicates messages, and the broker becomes a new dependency to run. See [events and messaging](../playbook/architecture/events-and-messaging.md).
 
 Fictional example. Treat totals within 20 points of each other as a tie (a starting point; the range runs from -200 to +200). Settle a tie on reversibility, then on what the team can run. The matrix supports judgement. It does not replace it.
 
@@ -100,7 +102,7 @@ A good C4 diagram has a title, a key, a label on every arrow saying what flows a
 
 ## Fitness functions
 
-A fitness function is an automated check that an architecture characteristic still holds, from "Building Evolutionary Architectures" (Ford, Parsons and Kua, 2017). Write one when a standard keeps being broken, or when a review keeps asking the same question.
+A fitness function is an automated check that an architecture characteristic still holds, from "Building Evolutionary Architectures" (Ford, Parsons, Kua and Sadalage, 2nd edition, 2022). Write one when a standard keeps being broken, or when a review keeps asking the same question.
 
 - **One characteristic or several.** Some checks test one characteristic, such as layering. Others test several together, such as latency while a dependency is failing.
 - **Triggered or continual.** A triggered check runs on an event, such as each build. A continual check runs all the time, such as a production monitor.
@@ -149,6 +151,6 @@ If you say no to more than about one review in five, the triggers or the referen
 - ISO/IEC 25010:2023, Systems and software engineering, Systems and software Quality Requirements and Evaluation (SQuaRE), Product quality model, ISO.
 - Len Bass, Paul Clements and Rick Kazman, "Software Architecture in Practice", Addison-Wesley (quality attribute scenarios).
 - Rick Kazman, Mark Klein and Paul Clements, "ATAM: Method for Architecture Evaluation", CMU/SEI-2000-TR-004, Software Engineering Institute, 2000: https://www.sei.cmu.edu
-- Neal Ford, Rebecca Parsons and Patrick Kua, "Building Evolutionary Architectures", O'Reilly Media, 2017.
+- Neal Ford, Rebecca Parsons, Patrick Kua and Pramod Sadalage, "Building Evolutionary Architectures", 2nd edition, O'Reilly Media, 2022.
 - Simon Brown, The C4 model: https://c4model.com
 - W3C, Web Content Accessibility Guidelines (WCAG) 2.2: https://www.w3.org/TR/WCAG22/

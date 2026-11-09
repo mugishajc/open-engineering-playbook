@@ -26,18 +26,20 @@ Status: on target, watch, outside appetite.
 
 | Area | Measure | Q-3 | Q-2 | Q-1 | This quarter | Threshold | Status |
 |---|---|---|---|---|---|---|---|
-| Delivery | Change lead time, tier 1 services | | | | | | |
-| Delivery | Key programmes on track | | | | | | |
+| Programmes | Forecast cost to complete against approved budget | | | | | | |
+| Programmes | Forecast date range (85% confidence) against plan | | | | | | |
 | Reliability | SLO attainment, tier 1 services | | | | | | |
-| Reliability | Major incidents and customer impact | | | | | | |
+| Reliability | Major incidents (SEV1) | | | | | | |
 | Security | Critical vulnerabilities on internet-facing systems past deadline | | | | | | |
-| Security | Privileged accounts without phishing-resistant MFA | | | | | | |
-| Resilience | Tier 1 services with a restore and failover test in the last 6 months | | | | | | |
+| Resilience | Tier 1 services with a full restore exercise in the last quarter, within RTO | | | | | | |
 | Cost | Run cost against budget | | | | | | |
-| People | Attrition and critical open roles | | | | | | |
-| Major risks | Risks outside appetite without an approved plan | | | | | | |
+| People | Critical roles with no successor or open over 90 days | | | | | | |
+| Risk | Risks outside appetite without an approved plan | | | | | | |
+| Audit and regulatory findings | Overdue findings, and age of the oldest | | | | | | |
 | AI | AI systems overdue for review | | | | | | |
 | End of life | Systems on unsupported software without a funded retirement date | | | | | | |
+
+One measure per row, no more than 12. DORA delivery metrics go in the executive committee pack, not here.
 
 ## 3. Top risks
 
@@ -49,15 +51,15 @@ No more than five, in business terms.
 
 ## 4. Key programmes
 
-| Programme | Business outcome | Forecast (range and confidence) | Budget used / approved | Status | Issue needing board attention |
-|---|---|---|---|---|---|
-| | | | | | |
+| Programme | Business outcome | Forecast date (range and confidence) | Approved budget | Spent to date | Forecast cost to complete | Status | Issue needing board attention |
+|---|---|---|---|---|---|---|---|
+| | | | | | | | |
 
 ## 5. Incidents and regulatory reports this quarter
 
-| Date | What happened, in business terms | Customers or citizens affected | Regulator notified? | Actions and status |
-|---|---|---|---|---|
-| | | | | |
+| Date | What happened, in business terms | Customers or citizens affected | Regulator notified? | Listed companies: materiality decision and time | Actions and status |
+|---|---|---|---|---|---|
+| | | | | | |
 
 ## 6. Decision requested
 
@@ -74,4 +76,6 @@ No more than five, in business terms.
 - Metric definitions and data sources (agreed with finance and risk)
 - Progress on actions from previous board meetings
 - Audit findings: open, overdue, closed this quarter
+- Material technology controls and their test results (where a controls declaration applies)
+- Customer hours lost per major incident
 - Links: strategy one-pager, risk register, quarterly engineering review

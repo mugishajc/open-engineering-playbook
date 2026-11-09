@@ -6,6 +6,7 @@
 |---|---|
 | Author | [name, role] |
 | Finance reviewer | [name] |
+| Benefit owner | [business executive who will report the benefit at 6 and 12 months] |
 | Date | [YYYY-MM-DD] |
 | Strategy action | [link] |
 | Decision needed by | [YYYY-MM-DD] |
@@ -20,32 +21,44 @@
 
 ## 3. Costs
 
-| Item | One-time | Per year | Source or assumption |
-|---|---|---|---|
-| Engineering time | [...] | [...] | [...] |
-| Tooling, licences, hosting | [...] | [...] | [...] |
-| Training | [...] | [...] | [...] |
-| Exit cost (if we stop later) | [...] | n/a | [...] |
-| **Total** | [...] | [...] | |
+| Item | One-time | Per year | Capital or operating | Source or assumption |
+|---|---|---|---|---|
+| Engineering time | [...] | [...] | [ask finance] | [...] |
+| Backfill for people moved to the work | [...] | [...] | [...] | [...] |
+| Tooling, licences, hosting | [...] | [...] | [...] | [...] |
+| Parallel running of old and new | [...] | [...] | [...] | [...] |
+| Training | [...] | [...] | [...] | [...] |
+| Exit cost (if we stop later) | [...] | n/a | [...] | [...] |
+| **Total** | [...] | [...] | | |
 
 ## 4. Benefits per year
 
-| Benefit | Formula | Low | Expected | High | Source |
-|---|---|---|---|---|---|
-| Toil removed | hours per week x hourly cost x weeks x share removed | [...] | [...] | [...] | [...] |
-| Incident cost avoided | incidents x hours x (revenue per hour + responder cost) | [...] | [...] | [...] | [...] |
-| Risk reduced | ALE before - ALE after | [...] | [...] | [...] | [...] |
-| Delay avoided | value per week x weeks removed x changes per year | [...] | [...] | [...] | [...] |
-| Option value | probability x saving - extra cost now | [...] | [...] | [...] | [...] |
-| **Total** | | [...] | [...] | [...] | |
+Cash means spend falls or margin rises. Capacity means people's time is released; it is not cash unless headcount or spend falls.
+
+| Benefit | Formula | Cash or capacity | Low | Expected | High | Source |
+|---|---|---|---|---|---|---|
+| Toil removed | hours per week x hourly cost x weeks x share removed | capacity, unless spend falls | [...] | [...] | [...] | [...] |
+| Incident margin avoided | incidents x hours x lost contribution margin per hour, plus penalties | cash | [...] | [...] | [...] | [...] |
+| Incident responder time | incidents x hours x responders x hourly cost | capacity | [...] | [...] | [...] | [...] |
+| Risk reduced | ALE before - ALE after | cash (expected value) | [...] | [...] | [...] | [...] |
+| Delay avoided | margin per week x weeks removed x changes per year | cash | [...] | [...] | [...] | [...] |
+| Option value | probability x saving - extra cost now | cash (expected value) | [...] | [...] | [...] | [...] |
+| **Total cash** | | | [...] | [...] | [...] | |
+| **Total capacity** | | | [...] | [...] | [...] | |
+
+Capacity released will be used for: [...]
 
 ## 5. Result
 
-| Scenario | Net annual benefit | Payback (years) | 3-year net value |
-|---|---|---|---|
-| Low (commit to this) | [...] | [...] | [...] |
-| Expected | [...] | [...] | [...] |
-| High | [...] | [...] | [...] |
+Payback uses cash only. The low scenario halves benefits and raises the one-time cost by 50%.
+
+| Scenario | Net annual cash benefit | One-time cost | Payback (years) | 3-year net cash | NPV at [discount rate], if finance requires |
+|---|---|---|---|---|---|
+| Low (commit to this) | [...] | [...] | [...] | [...] | [...] |
+| Expected | [...] | [...] | [...] | [...] | [...] |
+| High | [...] | [...] | [...] | [...] | [...] |
+
+Reference class check (large programmes): [similar past projects, their cost and time overruns, source]
 
 ## 6. Mandatory drivers
 

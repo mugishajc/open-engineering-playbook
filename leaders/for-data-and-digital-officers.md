@@ -1,10 +1,10 @@
 # For chief data and chief digital officers
 
-Tie every piece of data work to a business outcome someone already measures, give each important data set a named owner who is judged on its quality, and fund a small number of data products instead of a platform with no customers. Agree in writing what you own and what the CTO or CIO owns before the first budget round, because most failures in this role are failures of split responsibility, not of technology. Treat AI readiness as a data problem first: a model is only as usable as the data it may lawfully see.
+Tie every piece of data work to a business outcome someone already measures. Give each important data set a named owner who is judged on its quality. Fund a few data products, not a platform with no customers. Agree in writing what you own and what the CTO or CIO owns before the first budget round: most failures in this role come from a split nobody wrote down. A chief digital officer, who owns services and channels rather than data, starts at [chief digital officers](#chief-digital-officers).
 
 ## When to use this
 
-- You are new in a chief data officer (CDO) or chief digital officer role and need a plan for the first year.
+- You are new in a chief data officer or chief digital officer role and need a plan for the first year.
 - Data work is funded as a cost centre and the board asks what it returned.
 - Every report gives a different number for the same thing, and nobody owns the definition.
 - AI pilots stall because the data is missing, wrong or not cleared for that use.
@@ -97,19 +97,34 @@ Count value where the business already counts it. Avoid "number of dashboards" a
 
 Use the [business case](../playbook/strategy/business-case.md) method: low, expected and high scenarios, commit to the low one, check at 6 and 12 months.
 
+## Chief digital officers
+
+A chief digital officer owns how the organisation serves people through digital channels: the services, the user experience and the move from paper or counters to online. The two roles share an acronym and little else. If this is your role, the data sections above are for the colleague you will depend on most.
+
+| Decision | Starting point | Read |
+|---|---|---|
+| Who owns each service | one named service owner per end-to-end service (for example "renew a licence"), judged on completion rate and user satisfaction, not on a project delivered | [Product partnership](../playbook/ways-of-working/product-partnership.md) |
+| How services are funded | persistent product teams funded each year, not projects that end at launch | [Portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md) |
+| User research | every team talks to users at least every 2 weeks; test with people who use assistive technology, low-cost phones and slow networks | [For government](for-government.md) |
+| Channel shift | a target per service for the share of transactions completed online, with the assisted channel kept for people who need it | [Transition playbook](../playbook/strategy/transition-playbook.md) |
+| Accessibility | WCAG 2.2 level AA as the floor for every public service | [Public sector compliance](../playbook/compliance/public-sector.md) |
+| The split with the CIO or CTO | you own the service and its outcomes; they own the platforms and engineering capacity; agree capacity each quarter | [Decision rights](../playbook/operating-model/decision-rights.md) |
+
+In the first 90 days, list the ten services with the most transactions, name an owner for each, and measure where users drop out.
+
 ## Splitting responsibilities with the CTO or CIO
 
 There is no single correct split. There must be a written one. Agree it in the first 60 days and record it in your [decision rights](../playbook/operating-model/decision-rights.md).
 
 | Area | Common default owner | Notes |
 |---|---|---|
-| Data strategy and outcome targets | CDO | agreed with the executive team |
-| Definitions, catalogue, classification policy | CDO | stewards sit in the domains |
-| Data platform (storage, pipelines, compute) | CTO or CIO | CDO is the main customer and sets requirements |
-| Data products | the business domain that produces the data | CDO sets standards; domain owns delivery |
-| Security controls on data | CISO | CDO owns classification; CISO owns enforcement |
-| Privacy compliance | data protection officer | independent of the CDO where law requires |
-| AI use case approval | AI governance group | CDO confirms data readiness |
+| Data strategy and outcome targets | chief data officer | agreed with the executive team |
+| Definitions, catalogue, classification policy | chief data officer | stewards sit in the domains |
+| Data platform (storage, pipelines, compute) | CTO or CIO | the chief data officer is the main customer and sets requirements |
+| Data products | the business domain that produces the data | the chief data officer sets standards; the domain owns delivery |
+| Security controls on data | CISO | the chief data officer owns classification; the CISO owns enforcement |
+| Privacy compliance | data protection officer | independent of the chief data officer where law requires |
+| AI use case approval | AI governance group | the chief data officer confirms data readiness |
 | Digital channels and customer experience (chief digital officer) | chief digital officer | engineering capacity usually sits with the CTO; agree capacity allocation in [portfolio planning](../playbook/strategy/portfolio-and-capacity.md) |
 
 ## Regulation to plan for
@@ -121,7 +136,7 @@ This is not legal advice. Read the text and talk to your counsel.
 | EU Data Governance Act, Regulation (EU) 2022/868 (applies from 24 Sep 2023) | rules for re-use of protected public sector data, data intermediation services and data altruism organisations |
 | EU Data Act, Regulation (EU) 2023/2854 (applies from 12 Sep 2025) | users of connected products and related services can access and share the data they generate; rules on switching between data processing services; fairness of data-sharing contract terms |
 | Data protection laws: EU GDPR, UK GDPR, Kenya Data Protection Act 2019, Rwanda Law No 058/2021, Nigeria Data Protection Act 2023, Brazil LGPD, India DPDP Act 2023, California CCPA/CPRA | lawful basis, purpose limitation, retention, rights of individuals, impact assessments, cross-border transfer rules |
-| EU AI Act, Regulation (EU) 2024/1689 | data and data governance duties for high-risk systems; check EUR-Lex for current application dates |
+| EU AI Act, Regulation (EU) 2024/1689, as amended by Regulation (EU) 2026/1744 | data and data governance duties for high-risk systems. Prohibited practices apply from 2 Feb 2025. High-risk obligations apply from 2 Dec 2027 (Annex III) and 2 Aug 2028 (AI in Annex I products). New prohibitions on non-consensual intimate imagery and child sexual abuse material apply from 2 Dec 2026. Check EUR-Lex before you plan |
 
 Keep a register of which laws apply to which data products. Most of the evidence comes from the catalogue, the contracts and the retention jobs you already run.
 
@@ -131,7 +146,7 @@ Adapt the timing to your organisation. Use [first 90 days](first-90-days.md) for
 
 | Period | Focus | Exit criteria |
 |---|---|---|
-| Days 1 to 90 | listen, map outcomes, agree the split with CTO, CIO and CISO | written responsibility split; top 5 outcomes agreed; list of critical data sets with owners named |
+| Days 1 to 90 | listen, map outcomes, agree the split with CTO, CIO and CISO | written responsibility split (by day 60); top 5 outcomes agreed; list of critical data sets with owners named |
 | Months 4 to 6 | first 2 or 3 data products tied to outcomes | each product has an owner, contract and quality target; quality reported weekly |
 | Months 7 to 9 | governance that scales | catalogue generated from code for at least 50% of production stores; access by classification |
 | Months 10 to 12 | prove value, plan year two | value measured against baselines; data quality on the executive scorecard; year-two strategy on one page |
@@ -163,4 +178,5 @@ Adapt the timing to your organisation. Use [first 90 days](first-90-days.md) for
 - Regulation (EU) 2023/2854, Data Act: https://eur-lex.europa.eu/eli/reg/2023/2854/oj
 - Regulation (EU) 2016/679, GDPR: https://eur-lex.europa.eu/eli/reg/2016/679/oj
 - Regulation (EU) 2024/1689, AI Act: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- Regulation (EU) 2026/1744, Digital Omnibus on AI, amending the AI Act: https://eur-lex.europa.eu/eli/reg/2026/1744/oj
 - Zhamak Dehghani, "Data Mesh", O'Reilly Media, 2022.

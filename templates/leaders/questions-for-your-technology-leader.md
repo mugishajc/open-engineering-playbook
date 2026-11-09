@@ -41,7 +41,7 @@ A good answer has a number, a trend over at least 4 quarters and a named owner. 
 
 ### 5. When did we last restore our most important systems from backup, and how long did it take?
 
-- Good answer: a date in the last 6 months and a measured time, compared with the recovery target.
+- Good answer: for the most important systems, a restore in the last 3 months (monthly for Tier 1 services), with the measured time compared with the recovery target. See [backup and recovery](../../playbook/reliability/backup-and-recovery.md).
 - Worrying answer: "the backups run every night" with no restore test.
 - Answer: [...]
 

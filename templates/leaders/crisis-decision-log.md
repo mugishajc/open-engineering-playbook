@@ -24,6 +24,7 @@ UTC. Guidance: leaders/crisis-leadership.md and playbook/reliability/incident-ma
 |---|---|---|---|
 | 10 | Incident commander confirmed; crisis lead and liaison named | | |
 | 10 | Decision log opened; time of awareness recorded | | |
+| 10 | CEO informed by phone | | |
 | 20 | Out-of-band channel in use if internal tools may be compromised | | |
 | 20 | Legal counsel and data protection officer called | | |
 | 30 | First assessment agreed: scope, harm, spreading, criminal? | | |
@@ -31,7 +32,8 @@ UTC. Guidance: leaders/crisis-leadership.md and playbook/reliability/incident-ma
 | 45 | Outside responders engaged if needed; evidence preserved | | |
 | 60 | First all-staff message sent | | |
 | 60 | Customer holding statement and status page published | | |
-| 60 | CEO and board chair briefed; update schedule set | | |
+| 60 | Board chair briefed (via the CEO or company secretary, as the escalation policy says); update schedule set | | |
+| 60 | Listed companies: materiality assessment started with general counsel and company secretary; time recorded | | |
 | 60 | Regulatory clocks listed with deadlines | | |
 
 ## Regulatory clocks
@@ -41,6 +43,8 @@ UTC. Guidance: leaders/crisis-leadership.md and playbook/reliability/incident-ma
 | [e.g. GDPR Art. 33] | | | | |
 | [e.g. NIS2 early warning] | | | | |
 | [e.g. EU CRA early warning] | | | | |
+| [e.g. SEC Form 8-K Item 1.05: 4 business days after materiality is determined] | | | | |
+| [e.g. EU MAR Art. 17: inside information as soon as possible] | | | | |
 | [sector regulator] | | | | |
 
 ## Decisions

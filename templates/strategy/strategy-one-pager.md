@@ -29,11 +29,13 @@ The approach we will take. Two or three sentences.
 
 No more than seven, ranked. Each one must support the guiding policy.
 
-| # | Action | Horizon (Now, Next, Later) | Owner | Measure | Baseline | Target and date | Link (decision record, RFC, business case) |
-|---|---|---|---|---|---|---|---|
-| 1 | [...] | Now | [...] | [for example change lead time] | [...] | [...] | [...] |
-| 2 | [...] | Now | [...] | [...] | [...] | [...] | [...] |
-| 3 | [...] | Next | [...] | [...] | [...] | [...] | [...] |
+| # | Action | Horizon (Now, Next, Later) | Owner | Measure | Baseline | Target and date | Funding (approved, requested, none) | Link (decision record, RFC, business case) |
+|---|---|---|---|---|---|---|---|---|
+| 1 | [...] | Now | [...] | [for example change lead time] | [...] | [...] | approved | [...] |
+| 2 | [...] | Now | [...] | [...] | [...] | [...] | approved | [...] |
+| 3 | [...] | Next | [...] | [...] | [...] | [...] | requested | [...] |
+
+A Now action without approved funding moves to Next.
 
 ## 4. Constraints
 

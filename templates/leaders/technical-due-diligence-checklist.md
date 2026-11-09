@@ -2,7 +2,7 @@
 
 <!--
 How to use: agree the scope section with the sponsor before work starts. Send the request
-list in week 0. Work through the ten areas, mark each check Done, Not available or N/A, and
+list in week 0. Work through the eleven areas, mark each check Done, Not available or N/A, and
 record findings in the findings table. Raise any red flag to the deal lead within 24 hours.
 If the target cannot produce an item, record that as a finding.
 Guidance: leaders/technical-due-diligence.md
@@ -45,6 +45,7 @@ Guidance: leaders/technical-due-diligence.md
 | R9 | Org chart with tenure and contractor share; list of production access holders | | | |
 | R10 | Critical supplier and commercial licence contracts, with change of control and exit terms | | | |
 | R11 | Product and technical roadmap, capacity split, technical debt register | | | |
+| R12 | AI register with risk tiers; model and data provenance; contracts with model providers; inference cost per month | | | |
 
 ## 3. Checks by area
 
@@ -73,6 +74,10 @@ Guidance: leaders/technical-due-diligence.md
 | 9. Compliance | No open regulatory actions unknown to the deal team | | |
 | 10. Roadmap | Roadmap is staffed and funded | | |
 | 10. Roadmap | Technical debt register exists and is consistent with what you found | | |
+| 11. AI and models | Rights to use the training and fine-tuning data are documented | | |
+| 11. AI and models | Dependence on external model providers is known, with an exit option | | |
+| 11. AI and models | Inference cost as a share of revenue is known and fits the margin in the deal model | | |
+| 11. AI and models | AI systems are classified by risk tier, including under the EU AI Act where it applies | | |
 | Exit (outsourcing and vendors) | Data and configuration can be exported in open formats; exit cost priced | | |
 
 ## 4. Findings
@@ -94,3 +99,14 @@ Severity: Critical (breaks the thesis or creates exposure now), High (fix within
 | Key people to retain | |
 | What we could not see, and how it limits the conclusions | |
 | Overall confidence | high / medium / low |
+
+## 6. After signing: first 100 days (acquisitions)
+
+| Item | Owner | Due | Status |
+|---|---|---|---|
+| Day 1: access, security controls and incident contacts in place | | Day 1 | |
+| Transitional service agreements listed with exit dates (carve-outs) | | Day 30 | |
+| Identity and network integration plan agreed | | Day 30 | |
+| Key-person retention status | | Day 30 and day 90 | |
+| Licence true-ups and contract novations listed | | Day 60 | |
+| Target platform decided per capability (tolerate, invest, migrate or eliminate) | | Day 100 | |

@@ -19,9 +19,11 @@ EU DORA here means Regulation (EU) 2022/2554. It is unrelated to the DORA softwa
 
 The Basel Committee's Principles for Operational Resilience (March 2021) and the UK approach (PRA SS1/21 and FCA PS21/3) share one method. UK firms had to be able to remain within impact tolerances by 31 March 2025.
 
+Two newer UK rules matter to technology leaders. From 18 Mar 2027, FCA firms report operational incidents and material third-party arrangements under one regime (FCA PS26/2, with parallel PRA and Bank of England rules). Since 1 Jan 2025, HM Treasury can designate critical third parties, such as cloud providers, for direct oversight by the regulators (PRA PS16/24, FCA PS24/16). Designation does not move your own accountability for the services you buy.
+
 | Step | What to do | Owner | Starting point |
 |---|---|---|---|
-| 1. Identify important business services | services whose disruption would cause intolerable harm to customers or market integrity, or threaten the firm's safety and soundness | business, with risk | a short list (often 10 to 30), each with a named executive owner |
+| 1. Identify important business services | services whose disruption would cause intolerable harm to customers or market integrity, or threaten the firm's safety and soundness | business, with risk | a short list, each with a named executive owner |
 | 2. Set impact tolerances | the maximum tolerable disruption, expressed as time and, where useful, volume or value | business executive, approved by the board | "payments to customers restored within N hours" |
 | 3. Map the service | people, processes, technology, facilities, data and suppliers the service needs | architecture and service owners | generated from the service catalogue and dependency data, not drawn once by hand |
 | 4. Test with severe but plausible scenarios | regional cloud outage, ransomware, loss of a key supplier, corrupted data | technology and risk | each important service tested at least once a year |
@@ -45,14 +47,14 @@ EU DORA applies from 17 Jan 2025. Read the regulation and its technical standard
 ## Third-party and cloud concentration risk
 
 - Keep the register of ICT third-party arrangements as data, not a spreadsheet emailed before audits. Record which important business services each supplier supports.
-- For each critical supplier, hold a written and tested exit plan: target state, data export, time needed and cost. Test the data export at least once a year.
+- For each critical (Tier 1) supplier, hold a written exit plan, reviewed every year: target state, data export, time needed and cost. Run a real data export and import into the alternative, timed, at least once a year. Paper walk-throughs count only for Tier 2. DORA requires exit plans for ICT services supporting critical or important functions to be sufficiently tested (Art. 28(8)).
 - Measure concentration: the share of important business services that depend on a single provider or region. Report it to the board every quarter with the risk appetite threshold.
 - Design for the failure of one cloud region before designing for the failure of a whole provider. A multi-region design within one provider is cheaper and often enough; a multi-provider design must be justified by an impact tolerance.
 - Read the contract for audit rights, incident notification times, sub-contracting and data location before signing, not at renewal.
 
 ## Model risk for AI
 
-The US Federal Reserve's SR 11-7 (2011) guidance on model risk management is the reference many banks use worldwide. Apply its three elements to AI and language models, not only to statistical models.
+The US Federal Reserve's SR 11-7 (2011) guidance on model risk management is the reference many banks use worldwide. In the UK, PRA SS1/23 (effective May 2024) applies to banks with internal model approval and covers AI models: it expects a model inventory, risk tiering and an accountable senior manager. Use the two together; they agree on inventory and validation. In the EU, AI used to assess the creditworthiness of individuals is high-risk under the AI Act (Annex III, point 5(b)). Apply the three SR 11-7 elements to AI and language models, not only to statistical models.
 
 | SR 11-7 element | Applied to AI systems |
 |---|---|
@@ -68,7 +70,8 @@ PCI DSS v4.0.1 (June 2024) was current at the time of writing; check the PCI Sec
 
 - Reduce scope first: tokenise card data and keep it out of as many systems as possible. Every system removed from scope is a control you no longer evidence.
 - Put the development requirements into the pipeline: secure development training, code review, vulnerability scanning and change control as covered in [secure development](../playbook/security/secure-development.md) and [code review](../playbook/delivery/code-review.md).
-- Keep an inventory of scripts on payment pages and the reason for each.
+- Payment pages: keep an authorised inventory of scripts, with the reason for each and an integrity check (Req. 6.4.3), and detect changes to scripts and security headers at least weekly (Req. 11.6.1). If you use SAQ A, confirm you still meet the eligibility criterion on script attacks that the PCI SSC added in January 2025.
+- Confirm scope at least every 12 months (Req. 12.5.2); MFA for all access into the cardholder data environment (Req. 8.4.2); 12 months of audit logs with the last 3 months immediately available (Req. 10.5.1).
 
 ## Core banking and mainframe modernisation
 
@@ -90,6 +93,8 @@ Supervisors ask for control and evidence. They rarely require a weekly change bo
 
 ## Evidence for supervisors
 
+Evidence for any single change can be produced within 1 hour; a sample of 25 changes within 1 working day. The same targets apply in [regulated industries](../playbook/compliance/regulated-industries.md) and the [regulated profile](../profiles/regulated.md).
+
 | Supervisor asks | Evidence you should produce within 1 working day |
 |---|---|
 | Who approved this change and what was tested? | pull request, CI results, deployment record |
@@ -106,7 +111,7 @@ Give internal audit and the second line read-only access to these systems so the
 |---|---|
 | Important business services defined by IT system instead of by customer outcome | Define the service from the customer's point of view, then map systems to it. |
 | Impact tolerances set once and never tested | Scenario tests every year, with measured times. |
-| Exit plans that exist only on paper | Test the data export and timing for critical suppliers. |
+| Exit plans that exist only on paper | Run a real, timed export and import for Tier 1 suppliers every year. |
 | AI models outside the model inventory | One inventory, with risk tiers, covering vendor and in-house models. |
 | A big-bang core banking replacement | Strangler pattern, coexistence and rehearsed migrations. |
 | Evidence assembled by hand before each inspection | Collect it from systems of record all year. |
@@ -125,8 +130,11 @@ Give internal audit and the second line read-only access to these systems so the
 - Basel Committee on Banking Supervision, Principles for Operational Resilience (March 2021): https://www.bis.org/bcbs/publ/d516.htm
 - Bank of England PRA, SS1/21 Operational resilience: impact tolerances for important business services: https://www.bankofengland.co.uk/prudential-regulation/publication/2021/march/operational-resilience-impact-tolerances-for-important-business-services-ss
 - FCA, PS21/3 Building operational resilience: https://www.fca.org.uk/publications/policy-statements/ps21-3-building-operational-resilience
+- FCA, PS26/2 Operational incident and third party reporting: https://www.fca.org.uk/publications/policy-statements/ps26-2-operational-incident-third-party-reporting
+- PRA, PS16/24 Operational resilience: critical third parties to the UK financial sector: https://www.bankofengland.co.uk/prudential-regulation/publication/2024/november/operational-resilience-critical-third-parties-to-the-uk-financial-sector-policy-statement
+- PRA, SS1/23 Model risk management principles for banks: https://www.bankofengland.co.uk/prudential-regulation/publication/2023/may/model-risk-management-principles-for-banks-ss
 - Regulation (EU) 2022/2554 (Digital Operational Resilience Act): https://eur-lex.europa.eu/eli/reg/2022/2554/oj
 - European Central Bank, TIBER-EU framework: https://www.ecb.europa.eu/paym/cyber-resilience/tiber-eu/html/index.en.html
 - Board of Governors of the Federal Reserve System, SR 11-7, Guidance on Model Risk Management: https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm
-- PCI Security Standards Council, PCI DSS: https://www.pcisecuritystandards.org
+- PCI Security Standards Council, PCI DSS v4.0.1 and the SAQ A update of January 2025: https://www.pcisecuritystandards.org
 - ISO 20022: https://www.iso20022.org

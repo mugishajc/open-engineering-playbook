@@ -1,6 +1,6 @@
 # For leaders
 
-The rest of the playbook describes how good engineering works. This section is for the people who decide where it goes: CTOs, CIOs, Chief Data and Chief Digital Officers, principal engineers, chief and enterprise architects, IT strategists and planners, government technology leaders, bank and insurer executives, and business executives who fund technology without running it.
+The rest of the playbook describes how good engineering works. This section is for the people who decide where it goes. That includes technology leaders and architects, chief data and chief digital officers, government and bank leaders, and executives who fund technology without running it. Terms and acronyms are in the [glossary](../GLOSSARY.md).
 
 Each page is a toolkit you can use this week: agendas, checklists, decision aids and fill-in templates. Each one links back to the practice pages behind it.
 
@@ -13,7 +13,8 @@ Each page is a toolkit you can use this week: agendas, checklists, decision aids
 | A principal or staff engineer | [Decision making](decision-making.md) | [Architecture toolkit](architecture-toolkit.md), [RFCs](../playbook/architecture/rfcs.md) |
 | A chief or enterprise architect | [Architecture toolkit](architecture-toolkit.md) | [Architecture practice](../playbook/architecture/architecture-practice.md), [tech radar](../playbook/architecture/tech-radar.md) |
 | An IT strategist or planner | [Strategy toolkit](strategy-toolkit.md) | [Portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md), [transition playbook](../playbook/strategy/transition-playbook.md) |
-| A Chief Data or Chief Digital Officer | [For data and digital officers](for-data-and-digital-officers.md) | [Data governance](../playbook/data/data-governance.md), [AI governance](../playbook/ai/ai-governance.md) |
+| A chief data officer | [For data and digital officers](for-data-and-digital-officers.md) | [Data governance](../playbook/data/data-governance.md), [AI governance](../playbook/ai/ai-governance.md) |
+| A chief digital officer (services and channels) | [Chief digital officers](for-data-and-digital-officers.md#chief-digital-officers) | [Product partnership](../playbook/ways-of-working/product-partnership.md), [transition playbook](../playbook/strategy/transition-playbook.md), [for government](for-government.md) |
 | A government technology leader or adviser | [For government](for-government.md) | [Public sector](../playbook/compliance/public-sector.md), [public sector profile](../profiles/public-sector.md) |
 | A bank or insurer technology or risk executive | [For financial services](for-financial-services.md) | [Regulated industries](../playbook/compliance/regulated-industries.md), [control mapping](../playbook/compliance/control-mapping.md) |
 | The owner or manager of a small or medium business | [For small and medium businesses](for-small-and-medium-businesses.md) | [SME profile](../profiles/sme.md) for a week 1 to year 1 plan |
@@ -32,7 +33,7 @@ The [operating rhythm](operating-rhythm.md) page has the full version with agend
 | Weekly | Review delivery, reliability, security and cost numbers with your leads. Decide, or say when you will. | [Metrics](../playbook/measurement/metrics.md) |
 | Monthly | Architecture and risk review. Check the decisions made below you, not only the ones brought to you. | [Architecture toolkit](architecture-toolkit.md), [decision records](../playbook/architecture/decision-records.md) |
 | Quarterly | Strategy and portfolio review. Rebalance capacity. Report to the board. Re-run the self-assessment. | [Portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md), [board reporting](board-and-executive-reporting.md) |
-| Twice a year | Run a crisis exercise with the executive team. | [Crisis leadership](crisis-leadership.md) |
+| Twice a year | Run a crisis exercise with the executive team; the board joins at least one a year. | [Crisis leadership](crisis-leadership.md) |
 | Yearly | Refresh the technical strategy and the horizon scan. Set the budget against them. | [Technical strategy](../playbook/strategy/technical-strategy.md), [horizon scan](../playbook/strategy/horizon-scan.md) |
 
 ## All pages in this section
@@ -47,10 +48,10 @@ The [operating rhythm](operating-rhythm.md) page has the full version with agend
 | [Strategy toolkit](strategy-toolkit.md) | Wardley maps, capability maps, application portfolio rationalisation, scenarios, OKRs |
 | [Architecture toolkit](architecture-toolkit.md) | Quality attributes, review checklist, trade-off matrices, fitness functions |
 | [Technical due diligence](technical-due-diligence.md) | What to examine before you buy, invest in or depend on a technology business |
-| [For data and digital officers](for-data-and-digital-officers.md) | Data strategy tied to outcomes, governance teams accept, AI-ready data |
+| [For data and digital officers](for-data-and-digital-officers.md) | Data strategy tied to outcomes, governance teams accept, AI-ready data, and a section for chief digital officers on service ownership and channel shift |
 | [For government](for-government.md) | Shared digital infrastructure, procurement for outcomes, sovereignty, capability |
 | [For financial services](for-financial-services.md) | Operational resilience, EU DORA, model risk, modernising core systems under supervision |
-| [For business executives](for-business-executives.md) | Ten questions to ask, how to read the numbers, how to fund technology well |
-| [For small and medium businesses](for-small-and-medium-businesses.md) | The essential controls, managing an IT provider and software subscriptions, the first hour of an incident, a yearly IT plan |
+| [For business executives](for-business-executives.md) | Ten questions to ask, how to read the numbers, how to fund technology well, hiring and reviewing your technology leader |
+| [For small and medium businesses](for-small-and-medium-businesses.md) | The essential controls and their cost type, choosing and managing an IT provider, software subscriptions, the first hour of an incident with a downtime procedure, a yearly IT plan |
 | [Leading in the AI era](leading-in-the-ai-era.md) | The five AI decisions only leaders can make, staged funding, skills, measuring impact, a 12-month plan, board questions |
 | [Reading list](reading-list.md) | The books these roles keep going back to |
