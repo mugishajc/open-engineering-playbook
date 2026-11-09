@@ -1,0 +1,218 @@
+# Example answers for a fictional startup of 12 engineers.
+# Copy this file, or run assess.py --init for a blank one.
+#
+# Score it:
+#   python3 assessment/assess.py --questions assessment/questions.toml \
+#       --answers assessment/example-answers.toml
+#
+# This team protects its main branch, runs CI and keeps secrets out of code.
+# It has never tested a restore, has no written decision rights, has not
+# encrypted its customer database at rest, has no code assistant policy and
+# keeps no list of the laws that apply to it, so five areas sit below
+# Foundation.
+# Set an answer to true only when you can point to the evidence.
+# Commit this file and repeat the assessment every quarter.
+
+# One of: solo, startup, scale-up, enterprise.
+profile = "startup"
+# Add "public-sector" and/or "regulated" when they apply.
+overlays = []
+# A startup selling to government would set: overlays = ["public-sector"]
+
+[answers]
+
+# Strategy
+# [foundation] Is there a written technical strategy of no more than two pages that names the top three priorities for the next 12 months?
+"strategy.written-strategy" = true
+# [foundation] Before building a new component, do you write down why you are not buying or adopting an existing product or open source project?
+"strategy.build-buy-rule" = true
+# [standard] Is the technical strategy reviewed at least once a quarter, including a scan of the regulation and technology changes due in the next three years?
+"strategy.horizon-scan" = false
+# [standard] Is engineering capacity split between features, reliability, technical debt and platform as explicit percentages, set each quarter and checked against what was actually spent?
+"strategy.capacity-allocation" = false
+# [standard] Does every major transition, such as a platform migration or a new way of working, have a charter with one owner, exit criteria and a rollback plan?
+"strategy.transition-charter" = false
+# [assured] Are technical risks kept in a risk register with an owner, a rating and a last review date no more than 90 days old?
+"strategy.risk-register" = false
+
+# Operating model
+# [foundation] Does every repository and every production service have one named owning person or team?
+"operating-model.named-owners" = true
+# [foundation] Is it written down who can approve production changes, architecture changes and new vendors?
+"operating-model.decision-rights" = false
+# [standard] Is each team's type and its interaction mode with other teams written down and reviewed at least twice a year?
+"operating-model.team-types" = false
+# [standard] Does an engineering governance forum meet on a fixed schedule, publish its decisions and answer requests within 10 working days?
+"operating-model.governance-forum" = false
+# [assured] Do tooling rules, not just policy, stop one person from writing, approving and deploying the same production change?
+"operating-model.separation-of-duties" = false
+# [assured] Does engineering report to the board or audit committee at least twice a year on a small agreed set of measures, under a named IT governance framework such as ISO/IEC 38500 or COBIT?
+"operating-model.it-governance" = false
+
+# Ways of working
+# [foundation] Is all planned work for each team visible on one board or list, with a written limit on work in progress?
+"ways-of-working.visible-work" = true
+# [foundation] Does each team have a written working agreement that covers core hours, meetings, review norms and how new work reaches the team?
+"ways-of-working.working-agreement" = true
+# [standard] Does each team hold a retrospective at least every four weeks and track its actions to completion?
+"ways-of-working.retrospectives" = true
+# [standard] Do teams forecast delivery dates from measured throughput, for example with a Monte Carlo simulation, and give a range rather than a single date?
+"ways-of-working.throughput-forecasts" = false
+# [standard] Does every team have a named product partner who sets priorities together with engineering and takes part in planning?
+"ways-of-working.product-partner" = false
+# [assured] Can you trace every released change back to an approved requirement, request or risk item?
+"ways-of-working.traceable-requirements" = false
+
+# Delivery
+# [foundation] Is the default branch protected, so changes land only through a pull or merge request?
+"delivery.protected-default-branch" = true
+# [foundation] Does CI build and test every pull or merge request automatically, and block the merge when it fails?
+"delivery.ci-on-every-change" = true
+# [standard] Does every pull or merge request get a first review within one working day, and do you measure it?
+"delivery.code-review-sla" = true
+# [standard] Is every release versioned, with a changelog and a release process that any team member can run from written steps or a pipeline?
+"delivery.versioned-releases" = false
+# [standard] Are code, configuration and content changes rolled out in stages, such as a canary or a percentage rollout, with automatic rollback when health checks fail?
+"delivery.staged-rollout" = false
+# [assured] For any production change in the last 12 months, can you show the linked request, the reviewer, the CI result and who deployed it, within one hour?
+"delivery.change-evidence" = false
+
+# Quality
+# [foundation] Does every bug fix include a test that fails without the fix?
+"quality.regression-tests" = true
+# [foundation] Does the test suite that gates a merge finish in under 10 minutes?
+"quality.fast-feedback" = true
+# [standard] Are flaky tests quarantined or fixed within 5 working days of being found, with the count tracked?
+"quality.flaky-tests" = false
+# [standard] Do engineers write tests before or alongside new logic, and do reviewers check that changed lines are tested?
+"quality.test-first" = false
+# [standard] Are user-facing services tested against WCAG 2.2 level AA before each major release?
+"quality.accessibility" = false
+# [assured] Are the test results for each release kept as evidence and linked to the release record?
+"quality.test-evidence" = false
+
+# Reliability
+# [foundation] Are backups automated, stored away from the primary system, and has a restore been tested in the last 90 days?
+"reliability.backups-restored" = false
+# [foundation] Is there a written incident process that says how to declare an incident, who leads it and where updates go?
+"reliability.incident-process" = true
+# [standard] Does every user-facing service have SLOs with an error budget that the owning team reviews at least monthly?
+"reliability.slos" = false
+# [standard] Does every major incident get a blameless postmortem within 5 working days that looks for several contributing factors, not one root cause, with actions tracked to completion?
+"reliability.postmortems" = false
+# [standard] Can every production service roll back a bad release within 15 minutes, and has each team practised a rollback in the last quarter?
+"reliability.rollbacks" = false
+# [assured] Is disaster recovery tested at least once a year against written recovery time and recovery point objectives, with the results recorded?
+"reliability.dr-tested" = false
+
+# Security
+# [foundation] Are secrets kept out of source code, with secret scanning on every push?
+"security.no-secrets-in-code" = true
+# [foundation] Is multi-factor authentication required for source control, CI, cloud consoles and production access?
+"security.mfa" = true
+# [foundation] Are dependency updates proposed automatically and merged at least once a month?
+"security.dependency-updates" = true
+# [standard] Are vulnerabilities fixed within written time limits by severity, with known exploited vulnerabilities handled first?
+"security.vulnerability-slas" = false
+# [assured] Does every release ship with an SBOM and a signature or provenance attestation that is verified before deployment?
+"security.sbom-and-signing" = false
+# [assured] Is there an inventory of the cryptography your systems use, with a plan to move to post-quantum algorithms for data that must stay secret for 10 years or more?
+"security.crypto-inventory" = false
+
+# Data
+# [foundation] Is every data store labelled with a classification such as public, internal, confidential or restricted?
+"data.classification" = true
+# [foundation] Is confidential and restricted data encrypted in transit and at rest, with access limited to named roles?
+"data.protected-at-rest" = false
+# [standard] Does every important dataset have a named owner and a documented schema or data contract?
+"data.owners-and-contracts" = false
+# [standard] Do critical data pipelines run automated checks for freshness, completeness and validity that alert the owner?
+"data.quality-checks" = false
+# [standard] Does every new use of personal data get a privacy review, and a data protection impact assessment when the risk is high?
+"data.privacy-review" = false
+# [assured] Are retention and deletion rules enforced by automation, with deletion logs kept?
+"data.retention-enforced" = false
+
+# AI
+# [foundation] Is there a written code assistant policy that covers approved tools, data that must not be shared and review of generated code?
+"ai.code-assistant-policy" = false
+# [foundation] Is there a register of every AI tool staff use and every AI feature in your products, with an owner for each?
+"ai.use-register" = true
+# [standard] Does every new AI feature get a written assessment of risk, data use and human oversight before it reaches users?
+"ai.use-case-assessment" = false
+# [standard] Are AI features tested against the OWASP Top 10 for LLM Applications, including prompt injection and excessive agency, before release?
+"ai.application-security" = false
+# [standard] Do AI features have automated evaluations with pass thresholds that run before any model or prompt change ships?
+"ai.evaluations" = false
+# [assured] Is AI risk managed under a documented framework, such as ISO/IEC 42001 or the NIST AI Risk Management Framework, with records an auditor can review?
+"ai.management-system" = false
+
+# Architecture
+# [foundation] Are significant technical decisions recorded as decision records in the repository they affect?
+"architecture.decision-records" = true
+# [foundation] Does every production service send structured logs and health metrics to one place you can search?
+"architecture.logs-and-metrics" = true
+# [standard] Do changes that cross team lines or meet written triggers, such as a new data store or external dependency, get a lightweight architecture review or RFC with a fixed comment period?
+"architecture.review-triggers" = false
+# [standard] Does every new service and every major change get a written threat model before release?
+"architecture.threat-model" = true
+# [standard] Is technical debt kept in a register with an owner and an estimated cost, and does each team spend an agreed share of its time paying it down?
+"architecture.tech-debt-register" = false
+# [assured] Does every decision record name its approver and stay available for the period your records policy or regulator requires?
+"architecture.decision-approvals" = false
+
+# Platform
+# [foundation] Can someone new build, test and run the main service locally by following the README, in under one day?
+"platform.one-command-setup" = true
+# [foundation] Is production infrastructure defined as code in version control, with plans reviewed in pull requests and no manual changes in consoles?
+"platform.infrastructure-as-code" = true
+# [standard] Does a golden path template create a new service with CI, observability and security checks already set up?
+"platform.golden-path" = false
+# [standard] Is access to internal services decided per request from user and device identity, rather than by network location alone?
+"platform.zero-trust-access" = false
+# [standard] Does every team see the monthly cost of the services it owns, with an owner for every cost line?
+"platform.cost-visibility" = false
+# [assured] Can you build and deploy from internal mirrors of packages and container images, without reaching the public internet?
+"platform.internal-mirrors" = false
+
+# People
+# [foundation] Is there a written onboarding checklist that gets a new engineer to a merged change in their first week?
+"people.onboarding-checklist" = true
+# [standard] Does each team keep a skills matrix showing at least two people who can run and change each critical system?
+"people.skills-matrix" = false
+# [standard] Do you hire engineers with structured interviews and a work-sample task, scored against a written scorecard?
+"people.structured-hiring" = false
+# [standard] Is there a written career framework with levels and expectations that every engineer can read?
+"people.career-framework" = false
+# [standard] Is nobody on call more than one week in four, and do you track out-of-hours work and pages per person and act when anyone goes over an agreed limit?
+"people.sustainable-pace" = false
+# [assured] Do engineers complete secure coding and data protection training when they join and every year after, with completion recorded?
+"people.training-records" = false
+
+# Measurement
+# [foundation] Do you track at least deployment frequency and change lead time, even by hand?
+"measurement.delivery-basics" = true
+# [foundation] Do you run this assessment at least once a quarter and keep the answers in version control?
+"measurement.quarterly-assessment" = true
+# [standard] Do you measure all five DORA delivery metrics from tooling rather than by hand?
+"measurement.five-dora-metrics" = false
+# [standard] Do teams review their delivery and reliability metrics at least monthly and record the actions they take?
+"measurement.metrics-reviewed" = false
+# [standard] Are delivery metrics used only to improve team practice, and never to rank or rate individuals?
+"measurement.no-individual-ranking" = true
+# [assured] Are metric data and assessment results kept for an agreed retention period and given to auditors on request?
+"measurement.evidence-retained" = false
+
+# Compliance
+# [foundation] Is there a list of the laws, regulations and contracts that apply to your software, with an owner for each?
+"compliance.obligations-register" = false
+# [foundation] Do you check the licences of open source dependencies before you ship?
+"compliance.licence-check" = true
+# [standard] Is there a control map that links each relevant control, for example from ISO/IEC 27001 or SOC 2, to a practice and to the evidence for it?
+"compliance.control-map" = false
+# [standard] Does every supplier and SaaS tool that handles your data get a risk review before purchase and again at least once a year?
+"compliance.vendor-risk" = false
+# [assured] Is control evidence collected automatically from pipelines and kept in tamper-evident storage for the required retention period?
+"compliance.automated-evidence" = false
+# [assured] Do you have a tested process that meets the incident and vulnerability reporting deadlines that apply to you?
+"compliance.regulatory-reporting" = false

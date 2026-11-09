@@ -1,0 +1,691 @@
+# Open Engineering Playbook maturity assessment: question bank.
+#
+# Each question is a yes or no check that you can back with evidence.
+# A practice area reaches a level only when every question at that level,
+# and at every level below it, is answered true.
+#
+# Fields:
+#   id      area id, a full stop, then a short slug. Never reuse or rename an
+#           id once published: answer files in git history refer to it.
+#   level   foundation, standard or assured
+#   text    the question, answered true or false
+#   action  what to do when the answer is false, in the imperative
+#   link    the playbook page that explains the practice, relative to the
+#           repository root
+#
+# Numbers in the questions are starting points. Tune them in your fork and
+# keep the change in version control so scores stay comparable over time.
+
+version = 1
+
+[[areas]]
+id = "strategy"
+title = "Strategy"
+
+[[areas]]
+id = "operating-model"
+title = "Operating model"
+
+[[areas]]
+id = "ways-of-working"
+title = "Ways of working"
+
+[[areas]]
+id = "delivery"
+title = "Delivery"
+
+[[areas]]
+id = "quality"
+title = "Quality"
+
+[[areas]]
+id = "reliability"
+title = "Reliability"
+
+[[areas]]
+id = "security"
+title = "Security"
+
+[[areas]]
+id = "data"
+title = "Data"
+
+[[areas]]
+id = "ai"
+title = "AI"
+
+[[areas]]
+id = "architecture"
+title = "Architecture"
+
+[[areas]]
+id = "platform"
+title = "Platform"
+
+[[areas]]
+id = "people"
+title = "People"
+
+[[areas]]
+id = "measurement"
+title = "Measurement"
+
+[[areas]]
+id = "compliance"
+title = "Compliance"
+
+# -------------------------------------------------------------- strategy
+
+[[questions]]
+id = "strategy.written-strategy"
+level = "foundation"
+text = "Is there a written technical strategy of no more than two pages that names the top three priorities for the next 12 months?"
+action = "Write a one-page technical strategy with the top three priorities for the next 12 months."
+link = "playbook/strategy/technical-strategy.md"
+
+[[questions]]
+id = "strategy.build-buy-rule"
+level = "foundation"
+text = "Before building a new component, do you write down why you are not buying or adopting an existing product or open source project?"
+action = "Add a short build, buy or adopt note to every new component proposal."
+link = "playbook/strategy/build-buy-adopt.md"
+
+[[questions]]
+id = "strategy.horizon-scan"
+level = "standard"
+text = "Is the technical strategy reviewed at least once a quarter, including a scan of the regulation and technology changes due in the next three years?"
+action = "Review the strategy every quarter and add a horizon scan of regulation and technology changes due in the next three years."
+link = "playbook/strategy/horizon-scan.md"
+
+[[questions]]
+id = "strategy.capacity-allocation"
+level = "standard"
+text = "Is engineering capacity split between features, reliability, technical debt and platform as explicit percentages, set each quarter and checked against what was actually spent?"
+action = "Agree capacity percentages for features, reliability, debt and platform each quarter, and compare them with actual time spent."
+link = "playbook/strategy/portfolio-and-capacity.md"
+
+[[questions]]
+id = "strategy.transition-charter"
+level = "standard"
+text = "Does every major transition, such as a platform migration or a new way of working, have a charter with one owner, exit criteria and a rollback plan?"
+action = "Write a transition charter with an owner, exit criteria and a rollback plan for each major change in flight."
+link = "playbook/strategy/transition-playbook.md"
+
+[[questions]]
+id = "strategy.risk-register"
+level = "assured"
+text = "Are technical risks kept in a risk register with an owner, a rating and a last review date no more than 90 days old?"
+action = "Move technical risks into a risk register and review every entry at least every 90 days."
+link = "playbook/strategy/transition-playbook.md"
+
+# ------------------------------------------------------- operating-model
+
+[[questions]]
+id = "operating-model.named-owners"
+level = "foundation"
+text = "Does every repository and every production service have one named owning person or team?"
+action = "Name one owner for every repository and production service, and write it in the README or CODEOWNERS."
+link = "playbook/operating-model/roles.md"
+
+[[questions]]
+id = "operating-model.decision-rights"
+level = "foundation"
+text = "Is it written down who can approve production changes, architecture changes and new vendors?"
+action = "Write a one-page decision rights table for production changes, architecture changes and new vendors."
+link = "playbook/operating-model/decision-rights.md"
+
+[[questions]]
+id = "operating-model.team-types"
+level = "standard"
+text = "Is each team's type and its interaction mode with other teams written down and reviewed at least twice a year?"
+action = "Record each team's type and interaction modes, and review them every six months."
+link = "playbook/operating-model/team-topology.md"
+
+[[questions]]
+id = "operating-model.governance-forum"
+level = "standard"
+text = "Does an engineering governance forum meet on a fixed schedule, publish its decisions and answer requests within 10 working days?"
+action = "Set up a governance forum with a fixed schedule, a public decision log and a 10 working day answer limit."
+link = "playbook/operating-model/engineering-governance.md"
+
+[[questions]]
+id = "operating-model.separation-of-duties"
+level = "assured"
+text = "Do tooling rules, not just policy, stop one person from writing, approving and deploying the same production change?"
+action = "Enforce separation of duties in source control and deployment tooling, and keep the configuration under review."
+link = "playbook/operating-model/decision-rights.md"
+
+[[questions]]
+id = "operating-model.it-governance"
+level = "assured"
+text = "Does engineering report to the board or audit committee at least twice a year on a small agreed set of measures, under a named IT governance framework such as ISO/IEC 38500 or COBIT?"
+action = "Agree a short set of measures with the board or audit committee and report on them at least twice a year."
+link = "playbook/operating-model/it-governance.md"
+
+# ------------------------------------------------------- ways-of-working
+
+[[questions]]
+id = "ways-of-working.visible-work"
+level = "foundation"
+text = "Is all planned work for each team visible on one board or list, with a written limit on work in progress?"
+action = "Put each team's work on one board and set a work-in-progress limit."
+link = "playbook/ways-of-working/agile-and-scrum.md"
+
+[[questions]]
+id = "ways-of-working.working-agreement"
+level = "foundation"
+text = "Does each team have a written working agreement that covers core hours, meetings, review norms and how new work reaches the team?"
+action = "Write a team working agreement and review it when someone joins or leaves."
+link = "playbook/ways-of-working/agile-and-scrum.md"
+
+[[questions]]
+id = "ways-of-working.retrospectives"
+level = "standard"
+text = "Does each team hold a retrospective at least every four weeks and track its actions to completion?"
+action = "Hold a retrospective at least every four weeks and track each action to done."
+link = "playbook/ways-of-working/agile-and-scrum.md"
+
+[[questions]]
+id = "ways-of-working.throughput-forecasts"
+level = "standard"
+text = "Do teams forecast delivery dates from measured throughput, for example with a Monte Carlo simulation, and give a range rather than a single date?"
+action = "Record weekly throughput and forecast dates as ranges from that data."
+link = "playbook/ways-of-working/planning-and-forecasting.md"
+
+[[questions]]
+id = "ways-of-working.product-partner"
+level = "standard"
+text = "Does every team have a named product partner who sets priorities together with engineering and takes part in planning?"
+action = "Name a product partner for each team and plan together every cycle."
+link = "playbook/ways-of-working/product-partnership.md"
+
+[[questions]]
+id = "ways-of-working.traceable-requirements"
+level = "assured"
+text = "Can you trace every released change back to an approved requirement, request or risk item?"
+action = "Link every change to an approved requirement or request in your tracker."
+link = "playbook/ways-of-working/planning-and-forecasting.md"
+
+# -------------------------------------------------------------- delivery
+
+[[questions]]
+id = "delivery.protected-default-branch"
+level = "foundation"
+text = "Is the default branch protected, so changes land only through a pull or merge request?"
+action = "Protect the default branch and block direct pushes."
+link = "playbook/delivery/source-control.md"
+
+[[questions]]
+id = "delivery.ci-on-every-change"
+level = "foundation"
+text = "Does CI build and test every pull or merge request automatically, and block the merge when it fails?"
+action = "Run build and tests in CI on every pull or merge request and make a green run a merge requirement."
+link = "playbook/delivery/continuous-integration.md"
+
+[[questions]]
+id = "delivery.code-review-sla"
+level = "standard"
+text = "Does every pull or merge request get a first review within one working day, and do you measure it?"
+action = "Agree a one working day first-review limit and track the time to first review."
+link = "playbook/delivery/code-review.md"
+
+[[questions]]
+id = "delivery.versioned-releases"
+level = "standard"
+text = "Is every release versioned, with a changelog and a release process that any team member can run from written steps or a pipeline?"
+action = "Adopt a versioning scheme, generate the changelog and script the release."
+link = "playbook/delivery/release-management.md"
+
+[[questions]]
+id = "delivery.staged-rollout"
+level = "standard"
+text = "Are code, configuration and content changes rolled out in stages, such as a canary or a percentage rollout, with automatic rollback when health checks fail?"
+action = "Roll out code, configuration and content in stages, with health checks that stop and roll back a bad change."
+link = "playbook/delivery/gitops-and-deployment.md"
+
+[[questions]]
+id = "delivery.change-evidence"
+level = "assured"
+text = "For any production change in the last 12 months, can you show the linked request, the reviewer, the CI result and who deployed it, within one hour?"
+action = "Link every deployment to its change request, reviewer and CI run, and keep the records for at least 12 months."
+link = "playbook/delivery/release-management.md"
+
+# --------------------------------------------------------------- quality
+
+[[questions]]
+id = "quality.regression-tests"
+level = "foundation"
+text = "Does every bug fix include a test that fails without the fix?"
+action = "Make a failing test part of every bug fix and check for it in review."
+link = "playbook/quality/test-driven-development.md"
+
+[[questions]]
+id = "quality.fast-feedback"
+level = "foundation"
+text = "Does the test suite that gates a merge finish in under 10 minutes?"
+action = "Split or speed up the merge-gating tests until they finish in under 10 minutes."
+link = "playbook/delivery/testing.md"
+
+[[questions]]
+id = "quality.flaky-tests"
+level = "standard"
+text = "Are flaky tests quarantined or fixed within 5 working days of being found, with the count tracked?"
+action = "Track flaky tests and quarantine or fix each one within 5 working days."
+link = "playbook/quality/quality-engineering.md"
+
+[[questions]]
+id = "quality.test-first"
+level = "standard"
+text = "Do engineers write tests before or alongside new logic, and do reviewers check that changed lines are tested?"
+action = "Ask for tests with new logic and check changed-line coverage in review."
+link = "playbook/quality/test-driven-development.md"
+
+[[questions]]
+id = "quality.accessibility"
+level = "standard"
+text = "Are user-facing services tested against WCAG 2.2 level AA before each major release?"
+action = "Test user-facing services against WCAG 2.2 level AA before each major release."
+link = "playbook/compliance/public-sector.md"
+
+[[questions]]
+id = "quality.test-evidence"
+level = "assured"
+text = "Are the test results for each release kept as evidence and linked to the release record?"
+action = "Store test results with each release record and keep them for the required period."
+link = "playbook/quality/quality-engineering.md"
+
+# ----------------------------------------------------------- reliability
+
+[[questions]]
+id = "reliability.backups-restored"
+level = "foundation"
+text = "Are backups automated, stored away from the primary system, and has a restore been tested in the last 90 days?"
+action = "Automate backups to a separate location and test a full restore at least every 90 days."
+link = "playbook/reliability/backup-and-recovery.md"
+
+[[questions]]
+id = "reliability.incident-process"
+level = "foundation"
+text = "Is there a written incident process that says how to declare an incident, who leads it and where updates go?"
+action = "Write a one-page incident process: how to declare, who leads, where updates go."
+link = "playbook/reliability/incident-management.md"
+
+[[questions]]
+id = "reliability.slos"
+level = "standard"
+text = "Does every user-facing service have SLOs with an error budget that the owning team reviews at least monthly?"
+action = "Set SLOs and error budgets for user-facing services and review them monthly."
+link = "playbook/reliability/service-levels.md"
+
+[[questions]]
+id = "reliability.postmortems"
+level = "standard"
+text = "Does every major incident get a blameless postmortem within 5 working days that looks for several contributing factors, not one root cause, with actions tracked to completion?"
+action = "Hold a blameless postmortem within 5 working days of every major incident, list the contributing factors and track the actions."
+link = "playbook/reliability/root-cause-analysis.md"
+
+[[questions]]
+id = "reliability.rollbacks"
+level = "standard"
+text = "Can every production service roll back a bad release within 15 minutes, and has each team practised a rollback in the last quarter?"
+action = "Make releases rollback-safe, automate the rollback and practise it at least once a quarter."
+link = "playbook/reliability/rollbacks.md"
+
+[[questions]]
+id = "reliability.dr-tested"
+level = "assured"
+text = "Is disaster recovery tested at least once a year against written recovery time and recovery point objectives, with the results recorded?"
+action = "Set recovery time and recovery point objectives and run a recorded disaster recovery test every year."
+link = "playbook/reliability/backup-and-recovery.md"
+
+# -------------------------------------------------------------- security
+
+[[questions]]
+id = "security.no-secrets-in-code"
+level = "foundation"
+text = "Are secrets kept out of source code, with secret scanning on every push?"
+action = "Move secrets to a secrets manager and turn on secret scanning for every push."
+link = "playbook/security/secrets.md"
+
+[[questions]]
+id = "security.mfa"
+level = "foundation"
+text = "Is multi-factor authentication required for source control, CI, cloud consoles and production access?"
+action = "Require multi-factor authentication for source control, CI, cloud consoles and production access."
+link = "playbook/security/access-control.md"
+
+[[questions]]
+id = "security.dependency-updates"
+level = "foundation"
+text = "Are dependency updates proposed automatically and merged at least once a month?"
+action = "Turn on automated dependency update pull requests and merge them at least monthly."
+link = "playbook/security/dependencies.md"
+
+[[questions]]
+id = "security.vulnerability-slas"
+level = "standard"
+text = "Are vulnerabilities fixed within written time limits by severity, with known exploited vulnerabilities handled first?"
+action = "Publish fix time limits by severity and put known exploited vulnerabilities at the top of the queue."
+link = "playbook/security/vulnerability-management.md"
+
+[[questions]]
+id = "security.sbom-and-signing"
+level = "assured"
+text = "Does every release ship with an SBOM and a signature or provenance attestation that is verified before deployment?"
+action = "Generate an SBOM and sign every release, and verify the signature in the deployment pipeline."
+link = "playbook/security/supply-chain.md"
+
+[[questions]]
+id = "security.crypto-inventory"
+level = "assured"
+text = "Is there an inventory of the cryptography your systems use, with a plan to move to post-quantum algorithms for data that must stay secret for 10 years or more?"
+action = "Build a cryptographic inventory and a migration plan to post-quantum algorithms, starting with long-lived secret data."
+link = "playbook/security/post-quantum-readiness.md"
+
+# ------------------------------------------------------------------ data
+
+[[questions]]
+id = "data.classification"
+level = "foundation"
+text = "Is every data store labelled with a classification such as public, internal, confidential or restricted?"
+action = "Classify every data store as public, internal, confidential or restricted."
+link = "playbook/data/data-governance.md"
+
+[[questions]]
+id = "data.protected-at-rest"
+level = "foundation"
+text = "Is confidential and restricted data encrypted in transit and at rest, with access limited to named roles?"
+action = "Encrypt confidential and restricted data in transit and at rest, and limit access to named roles."
+link = "playbook/data/data-security-and-privacy.md"
+
+[[questions]]
+id = "data.owners-and-contracts"
+level = "standard"
+text = "Does every important dataset have a named owner and a documented schema or data contract?"
+action = "Name an owner and write a schema or data contract for each important dataset."
+link = "playbook/data/data-governance.md"
+
+[[questions]]
+id = "data.quality-checks"
+level = "standard"
+text = "Do critical data pipelines run automated checks for freshness, completeness and validity that alert the owner?"
+action = "Add freshness, completeness and validity checks to critical pipelines, with alerts to the owner."
+link = "playbook/data/data-quality.md"
+
+[[questions]]
+id = "data.privacy-review"
+level = "standard"
+text = "Does every new use of personal data get a privacy review, and a data protection impact assessment when the risk is high?"
+action = "Add a privacy review to the design stage and run an impact assessment for high-risk uses of personal data."
+link = "playbook/data/data-security-and-privacy.md"
+
+[[questions]]
+id = "data.retention-enforced"
+level = "assured"
+text = "Are retention and deletion rules enforced by automation, with deletion logs kept?"
+action = "Automate retention and deletion rules and keep the deletion logs."
+link = "playbook/data/data-governance.md"
+
+# -------------------------------------------------------------------- ai
+
+[[questions]]
+id = "ai.code-assistant-policy"
+level = "foundation"
+text = "Is there a written code assistant policy that covers approved tools, data that must not be shared and review of generated code?"
+action = "Publish a code assistant policy covering approved tools, data limits and review of generated code."
+link = "playbook/people/code-assistants.md"
+
+[[questions]]
+id = "ai.use-register"
+level = "foundation"
+text = "Is there a register of every AI tool staff use and every AI feature in your products, with an owner for each?"
+action = "Start an AI use register listing each tool and feature with its owner."
+link = "playbook/ai/ai-governance.md"
+
+[[questions]]
+id = "ai.use-case-assessment"
+level = "standard"
+text = "Does every new AI feature get a written assessment of risk, data use and human oversight before it reaches users?"
+action = "Assess each new AI feature for risk, data use and human oversight before release."
+link = "playbook/ai/ai-governance.md"
+
+[[questions]]
+id = "ai.application-security"
+level = "standard"
+text = "Are AI features tested against the OWASP Top 10 for LLM Applications, including prompt injection and excessive agency, before release?"
+action = "Test AI features against the OWASP Top 10 for LLM Applications before release."
+link = "playbook/ai/ai-application-security.md"
+
+[[questions]]
+id = "ai.evaluations"
+level = "standard"
+text = "Do AI features have automated evaluations with pass thresholds that run before any model or prompt change ships?"
+action = "Write automated evaluations with pass thresholds and run them on every model or prompt change."
+link = "playbook/ai/building-with-ai.md"
+
+[[questions]]
+id = "ai.management-system"
+level = "assured"
+text = "Is AI risk managed under a documented framework, such as ISO/IEC 42001 or the NIST AI Risk Management Framework, with records an auditor can review?"
+action = "Adopt a documented AI risk framework and keep records an auditor can review."
+link = "playbook/ai/ai-governance.md"
+
+# ---------------------------------------------------------- architecture
+
+[[questions]]
+id = "architecture.decision-records"
+level = "foundation"
+text = "Are significant technical decisions recorded as decision records in the repository they affect?"
+action = "Start a decision record folder in each main repository and record the next significant decision there."
+link = "playbook/architecture/decision-records.md"
+
+[[questions]]
+id = "architecture.logs-and-metrics"
+level = "foundation"
+text = "Does every production service send structured logs and health metrics to one place you can search?"
+action = "Send structured logs and health metrics from every production service to one searchable place."
+link = "playbook/architecture/observability.md"
+
+[[questions]]
+id = "architecture.review-triggers"
+level = "standard"
+text = "Do changes that cross team lines or meet written triggers, such as a new data store or external dependency, get a lightweight architecture review or RFC with a fixed comment period?"
+action = "Write the triggers for an architecture review and run each review as an RFC with a fixed comment period."
+link = "playbook/architecture/architecture-practice.md"
+
+[[questions]]
+id = "architecture.threat-model"
+level = "standard"
+text = "Does every new service and every major change get a written threat model before release?"
+action = "Add a threat model to the definition of done for new services and major changes."
+link = "playbook/security/secure-development.md"
+
+[[questions]]
+id = "architecture.tech-debt-register"
+level = "standard"
+text = "Is technical debt kept in a register with an owner and an estimated cost, and does each team spend an agreed share of its time paying it down?"
+action = "Start a technical debt register and agree a share of each team's time to pay it down."
+link = "playbook/architecture/technical-debt.md"
+
+[[questions]]
+id = "architecture.decision-approvals"
+level = "assured"
+text = "Does every decision record name its approver and stay available for the period your records policy or regulator requires?"
+action = "Add an approver field to decision records and keep them for the required retention period."
+link = "playbook/architecture/decision-records.md"
+
+# -------------------------------------------------------------- platform
+
+[[questions]]
+id = "platform.one-command-setup"
+level = "foundation"
+text = "Can someone new build, test and run the main service locally by following the README, in under one day?"
+action = "Write and test README setup steps until someone new can run the main service in under one day."
+link = "playbook/platform/golden-paths.md"
+
+[[questions]]
+id = "platform.infrastructure-as-code"
+level = "foundation"
+text = "Is production infrastructure defined as code in version control, with plans reviewed in pull requests and no manual changes in consoles?"
+action = "Move production infrastructure into code, review plans in pull requests and stop manual console changes."
+link = "playbook/delivery/infrastructure-as-code.md"
+
+[[questions]]
+id = "platform.golden-path"
+level = "standard"
+text = "Does a golden path template create a new service with CI, observability and security checks already set up?"
+action = "Build a golden path template for new services with CI, observability and security checks included."
+link = "playbook/platform/golden-paths.md"
+
+[[questions]]
+id = "platform.zero-trust-access"
+level = "standard"
+text = "Is access to internal services decided per request from user and device identity, rather than by network location alone?"
+action = "Put internal services behind identity-aware access and stop trusting the network location alone."
+link = "playbook/security/zero-trust.md"
+
+[[questions]]
+id = "platform.cost-visibility"
+level = "standard"
+text = "Does every team see the monthly cost of the services it owns, with an owner for every cost line?"
+action = "Tag every resource with an owner and show each team its monthly cost."
+link = "playbook/platform/finops.md"
+
+[[questions]]
+id = "platform.internal-mirrors"
+level = "assured"
+text = "Can you build and deploy from internal mirrors of packages and container images, without reaching the public internet?"
+action = "Set up internal mirrors for packages and container images and prove a build works without internet access."
+link = "playbook/platform/cloud-on-prem-air-gapped.md"
+
+# ---------------------------------------------------------------- people
+
+[[questions]]
+id = "people.onboarding-checklist"
+level = "foundation"
+text = "Is there a written onboarding checklist that gets a new engineer to a merged change in their first week?"
+action = "Write an onboarding checklist that ends with a merged change in week one."
+link = "playbook/people/onboarding.md"
+
+[[questions]]
+id = "people.skills-matrix"
+level = "standard"
+text = "Does each team keep a skills matrix showing at least two people who can run and change each critical system?"
+action = "Build a team skills matrix and pair or rotate until every critical system has at least two capable people."
+link = "playbook/people/skills-gap.md"
+
+[[questions]]
+id = "people.structured-hiring"
+level = "standard"
+text = "Do you hire engineers with structured interviews and a work-sample task, scored against a written scorecard?"
+action = "Use structured interviews and a work-sample task scored against a written scorecard."
+link = "playbook/people/hiring.md"
+
+[[questions]]
+id = "people.career-framework"
+level = "standard"
+text = "Is there a written career framework with levels and expectations that every engineer can read?"
+action = "Publish a career framework with levels and expectations."
+link = "playbook/people/career-framework.md"
+
+[[questions]]
+id = "people.sustainable-pace"
+level = "standard"
+text = "Is nobody on call more than one week in four, and do you track out-of-hours work and pages per person and act when anyone goes over an agreed limit?"
+action = "Grow the on-call rota to at least four people, track out-of-hours work and pages per person, and act when anyone goes over the limit."
+link = "playbook/people/sustainable-pace.md"
+
+[[questions]]
+id = "people.training-records"
+level = "assured"
+text = "Do engineers complete secure coding and data protection training when they join and every year after, with completion recorded?"
+action = "Add secure coding and data protection training to onboarding and repeat it yearly, with records."
+link = "playbook/people/onboarding.md"
+
+# ----------------------------------------------------------- measurement
+
+[[questions]]
+id = "measurement.delivery-basics"
+level = "foundation"
+text = "Do you track at least deployment frequency and change lead time, even by hand?"
+action = "Start a simple log of deployments and change lead time, by hand if needed."
+link = "playbook/measurement/metrics.md"
+
+[[questions]]
+id = "measurement.quarterly-assessment"
+level = "foundation"
+text = "Do you run this assessment at least once a quarter and keep the answers in version control?"
+action = "Commit this answers file and repeat the assessment every quarter."
+link = "playbook/measurement/maturity-model.md"
+
+[[questions]]
+id = "measurement.five-dora-metrics"
+level = "standard"
+text = "Do you measure all five DORA delivery metrics from tooling rather than by hand?"
+action = "Collect deployment frequency, change lead time, change fail rate, failed deployment recovery time and rework rate from your tools."
+link = "playbook/measurement/metrics.md"
+
+[[questions]]
+id = "measurement.metrics-reviewed"
+level = "standard"
+text = "Do teams review their delivery and reliability metrics at least monthly and record the actions they take?"
+action = "Add a monthly metrics review to each team's calendar and record the actions."
+link = "playbook/measurement/metrics.md"
+
+[[questions]]
+id = "measurement.no-individual-ranking"
+level = "standard"
+text = "Are delivery metrics used only to improve team practice, and never to rank or rate individuals?"
+action = "Write down that delivery metrics are for team improvement only and remove any individual ranking."
+link = "playbook/measurement/metrics.md"
+
+[[questions]]
+id = "measurement.evidence-retained"
+level = "assured"
+text = "Are metric data and assessment results kept for an agreed retention period and given to auditors on request?"
+action = "Agree a retention period for metrics and assessment results and store them where auditors can get them."
+link = "playbook/measurement/maturity-model.md"
+
+# ------------------------------------------------------------ compliance
+
+[[questions]]
+id = "compliance.obligations-register"
+level = "foundation"
+text = "Is there a list of the laws, regulations and contracts that apply to your software, with an owner for each?"
+action = "List the laws, regulations and contract terms that apply to your software and name an owner for each."
+link = "playbook/compliance/control-mapping.md"
+
+[[questions]]
+id = "compliance.licence-check"
+level = "foundation"
+text = "Do you check the licences of open source dependencies before you ship?"
+action = "Add a licence check for dependencies to CI and agree which licences are allowed."
+link = "playbook/security/dependencies.md"
+
+[[questions]]
+id = "compliance.control-map"
+level = "standard"
+text = "Is there a control map that links each relevant control, for example from ISO/IEC 27001 or SOC 2, to a practice and to the evidence for it?"
+action = "Build a control map from your relevant standards to the playbook practices and their evidence."
+link = "playbook/compliance/control-mapping.md"
+
+[[questions]]
+id = "compliance.vendor-risk"
+level = "standard"
+text = "Does every supplier and SaaS tool that handles your data get a risk review before purchase and again at least once a year?"
+action = "Review supplier and SaaS risk before purchase and at least once a year after."
+link = "playbook/security/third-party-and-saas-risk.md"
+
+[[questions]]
+id = "compliance.automated-evidence"
+level = "assured"
+text = "Is control evidence collected automatically from pipelines and kept in tamper-evident storage for the required retention period?"
+action = "Collect control evidence from pipelines automatically and keep it in tamper-evident storage."
+link = "playbook/compliance/control-mapping.md"
+
+[[questions]]
+id = "compliance.regulatory-reporting"
+level = "assured"
+text = "Do you have a tested process that meets the incident and vulnerability reporting deadlines that apply to you?"
+action = "List your reporting deadlines, such as the 24 hour early warning under the EU Cyber Resilience Act, and test the process."
+link = "playbook/compliance/regulated-industries.md"
