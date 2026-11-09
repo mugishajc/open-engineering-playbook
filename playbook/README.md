@@ -35,6 +35,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [Agile and Scrum](ways-of-working/agile-and-scrum.md) | The ceremonies run but nothing improves |
 | [Planning and forecasting](ways-of-working/planning-and-forecasting.md) | Estimates are always wrong |
 | [Product partnership](ways-of-working/product-partnership.md) | Product and engineering pull in different directions |
+| [Agile in the AI era](ways-of-working/agile-in-the-ai-era.md) | Code takes hours to write, but planning and ceremonies still assume weeks |
 
 ## 4. Delivery
 
@@ -102,6 +103,8 @@ How to decide where engineering is going and how to get there without stopping t
 | [AI governance](ai/ai-governance.md) | You need rules for AI use that satisfy regulators and still let teams build |
 | [Building with AI](ai/building-with-ai.md) | Pilots do not reach production |
 | [AI application security](ai/ai-application-security.md) | You ship features built on language models or agents |
+| [AI engineering practices](ai/ai-engineering-practices.md) | Assistants and coding agents raised output, and review queues and rework rose with it |
+| [AI architecture patterns](ai/ai-architecture-patterns.md) | You are choosing between a direct model call, retrieval, agents, a gateway or self-hosting |
 
 ## 10. Architecture
 

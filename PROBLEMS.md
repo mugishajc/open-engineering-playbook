@@ -1,6 +1,6 @@
 # Start from your problem
 
-Most playbooks are organised by practice. People arrive with a problem. Find yours below and go straight to the pages that address it. Each link opens a page with the practice at three levels, measurable outcomes and templates.
+Most playbooks are organised by practice. People arrive with a problem. Find yours below and go straight to the pages that address it. Playbook pages give the practice at three levels, with measurable outcomes and templates. Leaders pages give decision makers agendas, checklists and decision rules.
 
 If your problem is not here, [open an issue](https://github.com/mugishajc/open-engineering-playbook/issues/new). The list grows from what adopters report.
 
@@ -15,6 +15,11 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 | Someone made our chatbot reveal internal data | [AI application security](playbook/ai/ai-application-security.md) |
 | An agent can call tools and we cannot say what it is allowed to do | [AI application security](playbook/ai/ai-application-security.md), [access control](playbook/security/access-control.md) |
 | Junior engineers are losing core skills | [Code assistants](playbook/people/code-assistants.md), [onboarding](playbook/people/onboarding.md), [career framework](playbook/people/career-framework.md) |
+| The board asks for an AI strategy and all we have is a list of pilots | [Leading in the AI era](leaders/leading-in-the-ai-era.md), [AI governance](playbook/ai/ai-governance.md) |
+| Coding agents open pull requests faster than anyone can review them | [AI engineering practices](playbook/ai/ai-engineering-practices.md), [code review](playbook/delivery/code-review.md) |
+| A coding agent runs with an engineer's personal token and could merge its own changes | [AI engineering practices: coding agents in the repository](playbook/ai/ai-engineering-practices.md#coding-agents-in-the-repository), [source control](playbook/delivery/source-control.md) |
+| Every team calls model providers directly and nobody can see the cost or where the data went | [AI architecture patterns: model gateway](playbook/ai/ai-architecture-patterns.md#model-gateway) |
+| We are told to cut headcount because of AI, but cannot show any measured gain | [Leading in the AI era: measuring impact](leaders/leading-in-the-ai-era.md#measuring-impact-with-data-not-anecdotes) |
 
 ## Security
 
@@ -83,6 +88,8 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 | We cannot find people with cloud, Kubernetes, security or AI skills | [Skills gap](playbook/people/skills-gap.md), [hiring](playbook/people/hiring.md) |
 | The team is burnt out from pages and deadlines | [Sustainable pace](playbook/people/sustainable-pace.md), [on-call](playbook/reliability/on-call.md) |
 | We do Scrum ceremonies but nothing improves | [Agile and Scrum](playbook/ways-of-working/agile-and-scrum.md) |
+| We do Scrum ceremonies but AI changed how fast we write code, and planning no longer fits | [Agile in the AI era](playbook/ways-of-working/agile-in-the-ai-era.md), [planning and forecasting](playbook/ways-of-working/planning-and-forecasting.md) |
+| Story points doubled after we adopted code assistants, but users see no difference | [Agile in the AI era](playbook/ways-of-working/agile-in-the-ai-era.md), [metrics](playbook/measurement/metrics.md) |
 | Estimates are always wrong and deadlines always slip | [Planning and forecasting](playbook/ways-of-working/planning-and-forecasting.md) |
 | Product and engineering argue about priorities | [Product partnership](playbook/ways-of-working/product-partnership.md) |
 | Knowledge sits in three people's heads | [Knowledge sharing](playbook/people/knowledge-sharing.md), [documentation](playbook/people/documentation.md) |
@@ -104,3 +111,29 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 | We are locked into a vendor we can no longer afford | [Build, buy or adopt](playbook/strategy/build-buy-adopt.md), [public sector](playbook/compliance/public-sector.md) |
 | We do not know what to prepare for in the next five years | [Horizon scan](playbook/strategy/horizon-scan.md) |
 | We want to know where we stand overall | [Maturity model](playbook/measurement/maturity-model.md), [self-assessment](assessment/README.md) |
+
+## Leadership
+
+| Problem | Go to |
+|---|---|
+| I just started as CTO, CIO or chief architect and do not know where to begin | [First 90 days](leaders/first-90-days.md) |
+| The board does not understand our technology risk, or we do not understand theirs | [Board and executive reporting](leaders/board-and-executive-reporting.md) |
+| My week is all meetings and no decisions | [Operating rhythm](leaders/operating-rhythm.md), [decision making](leaders/decision-making.md) |
+| We are about to acquire, invest in or depend on a technology company | [Technical due diligence](leaders/technical-due-diligence.md) |
+| We have too many applications doing the same job | [Strategy toolkit: application portfolio](leaders/strategy-toolkit.md) |
+| Our data strategy is a slide, not a plan | [For data and digital officers](leaders/for-data-and-digital-officers.md) |
+| Each ministry builds its own systems and none of them talk to each other | [For government](leaders/for-government.md) |
+| The regulator asks how we stay within impact tolerances | [For financial services](leaders/for-financial-services.md) |
+| We are an EU financial entity and must show evidence for the EU DORA regulation | [For financial services](leaders/for-financial-services.md), [control mapping](playbook/compliance/control-mapping.md) |
+| A major outage or cyber attack is happening and the executives do not know their role | [Crisis leadership](leaders/crisis-leadership.md), [crisis decision log](templates/leaders/crisis-decision-log.md) |
+| We are a small business with one IT person, or none, and do not know what matters most | [For small and medium businesses](leaders/for-small-and-medium-businesses.md), [SME profile](profiles/sme.md) |
+| Our outside IT provider holds all the passwords and we have never read the contract | [For small and medium businesses: managing an outside IT provider](leaders/for-small-and-medium-businesses.md#managing-an-outside-it-provider) |
+| As a CEO or CFO, I cannot tell whether our technology function is healthy | [For business executives](leaders/for-business-executives.md) |
+
+## Practice
+
+| Problem | Go to |
+|---|---|
+| We have never practised a major incident or cyber attack | [Tabletop exercises](exercises/README.md) |
+| People read the playbook but nothing sticks | [True or false quizzes](exercises/README.md), [katas](exercises/README.md) |
+| Leaders keep repeating the same expensive decisions | [Decision games](exercises/README.md) |

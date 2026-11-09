@@ -8,10 +8,14 @@ First public release.
 
 ### Added
 
-- Playbook with fourteen areas and about ninety pages: strategy, operating model, ways of working, delivery, quality, reliability, security, data, AI, architecture, platform, people, measurement and compliance
+- Playbook with 14 areas and 83 pages: strategy, operating model, ways of working, delivery, quality, reliability, security, data, AI, architecture, platform, people, measurement and compliance
 - Three levels for every practice: Foundation, Standard, Assured
-- Adoption profiles: Solo, Startup, Scale-up, Enterprise, with Public sector and Regulated overlays
-- PROBLEMS.md: an index from about seventy real problems to the pages that address them
+- Adoption profiles: SME, Solo, Startup, Scale-up, Enterprise, with Public sector and Regulated overlays
+- PROBLEMS.md: an index from 89 real problems to the pages that address them
+- Leaders section with 15 toolkits: operating rhythm, decision making, first 90 days, board and executive reporting, crisis leadership, strategy and architecture toolkits, technical due diligence, leading in the AI era, a reading list, and pages for data and digital officers, government, financial services, small and medium businesses and business executives
+- AI era pages: agile in the AI era (beyond Scrum theatre), AI engineering practices, AI architecture patterns, and AI era sections in code review, CI, release management, incident management, quality, runbooks, scaling, access control and metrics
+- Exercises: 153 true-or-false statements with a terminal quiz and playable pages, 8 tabletop scenarios with a facilitator guide, 5 katas and 4 decision games
+- SME profile for businesses that use software but do not build it
 - Transition playbook for moving an organisation to a new way of building software, with exit criteria and a stop decision at each gate
 - Portfolio and capacity planning, architecture practice, IT governance (ISO/IEC 38500, COBIT 2019, ITIL 4) and a horizon scan to 2030
 - AI area: governance (EU AI Act as amended in 2026, ISO/IEC 42001, NIST AI RMF), building with AI from pilot to production, and controls for the OWASP Top 10 for LLM Applications

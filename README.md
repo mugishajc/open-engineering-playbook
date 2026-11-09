@@ -1,27 +1,50 @@
 # Open Engineering Playbook
 
-**An open engineering playbook and template kit for any organisation that builds software: one engineer, a startup, an enterprise, a bank or a government ministry.**
+**How to build and run software well, written so that any organisation can adopt it: one engineer, a small business, a startup, a large enterprise, a bank or a government ministry.**
 
-Most engineering handbooks describe how one company works. They are useful to read and hard to adopt. This playbook is written to be adopted. Every practice comes at three levels, every level has measurable outcomes, every recommendation works on public cloud, on-premises and air-gapped networks, and every template is ready to copy into a repository today.
+Writing code got cheap. Deciding what to build, proving it is safe, shipping it without breaking things and running it for years did not. This playbook covers all of it: technical strategy, how to move a whole organisation to a new way of working, code review, releases, reliability, security, data, AI, architecture, people and compliance. It goes down to the pull request template your engineers will see this afternoon.
 
-It covers the full path: from technical strategy and how to move a whole organisation to a new way of working, down to the pull request template your engineers will see this afternoon. It is written for the problems teams have now: code assistants in every editor, AI features that stall before production, supply chain attacks, new regulation with real deadlines, cloud bills that outgrow revenue, and senior engineers who are hard to hire and easy to lose.
+Most engineering handbooks describe how one company works. This one is written to be adopted. Every practice comes at three levels, every target is measurable, everything works on public cloud, on-premises and air-gapped networks, and every template is ready to copy.
 
-**Arrived with a problem? Start at [PROBLEMS.md](PROBLEMS.md).** It maps about seventy real problems to the pages that address them.
+**83** practice pages in 14 areas · **15** toolkits for leaders · **69** ready-to-copy templates · **89** real problems mapped to answers · **84**-question self-assessment · **153** true-or-false statements · **17** tabletop exercises, katas and decision games
 
-## Who it is for
+## Three ways in
+
+1. **Start from your problem.** [PROBLEMS.md](PROBLEMS.md) maps 89 problems organisations have today, from "pull requests wait days for review" to "the board cannot see whether IT is under control", to the pages that fix them.
+2. **Start from your role.** [For leaders](leaders/README.md) gives CTOs, CIOs, data officers, architects, strategists, government leaders, bank executives and boards the toolkits they use every week.
+3. **Start from your organisation.** [Profiles](profiles/README.md) tell a small business, a startup, a scale-up, an enterprise, a public body or a regulated firm what to adopt in week 1, month 1, quarter 1 and year 1.
+
+## Pick your door
+
+**By organisation**
 
 | You are | Start here |
 |---|---|
+| A small or medium business that uses software but does not build it (clinic, school, law firm, retailer, manufacturer, NGO) | [SME profile](profiles/sme.md) and [for small and medium businesses](leaders/for-small-and-medium-businesses.md) |
 | A solo engineer or freelancer | [Solo profile](profiles/solo.md), then copy the templates with `tools/adopt.sh` |
-| A startup CTO or tech lead | [Startup profile](profiles/startup.md) and [code review](playbook/delivery/code-review.md) |
-| A head of engineering at a scale-up | [Scale-up profile](profiles/scale-up.md) and [team topology](playbook/operating-model/team-topology.md) |
-| A CTO or principal engineer at an enterprise | [Transition playbook](playbook/strategy/transition-playbook.md) and [technical strategy](playbook/strategy/technical-strategy.md) |
-| A CISO or security lead | [Supply chain](playbook/security/supply-chain.md) and [control mapping](playbook/compliance/control-mapping.md) |
+| A startup | [Startup profile](profiles/startup.md) and [code review](playbook/delivery/code-review.md) |
+| A scale-up with several teams | [Scale-up profile](profiles/scale-up.md) and [team topology](playbook/operating-model/team-topology.md) |
+| A large enterprise | [Enterprise profile](profiles/enterprise.md) and the [transition playbook](playbook/strategy/transition-playbook.md) |
+| A ministry, agency or public body | [Public sector profile](profiles/public-sector.md) and [for government](leaders/for-government.md) |
+| A bank, insurer, health or telecom provider | [Regulated profile](profiles/regulated.md) and [for financial services](leaders/for-financial-services.md) |
+
+**By role**
+
+| You are | Start here |
+|---|---|
+| A CEO, CFO, COO or board member in any sector | [For business executives](leaders/for-business-executives.md) and [questions for your technology leader](templates/leaders/questions-for-your-technology-leader.md) |
+| Any leader deciding what to do about AI | [Leading in the AI era](leaders/leading-in-the-ai-era.md) |
+| A newly appointed CTO, CIO or chief architect | [First 90 days](leaders/first-90-days.md) and [operating rhythm](leaders/operating-rhythm.md) |
+| A CTO, CIO or principal engineer | [Technical strategy](playbook/strategy/technical-strategy.md), [decision making](leaders/decision-making.md) and [board reporting](leaders/board-and-executive-reporting.md) |
+| A chief or enterprise architect | [Architecture toolkit](leaders/architecture-toolkit.md) and [AI architecture patterns](playbook/ai/ai-architecture-patterns.md) |
+| An IT strategist or planner | [Strategy toolkit](leaders/strategy-toolkit.md) and [portfolio and capacity](playbook/strategy/portfolio-and-capacity.md) |
+| A Chief Data or Chief Digital Officer | [For data and digital officers](leaders/for-data-and-digital-officers.md) |
+| A CISO or security lead | [Supply chain](playbook/security/supply-chain.md), [AI application security](playbook/ai/ai-application-security.md) and [control mapping](playbook/compliance/control-mapping.md) |
 | An auditor or compliance officer | [Control mapping](playbook/compliance/control-mapping.md) and [change management](playbook/reliability/change-management.md) |
-| A public sector technology lead | [Public sector profile](profiles/public-sector.md) and [public sector](playbook/compliance/public-sector.md) |
-| At a bank, insurer, health or telecom provider | [Regulated profile](profiles/regulated.md) and [regulated industries](playbook/compliance/regulated-industries.md) |
-| A platform or DevOps engineer | [Golden paths](playbook/platform/golden-paths.md) and [cloud, on-premises and air-gapped](playbook/platform/cloud-on-prem-air-gapped.md) |
+| An engineering manager or team lead | [Agile in the AI era](playbook/ways-of-working/agile-in-the-ai-era.md) and [AI engineering practices](playbook/ai/ai-engineering-practices.md) |
+| A platform, DevOps or SRE engineer | [Golden paths](playbook/platform/golden-paths.md), [cloud native](playbook/platform/cloud-native.md) and [service levels](playbook/reliability/service-levels.md) |
 | A technical evangelist or advocate | [Stakeholders and communication](playbook/strategy/stakeholders-and-communication.md) |
+| Anyone who learns by doing | [Exercises](exercises/README.md): quizzes, tabletop scenarios, katas and decision games |
 
 ## Start in ten minutes
 
@@ -33,7 +56,10 @@ python3 assessment/assess.py --questions assessment/questions.toml --init > my-a
 #    Answer true or false, set your profile, then score it:
 python3 assessment/assess.py --questions assessment/questions.toml --answers my-answers.toml
 
-# 2. Copy the templates into one of your repositories. Existing files are never overwritten.
+# 2. Test what you know: ten true-or-false statements, each answer explained and linked.
+python3 exercises/quiz.py --count 10
+
+# 3. Copy the templates into one of your repositories. Existing files are never overwritten.
 tools/adopt.sh --target ../your-repo --platform github --with-security --dry-run
 tools/adopt.sh --target ../your-repo --platform github --with-security
 ```
@@ -43,12 +69,12 @@ The assessment report shows the level you reach in each of the fourteen areas, t
 ## What is inside
 
 ```
-PROBLEMS.md    seventy real problems, each mapped to the pages that fix it
-playbook/      fourteen areas, about ninety pages, each at three levels
+PROBLEMS.md    89 real problems, each mapped to the pages that address it
+playbook/      14 areas, 83 pages, each practice at three levels
   strategy/          technical strategy, transition playbook, business case,
                      build or buy, portfolio and capacity, stakeholders, horizon scan to 2030
   operating-model/   team topology, decision rights, roles, engineering and IT governance
-  ways-of-working/   agile and Scrum without the theatre, forecasting, product partnership
+  ways-of-working/   agile in the AI era, Scrum without the theatre, forecasting, product partnership
   delivery/          source control, code review, testing, CI, releases, versioning,
                      feature flags, environments, database changes, GitOps, infra as code
   quality/           quality engineering, test-driven development
@@ -57,7 +83,8 @@ playbook/      fourteen areas, about ninety pages, each at three levels
   security/          secure development, supply chain, secrets, dependencies,
                      vulnerabilities, access, zero trust, post-quantum, third parties
   data/              data governance, data quality and contracts, security and privacy
-  ai/                AI governance, building with AI, AI application security
+  ai/                AI governance, AI engineering practices, AI architecture patterns,
+                     building with AI, AI application security
   architecture/      architecture practice, decision records, RFCs, tech radar, APIs,
                      observability, scaling, legacy modernisation, technical debt
   platform/          golden paths, developer platform, cloud native, cloud,
@@ -66,10 +93,14 @@ playbook/      fourteen areas, about ninety pages, each at three levels
                      hiring, skills gap, career framework, sustainable pace
   measurement/       metrics (DORA, SLOs, SPACE), maturity model
   compliance/        control mapping, public sector, regulated industries
-profiles/      adoption paths: solo, startup, scale-up, enterprise, public sector, regulated
+leaders/       toolkits for CTOs, CIOs, CDOs, architects, strategists, government, banks,
+               small businesses and business executives: operating rhythm, decisions, board reporting,
+               first 90 days, leading in the AI era, crisis leadership, due diligence, reading list
+exercises/     153 true-or-false statements, 8 tabletop scenarios, 5 katas, 4 decision games
+profiles/      adoption paths: SME, solo, startup, scale-up, enterprise, public sector, regulated
 templates/     ready-to-copy files: GitHub, GitLab, Kubernetes, Argo CD, documents, CSV registers
 assessment/    maturity self-assessment that runs from a TOML file
-tools/         init script and the plain-language check
+tools/         adopt script and the plain-language check
 ```
 
 ## What is different about it
@@ -84,13 +115,17 @@ tools/         init script and the plain-language check
 
 **Maturity assessment as code.** The assessment is a TOML file in your repository. Answer it each quarter, commit it, and the history shows your progress in pull requests, not in a slide deck.
 
+**A toolkit for the people who decide.** The [leaders section](leaders/README.md) gives CTOs, CIOs, data officers, architects, strategists, government leaders, bank executives and boards what they use every week: an operating rhythm with agendas, a one-page board scorecard, decision aids, a first 90 days plan, crisis leadership, technical due diligence and a reading list.
+
+**Practice, not only reading.** The [exercises](exercises/README.md) turn the playbook into something teams do together: 153 true-or-false statements that challenge common beliefs, tabletop scenarios with timed events and scoring rubrics, katas for code review, root cause analysis and error budgets, and decision games for leaders.
+
 **Plain language, enforced.** The playbook is written for busy readers, many of whom read English as a second language. A check in CI rejects vague filler words and dashes used as punctuation. You can run the same check on your own documentation.
 
 **Change management without a weekly meeting.** The playbook shows how to replace a change advisory board with automated controls that produce better evidence: peer review, required checks, deployment records. It explains how that still satisfies ISO 27001 control 8.32 and SOC 2 CC8.1.
 
-**Written for the AI era, without the hype.** A fill-in policy for code assistants: what data may be sent where, who owns the result, and how to measure the effect honestly, including the rework it can cause. A path from AI pilot to production with evaluations, cost budgets and fallbacks. Controls for every item in the OWASP Top 10 for LLM Applications, and approval rules for agents that can call tools.
+**Written for the AI era, without the hype.** When code is cheap to produce, the bottleneck moves to deciding what to build, reviewing, verifying and learning from users. [Agile in the AI era](playbook/ways-of-working/agile-in-the-ai-era.md) explains what to keep from Scrum and what to drop. [AI engineering practices](playbook/ai/ai-engineering-practices.md) covers coding agents in your repositories, review of generated changes, evaluation gates in CI and the failure modes teams now meet, each with a fix and a metric. [AI architecture patterns](playbook/ai/ai-architecture-patterns.md) covers retrieval, agents, model gateways and when to change your architecture. There is a fill-in policy for code assistants, a path from pilot to production, controls for every item in the OWASP Top 10 for LLM Applications, and [a page for leaders](leaders/leading-in-the-ai-era.md) on what to decide, fund and measure.
 
-**Ready for the deadlines already on the calendar.** The [horizon scan](playbook/strategy/horizon-scan.md) and the pages behind it cover the EU Cyber Resilience Act reporting duty that started in September 2026, the EU AI Act high-risk obligations now due from December 2027, and the move away from RSA and elliptic-curve cryptography that NIST plans to deprecate after 2030.
+**Ready for the deadlines already on the calendar.** The [horizon scan](playbook/strategy/horizon-scan.md) and the pages behind it cover the EU Cyber Resilience Act reporting duty that started in September 2026, the EU AI Act high-risk obligations now due from December 2027, and the move away from RSA and elliptic-curve cryptography that NIST deprecates after 2030.
 
 **People problems are engineering problems.** Structured hiring with work samples and scorecards, a career framework, sustainable on-call and pace, and agile practice with the theatre removed. Teams that cannot hire, grow and keep good engineers do not get to the rest of this playbook.
 
