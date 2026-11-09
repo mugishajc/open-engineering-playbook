@@ -32,7 +32,7 @@ Decisions are written down where everyone can find them: [link].
 - Cadence: plan every [1 or 2] weeks, show working software every [2] weeks, retrospective every [2] weeks.
 - Board: [link]. Work in progress limit for "in progress": [number, at most the number of people].
 - Interrupt handler this week takes support questions and unplanned requests: [rotation link].
-- Capacity split agreed with product: [60]% roadmap, [20]% maintenance and debt, [20]% unplanned.
+- Capacity split agreed with product: [60]% features, [20]% reliability (incidents, on-call and unplanned work), [15]% technical debt, [5]% platform. See [portfolio and capacity](../../playbook/strategy/portfolio-and-capacity.md).
 - Forecasts are ranges with a confidence level, from throughput. See [planning and forecasting](../../playbook/ways-of-working/planning-and-forecasting.md).
 
 ## 4. Definition of done
@@ -61,7 +61,7 @@ A change is done when:
 - `main` is always releasable. If it breaks, the person who broke it fixes or reverts within 30 minutes.
 - Flaky tests are quarantined within 24 hours and fixed or deleted within 14 days.
 - When a release misbehaves, roll back first, investigate second.
-- Every incident gets a blameless review. See [postmortems](../../playbook/reliability/postmortems.md).
+- Every SEV1 and SEV2 incident gets a blameless postmortem; smaller incidents get a short blameless review. See [postmortems](../../playbook/reliability/postmortems.md).
 
 ## 7. Meetings and focus
 

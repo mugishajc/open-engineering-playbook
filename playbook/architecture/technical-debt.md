@@ -7,7 +7,7 @@
 Starting points. Tune them to your organisation.
 
 - Every team keeps a debt register with an owner, an interest estimate and a target date for each item.
-- Each team spends 15% to 25% of capacity on debt and maintenance, every sprint or cycle, not in occasional "clean-up" quarters.
+- Each team spends 10% to 20% of capacity on technical debt, every sprint or cycle, not in occasional "clean-up" quarters. This is separate from the reliability share, and uses the categories in [portfolio and capacity](../strategy/portfolio-and-capacity.md).
 - The top 5 debt items by interest are reviewed with product leadership every quarter, and at least 2 are closed or reduced.
 - Change lead time and change fail rate for the affected systems improve after debt work, measured with the [DORA metrics](../measurement/metrics.md).
 - No item rated high risk is older than 2 quarters without a recorded decision to accept it.
@@ -44,7 +44,7 @@ Then estimate the cost to fix in engineer-weeks. Rank by interest divided by cos
 ### Foundation
 
 - A debt register in the repository, using the [tech debt register template](../../templates/docs/tech-debt-register.csv). Add an item whenever you take a shortcut on purpose, and link it from a code comment.
-- Reserve a fixed share of capacity (start at 20%) for debt and maintenance. Protect it like any other commitment.
+- Reserve a fixed share of capacity for debt (start at 15%, next to about 20% for reliability and unplanned work, as in [portfolio and capacity](../strategy/portfolio-and-capacity.md)). Protect it like any other commitment.
 - Follow the boy scout rule: leave code you touch a little better, within the same pull request, when the change is small.
 
 ### Standard
@@ -57,7 +57,7 @@ Then estimate the cost to fix in engineer-weeks. Rank by interest divided by cos
 ### Assured
 
 - High-risk debt items, especially security and end-of-life items, are entered in the organisation's risk register with an owner and an acceptance decision.
-- Accepted security debt has an expiry date of at most 12 months and a compensating control.
+- Accepted security debt that is not a known vulnerability (an outdated design, weak but unexploited cryptography, a missing control) has an expiry date of at most 12 months and a compensating control. Known vulnerabilities follow the 90-day exception rule in [vulnerability management](../security/vulnerability-management.md).
 - End-of-life software in production is reported to the risk owner each quarter. Regulated firms and public bodies often must show they run supported software.
 
 ## Cloud, on-premises and air-gapped

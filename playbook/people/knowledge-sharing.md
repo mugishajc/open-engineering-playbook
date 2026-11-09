@@ -7,7 +7,7 @@ Make knowledge flow between people and teams on purpose: write decisions down, r
 Starting points. Tune them to your organisation.
 
 - Every critical system has at least 2 people who can operate and change it, recorded in the service catalogue.
-- At least 70% of RFCs that affect several teams get written comments from outside the owning team.
+- At least 80% of RFCs that affect several teams get written comments from those teams before the decision (the same target as [RFCs](../architecture/rfcs.md)).
 - Every postmortem with lessons for other teams is shared and summarised in a session or note within 30 days.
 - At least 1 internal talk or written deep explanation per month per 50 engineers.
 - Inner source pull requests from outside the owning team get a first response within 2 working days.

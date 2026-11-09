@@ -39,7 +39,9 @@ Passwords, API keys and tokens, private keys (TLS, SSH, signing), cloud access k
    | Database passwords for services | Every 90 days, or replace with dynamic secrets |
    | TLS certificates | Automated, with lifetimes of 90 days or less (ACME or an internal CA) |
    | Signing keys (artifacts, tokens) | Every 1 to 2 years, with a published rollover plan |
-   | Any secret held by someone who leaves | Within 1 working day of their departure |
+   | Any secret held by someone who leaves | Within 1 working day of their departure, within 4 hours for production and admin secrets (matches [access control](access-control.md)) |
+
+   Public TLS certificate lifetimes are falling under CA/Browser Forum ballot SC-081v3: a maximum of 200 days from 15 Mar 2026, 100 days from 15 Mar 2027 and 47 days from 15 Mar 2029. Any certificate still renewed by hand will become an outage. Automate renewal now and alert when any certificate is within 14 days of expiry.
 
 5. **Kubernetes.** Kubernetes Secrets are only base64-encoded by default. Turn on encryption at rest, restrict who can read Secrets with RBAC, and sync from a secret manager with a tool such as External Secrets Operator. For secrets that must live in git (for example GitOps configuration), encrypt them with SOPS and a KMS or age key.
 6. **Scan full history** of every repository once a quarter, and scan container images and build artifacts for embedded secrets.
@@ -83,3 +85,4 @@ Everything in Standard, plus:
 - HashiCorp Vault documentation: https://developer.hashicorp.com/vault/docs and OpenBao: https://openbao.org
 - Kubernetes, encrypting confidential data at rest: https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
 - gitleaks: https://github.com/gitleaks/gitleaks and SOPS: https://github.com/getsops/sops
+- CA/Browser Forum, Ballot SC-081v3, reducing certificate validity periods: https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/

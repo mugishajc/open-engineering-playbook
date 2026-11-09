@@ -41,8 +41,10 @@ Starting points. Tune them to your stack.
    | Category | Examples | Rule |
    |---|---|---|
    | Allow | MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC | Use freely |
-   | Review | MPL-2.0, LGPL-2.1, LGPL-3.0, EPL-2.0 | Allowed with conditions on how you link and distribute |
-   | Deny unless approved | GPL-2.0, GPL-3.0, AGPL-3.0, SSPL-1.0, no licence | Legal review for distributed or network-served products |
+   | Review | MPL-2.0, LGPL-2.1-only, LGPL-3.0-or-later, EPL-2.0 | Allowed with conditions on how you link and distribute |
+   | Deny unless approved | GPL-2.0-only, GPL-3.0-or-later, AGPL-3.0-only, SSPL-1.0, no licence | Legal review for distributed or network-served products |
+
+   Current SPDX identifiers for the GNU licences end in `-only` or `-or-later`; the bare forms (`GPL-2.0`) are deprecated. Match both variants of each licence in your scanner rules.
 
    The right policy depends on whether you distribute software, run it as a service or use it internally. This table is not legal advice.
 5. **Dependency confusion and typosquatting.** Use scoped or namespaced package names for internal packages, configure package managers to fetch internal names only from your registry, and reserve your internal names on public registries.
@@ -54,7 +56,7 @@ Everything in Standard, plus:
 
 1. **Approved component list** for Tier 1 systems, with each new direct dependency approved by a second reviewer.
 2. **SBOM per release** (see [supply chain](supply-chain.md)) as the record of what was shipped.
-3. **Evidence** of update times, exceptions and licence decisions kept for the audit period. This supports ISO/IEC 27001:2022 controls 8.8 (management of technical vulnerabilities) and 8.30 (outsourced development), and SSDF practice PW.4 (reuse well-secured software).
+3. **Evidence** of update times, exceptions and licence decisions kept for the audit period. This supports ISO/IEC 27001:2022 controls 5.21 (managing information security in the ICT supply chain) and 8.8 (management of technical vulnerabilities), and SSDF practice PW.4 (reuse existing, well-secured software).
 4. **End-of-life tracking.** A register of runtimes, frameworks and operating systems with support end dates, reviewed quarterly, with funded upgrade plans 6 months before each date.
 
 ## Cloud, on-premises and air-gapped

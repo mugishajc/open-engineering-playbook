@@ -30,7 +30,7 @@ The contract lives in the same repository as the service and changes in the same
 - Pick one field naming style (`camelCase` or `snake_case`) for the whole organisation and enforce it in the linter.
 - Use HTTP methods and status codes as RFC 9110 defines them. `GET` never changes state. `PUT` and `DELETE` are idempotent.
 - Timestamps are RFC 3339 strings in UTC: `2026-03-01T09:30:00Z`. Dates without times are `YYYY-MM-DD`.
-- Money is an object with a decimal string amount and an ISO 4217 currency code: `{"amount": "1250.00", "currency": "RWF"}`. Never a float.
+- Money is an object with a decimal string amount and an ISO 4217 currency code: `{"amount": "1250.00", "currency": "EUR"}`. Never a float. Use the number of decimal places ISO 4217 sets for each currency: two for EUR, KES and USD, none for JPY or RWF, three for BHD and KWD. Reject amounts with more places than the currency allows.
 - Identifiers are opaque strings. Clients must not parse them.
 
 ### Errors
@@ -42,7 +42,7 @@ Every error response uses Problem Details for HTTP APIs (RFC 9457) with media ty
   "type": "https://api.example.org/problems/insufficient-credit",
   "title": "Insufficient credit",
   "status": 422,
-  "detail": "The order total 1250.00 RWF exceeds the remaining credit of 900.00 RWF.",
+  "detail": "The order total 1250.00 EUR exceeds the remaining credit of 900.00 EUR.",
   "instance": "/v1/orders/ord_8f2k",
   "traceId": "4bf92f3577b34da6a3ce929d0e0e4736",
   "errors": [{ "pointer": "#/total/amount", "detail": "Exceeds credit limit" }]

@@ -103,6 +103,31 @@ RPO <n>, RTO <n>. Last restore test: YYYY-MM-DD.
 
 Steps, who approves, how to fail back.
 
+## Using AI assistants during an incident
+
+<!-- Delete this section if your organisation does not allow assistants in operations.
+Guidance: playbook/ai/ai-engineering-practices.md and playbook/ai/ai-application-security.md -->
+
+Approved assistant for operations: <tool, and the data classes it may see>. It runs under its own identity, not yours, with read-only access.
+
+Allowed without asking (read-only):
+
+- Summarise the alert, recent deployments and the change log for this service.
+- Query dashboards, logs and traces through <read-only integration>, and explain what the results show.
+- Search this runbook, past postmortems and decision records for similar incidents.
+- Draft the incident update for a human to edit (see the incident update template).
+
+Always done by a human, never by the assistant:
+
+- Any command in this runbook that changes state: rollback, failover, scaling, flag changes, restores, credential rotation.
+- Running a command the assistant suggested. Read it, check it against this runbook, then run it yourself.
+- Declaring, downgrading or closing an incident, and any message sent to customers or regulators.
+- Granting or using elevated access.
+
+Do not paste secrets, tokens or customer personal data into the assistant. If logs contain them, use the masked view.
+
+Record in the incident timeline: each assistant suggestion that you acted on, what you checked before acting, and the outcome. Note suggestions that were wrong; they go into the postmortem and help tune the tool.
+
 ## Access needed
 
 What access an on-call engineer needs, and how to get it just in time.

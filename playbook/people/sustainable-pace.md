@@ -12,7 +12,7 @@ Starting targets. Tune them to your context and local law.
 | Out-of-hours pages per on-call shift | 2 or fewer on average (see [on-call](../reliability/on-call.md)) |
 | Annual leave taken | Everyone takes their full entitlement each year |
 | Engineers with at least 2 blocks of 2 hours focus time per day | Most of the team, most days |
-| Engineers on a team's on-call rotation | At least 6 for a 24 by 7 rotation, so each person is on call at most 1 week in 6 |
+| Engineers on a team's on-call rotation | At least 6 for a primary-only 24 by 7 rotation (each person on call at most 1 week in 6); at least 8 at one site with a primary and a secondary, as in [on-call](../reliability/on-call.md) |
 | Team health survey score on workload | Measured every quarter, trending stable or up |
 
 ## Why it matters
@@ -35,7 +35,7 @@ Starting targets. Tune them to your context and local law.
 
 ### Standard
 
-- **On-call limits.** Use rotations of at least 6 people for 24 by 7 cover, pay or time off for on-call according to local law and policy, and a target of 2 or fewer out-of-hours pages per shift. Every page that did not need a human is a defect to fix. See [on-call](../reliability/on-call.md).
+- **On-call limits.** Use rotations of at least 6 people for primary-only 24 by 7 cover (8 with a secondary), pay or time off for on-call according to local law and policy, and a target of 2 or fewer out-of-hours pages per shift. Every page that did not need a human is a defect to fix. See [on-call](../reliability/on-call.md).
 - **Interrupt rotation.** One person per week handles support questions and unplanned requests, so the rest of the team has focus time.
 - **Meeting budget.** Protect at least two 2-hour focus blocks a day. Keep one meeting-free day per week if the team wants one.
 - **Crunch rules.** If the business genuinely needs a crunch (a legal deadline, a launch):

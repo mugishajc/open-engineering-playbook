@@ -22,7 +22,7 @@ Use four classes. The [data classification template](../../templates/docs/data-c
 | Public | Published documentation, marketing pages | Integrity: only authorised people can change it |
 | Internal | Internal wiki, non-sensitive metrics | SSO, MFA |
 | Confidential | Customer records, contracts, source code, most personal data | Encryption at rest and in transit, role-based access, access logged |
-| Restricted | Special category personal data (health, biometrics), payment card data, national ID numbers, credentials, classified material | Confidential controls, plus field-level encryption or tokenisation, just-in-time access, every read logged and reviewed, strict data residency |
+| Restricted | Special category personal data (health, biometrics), payment card data, national ID numbers, credentials, classified material | Confidential controls, plus field-level encryption or tokenisation, just-in-time access, every read logged, access reviewed every quarter, strict data residency |
 
 ## Practice
 
@@ -33,7 +33,7 @@ Use four classes. The [data classification template](../../templates/docs/data-c
 3. **Collect less.** For each personal data field, write why you need it. Drop the fields nobody can justify.
 4. **Keep personal data out of logs.** Mask or drop emails, phone numbers, tokens and national IDs in application logs and error trackers.
 5. **No production personal data in test.** Use synthetic data or masked copies.
-6. **Breach readiness.** Know who decides whether a breach is reportable and how to reach them in 1 hour (see [incident management](../reliability/incident-management.md)).
+6. **Breach readiness.** Know who decides whether a breach is reportable and how to reach them in 1 hour (see [incident management](../reliability/incident-management.md)). Under GDPR Article 33 the controller notifies the supervisory authority within 72 hours of becoming aware of a reportable personal data breach; other laws set their own clocks. A processor tells the controller without undue delay, so your supplier contracts need a shorter internal deadline.
 
 ### Standard
 
@@ -54,7 +54,7 @@ Everything in Standard, plus:
 2. **Data residency and transfers.** Record the country of every copy, including backups and supplier subprocessors. Transfers outside permitted jurisdictions need a legal basis (see [third-party and SaaS risk](../security/third-party-and-saas-risk.md)).
 3. **Field-level encryption or tokenisation** for restricted fields, so database administrators and backups do not see clear values.
 4. **Independent review** of DPIAs for high-risk processing by the data protection officer.
-5. **Evidence.** Inventory, DPIAs, deletion job results and access logs kept for the audit period. This supports ISO/IEC 27001:2022 controls 5.12 (classification), 5.34 (privacy and protection of PII), 8.10 (information deletion), 8.11 (data masking), 8.12 (data leakage prevention) and 8.33 (test information). ISO/IEC 27701 extends 27001 for privacy management.
+5. **Evidence.** Inventory, DPIAs, deletion job results and access logs kept for the audit period. This supports ISO/IEC 27001:2022 controls 5.12 (classification), 5.34 (privacy and protection of PII), 8.10 (information deletion), 8.11 (data masking), 8.12 (data leakage prevention) and 8.33 (test information). ISO/IEC 27701 covers privacy information management and is the usual certification route for privacy controls.
 
 ## Laws to check
 

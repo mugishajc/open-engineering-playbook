@@ -51,7 +51,7 @@ Everything in Standard, plus:
 1. **Formal maturity assessment** against the CISA model per pillar, with a funded plan to reach the target stage. Public sector bodies often have a mandated target.
 2. **Continuous evaluation.** Sessions are re-checked when risk changes (device falls out of compliance, user changes role), not only at sign-in.
 3. **Policy as code** for access rules, reviewed and versioned like application code.
-4. **Evidence.** Access policies, decision logs and assessment results kept for the audit period. This supports ISO/IEC 27001:2022 controls 5.15 (access control), 8.20 (network security), 8.22 (segregation of networks) and 8.16 (monitoring activities).
+4. **Evidence.** Access policies, decision logs and assessment results kept for the audit period. This supports ISO/IEC 27001:2022 controls 5.15 (access control), 8.5 (secure authentication), 8.16 (monitoring activities), 8.20 (networks security) and 8.22 (segregation of networks).
 
 ## Cloud, on-premises and air-gapped
 

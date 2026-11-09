@@ -47,7 +47,7 @@ Starting points. Tune them to your organisation.
 - Access follows least privilege. No production access until required training is complete and recorded. Production access is time-bound and approved (see [access control](../security/access-control.md)).
 - Training completion, policy acknowledgements and screening checks required by your policy are recorded with dates, as audit evidence.
 - An access review at day 90 confirms the new engineer holds only what the role needs.
-- Leaver process mirrors joiner process: all access removed within 1 working day of departure, with evidence. This supports ISO/IEC 27001 and SOC 2 access control requirements; see [control mapping](../compliance/control-mapping.md).
+- Leaver process mirrors joiner process: privileged access removed within 4 hours of the departure time and all other access within 1 working day, with evidence (the targets in [access control](../security/access-control.md)). This supports ISO/IEC 27001 and SOC 2 access control requirements; see [control mapping](../compliance/control-mapping.md).
 
 ## Cloud, on-premises and air-gapped
 

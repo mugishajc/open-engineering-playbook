@@ -71,6 +71,23 @@ The open source Four Keys project shows one way to compute delivery metrics from
 
 Goodhart's law, as Marilyn Strathern phrased it in 1997: "When a measure becomes a target, it ceases to be a good measure." Use metrics to start conversations and choose experiments, not to reward or punish.
 
+## In the AI era
+
+Code assistants and agents change how fast code is written. Whether they change outcomes is an empirical question for each team. The 2025 DORA report found AI adoption associated with higher delivery throughput and also with more delivery instability, so measure both sides (see [code assistants](../people/code-assistants.md) and [AI engineering practices](../ai/ai-engineering-practices.md)).
+
+| Measure | How | What it tells you |
+|---|---|---|
+| Team baseline | Record the five DORA metrics for at least one quarter before wider adoption, or use the last two quarters of history | The only fair comparison is a team with its own past |
+| Change fail rate and rework rate | As defined above, trended monthly | Whether faster output is reaching production broken |
+| Review load | Median pull request size, time in review, review rounds per pull request, reviewer hours | Whether the bottleneck moved from writing code to reading it |
+| Cost per change | Assistant and model spend per month divided by deployments to production | Whether spend scales with delivered changes or only with activity |
+| Escaped defects | Defects found in production per 100 changes | Quality that tests and review missed |
+| Developer survey | Two or three fixed questions each quarter: where the tools save time, where they cost time, confidence in generated code | Effects that system data cannot see, such as skill loss or review fatigue |
+
+Decision rule (starting point): expand use when throughput improves and change fail rate, rework rate and escaped defects stay within 10% of the baseline for two consecutive quarters. If instability rises beyond that, hold expansion and fix review and test practice first.
+
+Do not count lines of code generated, suggestion acceptance rate or "share of code written by AI". They measure activity and are easy to inflate. Do not compare teams with each other, and never attribute these metrics to individuals.
+
 ## Practice
 
 ### Foundation

@@ -22,7 +22,7 @@ Starting points. Tune them to your organisation.
 
 Organisations move through the phases repeatedly, one product or service at a time.
 
-## Practices
+## Techniques
 
 ### Allocation
 

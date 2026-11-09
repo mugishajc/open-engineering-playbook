@@ -72,7 +72,7 @@ A blend of all three works well. Never assume a candidate cheated because their 
 
 - Hiring decisions are documented with scorecards and evidence, retained for the period employment law and your policy require, and handled as personal data under the law that applies (for example EU GDPR, the Kenya Data Protection Act 2019 or Brazil's LGPD).
 - Pre-employment screening and vetting required for the role (for example security clearance) are scheduled early, because they often take the longest.
-- If you use AI tools to screen or rank candidates, treat them as high risk. The EU AI Act lists AI used in recruitment as a high-risk use case. Check current application dates on EUR-Lex, and see [AI governance](../ai/ai-governance.md).
+- If you use AI tools to screen or rank candidates, treat them as high risk. The EU AI Act lists AI used in recruitment and worker management as high-risk (Annex III), with obligations applying from 2 Dec 2027. Check EUR-Lex for current dates, and see [AI governance](../ai/ai-governance.md).
 - Public sector: follow the civil service or public body recruitment principles that apply, including fair and open competition.
 
 ## Cloud, on-premises and air-gapped

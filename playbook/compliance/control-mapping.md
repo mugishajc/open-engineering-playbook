@@ -47,21 +47,21 @@ Starting points. Tune them to your organisation.
 | [Production readiness](../reliability/production-readiness.md) | 5.30, 8.27, 8.29 | A1.2, CC7.1, CC8.1 | PW.1 | n/a | n/a |
 | [Backup and recovery](../reliability/backup-and-recovery.md) | 5.30, 8.13, 8.14 | A1.2, A1.3 | n/a | n/a | n/a |
 | [Change management](../reliability/change-management.md) | 8.32 | CC8.1 | PO.4 | n/a | n/a |
-| [Secure development](../security/secure-development.md) | 8.25 to 8.28 | CC7.1, CC8.1 | PO.1, PW.1, PW.2, PW.5 | n/a | SA |
+| [Secure development](../security/secure-development.md) | 8.25 to 8.29 | CC7.1, CC8.1 | PO.1, PW.1, PW.2, PW.5 | n/a | SA |
 | [Supply chain](../security/supply-chain.md) | 5.21, 8.30 | CC8.1, CC9.2 | PS.2, PS.3, PW.4 | Build L2 to L3 | BR |
-| [Secrets](../security/secrets.md) | 5.17, 8.24 | CC6.1 | PO.5, PS.1 | n/a | BR |
+| [Secrets](../security/secrets.md) | 5.17, 8.15, 8.24 | CC6.1 | PO.5, PS.1 | n/a | BR |
 | [Dependencies](../security/dependencies.md) | 5.21, 8.8 | CC7.1, CC9.2 | PW.4, RV.1 | n/a | QA |
 | [Vulnerability management](../security/vulnerability-management.md) | 5.7, 8.8 | CC7.1 | RV.1 to RV.3 | n/a | VM |
-| [Access control](../security/access-control.md) | 5.15, 5.18, 8.2, 8.5 | CC6.1 to CC6.3 | PO.5, PS.1 | n/a | AC |
-| [Zero trust](../security/zero-trust.md) | 5.15, 8.5, 8.20, 8.22 | CC6.1, CC6.6 | PO.5 | n/a | n/a |
+| [Access control](../security/access-control.md) | 5.15 to 5.18, 8.2, 8.5 | CC6.1 to CC6.3 | PO.5, PS.1 | n/a | AC |
+| [Zero trust](../security/zero-trust.md) | 5.15, 8.5, 8.16, 8.20, 8.22 | CC6.1, CC6.6 | PO.5 | n/a | n/a |
 | [Post-quantum readiness](../security/post-quantum-readiness.md) | 8.24 | CC6.1, CC6.7 | n/a | n/a | n/a |
 | [Third-party and SaaS risk](../security/third-party-and-saas-risk.md) | 5.19 to 5.23 | CC9.2 | PO.1 | n/a | n/a |
-| [Decision records](../architecture/decision-records.md) | 8.27 | CC8.1 | PW.1, PW.2 | n/a | n/a |
+| [Decision records](../architecture/decision-records.md) | 8.27, 8.32 | CC8.1 | PW.1, PW.2 | n/a | n/a |
 | [Observability](../architecture/observability.md) | 8.15, 8.16 | CC7.2 | n/a | n/a | n/a |
-| [Developer platform](../platform/developer-platform.md), [golden paths](../platform/golden-paths.md) | 8.9, 8.25 | CC8.1 | PO.3 | Build L2 to L3 | BR |
+| [Developer platform](../platform/developer-platform.md), [golden paths](../platform/golden-paths.md) | 8.9, 8.25, 8.31, 8.32 | CC8.1 | PO.3 | Build L2 to L3 | BR |
 | [Data governance](../data/data-governance.md) | 5.12, 5.13, 5.33, 5.34 | C1.1, P series | n/a | n/a | n/a |
 | [Data quality](../data/data-quality.md) | n/a | PI1 series | n/a | n/a | n/a |
-| [Data security and privacy](../data/data-security-and-privacy.md) | 5.34, 8.10 to 8.12, 8.24 | C1.1, C1.2, P series | n/a | n/a | n/a |
+| [Data security and privacy](../data/data-security-and-privacy.md) | 5.12, 5.34, 8.10 to 8.12, 8.24, 8.33 | C1.1, C1.2, P series | n/a | n/a | n/a |
 | [AI governance](../ai/ai-governance.md) | see Table 3 | CC3.2 | n/a | n/a | n/a |
 | [AI application security](../ai/ai-application-security.md) | 8.25, 8.28, 8.29 | CC7.1 | PW.1, PW.7, PW.8 | n/a | SA |
 | [Building with AI](../ai/building-with-ai.md), [code assistants](../people/code-assistants.md) | 8.28 | CC8.1 | PW.7 | n/a | n/a |
@@ -139,7 +139,7 @@ These frameworks cover areas the general security standards address only in part
 | [Zero trust](../security/zero-trust.md) | NIST SP 800-207; CISA Zero Trust Maturity Model v2.0 (pillars: Identity, Devices, Networks, Applications and Workloads, Data) | current and target maturity per pillar, policy decision logs |
 | [Post-quantum readiness](../security/post-quantum-readiness.md) | NIST FIPS 203 (ML-KEM), FIPS 204 (ML-DSA), FIPS 205 (SLH-DSA); NIST IR 8547 transition timeline | cryptographic inventory, systems ranked by how long their data must stay secret, migration plan |
 
-EU AI Act dates are changing. At the time of writing, high-risk obligations are expected to apply from 2 Dec 2027 for stand-alone (Annex III) systems and 2 Aug 2028 for systems embedded in regulated products, following the 2026 Digital Omnibus on AI. Check EUR-Lex for the current text.
+EU AI Act dates after the 2026 Digital Omnibus on AI (in force 27 Jul 2026): Article 50 transparency duties from 2 Aug 2026; high-risk obligations from 2 Dec 2027 for stand-alone (Annex III) systems and 2 Aug 2028 for systems embedded in regulated products. The full timeline is in [AI governance](../ai/ai-governance.md). Check EUR-Lex for the current text.
 
 ## Practice
 

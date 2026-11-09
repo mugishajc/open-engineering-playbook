@@ -77,3 +77,4 @@ Review date: YYYY-MM-DD (default 24 months from acceptance)
 - Risk register entry (Assured): ID and owner
 - Security and privacy sign-off (Assured): name, date
 - Threat model (Assured, if security-relevant): link
+- AI assistance (if any): tool, what it produced (options, summary, estimate), date, and who verified each fact against its primary source

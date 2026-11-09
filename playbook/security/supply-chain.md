@@ -69,7 +69,7 @@ Everything in Standard, plus:
 3. **Build from source for critical dependencies**, from the tagged repository commit, not from release tarballs. The xz-utils backdoor was in the tarballs.
 4. **Supplier SBOMs.** Require SBOMs and vulnerability disclosure policies from software suppliers in contracts (see [third-party and SaaS risk](third-party-and-saas-risk.md)).
 5. **EU Cyber Resilience Act.** Manufacturers must identify and document components, including by drawing up an SBOM in a commonly used, machine-readable format covering at least the top-level dependencies (Annex I, Part II). Most obligations apply from 11 Dec 2027.
-6. **Evidence.** Keep SBOMs, provenance and signature verification logs for every release for the support period of the product. This supports SSDF practices PS.2 and PS.3 and ISO/IEC 27001:2022 control 8.30 for outsourced code.
+6. **Evidence.** Keep SBOMs, provenance and signature verification logs for every release for the support period of the product. This supports SSDF practices PS.2 and PS.3 and ISO/IEC 27001:2022 controls 5.21 (managing information security in the ICT supply chain) and 8.30 (outsourced development).
 
 ## Cloud, on-premises and air-gapped
 

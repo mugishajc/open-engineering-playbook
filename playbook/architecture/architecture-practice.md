@@ -77,6 +77,31 @@ Keep diagrams as code (for example Structurizr DSL, Mermaid or PlantUML) in the 
 
 Review a design only when it meets a trigger in [engineering governance](../operating-model/engineering-governance.md): hard to reverse, three or more teams affected, off the [tech radar](tech-radar.md), regulated data or high-risk AI. Everything else uses the advice process and a decision record. Large proposals go through an [RFC](rfcs.md).
 
+### The architecture forum
+
+At Standard and above, one forum handles triggered reviews, cross-team decision records and radar changes. Starting points:
+
+- Meets weekly for 45 minutes. Members: 3 to 6 staff or principal engineers from different teams, plus security when the agenda needs it. Membership rotates every 12 months.
+- Gives a first written response within 5 working days of a request, and a decision within 10 working days. The same targets apply in [decision records](decision-records.md).
+- Advises; it does not own team designs. The owning team decides unless the change crosses a trigger, and then the named decision-maker from [decision rights](../operating-model/decision-rights.md) decides.
+- Publishes its decisions as decision records, and reviews its own response times each quarter.
+
+## When to change the architecture
+
+Architecture should change when evidence says the current structure no longer serves, not when a new pattern becomes fashionable. Open a review when any of these triggers fires (starting points):
+
+| Trigger | Signal to watch |
+|---|---|
+| A fitness function keeps failing | The same fitness function has failed, or been waived, for two quarters in a row |
+| Team cognitive load | A team owns more services than it can operate, or more than about 20% of its pull requests need another team's approval (see [team topology](../operating-model/team-topology.md)) |
+| Unit cost rising | Cost per transaction, per customer or per request rises for two quarters while volume grows (see [FinOps](../platform/finops.md)) |
+| Scaling headroom | Forecast peak in the next 12 months is within 2 times of the highest load the system has been shown to carry (see [scaling](scaling.md)) |
+| New AI workloads | A feature adds model calls with latency, cost or data-handling needs the current design was not built for: seconds rather than milliseconds, per-token cost, GPU capacity, prompts that carry personal data (see [AI architecture patterns](../ai/ai-architecture-patterns.md)) |
+| Regulatory change | A new law or rule changes where data may live, how decisions must be explained, or how fast incidents must be reported |
+| Repeated incidents | Postmortems name the same structural cause three times in 12 months |
+
+The rule when a trigger fires: change incrementally, behind a decision record. Write the ADR that states the trigger, the options and the measure that will show the change worked. Then move one slice at a time, using the strangler fig or branch by abstraction from [legacy modernisation](legacy-modernisation.md), with a fitness function that guards the new structure. A big-bang redesign needs an [RFC](rfcs.md) that explains why incremental change cannot work.
+
 ## Reference architectures
 
 A reference architecture is a worked, deployable example of how to build a common kind of system: a web service, an event consumer, a batch job, a retrieval-augmented AI application. Each one includes C4 diagrams, quality attribute scenarios it meets, the fitness functions that check it, and a template in the [developer platform](../platform/developer-platform.md) or [golden paths](../platform/golden-paths.md). Retire a reference architecture when fewer than two teams use it.

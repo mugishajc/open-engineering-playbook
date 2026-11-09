@@ -8,7 +8,7 @@ Starting points. Tune them to your organisation.
 
 - Every production workload has an ADR stating its hosting model and the conditions that would make you move it.
 - The [golden path](golden-paths.md) templates build and deploy on every hosting model you support, tested at least once a quarter on each.
-- Air-gapped sites receive security updates for critical vulnerabilities within 7 days of release, through the transfer process below.
+- Air-gapped sites meet the same fix-by times as every other site (see [vulnerability management](../security/vulnerability-management.md)): KEV-listed (P0) issues are fixed or mitigated with a pre-approved mitigation within 72 hours, and other critical (P1) issues are fixed within 7 days, through the transfer process below.
 - Every critical vendor or platform has an exit plan reviewed at least once a year. At Assured, the plan is rehearsed every 2 years.
 - Time on every air-gapped host stays within 100 milliseconds of the internal reference.
 

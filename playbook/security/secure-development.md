@@ -8,7 +8,7 @@ Starting points. Tune them to your risk.
 
 - 100% of repositories run secret scanning, dependency scanning and static analysis (SAST) in CI on every pull request.
 - New services and significant design changes have a threat model before the first production release.
-- Critical and high findings from CI block the merge, with an exception process that expires within 30 days.
+- Critical and high findings from CI block the merge. A merge-blocking exception expires within 30 days; a known vulnerability that cannot be fixed in time follows the exception rule in [vulnerability management](vulnerability-management.md) (90 days at most).
 - Every team has a named security champion who spends about 10% of their time on security work.
 - Every engineer completes secure coding training once a year, matched to the languages they use.
 - Vulnerability fix times meet the SLAs in [vulnerability management](vulnerability-management.md) for at least 90% of findings.
@@ -31,7 +31,7 @@ ISO/IEC 27001:2022 covers the same ground in Annex A controls 8.25 (secure devel
 ### Foundation
 
 1. **Turn on what is free.** Secret scanning with push protection, dependency alerts and automated update pull requests in your forge or CI (see [secrets](secrets.md) and [dependencies](dependencies.md)).
-2. **One static analysis tool** in CI for your main language, with rules tuned so the team reads every finding. Start by blocking only high-confidence, high-severity rules.
+2. **One static analysis tool** in CI for your main language, with rules tuned so the team reads every finding. Start by blocking only high-confidence, high-severity rules. Promote a warning rule to blocking when at least 8 of its last 10 findings were real problems (starting point); demote or tune a blocking rule that developers dismiss as false more than once a month.
 3. **Pre-commit hooks** for secrets and formatting, using the [pre-commit configuration](../../templates/repo/.pre-commit-config.yaml).
 4. **Protected main branch** and review on every change (see [code review](../delivery/code-review.md)).
 5. **SECURITY.md** in every repository so people know how to report a vulnerability (see the [template](../../templates/repo/SECURITY.md)).
@@ -60,7 +60,7 @@ ISO/IEC 27001:2022 covers the same ground in Annex A controls 8.25 (secure devel
 
 Everything in Standard, plus:
 
-1. **SSDF attestation.** Map each SSDF practice to your controls and evidence. US federal software suppliers attest to SSDF practices through CISA's Secure Software Development Attestation Form.
+1. **SSDF mapping.** Map each SSDF practice to your controls and evidence, so you can answer any customer or regulator from one record. In the US, OMB memo M-26-05 (January 2026) ended the blanket requirement for federal software suppliers to sign CISA's Secure Software Development Attestation Form; agencies may still ask for it, or for an SBOM, case by case. Keep the mapping current either way.
 2. **Independent security testing** (penetration test) before first release of Tier 1 services and at least once a year, plus after major changes. Findings follow the vulnerability management SLAs.
 3. **Separation of duties.** The author of a change cannot approve it. Changes to security-sensitive code paths (authentication, cryptography, payment, access control) need a second reviewer from the security champion group, enforced by CODEOWNERS.
 4. **Evidence retained** from CI scans, threat models and pen tests for the audit period. Map them in [control mapping](../compliance/control-mapping.md).
@@ -80,7 +80,7 @@ Everything in Standard, plus:
 | Security review at the end, a week before launch | Threat model at design time; checks on every pull request. |
 | Security team owns all fixes | Owning teams fix; champions and the security team help. |
 | Pen test as the only security activity | Pen tests find what the pipeline missed. They do not replace it. |
-| Exceptions with no expiry | Every exception has an owner and expires within 30 days, then is reviewed. |
+| Exceptions with no expiry | Every merge-blocking exception has an owner and expires within 30 days, then is reviewed. |
 
 ## Templates
 

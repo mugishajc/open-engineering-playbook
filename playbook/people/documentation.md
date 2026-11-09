@@ -72,7 +72,7 @@ Keep the README under about 200 lines. Move depth into `docs/`.
 
 - Controlled documents (policies, procedures, runbooks used as evidence) have version history, an approver and an effective date. Git history and pull request approvals provide this.
 - Retention of documents follows your records policy. Public sector bodies usually have statutory records duties.
-- Public-facing documentation meets WCAG 2.2 level AA, which the European Accessibility Act and many public sector rules expect.
+- Public-facing documentation meets WCAG 2.2 level AA. That covers WCAG 2.1 level AA, which EN 301 549 (the European standard used under the Web Accessibility Directive and the European Accessibility Act) currently references, and adds six success criteria at levels A and AA.
 - Documentation of the system is part of the [production readiness review](../reliability/production-readiness.md) and of release sign-off.
 
 ## Cloud, on-premises and air-gapped

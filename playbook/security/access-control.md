@@ -44,6 +44,25 @@ Everything in Standard, plus:
 4. **Evidence.** Keep provisioning logs, review results, elevation approvals and break-glass use for the audit period. This supports ISO/IEC 27001:2022 controls 5.15 (access control), 5.16 (identity management), 5.17 (authentication information), 5.18 (access rights), 8.2 (privileged access rights) and 8.5 (secure authentication), and SOC 2 CC6.1 to CC6.3.
 5. **Device trust.** Production access only from managed devices that meet a posture check (see [zero trust](zero-trust.md)).
 
+## In the AI era
+
+AI agents, coding agents and chat bots now act on systems with real permissions. Treat each one as a non-human identity with the same rigour as a production service, plus limits that reflect how easily its instructions can be hijacked (see [AI application security](../ai/ai-application-security.md) and [AI engineering practices](../ai/ai-engineering-practices.md)).
+
+| Rule | Starting point |
+|---|---|
+| One identity per agent and per environment | No shared "ai-bot" account across teams; no agent uses a person's token or session |
+| Named human owner | Recorded in the identity provider; ownerless agent identities are disabled within 10 working days |
+| Short-lived credentials | Issued per task or per session through OIDC federation or a secret manager; 1 hour or less, no static API keys |
+| Scoped tool permissions | Each tool grants one action on one resource type (for example `tickets:comment`, not `tickets:*`); read-only by default |
+| Acting for a user | The agent carries the user's authorisation as well as its own; the narrower of the two applies |
+| Human approval | Required for anything that deletes data, moves money, changes access, deploys to production or sends data outside the organisation |
+| Logging | Every tool call logged with the agent identity, the user it acted for, the parameters and the approver |
+| Reviews | Agent identities are in the quarterly access review, and any permission unused for 30 days is removed |
+
+A worked example: a support agent that drafts refund replies gets read access to the orders of the customer in the current ticket and permission to create a draft refund. Issuing the refund stays a human action in the payments tool. If the agent is tricked by a prompt injection in a customer email, the worst outcome is a wrong draft, not a payment.
+
+Code assistants that open pull requests follow the same rules: a bot identity with write access to branches only, never to protected branches, and a human approval on every merge (see [code assistants](../people/code-assistants.md)).
+
 ## Cloud, on-premises and air-gapped
 
 - **On-premises identity:** Keycloak or your directory service as the identity provider, with SAML or OIDC to each tool. Run it highly available; if it fails, nobody can sign in, so break-glass accounts matter more.

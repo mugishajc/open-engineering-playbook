@@ -67,7 +67,7 @@ Once an ADR is accepted, do not edit its decision or context. Change only the st
 - Decisions that span teams live in one central decisions repository (or in the platform repository) with its own sequence. Service repositories link to them.
 - Generate an index of all ADRs (title, status, date, owner) in CI and publish it with the internal docs. Tools such as `adr-tools` or a 30-line script both work.
 - When a pull request implements an ADR, the description links it. Reviewers check that the code matches the decision.
-- An architecture forum reviews cross-team ADRs once a week (see [architecture practice](architecture-practice.md) for how the forum works). The target is a decision within 10 working days of the ADR being proposed.
+- An architecture forum reviews cross-team ADRs once a week (see [architecture practice](architecture-practice.md) for how the forum works). The targets are a first written response within 5 working days and a decision within 10 working days of the ADR being proposed.
 - Review accepted ADRs older than 24 months. Mark each one "still valid", "superseded" or "deprecated", with reviewer and date. Review any ADR named as a contributing factor in a [postmortem](../reliability/postmortems.md) within 30 days of that postmortem.
 
 ### Assured
@@ -77,6 +77,17 @@ Once an ADR is accepted, do not edit its decision or context. Change only the st
 - ADRs that touch personal data, authentication, cryptography or data residency carry a security and privacy sign-off and link the [threat model](../../templates/docs/threat-model.md).
 - Retain ADRs for the life of the system plus the period your records policy requires. Because they live in git, retention means keeping the repository and its history, not exporting PDFs.
 - Map ADRs to controls in [control mapping](../compliance/control-mapping.md). They are direct evidence for ISO/IEC 27001:2022 Annex A 8.27 (secure system architecture and engineering principles) and support 8.32 (change management).
+
+## In the AI era
+
+Teams now use AI assistants to draft options, summarise vendor documents, estimate costs and even write the ADR itself. That is fine. What matters is that a reader in two years can tell which facts a person checked. Starting points:
+
+- **Say when AI shaped the analysis.** If an assistant produced options, comparisons, benchmarks, cost estimates or summaries of external sources that the decision relies on, add an "AI assistance" line under More information: the tool, what it produced, and the date.
+- **Name the verifier.** Every fact the decision depends on (a vendor limit, a licence term, a price, a benchmark, a regulation) is checked against its primary source by a named person, who adds the link. "The assistant said so" is not a source.
+- **Keep the prompt trail when it matters.** For decisions that pass the risk or compliance tests above, store the prompts and outputs that fed the analysis next to the ADR, or link to where they are kept. Redact secrets and personal data first.
+- **Consequences are human judgement.** The Consequences section is written or rewritten by a decision-maker, not pasted from a draft. Generated text tends to list benefits and miss costs.
+- **Reviewers check the checks.** A reviewer picks at least one AI-sourced claim and confirms it against the linked source before approving.
+- **Decisions about AI systems** themselves (which model, hosted or self-hosted, retrieval design, agent permissions) record the evaluation results and the model version they were based on, because a model upgrade can invalidate the decision. See [AI engineering practices](../ai/ai-engineering-practices.md) and [AI architecture patterns](../ai/ai-architecture-patterns.md).
 
 ## Cloud, on-premises and air-gapped
 

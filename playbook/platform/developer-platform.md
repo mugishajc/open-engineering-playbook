@@ -16,7 +16,7 @@ Starting points. Tune them to your organisation.
 | Situation | Do this |
 |---|---|
 | Solo or one team, under about 20 engineers | Do not build a platform. Use managed services, one [golden path](golden-paths.md) template and good docs. A part-time owner is enough. |
-| 2 or 3 teams with some duplicated work | Name one engineer as platform owner part-time. Share templates and pipeline components. Still no platform team. |
+| 2 teams with some duplicated work | Name one engineer as platform owner part-time. Share templates and pipeline components. Still no platform team. |
 | 3 or more teams repeating the same infrastructure work, or 40+ engineers | Start a platform team of 3 to 5 people with a product owner. Build the thinnest viable platform first. |
 | Enterprise, regulated or public sector with shared controls | A platform group with several teams (for example developer experience, runtime, data, security tooling), each run as a product. |
 | Must run on-premises or air-gapped | The platform carries the extra work of mirrors, registries and update transfer. Plan for it from day one. |

@@ -33,7 +33,7 @@ Starting points. Tune them to your organisation.
 ## Accessibility
 
 - Target WCAG 2.2 level AA as the minimum for every public web and mobile service.
-- In the EU, public sector websites and apps fall under Directive (EU) 2016/2102, and the European Accessibility Act applies to many private-sector products and services from 28 Jun 2025. In the US, Section 508 applies to federal technology.
+- In the EU, public sector websites and apps fall under Directive (EU) 2016/2102, and the European Accessibility Act applies to many private-sector products and services from 28 Jun 2025. Both rely on the harmonised standard EN 301 549, which currently references WCAG 2.1 level AA; targeting WCAG 2.2 AA meets it and covers the newer criteria. In the US, Section 508 applies to federal technology.
 - Run automated accessibility checks in [continuous integration](../delivery/continuous-integration.md). They catch only part of the problems, so add manual testing with assistive technology and testing with disabled users.
 - Publish an accessibility statement for each service and update it after each audit.
 

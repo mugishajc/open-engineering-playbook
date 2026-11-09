@@ -55,6 +55,18 @@ Start with a modular monolith unless you have a clear reason not to. It is one d
 
 Martin Fowler's "MonolithFirst" and "Microservice Prerequisites" set out the same reasoning: services add network calls, distributed data and operational load, and need monitoring, fast provisioning and automated deployment before they pay off. Enforce module boundaries in CI with architecture tests, so that splitting a module out later is a deployment change, not a rewrite. Record the decision in an [ADR](decision-records.md). For how architects run these trade-offs, see [architecture practice](architecture-practice.md).
 
+## In the AI era
+
+Model calls add a scaling dimension that CPU graphs do not show: each request has a token cost, takes seconds rather than milliseconds, and is limited by a provider's quotas or by GPU capacity you own. Plan them like any other scarce dependency (see [building with AI](../ai/building-with-ai.md) and [AI architecture patterns](../ai/ai-architecture-patterns.md)).
+
+- **Budget per request.** Set a cost and a p95 latency budget for each AI-backed flow before load testing. Load-test with realistic prompt and response sizes; token counts, not request counts, drive cost and provider limits.
+- **Provider rate limits are capacity.** Record each provider's requests-per-minute and tokens-per-minute quotas next to your other limiting resources. Alert at 70% of quota (starting point). Ask for quota increases weeks before a launch, not on the day.
+- **Cache before you scale.** Cache identical requests and stable answers; use the provider's prompt caching for long, repeated system prompts and documents. Measure the hit rate and the saving per hit, and remove caches that do not pay for their storage and invalidation work.
+- **Batch what can wait.** Classification, summarisation and embedding jobs that do not need an answer within seconds go on a queue and use batch interfaces where the provider offers them, which are usually cheaper.
+- **Route by difficulty.** Send simple requests to a smaller model and escalate only when evaluations show the smaller one fails. Re-run evaluations whenever routing changes.
+- **Degrade, do not fail.** When the provider is slow or quota is exhausted, shed or queue low-priority AI work, fall back to a cached answer or a non-AI path, and keep the core transaction working. Set timeouts on every model call and cap agent loop iterations.
+- **Self-hosted models** turn the problem into GPU capacity planning: measure tokens per second per GPU at your target latency, and remember that GPU lead times on-premises can be months.
+
 ## Practice
 
 ### Foundation

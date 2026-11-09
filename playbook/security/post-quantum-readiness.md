@@ -28,8 +28,9 @@ NIST published the first post-quantum standards on 13 Aug 2024: FIPS 203 (ML-KEM
 |---|---|---|
 | Now (2026) | Build the inventory; add crypto-agility to design standards; ask suppliers for roadmaps; enable hybrid key exchange where available | NIST IR 8547; UK NCSC |
 | By 2028 | Discovery complete and an initial migration plan in place, including supplier dependencies and long-lived hardware roots of trust | UK NCSC migration timelines |
-| 2030 to 2031 | US federal high value assets and high impact systems move to post-quantum cryptography | Executive Order 14412 and OMB M-26-15, as referenced by NIST IR 8547 |
-| After 2030 | NIST deprecates quantum-vulnerable public-key algorithms (RSA, ECDSA, EdDSA, DH, ECDH) | NIST IR 8547 |
+| 2 Jan 2030 | US federal systems support TLS 1.3 or a successor | Executive Order 14412 and OMB M-26-15, as cited in NIST IR 8547 |
+| 31 Dec 2030 and 31 Dec 2031 | US federal high value assets, high impact systems and other prioritised systems use post-quantum key establishment (2030) and post-quantum signatures (2031) | Executive Order 14412 and OMB M-26-15, as cited in NIST IR 8547 |
+| After 2030 | NIST deprecates all quantum-vulnerable public-key algorithms (RSA, ECDSA, EdDSA, DH, ECDH) at every key size, and disallows 112-bit symmetric algorithms | NIST IR 8547 |
 | By 2031 | Highest-priority migrations done; plan refined to finish by 2035 | UK NCSC |
 | After 2035 | NIST disallows quantum-vulnerable public-key algorithms; migration complete | NIST IR 8547; UK NCSC |
 
@@ -47,7 +48,7 @@ If you are not a US federal body, the federal dates still shape what your suppli
 ### Standard
 
 1. **Crypto-agility as a design rule.** Algorithms and key sizes are configuration, not code. Cryptography goes through a small number of approved libraries. Protocols negotiate algorithms. Certificates and keys can be rotated without downtime (see [secrets](secrets.md)).
-2. **Hybrid key exchange first.** Enable hybrid key exchange (a classical algorithm such as X25519 combined with ML-KEM) on TLS endpoints where your TLS library and clients support it. Hybrids protect against harvest-now-decrypt-later while hedging against weaknesses in new algorithms. NIST notes that hybrids add complexity and are expected to be temporary.
+2. **Hybrid key exchange first.** Enable hybrid key exchange (a classical algorithm such as X25519 combined with ML-KEM) on TLS endpoints where your TLS library and clients support it. Hybrids protect against harvest-now-decrypt-later while hedging against weaknesses in new algorithms. NIST notes that hybrids add complexity and are expected to be temporary. Hybrid groups such as X25519MLKEM768 exist only for TLS 1.3, so an endpoint still on TLS 1.2 must upgrade first; that upgrade is the first task for most legacy systems.
 3. **CBOM.** Record cryptographic assets in machine-readable form. CycloneDX supports a cryptography bill of materials (CBOM) alongside the SBOM (see [supply chain](supply-chain.md)).
 4. **Test interoperability** in a non-production environment: larger keys and signatures can break middleboxes, packet sizes and hardware with fixed buffers.
 5. **Prioritised plan.** Order the migration by data lifetime, exposure (internet-facing first) and dependency on suppliers.

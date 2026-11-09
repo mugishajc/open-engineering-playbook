@@ -89,6 +89,7 @@ Answer: **Yes**, **No** or **N/A** (with reason). Required: T1 = Tier 1, T2 = Ti
 | 8.4 | Access through SSO; production access just in time | T1 T2 | | | |
 | 8.5 | Artifacts signed with SBOM; admission verifies signatures | T1 | | | |
 | 8.6 | Penetration test done (Tier 1 before first release) | T1 | | | |
+| 8.7 | AI features: threat model section 6 complete, evaluation threshold met, agent tools least privilege with human approval for irreversible actions, kill switch tested | T1 T2 | | | |
 
 ## 9. Operations
 
