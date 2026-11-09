@@ -9,7 +9,7 @@ Starting points. Tune them to your incident volume.
 - Every SEV1 and SEV2 [postmortem](postmortems.md) lists at least 3 contributing factors, covering detection, response and recovery, not only the trigger.
 - At least half of action items address a class of failure (for example "all configuration pushes", "all services using this client library"), not only the one bug.
 - No postmortem names "human error" as a cause without the conditions that made the error likely.
-- Repeat incidents with the same contributing factor within 6 months fall quarter on quarter.
+- Repeat incidents with the same contributing factor are reviewed each quarter, and each repeat has a written reason why the earlier action did not prevent it.
 - Every incident commander and postmortem facilitator is trained in at least one technique on this page.
 
 ## Why "root cause" is usually plural
@@ -45,7 +45,7 @@ Starting points. Tune them to your incident volume.
 
 1. **Use more than one technique** for SEV1 incidents: timeline plus contributing factors as a minimum, plus a fishbone or CAST when the cause is disputed.
 2. **Look for classes of failure.** For each factor, ask "where else does this condition exist?" If a configuration push skipped staged rollout here, which other configuration pipelines do the same? Write action items for the class.
-3. **Tag every contributing factor** with a shared list (for example `change-config`, `change-code`, `capacity`, `dependency`, `alerting-gap`, `runbook-gap`, `access`, `knowledge`). Review tag counts every quarter. The top tags show where to invest.
+3. **Tag every contributing factor** with a shared list (for example `change-config`, `change-code`, `capacity`, `dependency`, `alerting-gap`, `runbook-gap`, `access`, `knowledge`). Review tag counts every quarter. Tags show where to look, not what to fund: read the incidents behind the top tags before deciding, because counts are easy to shift by tagging differently.
 4. **Trained facilitators.** People outside the team run the analysis for SEV1 incidents. They ask about conditions, not culprits, and challenge the first plausible story.
 5. **Check the fix against the factor.** Each action item names the contributing factor it addresses. A factor with no action is an accepted risk; say so.
 

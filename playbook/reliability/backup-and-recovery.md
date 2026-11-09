@@ -8,7 +8,7 @@ Starting points. Tune them to your data and obligations.
 
 - Every data store has an owner, a tier, an RPO and an RTO written in the service catalogue.
 - 100% of Tier 1 data stores have an automated restore test at least monthly, and a full restore exercise at least quarterly.
-- Measured restore time is at or below the RTO in the last test for every Tier 1 store.
+- Measured restore time from backup is at or below the restore RTO in the last test for every Tier 1 store.
 - At least one copy of every Tier 1 and Tier 2 backup is immutable or offline, with retention of at least 30 days.
 - A disaster recovery exercise runs at least once a year for Tier 1 services, with a written report.
 
@@ -16,11 +16,13 @@ Starting points. Tune them to your data and obligations.
 
 Tiers are defined in [production readiness](production-readiness.md). These targets are starting points; set yours from the cost of losing data and time.
 
-| Tier | RPO (data you can lose) | RTO (time to restore service) | Restore test | Immutable copy retention |
-|---|---|---|---|---|
-| Tier 1 | 15 minutes | 1 hour | Automated monthly; full exercise quarterly | 30 days or more |
-| Tier 2 | 4 hours | 8 hours | Quarterly | 30 days |
-| Tier 3 | 24 hours | 72 hours | Yearly | 14 days |
+| Tier | RPO (data you can lose) | RTO, failover to a replica or standby | RTO, restore from backup after a destructive event | Restore test | Immutable copy retention |
+|---|---|---|---|---|---|
+| Tier 1 | 15 minutes | 1 hour | 24 hours | Automated monthly; full exercise quarterly | 30 days or more |
+| Tier 2 | 4 hours | 8 hours | 48 hours | Quarterly | 30 days |
+| Tier 3 | 24 hours | 72 hours | 72 hours | Yearly | 14 days |
+
+The two RTOs cover different events. Failover covers a lost host, zone or region while the data is still good. Restore covers ransomware, corruption or deletion, when replicas hold the same damage and you must rebuild from backup in a clean environment, which takes hours for a large database. Set the restore RTO from a timed restore at production size, not from the failover RTO.
 
 An RPO under 15 minutes usually needs continuous replication or point-in-time recovery (database write-ahead log archiving), not periodic snapshots. Replication is not a backup: it copies deletions and encryption too.
 

@@ -9,7 +9,7 @@ Starting points. Tune them to your incident volume.
 - 100% of SEV1 and SEV2 incidents have a published postmortem.
 - The first draft is shared within 5 working days of resolution; the review meeting happens within 10 working days.
 - At least 80% of high-priority action items close by their due date. The rate is reported monthly.
-- Repeat incidents (same contributing factor within 6 months) fall quarter on quarter.
+- Repeat incidents with the same contributing factor are reviewed each quarter, and each repeat has a written reason why the earlier action did not prevent it.
 - Postmortems are readable by every engineer in the organisation, with redactions only for security or personal data.
 
 ## When a postmortem is required

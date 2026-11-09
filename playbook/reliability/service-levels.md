@@ -8,7 +8,7 @@ Starting points. Tune them to your services and risk appetite.
 
 - Every Tier 1 and Tier 2 service (tiers defined in [production readiness](production-readiness.md)) has 2 or 3 SLOs, each with a named owner.
 - At least 80% of pages come from SLO burn-rate alerts, not from cause-based alerts such as CPU or disk.
-- On-call engineers handle no more than 2 incidents per 12-hour shift on average, the limit in the Google SRE book (see [on-call](on-call.md)).
+- On-call engineers handle no more than 2 incidents per 12-hour period on call on average, the limit in the Google SRE book (see [on-call](on-call.md)).
 - SLOs and the error budget policy are reviewed every quarter, and the review is recorded.
 - When a service exhausts its error budget, the error budget policy is applied within 1 working day.
 
@@ -56,6 +56,8 @@ Error budget for common targets over a 28-day window (full outage equivalent):
    | 5% | 6 hours | 30 minutes | 6 | Page |
    | 10% | 3 days | 6 hours | 1 | Ticket |
 
+   These thresholds come from the SRE Workbook, which uses a 30-day window. On a 28-day window the same burn rates spend slightly more (2.1%, 5.4% and 10.7%). Keep the standard burn rates; the difference does not change who gets paged.
+
    Example Prometheus rule for a 99.9% availability SLO (fast-burn page):
 
    ```yaml
@@ -70,16 +72,30 @@ Error budget for common targets over a 28-day window (full outage equivalent):
          sum(rate(http_requests_total{service="checkout",code=~"5.."}[5m]))
          / sum(rate(http_requests_total{service="checkout"}[5m]))
        ) > (14.4 * 0.001)
+       and
+       # Low-traffic guard: do not page on one failed request at 3 a.m.
+       sum(rate(http_requests_total{service="checkout"}[5m])) > <min requests per second>
      labels:
        severity: page
      annotations:
        runbook_url: https://runbooks.example.internal/checkout#error-budget-burn
    ```
 
+   For a latency SLI (for example 99% of requests under 800 ms), count requests above the threshold from the histogram, and make the threshold a bucket boundary (`le="0.8"`), or the SLI cannot be computed exactly:
+
+   ```text
+   1 - sum(rate(http_request_duration_seconds_bucket{service="checkout",le="0.8"}[1h]))
+       / sum(rate(http_request_duration_seconds_count{service="checkout"}[1h]))
+     > (14.4 * 0.01)
+   ```
+
+   Pair it with the same expression over `[5m]`, as above. For low-traffic services, add synthetic traffic, alert on several related services together, or require a minimum event count, as the SRE Workbook describes.
+
    Generate these rules from an SLO definition rather than writing them by hand. Open-source generators such as Sloth and Pyrra produce Prometheus rules; OpenSLO is a vendor-neutral format for the definitions.
 4. **Error budget policy, agreed in writing** by the engineering lead and the product owner before it is needed. Starting point:
    - Budget remaining: ship as normal.
-   - Budget exhausted over the last 28 days: pause feature releases for that service. Only fixes, security patches and reliability work ship until the SLO is met again.
+   - Budget exhausted over the last 28 days: pause feature releases for that service. Only fixes, security patches and reliability work ship.
+   - The pause ends when the postmortem's priority actions for the contributing factors are done and the burn rate over the last 7 days is below 1, or when the 28-day SLO is met again, whichever comes first. Without this exit, one large incident freezes releases for about 28 days whatever the team fixes, because the incident stays in the rolling window. Extending or ending a pause early is the escalation owner's decision, recorded.
    - A single incident spends more than 20% of the budget: it gets a [postmortem](postmortems.md) with at least one action item that has a priority equal to the top feature work.
    - Disagreements go to the named escalation owner (for example the CTO), who decides within 2 working days.
 5. **SLOs for internal platforms.** Platform teams publish SLOs to the teams that depend on them. Examples to start from:
@@ -89,10 +105,10 @@ Error budget for common targets over a 28-day window (full outage equivalent):
    | CI | Pipelines that start within 5 minutes of a push | 95% |
    | CI | Pipeline runs that do not fail for infrastructure reasons | 99% |
    | Artifact registry | Successful pulls | 99.9% |
-   | Deployment pipeline | Deployments that complete without platform error | 99% |
+   | Deployment pipeline | Deployments that complete without platform error | 99%, 24/7 |
    | Identity provider | Successful sign-in requests | 99.95% |
 
-   An internal SLO tells product teams what to design around. A service cannot promise users more than its critical dependencies deliver, unless it adds redundancy or graceful degradation.
+   The deploy and rollback path is how teams roll back at 3 a.m., so hold it to the highest tier of any service it deploys, around the clock, and keep a break-glass deploy path that does not depend on CI (see [developer platform](../platform/developer-platform.md)). An internal SLO tells product teams what to design around. A service cannot promise users more than its critical dependencies deliver, unless it adds redundancy or graceful degradation.
 6. **Quarterly review.** Check whether the SLO matches user complaints. If users were unhappy while the SLO was green, the SLI measures the wrong thing. If the SLO was red and nobody noticed, the target is too tight.
 
 ### Assured

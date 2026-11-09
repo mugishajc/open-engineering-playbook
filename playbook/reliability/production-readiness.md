@@ -54,9 +54,9 @@ Use the full [production readiness review template](../../templates/docs/product
 |---|---|
 | Ownership | Owning team, on-call rotation, escalation path, service catalogue entry |
 | Service levels | 2 or 3 SLOs, burn-rate alerts, error budget policy (see [service levels](service-levels.md)) |
-| Observability | Metrics, structured logs and traces for the main journey; dashboards (see [observability](../architecture/observability.md)) |
-| Capacity | Load test at 2 times expected peak; known limits written down; autoscaling or a scaling procedure |
-| Resilience | Timeouts, retries with backoff and limits on every network call; behaviour with each critical dependency down |
+| Observability | Metrics, structured logs and traces for the main journey; dashboards; a tested paging path with a heartbeat (see [observability](../architecture/observability.md)) |
+| Capacity | Load test at 2 times expected peak; capacity for peak with one zone lost; known limits written down; autoscaling or a scaling procedure |
+| Resilience | Timeouts with deadline propagation; retries at one layer with jitter and a retry budget (see [scaling](../architecture/scaling.md#overload-protection)); behaviour with each critical dependency down and above capacity; quotas and certificate expiry tracked |
 | Change | Automated deployment with a tested rollback under 15 minutes (see [rollbacks](rollbacks.md)); feature flags for risky features (see [release management](../delivery/release-management.md)) |
 | Data | Backups meeting the tier's RPO and RTO, with a tested restore (see [backup and recovery](backup-and-recovery.md)) |
 | Security | Threat model for new data flows; secrets in a secret manager; dependencies and images scanned; access through SSO and least privilege |

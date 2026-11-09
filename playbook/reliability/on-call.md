@@ -6,8 +6,8 @@ Run on-call rotations large enough that nobody carries the pager more than one w
 
 Starting points. Tune them to your services and local labour law.
 
-- Each 24/7 rotation has at least 6 people, so each person is on call no more than 1 week in 6.
-- On average, no more than 2 incidents per 12-hour shift. Above that, the team stops feature work to cut alert load.
+- Each 24/7 primary rotation has at least 6 people, so each person is primary no more than 1 week in 6. A rotation where the same people also cover backup needs at least 8 at one site, or 6 per site across two sites.
+- Incidents: on average no more than 2 per 12-hour period on call (the SRE book's measure). Out-of-hours pages: under 2 per week per rotation. Above either, the team stops feature work to cut alert load.
 - At least 90% of pages are actionable (the responder had to do something). Non-actionable pages are fixed or removed within 2 weeks.
 - Pages are acknowledged within 5 minutes in 95% of cases.
 - Every on-call engineer has a written handover at the start of each shift.
@@ -18,25 +18,34 @@ Starting points. Tune them to your services and local labour law.
 ### Foundation
 
 1. **Business hours first.** If the product does not need 24/7 response, do not run a 24/7 rotation. Say so in your customer terms and on the status page.
-2. **One primary, one backup.** The backup is paged if the primary does not acknowledge within 10 minutes.
+2. **One primary, one backup.** The backup is paged if the primary does not acknowledge within 10 minutes. With fewer than 8 people, the backup comes from a shared escalation rotation across teams (for example the engineering managers), not from the same people as the primary.
 3. **Every page links to a runbook** (see the [runbook template](../../templates/docs/runbook.md)). A page with no runbook is a bug.
 4. **Page on symptoms.** Page when users are affected or about to be: SLO burn rate, failed health checks from outside, queues that stop draining. Send causes (high CPU, a disk at 80%) to dashboards or tickets. See [service levels](service-levels.md).
 5. **Time off after a bad night.** Someone paged overnight starts late or takes the morning off. No permission needed.
+6. **Fatigue limit.** After 2 hours of night-time response, hand over to the backup and rest. The manager backs this up.
 
 ### Standard
 
-1. **Rotation size.** Google's SRE book caps on-call at 25% of an engineer's time. With a primary and secondary on every shift, that needs at least 8 people at one site, or 6 per site across two sites. This playbook's starting point for a primary-only 24/7 rotation is 6 people. Below that, merge rotations across teams, move to business hours, or buy cover.
+1. **Rotation size.** Google's SRE book caps on-call at 25% of an engineer's time. With a primary and secondary drawn from the same people, that needs at least 8 people at one site, or 6 per site across two sites. A primary-only 24/7 rotation with a shared escalation backup needs at least 6 people. Below that, merge rotations across teams, move to business hours, or buy cover.
 2. **Shift length.** One week, handed over on a weekday morning, not Monday or Friday. Follow-the-sun teams use 8 to 12-hour shifts.
 3. **Alert hygiene.** Review every page weekly in a 30-minute meeting. For each: was it actionable, was it urgent, is the runbook right? Delete or demote alerts that fail.
-4. **Handover.** Written, at every shift change, in the rotation's channel:
-   - Open incidents and their state.
-   - Alerts that fired and were not fixed.
-   - Risky changes or migrations planned during the next shift.
-   - Anything odd that the next person should watch.
+4. **Handover.** Written, at every shift change, in the rotation's channel. Copy this block:
+
+   ```text
+   On-call handover <date> <HH:MM> UTC, <from> to <to>
+   Open incidents and their state:
+   Alerts fired and still open:
+   Silences in force, with expiry time:
+   Changes and migrations in flight or planned this shift:
+   Error budget state of Tier 1 services (normal, burning, exhausted):
+   Known risks and things to watch:
+   ```
+
+   Handing over an incident in progress uses the incident commander handover in the [incident update template](../../templates/docs/incident-update.md#incident-commander-handover).
 5. **Onboarding.** New members shadow one full rotation, then lead one with an experienced engineer as reverse shadow, before going solo.
 6. **Compensation principles.**
    - Pay a fixed amount for each on-call period, plus pay or time off in lieu for hours worked when paged. Write the rates down.
-   - Time responding counts as working time. In the EU, standby time with tight response constraints can count as working time in full (Court of Justice of the EU, case C-518/15, *Matzak*, 2018). Check the law where each person works.
+   - Time responding counts as working time. In the EU, standby time with tight response constraints can count as working time in full (Court of Justice of the EU, case C-518/15, *Matzak*, 2018). Later rulings (joined cases C-344/19 and C-580/19, 2021) apply this only when the constraints very significantly limit the person's free time. Check the law where each person works.
    - Respect minimum rest. The EU Working Time Directive (2003/88/EC) requires 11 consecutive hours of daily rest; a night of pages breaks it.
    - On-call is part of the role description, agreed at hiring, not added later without consent.
 7. **Escalation path.** Primary, then secondary, then the engineering manager, then the incident commander rotation. Each step has a timeout of 10 to 15 minutes.
@@ -49,7 +58,7 @@ Everything in Standard, plus:
 1. **Records.** Keep page logs, acknowledgement times and escalations for the retention period your auditors need. They support SOC 2 CC7.4 and ISO/IEC 27001:2022 controls 5.24 to 5.26.
 2. **Privileged access on call.** On-call engineers get production access through just-in-time elevation, logged and time-limited (see [access control](../security/access-control.md)). No standing admin rights because "they might need it at 3am".
 3. **Separation of duties.** Emergency changes made on call are reviewed by a second person within 2 working days (see [change management](change-management.md)).
-4. **Fatigue limits.** Written rule: after 2 or more hours of night-time response, the engineer hands over and rests. The manager enforces it.
+4. **Fatigue records.** The Foundation fatigue limit is a written rule, and handovers made under it are logged.
 
 ## Cloud, on-premises and air-gapped
 
@@ -79,3 +88,5 @@ Everything in Standard, plus:
 - Google, *The Site Reliability Workbook*, "On-Call": https://sre.google/workbook/on-call/
 - Directive 2003/88/EC (EU Working Time Directive): https://eur-lex.europa.eu/eli/dir/2003/88/oj
 - Court of Justice of the EU, case C-518/15, *Ville de Nivelles v Rudy Matzak*: https://curia.europa.eu/juris/liste.jsf?num=C-518/15
+- Court of Justice of the EU, case C-344/19, *Radiotelevizija Slovenija*, 9 March 2021: https://curia.europa.eu/juris/liste.jsf?num=C-344/19
+- Court of Justice of the EU, case C-580/19, *Stadt Offenbach am Main*, 9 March 2021: https://curia.europa.eu/juris/liste.jsf?num=C-580/19
