@@ -1,0 +1,63 @@
+# One phrase per line. Matching is case-insensitive and on word boundaries.
+# Lines starting with # are comments. Keep this list short and defensible:
+# every entry should be a word that adds no information in technical writing.
+leverage
+leverages
+leveraging
+robust
+seamless
+seamlessly
+comprehensive
+cutting-edge
+cutting edge
+state-of-the-art
+best-in-class
+world-class
+world class
+game-changer
+game changer
+revolutionize
+revolutionise
+revolutionary
+streamline
+streamlines
+streamlined
+holistic
+synergy
+synergies
+empower
+empowers
+empowering
+elevate
+elevates
+delve
+delves
+harness
+harnesses
+showcase
+showcases
+unlock
+unlocks
+unleash
+tapestry
+embark
+realm
+pivotal
+paramount
+myriad
+plethora
+ever-evolving
+fast-paced world
+in today's
+it's worth noting
+it is worth noting
+it is important to note
+needless to say
+at the end of the day
+deep dive
+dive into
+navigate the complexities
+testament to
+meticulous
+meticulously
+bustling
