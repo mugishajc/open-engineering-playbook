@@ -15,6 +15,7 @@ Guidance: playbook/reliability/on-call.md and playbook/reliability/production-re
 | On-call rotation | |
 | Escalation | Primary, then secondary after 10 min, then <manager>, then incident commander rotation |
 | Last reviewed | YYYY-MM-DD by <name> |
+| Last exercised (game day or drill) | YYYY-MM-DD |
 | Source repository | |
 | Service catalogue entry | |
 
@@ -53,22 +54,30 @@ One section per paging alert. The alert's `runbook_url` points to the anchor.
 ### <AlertName>
 
 - **What it means:** <symptom users feel>
-- **Check first:** <dashboard panel, query, recent deployments>
+- **Declare an incident if:** <impact condition, and the severity>
+- **Check first:** <dashboard panel, query, the change feed for recent deploys, flags and configuration>
 - **Likely causes:** <ranked list>
 - **Mitigate:**
   ```bash
   <copy-ready command>
   ```
+- **Confirm it worked:** <metric and expected value within N minutes>
+- **Do not:** <the obvious action that makes this worse, and why, for example restarting the primary database>
 - **Escalate if:** <condition, and to whom>
 
 ## Common procedures
 
+GitOps: each change below is made in Git at <path to the environment directory>. If you must change the cluster directly, the incident commander approves pausing auto-sync for this one Application first, you log it in the incident channel, and you put the change in Git and turn auto-sync back on before the incident closes. Otherwise self-heal reverts your change within minutes. See playbook/delivery/gitops-and-deployment.md.
+
 ### Roll back a deployment
 
-Target: under 15 minutes. See playbook/reliability/rollbacks.md.
+Target: under 15 minutes. See playbook/reliability/rollbacks.md. Roll back any recent change on the affected path; you do not need proof it caused the incident.
 
 ```bash
-<command to redeploy the previous version>
+# Rollout in progress (canary): return traffic to the stable version at once
+kubectl argo rollouts abort <rollout> -n <namespace>
+# Otherwise: <command to redeploy the previous version>
+# Then revert the change in Git so self-heal does not bring it back
 ```
 
 How to confirm it worked: <metric or check>.
@@ -87,7 +96,7 @@ How to confirm it worked: <metric or check>.
 
 ### Restore data from backup
 
-RPO <n>, RTO <n>. Last restore test: YYYY-MM-DD.
+RPO <n>. RTO for failover <n>; RTO for restore from backup <n>. Last restore test at production size: YYYY-MM-DD, took <n>.
 
 ```bash
 <restore command, to an isolated target first>

@@ -25,6 +25,24 @@ Roles: IC <name>, Ops lead <name>, Comms <name>, Scribe <name>
 Next update: <HH:MM> UTC or sooner if status changes
 ```
 
+## Incident commander handover
+
+Use when handing the IC or operations lead role to someone else. In a SEV1 longer than 4 hours, hand over at least every 4 to 6 hours. Post in the incident channel; the scribe logs it.
+
+```text
+IC handover at <HH:MM> UTC: <from> to <to>
+Current status: <Investigating | Identified | Mitigating | Monitoring>
+Impact now: <who is affected, what they cannot do>
+Mitigation in progress: <what, who, expected result by HH:MM>
+Decisions made: <with times>
+Decisions pending: <what, by when, who decides>
+Manual changes in force: <for example auto-sync paused on <app> at HH:MM | none>
+Roles: Ops lead <name>, Comms <name>, Scribe <name>
+Next update due: <HH:MM> UTC
+Open questions: <list>
+<to>: "I have command."
+```
+
 ## Executive update
 
 Send to the executive contact list for SEV1, and for SEV2 lasting over 2 hours.
@@ -43,7 +61,7 @@ Incident commander: <name, phone>
 
 ## External updates (status page or customer email)
 
-Plain language. Say what customers experience, not what broke internally. No blame on people or suppliers. Do not guess at causes or promise times you cannot meet.
+The communications lead or IC posts these without further approval. Set the component state each time: operational, degraded performance, partial outage or major outage. Plain language. Say what customers experience, not what broke internally. No blame on people or suppliers. Do not guess at causes or promise times you cannot meet.
 
 ### Investigating
 

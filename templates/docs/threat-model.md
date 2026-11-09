@@ -3,7 +3,7 @@
 <!--
 How to use: run this with the team in 1 to 2 hours at design time, before the first production
 release, and update it when the design changes. It follows the four questions of the Threat
-Modeling Manifesto and uses STRIDE to find threats. For AI features, also complete section 6.
+Modeling Manifesto and uses STRIDE to find threats. For personal data, also complete section 2b (LINDDUN). For AI features, also complete section 6.
 Guidance: playbook/security/secure-development.md and playbook/ai/ai-application-security.md
 -->
 
@@ -70,6 +70,24 @@ Walk each element and each flow that crosses a trust boundary. For each STRIDE c
 | T1 | API to database | I | SQL injection exposes order data | M | H |
 | T2 | | | | | |
 
+### Abuse of legitimate features
+
+STRIDE looks for broken controls. Also ask how someone could misuse the system working as designed: fraud, scraping, promotion or referral abuse, account sharing, or using a feature to harass other users. Add each one to the threats table above with the category "Abuse".
+
+## 2b. Privacy threats (complete if the system handles personal data)
+
+Use the LINDDUN categories and link the result to the DPIA.
+
+| Category | Question to ask | Threat found |
+|---|---|---|
+| Linking | Can data items or actions be combined to build a picture of a person? | |
+| Identifying | Can someone work out who a person is when that was not intended? | |
+| Non-repudiation | Are people tied to actions they should be able to deny? | |
+| Detecting | Can someone infer a person's involvement from traces alone? | |
+| Data disclosure | Do we collect, keep or share more personal data than we need? | |
+| Unawareness and unintervenability | Are people informed and able to control how their data is used? | |
+| Non-compliance | Do we fall short of the law, our policies or our retention rules? | |
+
 ## 3. What are we going to do about it?
 
 | Threat ID | Response (Mitigate / Eliminate / Transfer / Accept) | Control | Owner | Ticket | Due |
@@ -111,6 +129,8 @@ Accepted risks need a named owner and an expiry date, and go in the risk registe
 | LLM09 Misinformation | | |
 | LLM10 Unbounded Consumption | | |
 
+For agents, also walk the OWASP Top 10 for Agentic Applications for 2026.
+
 Tools the agent can call, the identity it uses, and which actions need human approval:
 
 | Tool | Read or write | Identity and scope | Human approval required? |
@@ -123,3 +143,5 @@ Tools the agent can call, the identity it uses, and which actions need human app
 - OWASP Threat Modeling Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Threat_Modeling_Cheat_Sheet.html
 - Microsoft, STRIDE threat categories: https://learn.microsoft.com/en-us/azure/security/develop/threat-modeling-tool-threats
 - OWASP Top 10 for LLM Applications 2025: https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/
+- OWASP Top 10 for Agentic Applications for 2026: https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/
+- LINDDUN privacy threat modelling: https://linddun.org

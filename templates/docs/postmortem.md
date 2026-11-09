@@ -10,13 +10,15 @@ Guidance: playbook/reliability/postmortems.md and playbook/reliability/root-caus
 | Field | Value |
 |---|---|
 | Incident ID | INC-YYYY-NNN |
-| Severity | SEV1 / SEV2 / SEV3 |
+| Severity | SEV1 / SEV2 / SEV3 / SEV4 or near miss |
 | Status | Draft / In review / Final |
 | Author | |
 | Incident commander | |
 | Review date | |
 | Services affected | |
-| Detected (UTC) | YYYY-MM-DD HH:MM |
+| Impact started (UTC) | YYYY-MM-DD HH:MM |
+| Detected (UTC) and how | YYYY-MM-DD HH:MM; alert / customer / staff |
+| Declared (UTC) | YYYY-MM-DD HH:MM |
 | Mitigated (UTC) | YYYY-MM-DD HH:MM |
 | Resolved (UTC) | YYYY-MM-DD HH:MM |
 | Regulatory report needed? | No / Yes: which regime, deadline, owner |

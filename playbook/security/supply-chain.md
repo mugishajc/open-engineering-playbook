@@ -29,7 +29,7 @@ Starting points. Tune them to your risk.
 
 ## SLSA build levels
 
-SLSA version 1.1 defines the Build track; version 1.2 (2025) adds a Source track for source control integrity.
+SLSA version 1.2 is the current approved specification. It contains the Build track (unchanged in substance from v1.1) and a Source track for source control integrity.
 
 | Level | Requirement | How to reach it |
 |---|---|---|
@@ -53,7 +53,8 @@ The [SBOM and signing workflow](../../templates/security/workflows/sbom-and-sign
 ### Standard
 
 1. **SLSA Build Level 2** for all release artifacts: provenance generated and signed by the build platform, not by a script the developer controls.
-2. **Verify at deployment.** An admission controller (for example Sigstore policy-controller or Kyverno on Kubernetes) rejects images that are not signed by your CI identity. Verification in CI alone is not enough; the deploy target must check.
+2. **Verify at deployment.** An admission controller (for example Sigstore policy-controller or Kyverno on Kubernetes) rejects images that are not signed by your CI identity. Verification in CI alone is not enough; the deploy target must check. Pin the policy to the release workflow on tag refs only, for example `--certificate-identity-regexp '^https://github\.com/OWNER/REPO/\.github/workflows/sbom-and-sign\.yml@refs/tags/v'` plus `--certificate-github-workflow-trigger push`. A policy that accepts any ref accepts any developer's build. Protect release tags with a tag ruleset so only release managers, and the release bot listed as a bypass actor, can create them.
+   Treat the forge and CI as crown jewels: 2 or 3 organisation owners at most, the audit log streamed to storage the forge admins cannot change, self-hosted runners isolated per trust level and never used for pull requests from forks, and CI configuration files protected by CODEOWNERS with a required platform team review.
 3. **SBOM inventory.** Send every SBOM to a central store that can answer "which services contain package X at version Y?". This turns a new critical vulnerability into a query.
 4. **VEX for customers and auditors.** When a scanner reports a vulnerability that does not affect your product (code not reachable, feature not compiled in), publish a VEX statement instead of arguing in email.
 5. **Base images** come from a small set of approved, regularly rebuilt images, pinned by digest (see [golden paths](../platform/golden-paths.md)).
@@ -68,8 +69,9 @@ Everything in Standard, plus:
 2. **Reproducible builds** for critical components where feasible, so a second builder can confirm the artifact matches the source.
 3. **Build from source for critical dependencies**, from the tagged repository commit, not from release tarballs. The xz-utils backdoor was in the tarballs.
 4. **Supplier SBOMs.** Require SBOMs and vulnerability disclosure policies from software suppliers in contracts (see [third-party and SaaS risk](third-party-and-saas-risk.md)).
-5. **EU Cyber Resilience Act.** Manufacturers must identify and document components, including by drawing up an SBOM in a commonly used, machine-readable format covering at least the top-level dependencies (Annex I, Part II). Most obligations apply from 11 Dec 2027.
-6. **Evidence.** Keep SBOMs, provenance and signature verification logs for every release for the support period of the product. This supports SSDF practices PS.2 and PS.3 and ISO/IEC 27001:2022 controls 5.21 (managing information security in the ICT supply chain) and 8.30 (outsourced development).
+5. **EU Cyber Resilience Act.** Manufacturers must identify and document components, including by drawing up an SBOM in a commonly used, machine-readable format covering at least the top-level dependencies (Annex I, Part II). These obligations apply from 11 Dec 2027; the reporting duty in Article 14 has applied since 11 Sep 2026 (see [vulnerability management](vulnerability-management.md)).
+6. **Model supply chain.** For AI model weights, record the source and hash, prefer signed models (for example the OpenSSF model signing format), keep dataset provenance for models you train or fine-tune, and run your evaluation suite on every third-party model version before you upgrade (see [AI application security](../ai/ai-application-security.md)).
+7. **Evidence.** Keep SBOMs, provenance and signature verification logs for every release for the support period of the product. This supports SSDF practices PS.2 and PS.3 and ISO/IEC 27001:2022 controls 5.21 (managing information security in the ICT supply chain) and 8.30 (outsourced development).
 
 ## Cloud, on-premises and air-gapped
 
@@ -97,7 +99,9 @@ Everything in Standard, plus:
 
 ## Sources
 
-- SLSA specification: https://slsa.dev/spec/
+- SLSA specification v1.2: https://slsa.dev/spec/v1.2/
+- OpenSSF model signing (sigstore model-transparency): https://github.com/sigstore/model-transparency
+- GitHub Docs, rulesets for tags and bypass lists: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/about-rulesets
 - CycloneDX: https://cyclonedx.org/ and SPDX: https://spdx.dev/
 - OpenVEX specification: https://github.com/openvex/spec
 - OASIS CSAF 2.0: https://docs.oasis-open.org/csaf/csaf/v2.0/csaf-v2.0.html

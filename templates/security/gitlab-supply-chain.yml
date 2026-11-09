@@ -28,6 +28,18 @@
 #    COSIGN_PRIVATE_KEY and COSIGN_PASSWORD to "signing", and make "signing" a
 #    protected environment: then only the sign job below receives them, not
 #    every job in a protected pipeline.
+#    Environment scoping is only as strong as your merge rights: anyone who can
+#    merge a change to .gitlab-ci.yml on a protected branch can add a job with
+#    `environment: signing` that reads the key. Protect .gitlab-ci.yml and every
+#    included CI file with CODEOWNERS and a required approval from the platform
+#    team. Prefer a KMS or HSM key reference, which a modified job can use but
+#    cannot read out.
+#
+#    Key rotation and compromise: an empty signing config (below) adds no
+#    trusted timestamp, so after a key leaks you cannot tell old good signatures
+#    from new forged ones. Run an internal RFC 3161 timestamp authority and list
+#    it in COSIGN_SIGNING_CONFIG. Keep old public keys in the verification
+#    policy for the support period of the releases they signed.
 #
 # 3. Your build job must export the pushed image's digest as a dotenv artifact:
 #      build-image:

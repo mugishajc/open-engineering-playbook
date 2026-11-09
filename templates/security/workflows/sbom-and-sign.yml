@@ -3,9 +3,17 @@
 # Every step uses the job's short-lived OIDC identity: there are no signing keys
 # or registry passwords to store or rotate.
 #
-# Copy to .github/workflows/sbom-and-sign.yml. It runs on version tags (v1.2.3)
-# and on demand. It pushes to GitHub Container Registry (ghcr.io); change
-# REGISTRY and the login step for another registry.
+# Copy to .github/workflows/sbom-and-sign.yml. It runs on version tags (v1.2.3),
+# and on demand only when started from a version tag: the job refuses any
+# other ref, so nobody can get a feature-branch image signed by this workflow.
+# It pushes to GitHub Container Registry (ghcr.io); change REGISTRY and the
+# login step for another registry.
+#
+# Protect v* tags with a tag ruleset (restrict creation, update and deletion)
+# so only release managers can create them. If release-please creates your tags
+# (templates/github/workflows/release-please.yml), add its GitHub App to the
+# ruleset's bypass list (actor_type Integration, with the App ID), or it cannot
+# create release tags.
 # Guidance: playbook/security/supply-chain.md
 #
 # What consumers run to verify (replace OWNER/REPO and the tag):
@@ -13,6 +21,10 @@
 #     --certificate-identity "https://github.com/OWNER/REPO/.github/workflows/sbom-and-sign.yml@refs/tags/v1.2.3" \
 #     --certificate-oidc-issuer https://token.actions.githubusercontent.com \
 #     ghcr.io/owner/repo@sha256:<digest>
+# Admission policies that accept any release use a regexp pinned to tag refs,
+# never one that matches any ref:
+#     --certificate-identity-regexp '^https://github\.com/OWNER/REPO/\.github/workflows/sbom-and-sign\.yml@refs/tags/v'
+#     --certificate-github-workflow-trigger push
 #   gh attestation verify oci://ghcr.io/owner/repo@sha256:<digest> --owner OWNER
 #
 # Keyless signing records signatures in the public Sigstore transparency log.
@@ -41,6 +53,8 @@ env:
 jobs:
   build-sbom-sign:
     name: Build, SBOM, sign, attest
+    # Sign only builds of version tags, also when started by hand.
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:

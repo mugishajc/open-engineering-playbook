@@ -41,7 +41,8 @@ Starting points. Tune them to your organisation.
 
 - Keep an inventory of where each data set is stored and processed, and who can access it, including supplier staff. See [data governance](../data/data-governance.md).
 - Classify data with the [data classification template](../../templates/docs/data-classification.md) and map each class to permitted hosting locations.
-- Check the jurisdiction of the supplier as well as the data centre. A provider subject to foreign law may face foreign access orders.
+- Check the jurisdiction of the supplier as well as the data centre. A provider subject to foreign law may face foreign access orders. Customer-managed keys in the provider's own key service do not change that while the data is processed; see [data security and privacy](../data/data-security-and-privacy.md) for external key managers.
+- Record the transfer mechanism for every copy or remote access outside the country. Remote support by supplier staff abroad is a transfer. Each data protection law below has its own transfer rule; the table in [data security and privacy](../data/data-security-and-privacy.md#laws-to-check) lists them.
 - Data protection laws to check include the EU GDPR, UK GDPR, Kenya Data Protection Act 2019, Rwanda Law No 058/2021, Nigeria Data Protection Act 2023, Brazil LGPD, India DPDP Act 2023 and California CCPA/CPRA. This is not legal advice.
 
 ## Records and transparency

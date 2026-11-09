@@ -1,6 +1,6 @@
 # Third-party and SaaS risk
 
-Know every supplier and SaaS tool that touches your data or your production systems, check each one in proportion to the damage it could do, and put the important promises in the contract. Most organisations now run on dozens or hundreds of SaaS tools, many signed up with a credit card and never reviewed, and a breach at a supplier is a breach of your data. A tiered process lets you spend hours on the five suppliers that matter and minutes on the rest.
+Know every supplier and SaaS tool that touches your data or your production systems, check each one in proportion to the damage it could do, and put the important promises in the contract. SaaS tools are easy to sign up for with a credit card and are often never reviewed, and a breach at a supplier is a breach of your data. A tiered process lets you spend hours on the five suppliers that matter and minutes on the rest.
 
 ## Outcomes
 
@@ -9,9 +9,9 @@ Starting points. Tune them to your supplier base.
 - 100% of suppliers that process personal or confidential data, or connect to production, are in one supplier register with an owner and a tier.
 - Tier 1 suppliers are reviewed before contract and every 12 months; Tier 2 every 24 months.
 - 100% of SaaS tools with company data use SSO, and SCIM where offered.
-- Contracts with Tier 1 and Tier 2 suppliers include breach notification within 72 hours or less, data location, subprocessor notice and exit terms.
+- Contracts with Tier 1 and Tier 2 suppliers require notice of a suspected security incident affecting your data or service within 24 hours of the supplier becoming aware (starting point), and within 4 hours for suppliers that support a function in scope of DORA or NIS2. They also cover data location, transfer mechanism, subprocessor notice and exit terms.
 - Unapproved SaaS tools found by discovery are reviewed or removed within 30 days.
-- Every Tier 1 supplier has a tested exit or continuity plan.
+- Every Tier 1 supplier has a written exit plan reviewed every year, and a real data export and import into the alternative, timed, at least once a year. Paper walk-throughs count only for Tier 2.
 
 ## Supplier tiers
 
@@ -37,9 +37,10 @@ Data classes come from [data security and privacy](../data/data-security-and-pri
 
 1. **Tier at intake.** A short form (data class, production access, criticality) sets the tier before purchase. Procurement and finance do not pay invoices for Tier 1 or 2 tools without a completed review.
 2. **Proportionate questionnaire.** Use the [vendor risk questionnaire](../../templates/docs/vendor-risk-questionnaire.md). Accept existing evidence instead of asking the same questions again: an ISO/IEC 27001 certificate with its statement of applicability scope, a SOC 2 Type II report, or a completed CSA CAIQ for cloud services.
+   When you accept a SOC 2 Type II report, check: the period ended within the last 12 months (ask for a bridge letter for the gap); the service you buy is in scope; subservice organisations are included or have their own reports; every exception and the management response; and the complementary user entity controls, which become your controls. Record who checked and when.
 3. **Contract clauses** for Tier 1 and 2 (starting points; your legal team owns the wording):
-   - Security incident notification to you within 72 hours, sooner if your own obligations require it (see [incident management](../reliability/incident-management.md)).
-   - Data location and transfer rules; list of subprocessors with advance notice of changes.
+   - Notice of a suspected security incident affecting your data or service within 24 hours of the supplier becoming aware, and within 4 hours for suppliers that support a DORA or NIS2 function. Your own clocks start when you become aware, and a supplier on a 72-hour clause can use up your whole GDPR deadline before you hear (see [incident management](../reliability/incident-management.md)).
+   - Data location and the transfer mechanism for each country (see [data security and privacy](../data/data-security-and-privacy.md), Foundation item 10); list of subprocessors with advance notice of changes.
    - Data processing terms that meet GDPR Article 28 or your local equivalent.
    - Vulnerability disclosure and patch commitments; SBOM on request for software you run (see [supply chain](supply-chain.md)).
    - Right to audit or to receive independent audit reports yearly.
@@ -52,8 +53,8 @@ Data classes come from [data security and privacy](../data/data-security-and-pri
 
 Everything in Standard, plus:
 
-1. **Concentration and exit.** For each Tier 1 supplier, document what happens if it fails or you must leave: alternative supplier, data export tested, time to switch. Test the plan every year for the most critical.
-2. **Regulated finance.** EU financial entities must keep a register of information on all contracts with ICT third-party service providers and manage ICT third-party risk under the EU Digital Operational Resilience Act (Regulation (EU) 2022/2554). Outsourcing rules from your supervisor also apply.
+1. **Concentration and exit.** For each Tier 1 supplier, document what happens if it fails or you must leave: alternative supplier, data export, time to switch. Review the plan every year and run a real, timed export and import into the alternative at least once a year. A paper walk-through counts only for Tier 2. Under DORA, exit plans for ICT services supporting critical or important functions must be "sufficiently tested" (Art. 28(8)).
+2. **Regulated finance.** EU financial entities must keep a register of information on all contracts with ICT third-party service providers (DORA Art. 28(3), in the format set by Implementing Regulation (EU) 2024/2956), assess concentration risk (Art. 29), and include the key contract terms in Art. 30, with more terms for services supporting critical or important functions. Outsourcing rules from your supervisor also apply.
 3. **NIS2.** Entities in scope must address supply chain security, including the security of relationships with direct suppliers, as part of their risk management measures (Directive (EU) 2022/2555, Article 21).
 4. **Public sector.** Procurement frameworks, data residency and sovereignty rules often decide which suppliers are allowed at all (see [public sector](../compliance/public-sector.md)).
 5. **Evidence.** Register, reviews, contracts and exceptions kept for the audit period. This supports ISO/IEC 27001:2022 controls 5.19 to 5.23 (supplier relationships and cloud services) and SOC 2 CC9.2.
@@ -78,12 +79,14 @@ Everything in Standard, plus:
 ## Templates
 
 - [Vendor risk questionnaire](../../templates/docs/vendor-risk-questionnaire.md)
+- [Exit plan](../../templates/security/exit-plan.md)
 - [Risk register](../../templates/strategy/risk-register.csv)
 
 ## Sources
 
 - Regulation (EU) 2016/679 (GDPR), Article 28: https://eur-lex.europa.eu/eli/reg/2016/679/oj
-- Regulation (EU) 2022/2554 (DORA): https://eur-lex.europa.eu/eli/reg/2022/2554/oj
+- Regulation (EU) 2022/2554 (DORA), Articles 28 to 30: https://eur-lex.europa.eu/eli/reg/2022/2554/oj
+- Commission Implementing Regulation (EU) 2024/2956, register of information templates: https://eur-lex.europa.eu/eli/reg_impl/2024/2956/oj
 - Directive (EU) 2022/2555 (NIS2), Article 21: https://eur-lex.europa.eu/eli/dir/2022/2555/oj
 - Cloud Security Alliance, Cloud Controls Matrix and CAIQ: https://cloudsecurityalliance.org/research/cloud-controls-matrix
 - UK NCSC, supply chain security guidance: https://www.ncsc.gov.uk/collection/supply-chain-security

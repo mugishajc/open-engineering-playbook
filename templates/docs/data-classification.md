@@ -15,7 +15,9 @@
 | Public | approved for anyone to see | published reports, open data, marketing pages |
 | Internal | for staff and contractors; low harm if disclosed | internal wiki, team metrics, non-sensitive tickets |
 | Confidential | harm to people or the organisation if disclosed | customer records, most personal data, contracts, source code |
-| Restricted | serious harm if disclosed or changed | special category personal data, credentials and keys, payment card data, classified material |
+| Restricted | serious harm if disclosed or changed | special category personal data, credentials and keys, payment card data, national ID numbers |
+
+Government classified information follows its national scheme and is out of scope of this template.
 
 ## 2. Handling rules
 
@@ -27,10 +29,10 @@
 | Access logging | no | optional | required | required and reviewed quarterly |
 | Allowed hosting locations | any | [approved providers] | [approved regions] | [named data centres or regions only] |
 | Copies in test or dev environments | allowed | allowed | masked or synthetic only | never |
-| Use in external AI tools | allowed | approved tools only | only with data owner approval and a covering contract | never |
+| Use in external AI tools | allowed | approved tools only | only with data owner approval and a contract covering use, retention, training and location | never, unless the CISO and the data owner approve a specific service with a DPIA and contract terms on retention and training, recorded as an exception |
 | Sharing with suppliers | allowed | under contract | under contract with data protection terms | only with approval from [role] |
 | Retention | [...] | [...] | [per retention schedule] | [per retention schedule] |
-| Disposal | none | standard delete | verified delete | verified delete with record |
+| Disposal | none | standard delete | verified delete (NIST SP 800-88 Rev. 2 or national equivalent; for cloud storage, destroy the encryption key) | verified delete with record |
 
 ## 3. Labelling
 

@@ -32,10 +32,12 @@ Answer: **Yes**, **No** or **N/A** (with reason). Required: T1 = Tier 1, T2 = Ti
 
 | # | Question | Req. | Answer | Evidence | Gap type |
 |---|---|---|---|---|---|
-| 2.1 | 2 or 3 SLOs defined for the main user journey | T1 T2 T3 | | | |
+| 2.1 | 2 or 3 SLOs defined for the main user journey | T1 T2 | | | |
+| 2.1a | One availability check (external probe or SLI) | T3 | | | |
 | 2.2 | Multi-window burn-rate alerts route to the on-call rotation | T1 T2 | | | |
 | 2.3 | Error budget policy agreed with the product owner | T1 T2 | | | |
 | 2.4 | External synthetic check in place | T1 | | | |
+| 2.5 | Paging path tested end to end; heartbeat alert to an external dead man's switch; alert when telemetry stops arriving | T1 T2 | | | |
 
 ## 3. Observability
 
@@ -49,7 +51,8 @@ Answer: **Yes**, **No** or **N/A** (with reason). Required: T1 = Tier 1, T2 = Ti
 
 | # | Question | Req. | Answer | Evidence | Gap type |
 |---|---|---|---|---|---|
-| 4.1 | Load tested at 2 times expected peak | T1 | | | |
+| 4.1 | Load tested at 2 times expected peak | T1 T2 | | | |
+| 4.4 | Capacity carries peak with one zone or failure domain lost, without counting on autoscaling | T1 | | | |
 | 4.2 | Known limits and bottlenecks written down | T1 T2 | | | |
 | 4.3 | Scaling is automatic, or a scaling procedure exists (on-premises: hardware lead time known) | T1 T2 | | | |
 
@@ -57,16 +60,21 @@ Answer: **Yes**, **No** or **N/A** (with reason). Required: T1 = Tier 1, T2 = Ti
 
 | # | Question | Req. | Answer | Evidence | Gap type |
 |---|---|---|---|---|---|
-| 5.1 | Timeouts, bounded retries with backoff on every network call | T1 T2 | | | |
+| 5.1 | Timeouts with deadline propagation; retries at one layer only, with backoff, jitter and a retry budget | T1 T2 | | | |
 | 5.2 | Behaviour with each critical dependency down is known and tested | T1 | | | |
 | 5.3 | No single point of failure, or the risk is accepted in writing | T1 | | | |
+| 5.4 | Behaviour above capacity tested: load shedding by priority, graceful degradation, no retry storm | T1 | | | |
+| 5.5 | Each dependency classed hard or soft; soft dependencies fail open with a degraded response; readiness does not check shared dependencies | T1 T2 | | | |
+| 5.6 | Cloud quotas and provider rate limits listed, with headroom for peak and for failover | T1 T2 | | | |
+| 5.7 | Certificates renewed automatically, with expiry alerts at 21 days; domains and tokens with expiry dates listed | T1 T2 T3 | | | |
 
 ## 6. Change and rollback
 
 | # | Question | Req. | Answer | Evidence | Gap type |
 |---|---|---|---|---|---|
 | 6.1 | Deployed only by the pipeline from version control | T1 T2 T3 | | | |
-| 6.2 | Rollback tested and takes under 15 minutes | T1 T2 | | | |
+| 6.2 | Rollback tested and takes under 15 minutes, using the fast path under canary delivery (abort or rollback window, not only a Git revert) | T1 T2 | | | |
+| 6.5 | Manifests leave `spec.replicas` out when an autoscaler owns it | T1 T2 | | | |
 | 6.3 | Risky features behind flags with a kill switch | T1 T2 | | | |
 | 6.4 | Schema changes are backward compatible (expand and contract) | T1 T2 | | | |
 
@@ -76,7 +84,7 @@ Answer: **Yes**, **No** or **N/A** (with reason). Required: T1 = Tier 1, T2 = Ti
 |---|---|---|---|---|---|
 | 7.1 | Data classified; retention period set | T1 T2 T3 | | | |
 | 7.2 | Backups meet the tier's RPO; immutable copy exists | T1 T2 | | | |
-| 7.3 | Restore tested; measured time within RTO (date of test) | T1 T2 | | | |
+| 7.3 | Restore from backup tested at production size; measured time within the restore RTO (date of test) | T1 T2 | | | |
 | 7.4 | DPIA done where personal data processing is high risk | T1 T2 | | | |
 
 ## 8. Security

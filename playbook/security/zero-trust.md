@@ -42,7 +42,8 @@ NIST SP 800-207 (2020) describes zero trust architecture: no implicit trust from
 3. **Micro-segmentation.** Default-deny network policies between services; allow only declared flows. On Kubernetes, a default-deny NetworkPolicy per namespace (see the [service baseline](../../templates/platform/k8s-service-baseline.yaml)).
 4. **Workload identity.** Services authenticate to each other with mutual TLS certificates issued automatically or with short-lived signed tokens, and each call is authorised against a policy. A service mesh is one way to get mutual TLS; it is not required.
 5. **Least-privilege data access** with logging of every read of restricted data.
-6. **Central logs** of authentication and authorisation decisions, kept for at least 12 months (starting point), with alerts on impossible travel, new devices and unusual data volumes.
+6. **Central logs** of authentication and authorisation decisions, kept for at least 12 months (starting point), with alerts on impossible travel, new devices and unusual data volumes. Retention, write-once storage and clock synchronisation for security logs follow [observability](../architecture/observability.md).
+7. **Endpoint and email.** Endpoint detection and response on every managed device, with coverage reported monthly (target 100% of devices that reach production or restricted data). Block macros from internet files and script execution from user download folders. Filter inbound email for spoofing (SPF, DKIM and DMARC at `p=reject` on your own domains) and for malicious attachments and links.
 
 ### Assured
 

@@ -31,6 +31,10 @@ Tick one. If in doubt, choose the higher tier and ask the AI governance lead.
 
 Reason for the tier: [...]
 
+- Our role under the EU AI Act: [provider, deployer, both, not in scope]. If we put our name or trademark on a high-risk system, make a substantial modification to it, or change the intended purpose of a system so that it becomes high-risk, we become its provider (Article 25).
+- If the use case falls under Annex III but we judge it not high-risk under Article 6(3): the documented reasoning [link] and the EU database registration reference (Articles 6(4) and 49(2)) [...]
+- Can it act on production, customer data or money (including coding agents that run commands)? If yes, the internal tier is at least Medium, whatever the AI Act category.
+
 ## 3. Model and supplier
 
 | Item | Value |
@@ -68,12 +72,15 @@ Reason for the tier: [...]
 - Actions that always need human approval: [...]
 - How users are told they are dealing with AI or AI-generated content: [...]
 - How affected people can challenge an outcome: [...]
+- Fundamental rights impact assessment required (Article 27: public bodies, private entities providing public services, and deployers of credit scoring or life and health insurance pricing systems)? [yes, no; link]
+- Solely automated decision with legal or similarly significant effect on a person (GDPR Article 22)? [yes, no]. If yes: the legal ground, and how a person obtains human review, expresses their view and contests the decision: [...]
 
 ## 7. Monitoring and incidents
 
 - Production metrics and alert thresholds (quality, drift, cost, abuse): [...]
-- Logs kept and retention: [...]
+- Logs kept and retention: [...] (at least 6 months for high-risk systems, Articles 19 and 26(6); mask personal data at write time)
 - Incident route: [team on-call, link]
+- Serious incident reporting (high-risk, Article 73): who reports to the market surveillance authority, and the deadlines: 15 days from awareness, 2 days for a widespread infringement or serious and irreversible disruption of critical infrastructure, 10 days for a death: [...]
 - Review date (6 to 12 months): [YYYY-MM-DD]
 
 ## 8. Decision

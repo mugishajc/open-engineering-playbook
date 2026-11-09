@@ -1,0 +1,3 @@
+id,date_occurred,date_aware,description,data_categories,people_affected_approx,likely_effects,risk_to_people,reported_to_authority,reported_at,reason_if_not_reported,people_informed,remedial_action,owner,closed
+PB-001,YYYY-MM-DD,YYYY-MM-DD HH:MM,[EXAMPLE: invoice emailed to the wrong customer],"Name, address, invoice amount",1,Low: one recipient who confirmed deletion,Unlikely to result in a risk,no,n/a,One recipient; confirmed deletion in writing; no sensitive data,no,Recipient check added to the invoice tool,finance lead,yes
+PB-002,,,,,,,,,,,,,,

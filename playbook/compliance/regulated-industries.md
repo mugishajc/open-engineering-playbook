@@ -9,8 +9,8 @@ Starting points. Tune them to your organisation.
 - At least 90% of production changes are standard changes approved by the pipeline, with a complete evidence trail and no manual ticket.
 - Every production change has an author and a different approver, enforced by tooling, with no exceptions outside documented emergency procedures.
 - Emergency changes get retrospective review within 2 working days, 100% of the time.
-- Evidence for any change (who, what, why, tests, approval, deployment, outcome) can be produced within 15 minutes.
-- Every ICT supplier that supports a critical or important function has due diligence, a contract with audit and exit rights, and a tested exit plan.
+- Evidence for any single change (who, what, why, tests, approval, deployment, outcome) can be produced within 1 hour; a sample of 25 changes within 1 working day.
+- Every ICT supplier that supports a critical or important function has due diligence, a contract with audit and exit rights, and an exit plan reviewed every year and tested with a real, timed data export and import at least once a year.
 
 ## Separation of duties with automation
 
@@ -45,6 +45,7 @@ Measure change fail rate and failed deployment recovery time for each class. If 
 - Keep pull requests, CI logs, deployment records and incident records in their systems of record, retained for the longest period any rule requires.
 - Use the [control mapping](control-mapping.md) to show one piece of evidence against many requirements.
 - Protect evidence from change: write-once storage or a signed log.
+- Prove the population is complete: reconcile every production deployment to an approved pull request or emergency change record, and keep the ruleset bypass log (see [control mapping](control-mapping.md)).
 - Give internal audit and the second line read-only access so they can test controls directly.
 
 ## Third-party and outsourcing risk
@@ -52,7 +53,7 @@ Measure change fail rate and failed deployment recovery time for each class. If 
 - Keep a register of ICT third-party arrangements, with the function each supports and whether it is critical or important. EU financial entities must keep such a register under the EU Digital Operational Resilience Act.
 - Do due diligence before signing: security, resilience, sub-contractors, location of data and staff, financial health.
 - Contracts include audit and access rights, incident notification times, service levels, data location, sub-contracting limits, termination rights and exit assistance.
-- Write and test exit plans for critical suppliers. See [third-party and SaaS risk](../security/third-party-and-saas-risk.md) and [build, buy, adopt or partner](../strategy/build-buy-adopt.md).
+- Write exit plans for critical suppliers and test them with a real, timed data export and import every year; paper walk-throughs count only for less critical suppliers. See [third-party and SaaS risk](../security/third-party-and-saas-risk.md) and [build, buy, adopt or partner](../strategy/build-buy-adopt.md).
 - Watch concentration: several critical functions on one provider is a risk to record and manage.
 
 ## EU DORA: ICT risk for financial entities
@@ -61,8 +62,8 @@ The Digital Operational Resilience Act (Regulation (EU) 2022/2554) applies from 
 
 | DORA area | Playbook practices |
 |---|---|
-| ICT risk management framework (Chapter II) | [technical strategy](../strategy/technical-strategy.md), [engineering governance](../operating-model/engineering-governance.md), [secure development](../security/secure-development.md), [backup and recovery](../reliability/backup-and-recovery.md) |
-| ICT-related incident management and reporting (Chapter III) | [incident management](../reliability/incident-management.md), [postmortems](../reliability/postmortems.md) |
+| ICT risk management framework (Chapter II, with the RTS in Delegated Regulation (EU) 2024/1774) | [technical strategy](../strategy/technical-strategy.md), [engineering governance](../operating-model/engineering-governance.md), [secure development](../security/secure-development.md), [backup and recovery](../reliability/backup-and-recovery.md) |
+| ICT-related incident management and reporting (Chapter III, with Delegated Regulation (EU) 2025/301 for report content and timing) | [incident management](../reliability/incident-management.md), [postmortems](../reliability/postmortems.md) |
 | Digital operational resilience testing (Chapter IV) | [testing](../delivery/testing.md), [production readiness](../reliability/production-readiness.md), restore tests |
 | ICT third-party risk (Chapter V) | [third-party and SaaS risk](../security/third-party-and-saas-risk.md), [build, buy, adopt or partner](../strategy/build-buy-adopt.md) |
 
@@ -70,20 +71,20 @@ The Digital Operational Resilience Act (Regulation (EU) 2022/2554) applies from 
 
 | Sector | What to add |
 |---|---|
-| Banks and insurers | model risk management for models used in credit, pricing, fraud and capital: independent validation before use and after material change; EU DORA; payment card rules (PCI DSS) for card data |
-| Health | patient data under health privacy law (for example HIPAA in the US); clinical safety review for software that affects care; medical device rules where software is a device |
-| Telecoms | lawful interception and data retention duties; network security rules; NIS2 where transposed |
+| Banks and insurers | model risk management for models used in credit, pricing, fraud and capital: independent validation before use and after material change (US SR 11-7; UK PRA SS1/23); EU DORA; payment card rules (PCI DSS) for card data. See [for financial services](../../leaders/for-financial-services.md) |
+| Health | HIPAA in the US, with breach notice to affected individuals without unreasonable delay and within 60 days of discovery (45 CFR 164.404); EU Medical Device Regulation (EU) 2017/745 where software is a medical device (Annex VIII, Rule 11); European Health Data Space Regulation (EU) 2025/327 for electronic health record systems; in England, the NHS clinical safety standards DCB0129 (manufacturers) and DCB0160 (deploying organisations) |
+| Telecoms | lawful interception and data retention duties; national telecom security rules, such as the UK Telecommunications (Security) Act 2021 and its code of practice; NIS2 where transposed |
 | Critical infrastructure (energy, water, transport) | operational technology separation from IT; NIS2 where transposed; safety cases for control system changes; long-lived systems with slow patch windows |
 
 ## Model risk
 
-When a change touches a model that drives decisions about customers or capital, add three steps to the normal change: independent validation of the model before production, monitoring of its performance and inputs in production, and a record of who approved it. Use the same approach for AI systems. See [AI governance](../ai/ai-governance.md).
+When a change touches a model that drives decisions about customers or capital, add three steps to the normal change: independent validation of the model before production, monitoring of its performance and inputs in production, and a record of who approved it. Use the same approach for AI systems. US banks follow SR 11-7. UK banks with internal model approval follow PRA SS1/23, which covers AI models and expects a model inventory, risk tiering and an accountable senior manager. In the EU, AI that scores the creditworthiness of individuals is high-risk under the AI Act. See [AI governance](../ai/ai-governance.md).
 
 ## Practice
 
 ### Foundation
 
-Smaller regulated firms and fintechs. Protected branches with an independent approver, signed releases, CI evidence kept for the retention period, a supplier register, and an incident process that meets reporting deadlines.
+Smaller regulated firms and fintechs. The reporting duties, registers and contract terms that your regulator sets apply at this level too; levels never lower a legal duty. Protected branches with an independent approver, signed releases, CI evidence kept for the retention period, a supplier register, and an incident process that meets reporting deadlines.
 
 ### Standard
 
@@ -104,7 +105,7 @@ Using cloud for a critical or important function is usually treated as outsourci
 | Weekly CAB for every change | Automate standard changes. Keep the CAB for major ones. |
 | Approvals by people who did not read the change | Approval by a reviewer in the pull request, with the diff. |
 | Evidence assembled by hand before audits | Collect it from systems of record continuously. |
-| Exit plans that exist only on paper | Test them for critical suppliers. |
+| Exit plans that exist only on paper | Run a real, timed export and import for critical suppliers every year. |
 
 ## Templates
 
@@ -119,5 +120,11 @@ Using cloud for a critical or important function is usually treated as outsourci
 - NIS2 Directive (EU) 2022/2555: https://eur-lex.europa.eu/eli/dir/2022/2555/oj
 - Board of Governors of the Federal Reserve System, SR 11-7, Guidance on Model Risk Management: https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm
 - PCI Security Standards Council: https://www.pcisecuritystandards.org
-- US HHS, HIPAA: https://www.hhs.gov/hipaa
+- US HHS, HIPAA: https://www.hhs.gov/hipaa and 45 CFR 164.404: https://www.ecfr.gov/current/title-45/subtitle-A/subchapter-C/part-164/subpart-D/section-164.404
+- PRA, SS1/23 Model risk management principles for banks: https://www.bankofengland.co.uk/prudential-regulation/publication/2023/may/model-risk-management-principles-for-banks-ss
+- Commission Delegated Regulation (EU) 2024/1774: https://eur-lex.europa.eu/eli/reg_del/2024/1774/oj
+- Regulation (EU) 2017/745 (Medical Device Regulation): https://eur-lex.europa.eu/eli/reg/2017/745/oj
+- Regulation (EU) 2025/327 (European Health Data Space): https://eur-lex.europa.eu/eli/reg/2025/327/oj
+- NHS England, DCB0129 clinical risk management (DCB0160 is linked from the same page): https://digital.nhs.uk/data-and-information/information-standards/governance/latest-activity/standards-and-collections/dcb0129-clinical-risk-management-its-application-in-the-manufacture-of-health-it-systems
+- UK Telecommunications (Security) Act 2021: https://www.legislation.gov.uk/ukpga/2021/31/contents
 - AICPA Trust Services Criteria (SOC 2): https://www.aicpa-cima.com/topic/audit-assurance/audit-and-assurance-greater-than-soc-2

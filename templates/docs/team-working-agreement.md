@@ -51,7 +51,7 @@ A change is done when:
 ## 5. Code review
 
 - Pull requests aim for under about 400 changed lines.
-- First response within 1 working day; re-review within 4 working hours.
+- First response within 1 working day, with a team median under 4 working hours; re-review within 4 working hours.
 - Comments are labelled: `blocking:`, `question:`, `suggestion:`, `nit:`, `praise:`, `follow-up:`.
 - The author owns every line, including code produced with tools or code assistants.
 - See [code review](../../playbook/delivery/code-review.md).

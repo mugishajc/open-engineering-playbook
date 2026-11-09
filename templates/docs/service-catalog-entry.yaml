@@ -31,6 +31,12 @@ metadata:
     example.org/slo: 99.9% of order requests succeed over 28 days
     example.org/on-call: orders-primary
     example.org/maintainers: "2"
+    # Recovery targets for the service's data, from the tier table in
+    # playbook/reliability/backup-and-recovery.md. Two RTOs: failover to a
+    # replica, and restore from backup after ransomware or deletion.
+    example.org/rpo: 15m
+    example.org/rto-failover: 1h
+    example.org/rto-restore: 24h
   links:
     - url: https://docs.example.org/orders-service/runbook
       title: Runbook

@@ -1,6 +1,6 @@
 # Secrets
 
-Keep secrets out of source control, issue them from a secret manager, prefer short-lived credentials over long-lived ones, and rotate what remains on a schedule. Leaked credentials are one of the most common ways attackers get in, and a key committed to git stays in its history and every clone. Short-lived, automatically issued credentials remove most of the risk and most of the rotation work.
+Keep secrets out of source control, issue them from a secret manager, prefer short-lived credentials over long-lived ones, and rotate what remains on a schedule. Credential abuse was the first step in 22% of the breaches in the Verizon 2025 Data Breach Investigations Report, and a key committed to git stays in its history and every clone. Short-lived, automatically issued credentials remove most of the risk and most of the rotation work.
 
 ## Outcomes
 
@@ -29,6 +29,7 @@ Passwords, API keys and tokens, private keys (TLS, SSH, signing), cloud access k
 ### Standard
 
 1. **OIDC federation from CI.** GitHub Actions and GitLab CI issue a signed OIDC token per job. Configure the cloud provider or Vault to trust it, scoped to the repository, branch or environment. The job gets short-lived credentials (minutes to hours) and nothing long-lived is stored in CI.
+   Pin the trust policy to the exact subject: repository plus environment (for example `repo:org/app:environment:production`), never only the audience or an organisation wildcard. A policy that checks only the audience lets any repository or branch, including a pull request from a fork, assume the role. Use protected environments so only approved branches can obtain production credentials. Test the policy by trying to assume the role from another branch.
 2. **Workload identity in runtime.** Services get credentials from the platform (cloud workload identity, Kubernetes service account tokens exchanged with Vault), not from environment variables set by hand.
 3. **Dynamic secrets** for databases and cloud access where possible: Vault or OpenBao create a credential per request with a time-to-live of 1 to 24 hours (starting point) and revoke it automatically.
 4. **Rotation intervals** for secrets that must stay static (starting points):
@@ -38,7 +39,7 @@ Passwords, API keys and tokens, private keys (TLS, SSH, signing), cloud access k
    | Service API keys and tokens | Every 90 days, automated |
    | Database passwords for services | Every 90 days, or replace with dynamic secrets |
    | TLS certificates | Automated, with lifetimes of 90 days or less (ACME or an internal CA) |
-   | Signing keys (artifacts, tokens) | Every 1 to 2 years, with a published rollover plan |
+   | Signing keys (artifacts, tokens) | Every 1 to 2 years, with a published rollover plan. Keep old public keys in the verification policy for the support period of the releases they signed, or use a trusted timestamp so old signatures stay valid |
    | Any secret held by someone who leaves | Within 1 working day of their departure, within 4 hours for production and admin secrets (matches [access control](access-control.md)) |
 
    Public TLS certificate lifetimes are falling under CA/Browser Forum ballot SC-081v3: a maximum of 200 days from 15 Mar 2026, 100 days from 15 Mar 2027 and 47 days from 15 Mar 2029. Any certificate still renewed by hand will become an outage. Automate renewal now and alert when any certificate is within 14 days of expiry.
@@ -54,6 +55,7 @@ Everything in Standard, plus:
 2. **Separation of duties.** People who administer the secret manager cannot read application secrets; access to read production secrets is just-in-time and logged (see [access control](access-control.md)).
 3. **Audit trail.** Every read of a production secret is logged with identity and time, kept for the audit period, and alerts fire on unusual access. This supports ISO/IEC 27001:2022 controls 5.17 (authentication information), 8.24 (use of cryptography) and 8.15 (logging).
 4. **Inventory.** A register of all static secrets with owner, purpose, location and rotation date, reviewed quarterly. The same inventory feeds [post-quantum readiness](post-quantum-readiness.md).
+5. **Key lifecycle.** Write down, for each key class, how it is generated, backed up (HSM key backup or escrow under dual control), rotated without breaking old data or signatures, and destroyed (destroying a data key is how you delete data in backups you cannot rewrite). Non-exportable keys conflict with leaving a provider: for data you may need to move, use a key you can import elsewhere (bring your own key) or plan to re-encrypt under a new key during exit, and record which choice you made in the exit plan.
 
 ## Cloud, on-premises and air-gapped
 
@@ -85,4 +87,5 @@ Everything in Standard, plus:
 - HashiCorp Vault documentation: https://developer.hashicorp.com/vault/docs and OpenBao: https://openbao.org
 - Kubernetes, encrypting confidential data at rest: https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
 - gitleaks: https://github.com/gitleaks/gitleaks and SOPS: https://github.com/getsops/sops
+- Verizon, 2025 Data Breach Investigations Report: https://www.verizon.com/business/resources/reports/2025-dbir-data-breach-investigations-report.pdf
 - CA/Browser Forum, Ballot SC-081v3, reducing certificate validity periods: https://cabforum.org/2025/04/11/ballot-sc081v3-introduce-schedule-of-reducing-validity-and-data-reuse-periods/

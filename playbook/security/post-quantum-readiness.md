@@ -27,20 +27,22 @@ NIST published the first post-quantum standards on 13 Aug 2024: FIPS 203 (ML-KEM
 | When | Milestone | Source |
 |---|---|---|
 | Now (2026) | Build the inventory; add crypto-agility to design standards; ask suppliers for roadmaps; enable hybrid key exchange where available | NIST IR 8547; UK NCSC |
+| End of 2026 | EU member states have national transition plans and have started pilots for high- and medium-risk use cases | EU Coordinated Implementation Roadmap (NIS Cooperation Group, June 2025) |
 | By 2028 | Discovery complete and an initial migration plan in place, including supplier dependencies and long-lived hardware roots of trust | UK NCSC migration timelines |
 | 2 Jan 2030 | US federal systems support TLS 1.3 or a successor | Executive Order 14412 and OMB M-26-15, as cited in NIST IR 8547 |
 | 31 Dec 2030 and 31 Dec 2031 | US federal high value assets, high impact systems and other prioritised systems use post-quantum key establishment (2030) and post-quantum signatures (2031) | Executive Order 14412 and OMB M-26-15, as cited in NIST IR 8547 |
+| End of 2030 | EU: high-risk use cases migrated, and quantum-safe software and firmware upgrades on by default. Australia: ASD advises ceasing use of traditional asymmetric cryptography | EU roadmap; ASD Information Security Manual and post-quantum planning guidance |
 | After 2030 | NIST deprecates all quantum-vulnerable public-key algorithms (RSA, ECDSA, EdDSA, DH, ECDH) at every key size, and disallows 112-bit symmetric algorithms | NIST IR 8547 |
 | By 2031 | Highest-priority migrations done; plan refined to finish by 2035 | UK NCSC |
-| After 2035 | NIST disallows quantum-vulnerable public-key algorithms; migration complete | NIST IR 8547; UK NCSC |
+| After 2035 | NIST disallows quantum-vulnerable public-key algorithms; migration complete; EU medium-risk use cases migrated | NIST IR 8547; UK NCSC; EU roadmap |
 
-If you are not a US federal body, the federal dates still shape what your suppliers build. Check the current version of NIST IR 8547 (final, October 2026) and your national authority's guidance.
+If you are not a US federal body, the federal dates still shape what your suppliers build. Suppliers to US national security systems follow NSA CNSA 2.0, which sets earlier dates, starting with software and firmware signing. In the EU and Australia, the end of 2030 is the date that matters for high-risk systems. Check the current version of NIST IR 8547 (final, October 2026) and your national authority's guidance.
 
 ## Practice
 
 ### Foundation
 
-1. **Inventory.** List where you use public-key cryptography: TLS endpoints, SSH, VPNs, code and artifact signing, certificates and certificate authorities, tokens (JWT signing), encrypted backups, hardware security modules, and third-party services that do it for you. Use the [crypto inventory template](../../templates/docs/crypto-inventory.csv). For each, record the algorithm, key size, owner, and how long the protected data must stay secret.
+1. **Inventory.** List where you use public-key cryptography: TLS endpoints, SSH, VPNs, code and artifact signing, certificates and certificate authorities, tokens (JWT signing), encrypted backups, hardware security modules, and third-party services that do it for you. Use the [crypto inventory template](../../templates/docs/crypto-inventory.csv). For each, record the algorithm, key size, owner, how long the protected data must stay secret, and, for signatures, how long they must stay trusted (firmware roots of trust, code signing for long-lived devices, signed documents).
 2. **Find the long-lived secrets.** Rank systems by confidentiality lifetime. Health records, state secrets, long-term contracts, identity data and anything kept 10+ years go first.
 3. **Stay current.** Keep TLS libraries, operating systems and language runtimes updated. Most of the migration arrives through these updates.
 4. **Ask suppliers** the questions below at renewal.
@@ -102,3 +104,6 @@ The [vendor risk questionnaire](../../templates/docs/vendor-risk-questionnaire.m
 - UK NCSC, *Timelines for migration to post-quantum cryptography*: https://www.ncsc.gov.uk/guidance/pqc-migration-timelines
 - CISA, *Quantum-Readiness: Migration to Post-Quantum Cryptography*: https://www.cisa.gov/resources-tools/resources/quantum-readiness-migration-post-quantum-cryptography
 - CycloneDX, Cryptography Bill of Materials: https://cyclonedx.org/capabilities/cbom/
+- NIS Cooperation Group, *A Coordinated Implementation Roadmap for the Transition to Post-Quantum Cryptography* (June 2025): https://digital-strategy.ec.europa.eu/en/library/coordinated-implementation-roadmap-transition-post-quantum-cryptography
+- Australian Signals Directorate, *Planning for post-quantum cryptography*: https://www.cyber.gov.au/business-government/secure-design/planning-for-post-quantum-cryptography
+- NSA, Commercial National Security Algorithm Suite 2.0 (CNSA 2.0): https://media.defense.gov/2022/Sep/07/2003071834/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS_.PDF

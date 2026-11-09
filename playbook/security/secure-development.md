@@ -8,14 +8,14 @@ Starting points. Tune them to your risk.
 
 - 100% of repositories run secret scanning, dependency scanning and static analysis (SAST) in CI on every pull request.
 - New services and significant design changes have a threat model before the first production release.
-- Critical and high findings from CI block the merge. A merge-blocking exception expires within 30 days; a known vulnerability that cannot be fixed in time follows the exception rule in [vulnerability management](vulnerability-management.md) (90 days at most).
+- Findings that meet the blocking rules in the pipeline checks table below block the merge. A merge-blocking exception expires within 30 days; a known vulnerability that cannot be fixed in time follows the exception rule in [vulnerability management](vulnerability-management.md) (90 days at most).
 - Every team has a named security champion who spends about 10% of their time on security work.
 - Every engineer completes secure coding training once a year, matched to the languages they use.
 - Vulnerability fix times meet the SLAs in [vulnerability management](vulnerability-management.md) for at least 90% of findings.
 
 ## The SSDF in one table
 
-NIST SP 800-218 (SSDF version 1.1, February 2022) is the published version. A draft version 1.2 (SP 800-218r1 initial public draft, December 2025) adds practices, including PO.6. The table shows where each group lives in this playbook.
+NIST SP 800-218 (SSDF version 1.1, February 2022) is the published version. A draft version 1.2 (SP 800-218r1 initial public draft, December 2025) adds practices, including PO.6. For teams that train or fine-tune models, NIST SP 800-218A (July 2024) adds AI-specific tasks to each SSDF practice. The table shows where each group lives in this playbook.
 
 | SSDF group | What it asks | Where in this playbook |
 |---|---|---|
@@ -94,6 +94,7 @@ Everything in Standard, plus:
 
 - NIST SP 800-218, *Secure Software Development Framework (SSDF) Version 1.1*: https://csrc.nist.gov/pubs/sp/800/218/final
 - NIST SSDF project page (including the version 1.2 draft): https://csrc.nist.gov/projects/ssdf
+- NIST SP 800-218A, *Secure Software Development Practices for Generative AI and Dual-Use Foundation Models*: https://csrc.nist.gov/pubs/sp/800/218/a/final
 - CISA, Secure Software Development Attestation Form: https://www.cisa.gov/secure-software-attestation-form
 - OWASP Application Security Verification Standard: https://owasp.org/www-project-application-security-verification-standard/
 - OWASP SAMM: https://owaspsamm.org/
