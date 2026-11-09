@@ -45,12 +45,14 @@ LEVEL_LABEL = {
 }
 PROFILE_TARGET = {
     "solo": "foundation",
+    "sme": "foundation",
     "startup": "foundation",
     "scale-up": "standard",
     "enterprise": "standard",
 }
 PROFILE_LABEL = {
     "solo": "Solo",
+    "sme": "SME",
     "startup": "Startup",
     "scale-up": "Scale-up",
     "enterprise": "Enterprise",

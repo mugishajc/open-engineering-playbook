@@ -113,6 +113,10 @@ class TargetLevel(unittest.TestCase):
             self.assertEqual(ka.target_level(profile, ["regulated"]), "assured")
             self.assertEqual(ka.target_level(profile, ["public-sector", "regulated"]), "assured")
 
+    def test_sme_profile_targets_foundation(self):
+        self.assertEqual(ka.target_level("sme", []), "foundation")
+        self.assertEqual(ka.target_level("sme", ["regulated"]), "assured")
+
     def test_unknown_profile(self):
         with self.assertRaises(ka.AssessError):
             ka.target_level("huge")

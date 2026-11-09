@@ -39,7 +39,7 @@ Exit codes: 0 for a report, 1 when `--check` finds an area below target, 2 for i
 ## The answers file
 
 ```toml
-profile = "startup"          # solo, startup, scale-up or enterprise
+profile = "startup"          # solo, sme, startup, scale-up or enterprise
 overlays = []                # add "public-sector" and/or "regulated" when they apply
 
 [answers]
