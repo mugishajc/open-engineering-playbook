@@ -1,0 +1,12 @@
+capability,level,parent,owner,business_criticality,current_maturity,target_maturity,systems,notes
+Customer management,1,,Chief Operating Officer,high,3,4,"CRM (SaaS); customer portal","Example row. Level 1 capabilities describe what the organisation does, not which department does it."
+Manage customer accounts,2,Customer management,Head of Customer Operations,high,2,4,"CRM (SaaS); legacy account database","Two systems hold account data; consolidation candidate. Maturity 1 to 5."
+Handle customer requests,2,Customer management,Head of Customer Operations,medium,3,3,"Service desk tool; email","Meets need today; no investment planned."
+Finance,1,,Chief Financial Officer,high,3,4,"ERP","Example row."
+Collect payments,2,Finance,Head of Finance Operations,high,2,4,"Payment gateway; ERP; spreadsheet reconciliation","High criticality with low maturity: invest. Manual reconciliation each month."
+Report to regulators,2,Finance,Head of Compliance,high,2,4,"ERP; reporting scripts","Manual steps before each submission; see the risk register."
+People,1,,Chief People Officer,medium,3,3,"HR system (SaaS)","Example row."
+Pay staff,2,People,Head of Payroll,high,4,4,"Payroll system (SaaS)","Stable; tolerate."
+Service delivery,1,,Chief Technology Officer,high,3,4,"Core platform; data warehouse","Example row."
+Provide online services,2,Service delivery,Head of Engineering,high,3,4,"Core platform; identity provider; content management system","Three content management systems in use; consolidation candidate."
+Analyse operational data,2,Service delivery,Head of Data,medium,2,3,"Data warehouse; spreadsheets","Ownership of data definitions unclear; see data governance."

@@ -1,0 +1,9 @@
+application,owner,business_value_1to5,technical_fit_1to5,annual_run_cost,users,time_decision,rationale,target_quarter
+EXAMPLE Customer Portal,Head of Customer Operations,5,4,120000,25000,invest,"Main channel for customers; modern stack, tested and on the golden path. Fund improvements.",
+EXAMPLE Legacy Billing,Head of Finance Operations,5,1,310000,40,migrate,"Business critical but runs on an unsupported platform with one engineer who knows it. Move function to the ERP billing module.",2027-Q2
+EXAMPLE Intranet Wiki,Head of Internal Communications,2,4,8000,600,tolerate,"Works and costs little; low value. Keep at minimum cost, no new features.",
+EXAMPLE Expense Spreadsheet Tool,Head of Finance Operations,1,1,15000,80,eliminate,"Duplicates the ERP expenses module. Retire after records retention check and data export.",2026-Q4
+EXAMPLE Field Inspection App,Head of Field Operations,4,2,95000,350,migrate,"Needed by inspectors but built on a framework with no security updates. Rebuild on the standard mobile platform.",2027-Q3
+EXAMPLE Data Warehouse,Head of Data,4,4,180000,150,invest,"Basis for reporting and planned analytics. Fund data quality and access controls.",
+EXAMPLE Old Document Archive,Head of Records,2,2,40000,20,eliminate,"Read-only archive. Move records to the current records system under the retention schedule, then switch off.",2027-Q1
+EXAMPLE Team Chat Bridge,Head of IT Operations,2,1,12000,300,eliminate,"Replaced by the standard collaboration suite; still running for a few teams. Remove after migration of channels.",2026-Q4
