@@ -6,8 +6,18 @@
 # Replace every value in angle brackets. Tune resources, replicas and
 # autoscaling from measurement after 2 weeks in production.
 #
-# The namespace should enforce the Pod Security Standards "restricted" profile:
-#   kubectl label namespace orders pod-security.kubernetes.io/enforce=restricted
+# The platform team creates the namespace (the Argo CD project template does not
+# allow teams to create cluster-scoped objects). It must enforce the Pod Security
+# Standards "restricted" profile, for example:
+#   apiVersion: v1
+#   kind: Namespace
+#   metadata:
+#     name: orders
+#     labels:
+#       pod-security.kubernetes.io/enforce: restricted
+#       pod-security.kubernetes.io/enforce-version: latest
+#       pod-security.kubernetes.io/warn: restricted
+#       pod-security.kubernetes.io/audit: restricted
 #
 # Air-gapped: the image must come from the internal registry.
 apiVersion: v1
@@ -70,6 +80,8 @@ spec:
             matchLabels:
               app.kubernetes.io/name: orders-service
       terminationGracePeriodSeconds: 30
+      # Do not inject environment variables for every Service in the namespace.
+      enableServiceLinks: false
       containers:
         - name: app
           # Pin by digest so the running image is exactly the one that was signed.
@@ -118,6 +130,13 @@ spec:
               port: http
             periodSeconds: 20
             failureThreshold: 3
+          # Optional on Kubernetes 1.30 or later: wait a few seconds before
+          # SIGTERM so load balancers stop sending traffic first. Older clusters
+          # need an exec sleep in the image instead.
+          # lifecycle:
+          #   preStop:
+          #     sleep:
+          #       seconds: 5
           volumeMounts:
             # Writable scratch space, since the root filesystem is read-only.
             - name: tmp
@@ -228,6 +247,8 @@ spec:
   policyTypes:
     - Egress
   egress:
+    # DNS. Labels differ on some distributions (OpenShift, NodeLocal DNSCache);
+    # check yours with: kubectl -n kube-system get pods --show-labels
     - to:
         - namespaceSelector:
             matchLabels:
@@ -244,6 +265,10 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: observability
+          # The label the OpenTelemetry Collector Helm chart sets. Check yours.
+          podSelector:
+            matchLabels:
+              app.kubernetes.io/name: opentelemetry-collector
       ports:
         - protocol: TCP
           port: 4318

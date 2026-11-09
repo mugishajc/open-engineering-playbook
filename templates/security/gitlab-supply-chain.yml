@@ -24,7 +24,10 @@
 #      COSIGN_PASSWORD     masked and protected, the key's password
 #      COSIGN_PUBLIC_KEY   type File, holding cosign.pub (verification only)
 #    Protected variables are only given to protected branches and tags, so only
-#    those pipelines can sign.
+#    those pipelines can sign. Also set the environment scope of
+#    COSIGN_PRIVATE_KEY and COSIGN_PASSWORD to "signing", and make "signing" a
+#    protected environment: then only the sign job below receives them, not
+#    every job in a protected pipeline.
 #
 # 3. Your build job must export the pushed image's digest as a dotenv artifact:
 #      build-image:
@@ -106,12 +109,25 @@ variables:
 
 .supply-chain-sign:
   extends: .supply-chain-base
+  # Environment-scoped variables reach only this job. "prepare" records no deployment.
+  environment:
+    name: signing
+    action: prepare
   script:
     - |
-      if [ -z "${COSIGN_PRIVATE_KEY:-}" ] || [ -z "${COSIGN_PASSWORD:-}" ]; then
-        echo "COSIGN_PRIVATE_KEY and COSIGN_PASSWORD must be set (protected variables)." >&2
+      if [ -z "${COSIGN_PRIVATE_KEY:-}" ]; then
+        echo "COSIGN_PRIVATE_KEY must be set (protected, scoped to the signing environment)." >&2
         exit 1
       fi
+      case "$COSIGN_PRIVATE_KEY" in
+        *://*) : ;;  # KMS or HSM reference: no password needed
+        *)
+          if [ -z "${COSIGN_PASSWORD:-}" ]; then
+            echo "COSIGN_PASSWORD must be set for a file key." >&2
+            exit 1
+          fi
+          ;;
+      esac
     - |
       if [ -n "${COSIGN_SIGNING_CONFIG:-}" ]; then
         sc="$COSIGN_SIGNING_CONFIG"
