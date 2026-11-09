@@ -11,16 +11,18 @@ jobs:
   plain-language:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: { python-version: "3.12" }
       - run: python3 tools/plain_lint.py
+      - name: page layout follows STYLE.md
+        run: python3 tools/check_structure.py
 
   tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: { python-version: "3.12" }
       - name: assessment tool
         run: python3 -m unittest discover -s assessment/tests -v
@@ -36,7 +38,7 @@ jobs:
   links:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: check relative links between pages
         uses: lycheeverse/lychee-action@v2
         with:
@@ -46,8 +48,8 @@ jobs:
   templates:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: { python-version: "3.12" }
       - name: YAML and JSON parse
         run: |
@@ -74,8 +76,32 @@ jobs:
           ./actionlint -color .github/workflows/*.yml templates/github/workflows/*.yml templates/security/workflows/*.yml
       - name: shellcheck
         run: shellcheck tools/*.sh
-      - name: init script copies templates into an empty repo
+      - name: adopt script copies templates into empty repositories
         run: |
           tmp=$(mktemp -d)
           tools/adopt.sh --target "$tmp" --platform github --with-security
           test -f "$tmp/.github/PULL_REQUEST_TEMPLATE.md"
+          test -f "$tmp/.github/dependabot.yml"
+          solo=$(mktemp -d)
+          tools/adopt.sh --target "$solo" --platform github --solo --updates renovate
+          test -f "$solo/docs/repository-rules/default-branch-solo.json"
+          test -f "$solo/renovate.json"
+          test ! -e "$solo/.github/dependabot.yml"
+          lab=$(mktemp -d)
+          tools/adopt.sh --target "$lab" --platform gitlab --with-security
+          test -f "$lab/.gitlab-ci.yml"
+      - name: Kubernetes templates are valid
+        run: |
+          curl -sSLf https://github.com/yannh/kubeconform/releases/download/v0.8.0/kubeconform-linux-amd64.tar.gz | tar -xz kubeconform
+          ./kubeconform -strict -summary -ignore-missing-schemas templates/platform/*.yaml
+      - name: no Deployment fixes replicas while an autoscaler manages it
+        run: |
+          python3 - <<'PY2'
+          import pathlib, sys, yaml
+          docs = [d for f in pathlib.Path("templates/platform").glob("*.yaml") for d in yaml.safe_load_all(f.read_text()) if d]
+          targets = {(d["spec"]["scaleTargetRef"]["kind"], d["spec"]["scaleTargetRef"]["name"]) for d in docs if d.get("kind") == "HorizontalPodAutoscaler"}
+          bad = [d["metadata"]["name"] for d in docs if (d.get("kind"), d.get("metadata", {}).get("name")) in targets and "replicas" in d.get("spec", {})]
+          if bad:
+              sys.exit(f"spec.replicas set on autoscaled workloads: {bad}. Remove it; the HPA owns the replica count.")
+          print(f"{len(targets)} autoscaled workload(s) checked")
+          PY2
