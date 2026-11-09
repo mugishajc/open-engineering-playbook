@@ -28,9 +28,9 @@ Status: on target, watch, outside appetite.
 |---|---|---|---|---|---|---|---|
 | Programmes | Forecast cost to complete against approved budget | | | | | | |
 | Programmes | Forecast date range (85% confidence) against plan | | | | | | |
-| Reliability | SLO attainment, tier 1 services | | | | | | |
+| Reliability | Tier 1 services that met their SLO | | | | | | |
 | Reliability | Major incidents (SEV1) | | | | | | |
-| Security | Critical vulnerabilities on internet-facing systems past deadline | | | | | | |
+| Security | Actively exploited (CISA KEV) or critical vulnerabilities on internet-facing systems past their fix deadline | | | | | | |
 | Resilience | Tier 1 services with a full restore exercise in the last quarter, within RTO | | | | | | |
 | Cost | Run cost against budget | | | | | | |
 | People | Critical roles with no successor or open over 90 days | | | | | | |
@@ -61,15 +61,30 @@ No more than five, in business terms.
 |---|---|---|---|---|---|
 | | | | | | |
 
-## 6. Decision requested
+## 6. Escalations since the last meeting
+
+Events that crossed a threshold agreed with the chair (see leaders/board-and-executive-reporting.md, "What reaches the board, and how fast"). Write "none" if none.
+
+| Date | Event | Threshold crossed | Who was told, and when | Status |
+|---|---|---|---|---|
+| | | | | |
+
+## 7. Decision requested
+
+If a field is empty, the paper is not ready for decision.
 
 | Field | Value |
 |---|---|
-| Decision | [what the board is asked to approve or accept] |
+| Decision | [what the board is asked to approve, continue, rescope, stop or accept, in one sentence] |
 | Options considered | [at least two, including do nothing] |
 | Recommendation and reason | |
-| Cost and funding | |
-| Risk if not approved | |
+| Amount asked for now | [next stage only; the full estimate as a range at 50% and 85% confidence] |
+| Low case | [does it still pay back with benefits halved and one-time cost up 50%?] |
+| Running cost per year after launch | |
+| Stop conditions | [measure, threshold and date for the next gate] |
+| Benefit owner | [one named business executive] |
+| Risk if not approved, and cost of waiting | |
+| Decision needed by | [date, and why] |
 
 ## Appendix (optional)
 

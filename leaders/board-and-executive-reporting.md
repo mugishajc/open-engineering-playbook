@@ -22,7 +22,7 @@ This page is for the CTO, CIO and chief architect who report to a board, an exec
 | To know the organisation can keep running | Resilience tests done, results, and gaps | Assurances without evidence |
 | To make decisions | A clear ask, options and your recommendation | Information with no ask |
 
-In the UK, the Cyber Governance Code of Practice (DSIT and NCSC, April 2025) sets out the actions boards and directors should take on cyber risk, in five areas: risk management, strategy, people, incident planning and response, and assurance and oversight. The NCSC Board Toolkit supports it with questions boards should ask. Read both before your first report, so you answer the questions your board will be told to ask. Outside the UK, use them as a checklist even where they are not expected.
+In the UK, the Cyber Governance Code of Practice (DSIT and NCSC, April 2025) sets out the actions boards and directors should take on cyber risk, in five principles: risk management; strategy; people; incident planning, response and recovery; and assurance and oversight. The NCSC Board Toolkit supports it with questions boards should ask. Read both before your first report, so you answer the questions your board will be told to ask. Outside the UK, use them as a checklist even where they are not expected.
 
 ## The one-page scorecard
 
@@ -35,7 +35,6 @@ Show each measure with the last 4 quarters, the threshold from the risk appetite
 | Reliability | Tier 1 services that met their SLO for the quarter | 100%, with a recovery plan for any miss |
 | Reliability | Major incidents (SEV1) | No more than 2 per quarter |
 | Security | Actively exploited (CISA KEV) or critical vulnerabilities on internet-facing systems past their fix deadline | Zero: exploited ones fixed within 72 hours, other critical ones within 7 days |
-| Security | Privileged accounts protected by phishing-resistant MFA (security keys or passkeys) | 100% |
 | Resilience | Tier 1 services with a full restore exercise in the last quarter, within the recovery time objective | 100% (see [backup and recovery](../playbook/reliability/backup-and-recovery.md)) |
 | Cost | Run cost against budget | Within 5% of budget |
 | People | Critical roles with no successor, or open for more than 90 days | Zero without a plan |
@@ -74,6 +73,32 @@ A risk appetite statement tells the organisation how much of a given risk the bo
 | "We use AI responsibly." | "No AI system makes a decision with legal or similar effect on a person without human review." |
 
 Write 5 to 10 statements, have the board approve them, review them every year, and show each one as a scorecard threshold.
+
+## What reaches the board, and how fast
+
+Agree these thresholds with the chair and the audit committee chair in writing, before you need them. The numbers are starting points; tie each one to a scorecard threshold.
+
+| Event | Who is told | By when |
+|---|---|---|
+| A cyber incident or outage that may be material, reportable to a regulator, or front-page news | CEO, then the chair and audit committee chair | CEO within 24 hours; the chairs the same day the CEO decides it may be material |
+| A major programme forecast moves outside tolerance (cost more than 10% over the approved budget, or the 85% date past the plan) | Sponsor and CEO; the board as a decision paper | Within 24 hours to the CEO; the board at its next meeting, or sooner if money must be released |
+| A risk moves outside appetite with no approved treatment | Risk owner and the executive committee; the board on the scorecard | Next executive meeting; next board meeting |
+| A regulator, auditor or supervisor raises a finding rated high | Audit committee chair | Within 5 working days |
+| A request to accept a risk outside appetite | The body that set the appetite | Before the risk is taken, never after |
+
+## What the board decides
+
+The board does not approve releases or designs. It keeps the decisions below and delegates the rest with written limits.
+
+| The board keeps | With these inputs | Delegates to the executive |
+|---|---|---|
+| Risk appetite for technology, cyber, supplier and AI risk | 5 to 10 measurable statements, reviewed yearly | Controls that keep risk inside appetite |
+| Approval of major programmes, one stage at a time | A business case with a low case, kill criteria and the next stage's cost only | Spending inside an approved stage |
+| Continuing, rescoping or stopping a major programme at a gate | The forecast to finish at 85% confidence and the value still to come; money already spent is not an input | Day-to-day re-planning inside tolerance |
+| Acceptance of a risk outside appetite | The options, the cost of reducing it, a named owner and an expiry date | Risks inside appetite |
+| Appointing, setting objectives for and reviewing the technology leader | The ten [questions](../templates/leaders/questions-for-your-technology-leader.md) and 4 quarters of trends | Building the team below |
+
+A decision paper to the board states the ask in one sentence, at least two options including "do nothing", the recommendation, the cost of the next stage only, the stop conditions, the risk if not approved, and the date by which a decision is needed. If any of these is missing, send it back.
 
 ## How to report bad news
 
@@ -116,6 +141,8 @@ Prepare written answers with evidence for each.
 | Only green | A report that is always green is not believed. Show the reds and the plan. |
 | Jargon | Test the page on a non-technical colleague before it goes out |
 | No ask | End with the decision or guidance you need, or say "for information only" |
+| Whole programme approved in one vote | Ask for the next stage only, with kill criteria agreed now |
+| The board hears of a material incident from the press | Agree the escalation thresholds with the chair in advance |
 | Different numbers from the finance or risk reports | Agree sources with finance and risk before the meeting |
 
 ## Templates

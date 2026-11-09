@@ -47,6 +47,19 @@ Fund AI like any uncertain investment: small bets with stop points, then shared 
 
 Most pilot failures are decided before the pilot starts: no baseline, no eval set, no owner for production. Refuse to fund a pilot without all three.
 
+### Before you approve an AI use case
+
+1. Is it in the AI register with a risk tier from [AI governance](../playbook/ai/ai-governance.md#risk-tiers)?
+2. Is a business owner accountable for the outcome, not only a technical owner for the system?
+3. Is there a baseline for the outcome, and a non-AI option it was compared with?
+4. Is the data lawful to use for this purpose, and allowed to go where the model runs?
+5. Is there an eval set with a pass threshold agreed by the owner, and a stop condition with a date?
+6. Can it act on production systems, customer data or money? If so, it is at least Medium tier, irreversible actions need a person's approval, and there is an off switch someone has tested.
+7. Does it make or shape a decision about a person? If so, who reviews it, and how can the person challenge it?
+8. What does it cost per outcome at expected volume, and who pays when volume grows?
+
+Escalate to the executive committee, and report to the board, any High-tier use, any use that makes or shapes decisions with legal or similar effect on people, and any agent that can move money or change customer records without a person's approval. Low-risk uses get a decision within 5 working days and high-risk ones within 30, as set in [AI governance](../playbook/ai/ai-governance.md).
+
 ## Workforce and skills
 
 AI changes what engineers spend their time on. It does not remove the need for people who understand the system.
@@ -72,7 +85,7 @@ See [skills gap](../playbook/people/skills-gap.md), [career framework](../playbo
 | Measure | Healthy sign | Warning sign |
 |---|---|---|
 | Change lead time and deployment frequency | Improve, while instability holds steady | Improve while change fail rate rises |
-| Change fail rate and rework rate | Stable or falling against baseline | Rising for 2 quarters in a row |
+| Change fail rate and rework rate | Within 10% of baseline | More than 10% above baseline for 2 quarters in a row (the decision rule in [metrics](../playbook/measurement/metrics.md)): pause wider rollout |
 | Review time and pull request size | Stable | Queues growing, pull requests getting larger |
 | Cost per outcome | Falling or stable as volume grows | Total spend rising with no outcome attached |
 | User outcome measure | Moving in the direction the business case promised | Unchanged after two quarters |
@@ -120,16 +133,18 @@ Governance works when the safe path is also the fast path. Keep one register of 
 
 ## Questions boards should ask
 
-1. Which business outcomes is AI meant to move, and what were they before we started?
-2. What is our risk appetite for AI, and which uses have we refused?
-3. Where does our data go when staff or products use AI, and who approved it?
-4. Has our change fail rate or rework rate risen since teams adopted code assistants?
-5. Which pilots did we stop this year, and why?
-6. What does AI cost us per outcome, and is that falling?
-7. Which AI systems make or shape decisions about customers, citizens or staff, and where is the human review?
-8. Are we still hiring and growing junior engineers?
-9. Could we switch model provider within a quarter if we had to?
-10. Do the EU AI Act or other rules apply to us, and by when? (Check EUR-Lex for current dates.)
+| # | Question | A worrying answer |
+|---|---|---|
+| 1 | Which business outcomes is AI meant to move, and what were they before we started? | Usage counts, licences bought or "productivity" with no baseline |
+| 2 | What is our risk appetite for AI, and which uses have we refused? | No use has ever been refused |
+| 3 | Where does our data go when staff or products use AI, and who approved it? | "The vendor says it is secure"; no table of data class against location |
+| 4 | Has our change fail rate or rework rate risen since teams adopted code assistants? | Not measured, or only speed is reported |
+| 5 | Which pilots did we stop this year, and why? | None stopped, or pilots still running after 90 days with no gate |
+| 6 | What does AI cost us per outcome, and is that falling? | Only total spend, or no owner for the spend |
+| 7 | Which AI systems make or shape decisions about customers, citizens or staff, and where is the human review? | No list, or "a person can override it" with no record of overrides |
+| 8 | Are we still hiring and growing junior engineers? | Junior hiring frozen on the promise of AI |
+| 9 | Could we switch model provider within a quarter if we had to? | No exit plan, or prompts and evals tied to one provider's tools |
+| 10 | Do the EU AI Act or other rules apply to us, and by when? | "Legal is looking at it" with no date (check EUR-Lex for current dates) |
 
 See [board and executive reporting](board-and-executive-reporting.md) for how to report the answers.
 

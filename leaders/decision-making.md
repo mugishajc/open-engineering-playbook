@@ -60,6 +60,58 @@ Write a decision record for every one-way door and every medium or heavy decisio
 - **Disagree and commit.** Andy Grove's High Output Management describes a process of free discussion, a clear decision, then full support from everyone, including those who argued against it. Bezos's 2016 shareholder letter uses the phrase "disagree and commit". Dissent goes on the record in the decision record; after that, people support the decision in their work.
 - **Reopen only with new evidence.** A decision is reopened when its review date arrives or when a fact listed in the record changes, not because someone lost the argument.
 
+## Investment decisions under uncertainty
+
+Fund large technology investments so that a wrong start costs one stage, not the whole budget. Flyvbjerg and Budzier found that IT project cost overruns have a fat tail: a small share overrun by very large amounts. Fund in a way that caps the loss from that tail.
+
+| Rule | Starting point |
+|---|---|
+| Fund one stage at a time | Approve the whole case, release money only for the next stage. Each stage ends with something real: tested evidence, a working release, a reconciled migration rehearsal. See [stage gates](../playbook/project-management/risks-raid-and-stage-gates.md#stage-gates-that-can-stop-work). |
+| Write kill criteria before the money moves | Each stage has stop conditions as a measure, a threshold and a date, in the charter. A stop condition met means stop, unless the sponsor records why not. |
+| Decide on what is left, not what is spent | At every gate ask: knowing what we know now, would we start this today? Compare remaining cost with remaining value only. See [how to stop work](../playbook/strategy/portfolio-and-capacity.md#how-to-stop-work). |
+| Commit to the low case | The business case still pays back with benefits halved and one-time cost up 50%, as in the [business case](../playbook/strategy/business-case.md#putting-it-together) method. If it does not, cut scope or phase it. |
+| Check against a reference class | Compare the cost and duration with what similar programmes actually took, not with the plan. |
+| Separate who asks from who checks | For a heavy decision, one reviewer who does not report to the sponsor sees the evidence before the gate. |
+| Count the cost of waiting | A deferred decision is a decision to keep paying run cost and risk. Put that cost in the paper. |
+
+Sunk cost shows up as language: "we are 80% done", "we cannot waste two years", "one more quarter". When you hear it, ask for the forecast to finish at 85% confidence and the value still to come.
+
+## Speed and control
+
+Speed and control conflict most when a team wants to ship and a control owner wants to check. Settle it by rule, not by who argues harder.
+
+| Situation | Who wins by default | Rule |
+|---|---|---|
+| Two-way door, contained blast radius | Speed | The team decides. Controls are automated in the pipeline, not a meeting. |
+| Legal effect on a person, money movement, personal data, safety | Control | The control owner must agree. Make the check fast, not optional. |
+| A control blocks delivery repeatedly | Neither | Escalate the control itself: automate it, tier it by risk, or retire it. See [change management](../playbook/reliability/change-management.md). |
+| A team asks to skip a control once | Control owner decides | A written exception with a named risk owner and an expiry of no more than 12 months, as in [decision rights](../playbook/operating-model/decision-rights.md#raci-for-common-engineering-decisions). |
+
+Two signs the balance is wrong: exceptions that are renewed without review, and controls nobody can link to a risk they reduce.
+
+## What you never delegate
+
+You can delegate the analysis and the work. Keep these decisions yourself, and write them down.
+
+- **Risk acceptance outside appetite.** The person who accepts the risk is named and can be asked about it later.
+- **Stopping or rescoping a major programme.** The sponsor decides; a steering group advises.
+- **Decisions with legal or similar effect on people,** including where AI makes or shapes them. See [leading in the AI era](leading-in-the-ai-era.md#the-five-decisions-only-leaders-can-make).
+- **Commitments to regulators, ministers or the market.**
+- **The escalation thresholds themselves:** what must reach you, and how fast. See the [escalation path](../playbook/operating-model/decision-rights.md#escalation-path).
+
+## Before you approve a heavy decision
+
+Use this list for any one-way door with a large blast radius. A missing answer is a reason to send the paper back, with a date.
+
+1. Is one accountable owner named, with the authority to decide under [decision rights](../playbook/operating-model/decision-rights.md)?
+2. Are at least 3 options compared, including "do nothing" and a smaller first step?
+3. Has a pre-mortem been held, and did it change the plan?
+4. Is only the next stage funded, with kill criteria as a measure, a threshold and a date?
+5. Does the low case still pay back? Is the running cost after launch included?
+6. Is the exit stated: how to reverse, leave the supplier, or switch off, and what it costs?
+7. Is the risk inside appetite, or is the acceptance written and signed by the right person?
+8. Is the review date set, and who will check the benefit at 6 and 12 months?
+
 ## Decision quality is not outcome quality
 
 A good decision can have a bad outcome, and a bad decision can get lucky. Daniel Kahneman's Thinking, Fast and Slow describes outcome bias and hindsight bias: people judge decisions by results they could not have known. Judge a decision by what was knowable at the time.
@@ -101,19 +153,24 @@ All from Kahneman's Thinking, Fast and Slow. Each has a cheap counter.
 | Consensus required | Consult widely, then the owner decides. Consensus is a bonus, not a gate. |
 | Decisions reopened by whoever was absent | Reopen only at the review date or with new evidence |
 | Pre-mortem held after the decision is announced | Hold it before, while the plan can still change |
+| Whole programme funded in one approval | Fund the next stage only, with kill criteria written first |
+| Risk accepted by whoever was in the room | The named owner at the level the appetite sets signs it, with an expiry date |
 
 ## Templates
 
 - [Pre-mortem](../templates/leaders/pre-mortem.md)
 - [Architecture decision record](../templates/docs/adr.md)
 - [RACI](../templates/strategy/raci.csv)
+- [Stage gate checklist](../templates/project/stage-gate-checklist.md)
+- [Business case](../templates/strategy/business-case.md)
 
 ## Sources
 
 - Jeff Bezos, 2015 Letter to Shareholders, Amazon.com, Inc. (filed with the SEC in April 2016): https://www.sec.gov/Archives/edgar/data/1018724/000119312516530910/d168744dex991.htm
-- Jeff Bezos, 2016 Letter to Shareholders, Amazon.com, Inc.
+- Jeff Bezos, 2016 Letter to Shareholders, Amazon.com, Inc. (filed with the SEC in April 2017): https://www.sec.gov/Archives/edgar/data/1018724/000119312517120198/d373368dex991.htm
 - David J. Snowden and Mary E. Boone, "A Leader's Framework for Decision Making", Harvard Business Review, November 2007: https://hbr.org/2007/11/a-leaders-framework-for-decision-making
 - Gary Klein, "Performing a Project Premortem", Harvard Business Review, September 2007: https://hbr.org/2007/09/performing-a-project-premortem
 - Daniel Kahneman, "Thinking, Fast and Slow", Farrar, Straus and Giroux, 2011.
 - Andy Grove, "High Output Management", Random House, 1983.
+- Bent Flyvbjerg and Alexander Budzier, "Why Your IT Project May Be Riskier Than You Think", Harvard Business Review, September 2011: https://papers.ssrn.com/abstract=2229735
 - Michael Nygard, "Documenting Architecture Decisions", 2011: https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions

@@ -11,7 +11,7 @@
 
 ## How to use the answers
 
-A good answer has a number, a trend over at least 4 quarters and a named owner. A worrying answer is vague, has no date, or blames one person or supplier. A worrying answer is a prompt to ask for a plan, not a verdict.
+A good answer has a number, a trend over at least 4 quarters and a named owner. A worrying answer is vague, has no date, or blames one person or supplier. A worrying answer is a prompt to ask for a plan, not a verdict. Two worrying answers on the same question in a row is a matter for the board, not only the meeting.
 
 ## The ten questions
 
@@ -41,7 +41,7 @@ A good answer has a number, a trend over at least 4 quarters and a named owner. 
 
 ### 5. When did we last restore our most important systems from backup, and how long did it take?
 
-- Good answer: for the most important systems, a restore in the last 3 months (monthly for Tier 1 services), with the measured time compared with the recovery target. See [backup and recovery](../../playbook/reliability/backup-and-recovery.md).
+- Good answer: for Tier 1 systems, an automated restore test every month and a full restore exercise in the last quarter, with the measured time compared with the restore recovery time objective. See [backup and recovery](../../playbook/reliability/backup-and-recovery.md).
 - Worrying answer: "the backups run every night" with no restore test.
 - Answer: [...]
 
@@ -89,3 +89,15 @@ A good answer has a number, a trend over at least 4 quarters and a named owner. 
 | 8 | [...] | [...] | [...] | [...] | [...] |
 | 9 | [...] | [...] | [...] | [...] | [...] |
 | 10 | [...] | [...] | [...] | [...] | [...] |
+
+## Decisions arising
+
+Close the meeting by recording what, if anything, must be decided. Starting thresholds are in leaders/for-business-executives.md (approve, fund, stop or escalate).
+
+| Decision type | What | Evidence seen | Decided by | By when |
+|---|---|---|---|---|
+| Approve or fund the next stage | [...] | [...] | [...] | [...] |
+| Rescope or stop | [...] | [...] | [...] | [...] |
+| Accept a risk outside appetite (with expiry date) | [...] | [...] | [...] | [...] |
+| Escalate to the board | [...] | [...] | [...] | [...] |
+| None | [say so] | | | |

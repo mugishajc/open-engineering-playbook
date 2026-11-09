@@ -41,7 +41,7 @@ All durations and frequencies are starting points. Tune them after one quarter.
 4. One message to unblock someone.
 
 **Weekly metrics review (45 minutes).**
-1. DORA metrics for tier 1 services: deployment frequency, change lead time, change fail rate, failed deployment recovery time, rework rate (10 minutes). See [metrics](../playbook/measurement/metrics.md).
+1. DORA metrics for Tier 1 services: deployment frequency, change lead time, change fail rate, failed deployment recovery time, rework rate (10 minutes). See [metrics](../playbook/measurement/metrics.md).
 2. SLOs: services that burned more than 25% of their monthly error budget this week (10 minutes). See [service levels](../playbook/reliability/service-levels.md).
 3. Incidents since last week and overdue postmortem actions (10 minutes).
 4. Cost: spend this week against forecast, any line more than 10% over (10 minutes). See [FinOps](../playbook/platform/finops.md).
@@ -50,9 +50,10 @@ All durations and frequencies are starting points. Tune them after one quarter.
 Look at trends over 4 to 12 weeks, not single points. Never rank teams against each other on these numbers. If suppliers run most of your systems, replace item 1 with supplier service level attainment, failed or rolled-back changes and open supplier incidents.
 
 **Leadership team meeting (60 minutes).**
-1. Decisions requested in writing at least 24 hours before (40 minutes). No paper, no slot.
-2. Risks or incidents that need cross-team action (10 minutes).
-3. What each person will tell their teams (10 minutes).
+1. Decisions requested in writing at least 24 hours before (35 minutes). No paper, no slot. Each paper names the owner, the options and the cost of waiting.
+2. Decisions past their deadline in the decision log (5 minutes). Decide now, or set a new date and say why.
+3. Risks or incidents that need cross-team action (10 minutes).
+4. What each person will tell their teams (10 minutes).
 
 **Monthly architecture review (90 minutes).**
 1. Fitness function and standards drift report (15 minutes).
@@ -63,12 +64,12 @@ Look at trends over 4 to 12 weeks, not single points. Never rank teams against e
 1. New and changed risks since last month (20 minutes).
 2. Risks outside appetite, with treatment status (20 minutes).
 3. Audit findings and supplier changes (10 minutes).
-4. What goes to the board this quarter (10 minutes).
+4. What goes to the board this quarter, checked against the agreed escalation thresholds (10 minutes). See [what reaches the board, and how fast](board-and-executive-reporting.md#what-reaches-the-board-and-how-fast).
 
 **Quarterly strategy and portfolio review (half day).**
 1. Is the diagnosis in the [technical strategy](../playbook/strategy/technical-strategy.md) still true? What evidence changed?
 2. Portfolio status and the run, grow and transform mix (see [portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md)).
-3. Stop decisions: name at least one piece of work to stop or shrink.
+3. Stop decisions: name at least one piece of work to stop or shrink. Check every initiative against its written stop conditions and ask "would we start this today?" Money already spent is not an input. See [investment decisions under uncertainty](decision-making.md#investment-decisions-under-uncertainty).
 4. Next quarter's objectives and capacity allocation.
 
 **Annual planning (4 to 8 weeks elapsed).** Start 3 to 4 months before the financial year. Week 1: refresh the [horizon scan](../playbook/strategy/horizon-scan.md) and the strategy diagnosis. Weeks 2 to 4: demand and capacity, run cost forecast, business cases for new bets. Weeks 5 to 6: negotiate the mix with finance and product. Final week: publish the plan with a forecast range, not a single date.
@@ -113,6 +114,8 @@ Andy Grove's High Output Management treats meetings as a tool with a cost, and o
 | The leader attends everything | Delegate forums where you only listen. Read the output. |
 | Strategy reviewed once a year | Review it every quarter; change it when the evidence changes. |
 | Board report written the night before | Generate it from the same data the weekly and monthly forums use. |
+| Bad news held for the next scheduled forum | Use the escalation thresholds agreed with the board; the calendar is a minimum, not a gate. |
+| Quarterly review that never stops anything | At least one stop or shrink decision each quarter, or a written reason why not. |
 | Rhythm abandoned during a crisis | Cancel optional forums during a crisis, but keep one-to-ones and the risk review. Restart the full rhythm within 2 weeks. |
 
 ## Templates

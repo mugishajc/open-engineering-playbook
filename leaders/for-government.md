@@ -91,7 +91,7 @@ A digital service that removes the paper or counter option before the digital on
 
 - Keep the roles that make decisions in the civil service: service owners, product managers, architects, security leads and enough senior engineers to review supplier work.
 - Pay competitively for scarce skills through a digital pay framework if your rules allow one. Otherwise, the skills leave.
-- Measure the share of critical systems where a civil servant can explain how it works and how to change it. Target 100% for tier 1 systems.
+- Measure the share of critical systems where a civil servant can explain how it works and how to change it. Target 100% for Tier 1 systems.
 - Use [hiring](../playbook/people/hiring.md), [career framework](../playbook/people/career-framework.md) and [skills gap](../playbook/people/skills-gap.md) for the practice.
 
 ## Assurance and spend controls
@@ -103,7 +103,22 @@ A digital service that removes the paper or counter option before the digital on
 | Independent assurance gates on large programmes | publishing the gate criteria in advance; each gate can stop or reshape the programme |
 | Audit office reviews | giving auditors read-only access to delivery evidence: [control mapping](../playbook/compliance/control-mapping.md) |
 
-Ask for the same 8 to 12 measures every quarter, as listed in [IT governance](../playbook/operating-model/it-governance.md). Use [board and executive reporting](board-and-executive-reporting.md) for the format.
+Ask for the same measures every quarter, no more than 12, as listed in [IT governance](../playbook/operating-model/it-governance.md). Use [board and executive reporting](board-and-executive-reporting.md) for the format.
+
+## Decisions senior officials keep
+
+In the UK, HM Treasury's Managing Public Money makes the accounting officer personally answerable to Parliament for four tests on spending: regularity, propriety, value for money and feasibility. If a minister asks for spending that fails one of them, the accounting officer can ask for a written ministerial direction, and the minister then answers for that spending. Many governments have an equivalent; find yours before a large programme starts.
+
+| Decision | Keep it with | Starting rule |
+|---|---|---|
+| Approve a major programme | The accounting officer or senior responsible owner | Approve the full case, fund only the next phase. Each phase ends with something in production and fits one budget year. |
+| Continue, rescope or stop at a gate | The senior responsible owner, advised by independent assurance | Decide on remaining cost and remaining value. Stop conditions are written in the business case as a measure, a threshold and a date. |
+| Proceed when a test may fail (feasibility or value for money) | The accounting officer | Write an assessment against the four tests. Where it fails, seek a direction rather than proceed quietly. |
+| Accept a risk outside appetite | The body that set the appetite, often the departmental board | Written, with an owner and an expiry date. HM Treasury's Orange Book sets out the principles. |
+| Let an algorithm or AI make or shape a decision about a citizen | The service owner, with legal and the DPO | Human review for decisions with legal or similar effect, a route to challenge, and a public record of the tool. UK central government departments must publish records under the Algorithmic Transparency Recording Standard. |
+| Sign a contract that would be hard to exit | The accounting officer, above the delegated limit | Exit terms and a tested data export before signature. |
+
+Public programmes are hard to stop because stopping is visible and money already spent is easy to quote back. Agree with the minister at approval which result would end the programme, so a stop is the plan working, not a political failure. In the UK, summaries of accounting officer assessments for projects in the Government Major Projects Portfolio are published on GOV.UK; reading a few shows what a complete assessment covers.
 
 ## Funding continuous services in budget years
 
@@ -116,7 +131,7 @@ Ask for the same 8 to 12 measures every quarter, as listed in [IT governance](..
 ## Cyber resilience of national systems
 
 - Keep an inventory of systems the state cannot function without, with owners, dependencies and recovery targets.
-- Test restores and failovers of tier 1 systems at least every 6 months. See [backup and recovery](../playbook/reliability/backup-and-recovery.md).
+- Test Tier 1 backups with an automated restore every month and a full restore exercise every quarter, and recover each Tier 1 service at another site at least once a year. See [backup and recovery](../playbook/reliability/backup-and-recovery.md).
 - Rehearse a national-level incident each year with the national cyber authority. See [crisis leadership](crisis-leadership.md).
 - Agree the ransomware position with legal and the national cyber authority before an attack, not during one. See the ransomware decisions in [crisis leadership](crisis-leadership.md).
 - Plan the move to post-quantum cryptography for data that must stay secret for 10 years or more. See [post-quantum readiness](../playbook/security/post-quantum-readiness.md).
@@ -143,6 +158,7 @@ Ask for the same 8 to 12 measures every quarter, as listed in [IT governance](..
 | Digital channel launched and counters closed the same day | Keep assisted channels until digital completion rates show they are no longer needed. |
 | Services built only in the official language for the newest phones | Test with users on low-cost devices, slow networks and in local languages. |
 | Assurance as a document review at the end | Gates with published criteria and the power to stop. |
+| A failing programme continued because of what it has already cost | Decide on remaining cost and value; agree the stop result with the minister at approval. |
 
 ## Templates
 
@@ -162,3 +178,7 @@ Ask for the same 8 to 12 measures every quarter, as listed in [IT governance](..
 - GovStack: https://www.govstack.global
 - W3C, Web Content Accessibility Guidelines (WCAG) 2.2: https://www.w3.org/TR/WCAG22/
 - UK NCSC, Board Toolkit: https://www.ncsc.gov.uk/collection/board-toolkit
+- HM Treasury, Managing Public Money: https://www.gov.uk/government/publications/managing-public-money
+- HM Treasury, accounting officer assessments: guidance: https://www.gov.uk/government/publications/accounting-officer-assessments
+- HM Treasury and Government Finance Function, The Orange Book, Management of Risk: Principles and Concepts: https://www.gov.uk/government/publications/orange-book
+- UK Algorithmic Transparency Recording Standard hub: https://www.gov.uk/government/collections/algorithmic-transparency-recording-standard-hub

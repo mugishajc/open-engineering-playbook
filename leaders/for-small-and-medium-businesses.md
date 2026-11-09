@@ -157,7 +157,7 @@ Review once a year with your IT person or provider. Keep it to one page.
 
 ## What you can skip
 
-If you do not write software, skip delivery, quality, architecture, platform, the engineering parts of people and measurement, and most of the AI pages. Come back to them when you employ developers or commission custom software. The [SME profile](../profiles/sme.md) lists what to skip and when to revisit it.
+If you do not write software, skip delivery, quality, architecture, platform, product, the engineering parts of people and measurement, and most of the AI pages. Come back to them when you employ developers or commission custom software. Keep one page: replacing a core system or changing IT provider is a project, so write a one-page plan with an owner, a date range, a way back and the point at which you would stop (see [projects and products](../playbook/project-management/projects-and-products.md#foundation)). The [SME profile](../profiles/sme.md) lists what to skip and when to revisit it.
 
 ## Common mistakes
 

@@ -38,7 +38,7 @@ Close every session with: "What should I not change?"
 
 ### What to measure in the first 30 days
 
-Run the [maturity self-assessment](../assessment/README.md) with 3 to 5 engineering leads, answering only what you can see evidence for. It gives you the level reached in each of the 14 practice areas and the gap to your profile's target. Alongside it, collect a baseline you can compare against at day 90 and day 365.
+Run the [maturity self-assessment](../assessment/README.md) with 3 to 5 engineering leads, answering only what you can see evidence for. It gives you the level reached in each of the 16 practice areas and the gap to your profile's target. Alongside it, collect a baseline you can compare against at day 90 and day 365.
 
 | Area | Baseline |
 |---|---|
@@ -82,6 +82,19 @@ By day 90 you should have:
 - A first board or executive report in the format of [board and executive reporting](board-and-executive-reporting.md).
 - A view of your leadership team: who stays in role, who needs support, which roles are missing.
 
+### Decisions to bring to your manager or board by day 90
+
+A new leader is the cheapest moment an organisation has to stop or reshape inherited work, because nobody's credibility is tied to it yet. Do not let that window close.
+
+| Decision | Bring | Evidence |
+|---|---|---|
+| Each major inherited programme: continue, rescope or stop | A recommendation per programme | Forecast to finish at 85% confidence, remaining value, written stop conditions met or not. Money already spent is not evidence. See [decision making](decision-making.md#investment-decisions-under-uncertainty). |
+| Risks outside appetite you have found | A request to accept, treat or fund, with a named owner | Baseline numbers, not impressions |
+| Your predecessor's commitments to the board | Keep, change or withdraw each one | The diagnosis |
+| What must reach you and the board, and how fast | Agreed escalation thresholds | See [board and executive reporting](board-and-executive-reporting.md#what-reaches-the-board-and-how-fast) |
+
+If you hired the leader, ask for this table at day 90. A leader who brings no stop or rescope recommendation has either inherited an unusually healthy portfolio or has not looked hard enough; ask which.
+
 ## Paths by situation
 
 | | Turnaround | Scale-up | Public-sector appointment | Realignment |
@@ -104,6 +117,7 @@ By day 90 you should have:
 | Reorganising in the first month | Strategy first, structure second |
 | Criticising the previous leader's decisions in public | Ask what constraints they faced. Most decisions made sense at the time. |
 | Too many early wins | Pick 2 or 3 and finish them |
+| Adopting every inherited programme by default | Bring a continue, rescope or stop recommendation for each one by day 90 |
 | A 40-page strategy | One page. Detail goes in decision records and business cases. |
 | No baseline, so progress cannot be shown | Measure in the first 30 days, even roughly |
 

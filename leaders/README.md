@@ -1,6 +1,6 @@
 # For leaders
 
-The rest of the playbook describes how good engineering works. This section is for the people who decide where it goes. That includes technology leaders and architects, chief data and chief digital officers, government and bank leaders, and executives who fund technology without running it. Terms and acronyms are in the [glossary](../GLOSSARY.md).
+The rest of the playbook describes how good engineering works. This section is for the people who decide where it goes. That includes technology leaders and architects, product, programme and quality leaders, chief data and chief digital officers, government and bank leaders, and executives who fund technology without running it. Terms and acronyms are in the [glossary](../GLOSSARY.md).
 
 Each page is a toolkit you can use this week: agendas, checklists, decision aids and fill-in templates. Each one links back to the practice pages behind it.
 
@@ -13,6 +13,9 @@ Each page is a toolkit you can use this week: agendas, checklists, decision aids
 | A principal or staff engineer | [Decision making](decision-making.md) | [Architecture toolkit](architecture-toolkit.md), [RFCs](../playbook/architecture/rfcs.md) |
 | A chief or enterprise architect | [Architecture toolkit](architecture-toolkit.md) | [Architecture practice](../playbook/architecture/architecture-practice.md), [tech radar](../playbook/architecture/tech-radar.md) |
 | An IT strategist or planner | [Strategy toolkit](strategy-toolkit.md) | [Portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md), [transition playbook](../playbook/strategy/transition-playbook.md) |
+| A chief product officer or head of product | [For product leaders](for-product-leaders.md) | [Product strategy](../playbook/product/product-strategy.md), [roadmaps and prioritisation](../playbook/product/roadmaps-and-prioritisation.md) |
+| A programme director, portfolio lead or head of a PMO | [For programme and portfolio leaders](for-programme-and-portfolio-leaders.md) | [Status reporting](../playbook/project-management/status-reporting.md), [a modern PMO](../playbook/project-management/modern-pmo.md) |
+| A head of QA, test manager or quality lead | [For QA and test leaders](for-qa-and-test-leaders.md) | [Test strategy](../playbook/quality/test-strategy.md), [quality engineering](../playbook/quality/quality-engineering.md) |
 | A chief data officer | [For data and digital officers](for-data-and-digital-officers.md) | [Data governance](../playbook/data/data-governance.md), [AI governance](../playbook/ai/ai-governance.md) |
 | A chief digital officer (services and channels) | [Chief digital officers](for-data-and-digital-officers.md#chief-digital-officers) | [Product partnership](../playbook/ways-of-working/product-partnership.md), [transition playbook](../playbook/strategy/transition-playbook.md), [for government](for-government.md) |
 | A government technology leader or adviser | [For government](for-government.md) | [Public sector](../playbook/compliance/public-sector.md), [public sector profile](../profiles/public-sector.md) |
@@ -41,17 +44,20 @@ The [operating rhythm](operating-rhythm.md) page has the full version with agend
 | Page | What it gives you |
 |---|---|
 | [Operating rhythm](operating-rhythm.md) | Recurring forums with purpose, attendees, inputs, outputs and agendas |
-| [Decision making](decision-making.md) | How much process a decision needs, pre-mortems, Cynefin, guarding against bias |
+| [Decision making](decision-making.md) | How much process a decision needs, pre-mortems, Cynefin, staged funding with kill criteria, speed against control, what you never delegate, guarding against bias |
 | [First 90 days](first-90-days.md) | A plan for a new technology leader: listen, measure, decide |
-| [Board and executive reporting](board-and-executive-reporting.md) | A one-page scorecard and how to explain debt, security and AI risk to a board |
+| [Board and executive reporting](board-and-executive-reporting.md) | A one-page scorecard, escalation thresholds for what reaches the board and how fast, what the board decides, and how to explain debt, security and AI risk |
 | [Crisis leadership](crisis-leadership.md) | The executive's job in a major incident or cyber attack: a first-hour checklist, communication schedule, ransomware decisions |
 | [Strategy toolkit](strategy-toolkit.md) | Wardley maps, capability maps, application portfolio rationalisation, scenarios, OKRs |
 | [Architecture toolkit](architecture-toolkit.md) | Quality attributes, review checklist, trade-off matrices, fitness functions |
 | [Technical due diligence](technical-due-diligence.md) | What to examine before you buy, invest in or depend on a technology business |
 | [For data and digital officers](for-data-and-digital-officers.md) | Data strategy tied to outcomes, governance teams accept, AI-ready data, and a section for chief digital officers on service ownership and channel shift |
-| [For government](for-government.md) | Shared digital infrastructure, procurement for outcomes, sovereignty, capability |
+| [For government](for-government.md) | Shared digital infrastructure, procurement for outcomes, sovereignty, capability, and the decisions accounting officers and senior officials keep |
 | [For financial services](for-financial-services.md) | Operational resilience, EU DORA, model risk, modernising core systems under supervision |
-| [For business executives](for-business-executives.md) | Ten questions to ask, how to read the numbers, how to fund technology well, hiring and reviewing your technology leader |
+| [For business executives](for-business-executives.md) | Ten questions to ask, how to read the numbers, when to approve, fund, stop or escalate, what you never delegate, how to fund technology well, hiring and reviewing your technology leader |
+| [For product leaders](for-product-leaders.md) | Product teams instead of feature teams, a product leader's rhythm, evidence over opinion, roadmaps and saying no, B2B products, product operations, first 90 days |
+| [For programme and portfolio leaders](for-programme-and-portfolio-leaders.md) | The first 30 days on a programme in trouble, questions that find the real status, fixed dates and prices without lying, steering groups, systems integrators, stopping a programme |
+| [For QA and test leaders](for-qa-and-test-leaders.md) | Choosing an operating model, a quality scorecard, making the case for investment, outsourced testing, the changing role of testers, AI and testing for the board |
 | [For small and medium businesses](for-small-and-medium-businesses.md) | The essential controls and their cost type, choosing and managing an IT provider, software subscriptions, the first hour of an incident with a downtime procedure, a yearly IT plan |
 | [Leading in the AI era](leading-in-the-ai-era.md) | The five AI decisions only leaders can make, staged funding, skills, measuring impact, a 12-month plan, board questions |
 | [Reading list](reading-list.md) | The books these roles keep going back to |

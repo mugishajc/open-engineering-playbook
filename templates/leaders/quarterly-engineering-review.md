@@ -23,7 +23,9 @@ Three sentences: what went well, what did not, and the 3 to 5 goals for next qua
 |---|---|---|---|---|---|---|
 | | | | | | | |
 
-## 3. Delivery (DORA metrics, tier 1 services)
+## 3. Delivery (DORA metrics, Tier 1 services)
+
+Set targets as improvement against your own baseline, not another organisation's numbers.
 
 | Metric | Q-3 | Q-2 | Q-1 | This quarter | Target | Comment |
 |---|---|---|---|---|---|---|
@@ -41,7 +43,7 @@ Three sentences: what went well, what did not, and the 3 to 5 goals for next qua
 | SEV1 incidents | | | |
 | SEV2 incidents | | | |
 | Postmortem actions overdue | | | |
-| Restore and failover tests done for tier 1 services | | | |
+| Tier 1 services with a monthly automated restore test and a full restore exercise this quarter | | | |
 
 Notable incidents and what changed because of them:
 
@@ -88,7 +90,15 @@ Attach the report from `assessment/assess.py`. List areas below their target lev
 |---|---|---|---|---|
 | | | | | |
 
-## 10. Goals for next quarter
+## 10. Work stopped, shrunk or rescoped
+
+At least one item, or a written reason why nothing should stop. Money already spent is not a reason to continue.
+
+| Work | Decision (stop, shrink, rescope) | Stop condition or evidence | People released, and to what | Date |
+|---|---|---|---|---|
+| | | | | |
+
+## 11. Goals for next quarter
 
 No more than five. Each one measurable, with an owner and a date.
 
@@ -96,6 +106,8 @@ No more than five. Each one measurable, with an owner and a date.
 |---|---|---|---|---|
 | | | | | |
 
-## 11. Decisions and help needed
+## 12. Decisions and help needed
 
-- [decision or resource request, who must decide, by when]
+| Decision or request | Options | Recommendation | Who decides | By when | Cost of waiting |
+|---|---|---|---|---|---|
+| | | | | | |

@@ -65,6 +65,30 @@ Be wary of any single number used as a target. Once people are paid or ranked on
 
 Use the [business case](../playbook/strategy/business-case.md) method and check benefits at 6 and 12 months. For an acquisition or a large supplier choice, use [technical due diligence](technical-due-diligence.md).
 
+## Approve, fund, stop or escalate
+
+Use these as starting thresholds and agree your own with the technology leader. The rules behind them are in [decision making](decision-making.md#investment-decisions-under-uncertainty).
+
+| Decision | Do it when | Do not do it when |
+|---|---|---|
+| Approve a new investment | All eight checks above are met and the low case pays back inside the period finance accepts | The only benefit case is the expected case, or the running cost is missing |
+| Release the next stage of money | The stage's exit criteria are met with evidence: working software in use, test results, reconciled data | The evidence is a plan, a percentage complete or a supplier's status report |
+| Rescope | The outcome is still worth it but the forecast is outside tolerance (cost more than 10% over budget, or the 85% date past the plan) | The new scope has no forecast of its own |
+| Stop | A stop condition written at the start was met, or the remaining value no longer covers the remaining cost | The only argument for going on is the money already spent |
+| Escalate to the board | A risk leaves appetite, a programme leaves tolerance, or an incident may be material | You would be asking the board to manage the work instead of deciding |
+
+When you stop, release the team within 2 weeks, record what was learned, and say in public that it was a good decision. People hide failing work where stopping is punished.
+
+## What you never delegate
+
+- **The risk appetite.** Technology, cyber, supplier and AI risk appetite is set by the board in measurable terms. See [risk appetite statements](board-and-executive-reporting.md#risk-appetite-statements).
+- **Accepting a risk outside appetite.** A named executive signs it, with an expiry date.
+- **The benefit.** One business executive owns each major investment's benefit. The technology leader owns delivery, not whether the business uses what was built.
+- **Decisions that affect people's rights,** including AI that makes or shapes decisions about customers, citizens or staff. See [leading in the AI era](leading-in-the-ai-era.md#questions-boards-should-ask).
+- **The ransomware and disclosure positions,** agreed before an attack. See [ransomware decisions](crisis-leadership.md#ransomware-decisions).
+
+When speed and control conflict, do not split the difference in a meeting. Ask which of the two the risk appetite puts first for this decision, and ask the technology leader to make the control fast rather than skip it. See [speed and control](decision-making.md#speed-and-control).
+
 ## How to fund technology
 
 - **Fund teams, not projects.** A persistent team that owns a service keeps improving it. A project team that disbands at launch leaves a system nobody understands. Agree with finance how team funding is capitalised before you change it: see [technology budget and cost](../playbook/strategy/technology-budget-and-cost.md).
@@ -104,6 +128,7 @@ Use the [business case](../playbook/strategy/business-case.md) method and check 
 - Important services have reliability targets agreed with the business, and the board sees attainment.
 - Restores and failovers of critical systems are tested on a schedule, with measured times.
 - Major incidents lead to a written review within 5 working days and actions that get done.
+- At least one programme a year is rescoped or stopped at a gate, or the board hears why none needed to be.
 - Every critical supplier has an owner and an exit plan.
 - The executive team exercises a serious cyber incident twice a year, and the board joins at least one of those exercises. The UK NCSC Board Toolkit is a good starting point. See also [crisis leadership](crisis-leadership.md).
 
@@ -113,6 +138,8 @@ Use the [business case](../playbook/strategy/business-case.md) method and check 
 |---|---|
 | Asking only "is it on time and on budget?" | Ask the ten questions; on time and on budget says nothing about value or risk. |
 | Approving a large programme as one decision | Approve in stages with stop points. |
+| Continuing because of money already spent | Decide on remaining cost and remaining value only. |
+| Agreeing headcount cuts on a promised AI gain | Commit to a measured review first; see [leading in the AI era](leading-in-the-ai-era.md#when-the-gain-is-real). |
 | Cutting maintenance to fund new features | Agree a protected share for reliability and debt. |
 | Comparing teams on delivery metrics | Use metrics to find where to help, not to rank. |
 | Treating cyber security as an IT issue | Own the risk appetite at board level; delegate the controls. |
@@ -123,6 +150,7 @@ Use the [business case](../playbook/strategy/business-case.md) method and check 
 - [Questions for your technology leader](../templates/leaders/questions-for-your-technology-leader.md)
 - [Board engineering report](../templates/leaders/board-engineering-report.md)
 - [Business case](../templates/strategy/business-case.md)
+- [Stage gate checklist](../templates/project/stage-gate-checklist.md)
 - [Risk register](../templates/strategy/risk-register.csv)
 - [Tech debt register](../templates/docs/tech-debt-register.csv)
 
