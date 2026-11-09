@@ -136,6 +136,10 @@ jobs:
           cosign attest --yes --type cyclonedx --predicate sbom.cdx.json "${IMAGE}@${DIGEST}"
 
       - name: Attest SLSA build provenance
+        # GitHub artifact attestations work on public repositories on every plan;
+        # on private repositories they need GitHub Enterprise Cloud. Set the
+        # repository variable ATTEST_PRIVATE to true if you have it.
+        if: ${{ !github.event.repository.private || vars.ATTEST_PRIVATE == 'true' }}
         uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
         with:
           subject-name: ${{ steps.image.outputs.name }}
