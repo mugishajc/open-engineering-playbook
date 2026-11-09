@@ -1,0 +1,52 @@
+# Software catalogue entry for one service, in the Backstage descriptor format.
+# Save as catalog-info.yaml at the root of the service repository.
+# Replace every value in angle brackets. Delete annotations you do not use.
+# Format reference: https://backstage.io/docs/features/software-catalog/descriptor-format
+#
+# Custom annotations use example.org as a placeholder prefix. Replace it with
+# a domain your organisation controls, as Backstage recommends.
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: orders-service
+  title: Orders service
+  description: Takes and tracks customer orders. Owns the orders database.
+  labels:
+    tier: "1"
+  tags:
+    - go
+    - postgres
+    - pii
+  annotations:
+    # Where the code lives. Use the one that matches your git host.
+    github.com/project-slug: <org>/orders-service
+    # gitlab.com/project-slug: <group>/orders-service
+    backstage.io/source-location: url:https://git.example.org/<org>/orders-service
+    # Docs built from docs/ in this repository with TechDocs.
+    backstage.io/techdocs-ref: dir:.
+    # Playbook fields. Replace example.org with your own domain.
+    example.org/data-classification: confidential
+    example.org/hosting-model: on-premises
+    example.org/golden-path: backend-service@v3.2.0
+    example.org/slo: 99.9% of order requests succeed over 28 days
+    example.org/on-call: orders-primary
+    example.org/maintainers: "2"
+  links:
+    - url: https://docs.example.org/orders-service/runbook
+      title: Runbook
+    - url: https://grafana.example.org/d/orders
+      title: Dashboard
+    - url: https://git.example.org/<org>/orders-service/tree/main/docs/decisions
+      title: Decision records
+spec:
+  type: service
+  # experimental | production | deprecated
+  lifecycle: production
+  owner: group:default/team-orders
+  system: commerce
+  providesApis:
+    - orders-api
+  consumesApis:
+    - payments-api
+  dependsOn:
+    - resource:default/orders-db
