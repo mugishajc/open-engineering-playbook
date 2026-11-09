@@ -1,0 +1,1507 @@
+# Open Engineering Playbook: true-or-false question bank.
+#
+# Each statement is either true or false according to the playbook page it
+# links to. Play them in the terminal with exercises/quiz.py, or on GitHub
+# through the exported page for each area in this folder.
+#
+# Fields for [[areas]]:
+#   id           lower case words joined by hyphens
+#   title        shown in headings and scores
+#   intro        one or two sentences that open the exported page
+#
+# Fields for [[statements]]:
+#   id           area id, a full stop, then a short slug. Never reuse an id.
+#   area         must match the part of the id before the full stop
+#   level        foundation, standard or assured
+#   statement    the claim to judge, as one sentence
+#   answer       true or false
+#   explanation  2 to 4 plain sentences that say why
+#   link         the page that teaches it, relative to the repository root
+#
+# After editing this file, run:
+#   python3 exercises/quiz.py --export
+#   python3 exercises/quiz.py --check
+
+version = 1
+
+[[areas]]
+id = "strategy"
+title = "Strategy"
+intro = "Most engineering waste starts here: goals with no diagnosis, tools chosen before problems, and work that never stops. See how well you can tell a real strategy from a wish list."
+
+[[areas]]
+id = "operating-model"
+title = "Operating model"
+intro = "Who decides, who is consulted and how teams are shaped set the speed of everything else. These statements test the beliefs that slow organisations down."
+
+[[areas]]
+id = "ways-of-working"
+title = "Ways of working"
+intro = "Story points, velocity, sprints and estimates: some of the most repeated beliefs in software are not in the Scrum Guide at all. Find out which ones."
+
+[[areas]]
+id = "delivery"
+title = "Delivery"
+intro = "Branches, pipelines, reviews, migrations and releases. Small, frequent, reversible changes are the theme; check whether your habits agree."
+
+[[areas]]
+id = "quality"
+title = "Quality"
+intro = "Quality is built in while the code is written, not inspected at the end. These statements check what you believe about testers, TDD and test suites."
+
+[[areas]]
+id = "reliability"
+title = "Reliability"
+intro = "SLOs, on-call, incidents, rollbacks and backups. Several of these statements sound responsible and make outages longer."
+
+[[areas]]
+id = "security"
+title = "Security"
+intro = "Vulnerabilities, secrets, dependencies, zero trust and the quantum timeline. Separate the controls that work from the ones that only feel safe."
+
+[[areas]]
+id = "data"
+title = "Data"
+intro = "Ownership, classification, quality and privacy. Most data problems are ownership problems; see which common habits make them worse."
+
+[[areas]]
+id = "ai"
+title = "AI"
+intro = "Prompt injection, evaluations, agents and the EU AI Act. Building with AI changes less than people think, and the parts it does change matter a lot."
+
+[[areas]]
+id = "architecture"
+title = "Architecture"
+intro = "Microservices, rewrites, decision records, APIs and debt. Test your instincts on the decisions that are expensive to reverse."
+
+[[areas]]
+id = "platform"
+title = "Platform"
+intro = "Kubernetes, golden paths, developer platforms, cloud cost and carbon. The simplest option that meets the need wins more often than people expect."
+
+[[areas]]
+id = "people"
+title = "People"
+intro = "Code assistants, hiring, onboarding, careers and sustainable pace. These statements test beliefs about how engineers join, grow and stay."
+
+[[areas]]
+id = "measurement"
+title = "Measurement"
+intro = "DORA metrics, SPACE and the maturity model. Metrics help teams choose what to improve, and hurt them the moment they become targets for people."
+
+[[areas]]
+id = "compliance"
+title = "Compliance"
+intro = "Auditors, regulators and public-sector rules. Good engineering evidence answers most of their questions without extra meetings."
+
+[[areas]]
+id = "leaders"
+title = "Leaders"
+intro = "For CTOs, CIOs, architects and executives: decisions, crises, boards and portfolios. Test the beliefs that shape how technology is led."
+
+# ---------------------------------------------------------------- strategy
+
+[[statements]]
+id = "strategy.goals-are-not-strategy"
+area = "strategy"
+level = "foundation"
+statement = "A list of goals such as 'be cloud native, ship faster, improve quality' is a sound technical strategy."
+answer = false
+explanation = "Goals without a diagnosis give nobody a reason to rule anything in or out. A strategy starts by naming what is stopping you today, then sets a guiding policy and three to seven coherent actions. If you cannot write the diagnosis, collect evidence before setting goals."
+link = "playbook/strategy/technical-strategy.md"
+
+[[statements]]
+id = "strategy.one-page"
+area = "strategy"
+level = "foundation"
+statement = "A technical strategy should fit on one page and name no more than seven actions."
+answer = true
+explanation = "The playbook asks for one page: a diagnosis, a guiding policy and three to seven actions. When fifteen actions are all marked high, nothing is a priority. Rank the actions and name what you will not do."
+link = "playbook/strategy/technical-strategy.md"
+
+[[statements]]
+id = "strategy.borrowed-diagnosis"
+area = "strategy"
+level = "standard"
+statement = "Doing what the large tech companies do is a safe starting point for most organisations' technical strategy."
+answer = false
+explanation = "Their problems, scale and constraints are not yours, so their answers often do not fit. The playbook calls this a borrowed diagnosis. Start from your own evidence about what slows you down."
+link = "playbook/strategy/technical-strategy.md"
+
+[[statements]]
+id = "strategy.build-commodity"
+area = "strategy"
+level = "foundation"
+statement = "Building your own version of a commodity tool is usually cheaper than buying one, because there is no licence fee."
+answer = false
+explanation = "The licence fee is a small part of the cost; maintenance over five years is the large part, and a home-grown commodity tool rarely wins on it. Build only what differentiates you. Compare options on total cost of ownership over 3 to 5 years, including the cost of leaving."
+link = "playbook/strategy/build-buy-adopt.md"
+
+[[statements]]
+id = "strategy.weights-first"
+area = "strategy"
+level = "standard"
+statement = "In a weighted scoring matrix for a build or buy decision, the weights should be agreed before anyone scores the options."
+answer = true
+explanation = "Weights chosen after scoring can be bent to favour the option people already wanted. Agree and record the weights first, then score. This keeps the decision honest and defensible later."
+link = "playbook/strategy/build-buy-adopt.md"
+
+[[statements]]
+id = "strategy.saved-hours-are-cash"
+area = "strategy"
+level = "standard"
+statement = "In a business case, engineering hours saved can be counted as cash savings."
+answer = false
+explanation = "Finance counts cash only when headcount or spend actually falls. Say what the saved hours will be used for instead. Show low, expected and high cases and commit to the low one."
+link = "playbook/strategy/business-case.md"
+
+[[statements]]
+id = "strategy.pilot-best-team"
+area = "strategy"
+level = "standard"
+statement = "A transition should include a pilot with an average team, not only with the strongest one."
+answer = true
+explanation = "A pilot that succeeds only with the best team tells you little about the other teams. The playbook adds a second pilot with an average team. That pilot shows the support and training the rest of the organisation will need."
+link = "playbook/strategy/transition-playbook.md"
+
+[[statements]]
+id = "strategy.stop-is-an-outcome"
+area = "strategy"
+level = "standard"
+statement = "At each gate of a transition programme, stopping is a planned and valid outcome."
+answer = true
+explanation = "Every gate chooses one of three outcomes: continue, change scope or stop. Funding one phase at a time keeps stopping cheap. Write the stop conditions in the charter and honour them, rather than treating stop as failure."
+link = "playbook/strategy/transition-playbook.md"
+
+[[statements]]
+id = "strategy.full-capacity"
+area = "strategy"
+level = "foundation"
+statement = "Planning 100% of engineering capacity for features is the most efficient use of a team."
+answer = false
+explanation = "Reliability, debt and platform work still happen; they just happen unplanned and invisible. The playbook sets an explicit capacity split for them. Planning to full capacity also leaves no room for the unplanned work that always arrives."
+link = "playbook/strategy/portfolio-and-capacity.md"
+
+[[statements]]
+id = "strategy.wait-for-final-dates"
+area = "strategy"
+level = "standard"
+statement = "It is sensible to wait until regulators confirm final dates before preparing for new rules."
+answer = false
+explanation = "Dates move, but the preparation is useful whatever the final date. The EU AI Act high-risk dates were moved by the 2026 Digital Omnibus, yet a register of AI use cases is needed either way. Start the cheap, no-regret work now, such as inventories and owners."
+link = "playbook/strategy/horizon-scan.md"
+
+# --------------------------------------------------------- operating model
+
+[[statements]]
+id = "operating-model.two-accountable"
+area = "operating-model"
+level = "foundation"
+statement = "An important decision can have two accountable people, so that both departments are represented."
+answer = false
+explanation = "Every decision has exactly one accountable person and a time limit. With two, each waits for the other and nobody owns the result. Pick one; the other becomes consulted."
+link = "playbook/operating-model/decision-rights.md"
+
+[[statements]]
+id = "operating-model.consulted-is-veto"
+area = "operating-model"
+level = "foundation"
+statement = "Being consulted on a decision gives you a veto over it."
+answer = false
+explanation = "Consulted people give their input by a deadline. The accountable person then decides. Treating consulted as a veto turns every decision into a negotiation with no end date."
+link = "playbook/operating-model/decision-rights.md"
+
+[[statements]]
+id = "operating-model.lowest-level"
+area = "operating-model"
+level = "foundation"
+statement = "Decisions should be made at the lowest level that has the information and will live with the result."
+answer = true
+explanation = "The people closest to the work usually know the most and bear the consequences. Escalate only when a decision crosses team boundaries, cannot be undone cheaply, or breaks an agreed standard. Otherwise everything queues for the CTO."
+link = "playbook/operating-model/decision-rights.md"
+
+[[statements]]
+id = "operating-model.board-for-every-change"
+area = "operating-model"
+level = "standard"
+statement = "Strong engineering governance means every significant change queues for a review board."
+answer = false
+explanation = "Govern with written standards, automated checks and a small review group that answers within a fixed time. Review only the decisions that are hard to reverse or cross team boundaries. Everything else uses the advice process."
+link = "playbook/operating-model/engineering-governance.md"
+
+[[statements]]
+id = "operating-model.waivers-expire"
+area = "operating-model"
+level = "standard"
+statement = "Every exception to an engineering standard should be written down, owned and given an expiry date."
+answer = true
+explanation = "Waivers that never expire quietly become the real standard. An owner and an expiry date force a decision: fix the gap, renew the exception on purpose, or change the standard. A monthly report of expiring waivers keeps this cheap."
+link = "playbook/operating-model/engineering-governance.md"
+
+[[statements]]
+id = "operating-model.component-teams"
+area = "operating-model"
+level = "standard"
+statement = "For a single product, separate front end, back end and database teams are the most efficient structure."
+answer = false
+explanation = "Component teams turn every feature into a hand-off between teams. Organise most engineers into stream-aligned teams that own a product or service end to end. Keep specialists as enabling or complicated-subsystem teams."
+link = "playbook/operating-model/team-topology.md"
+
+[[statements]]
+id = "operating-model.four-team-types"
+area = "operating-model"
+level = "foundation"
+statement = "Team Topologies describes four team types: stream-aligned, enabling, complicated-subsystem and platform."
+answer = true
+explanation = "Skelton and Pais (2019) describe these four types and three ways teams interact: collaboration, X-as-a-Service and facilitating. Most engineers belong in stream-aligned teams. Add the other types only when they reduce load on those teams."
+link = "playbook/operating-model/team-topology.md"
+
+[[statements]]
+id = "operating-model.permanent-collaboration"
+area = "operating-model"
+level = "standard"
+statement = "When two teams collaborate well, they should stay in collaboration mode permanently."
+answer = false
+explanation = "Collaboration is expensive: it uses both teams' attention and blurs who owns what. Use it for a set period to discover the right interface. Then set an end date, write the interface down and move to X-as-a-Service."
+link = "playbook/operating-model/team-topology.md"
+
+[[statements]]
+id = "operating-model.big-board-pack"
+area = "operating-model"
+level = "assured"
+statement = "A detailed 40-page technology pack gives a board better oversight than a two-page summary."
+answer = false
+explanation = "Long packs arrive late and bury what the board needs to act on. The playbook recommends two pages with 8 to 12 measures, showing trends and thresholds. Board members can then see quickly which numbers are outside the agreed risk appetite."
+link = "playbook/operating-model/it-governance.md"
+
+[[statements]]
+id = "operating-model.itil-means-meetings"
+area = "operating-model"
+level = "standard"
+statement = "An organisation can adopt ITIL 4 without adding change approval meetings."
+answer = true
+explanation = "ITIL 4 describes a service value system, not a meeting schedule. Copying it as a set of approval meetings can add a week to every change. Use pre-authorised standard changes and evidence that the pipeline produces automatically."
+link = "playbook/operating-model/it-governance.md"
+
+# --------------------------------------------------------- ways of working
+
+[[statements]]
+id = "ways-of-working.scrum-needs-points"
+area = "ways-of-working"
+level = "foundation"
+statement = "Story points and velocity are required parts of Scrum."
+answer = false
+explanation = "The Scrum Guide (2020 edition) does not mention story points or velocity. They are an optional technique that many teams add. You can run Scrum fully and forecast from throughput instead."
+link = "playbook/ways-of-working/agile-and-scrum.md"
+
+[[statements]]
+id = "ways-of-working.compare-velocity"
+area = "ways-of-working"
+level = "foundation"
+statement = "Comparing velocity between teams is a fair way to see which team is more productive."
+answer = false
+explanation = "Story points are a team-local unit, so ten points in one team mean something different in another. Points also drift over time and inflate as soon as velocity becomes a target. Use throughput and cycle time, and compare each team only with its own past."
+link = "playbook/ways-of-working/planning-and-forecasting.md"
+
+[[statements]]
+id = "ways-of-working.daily-scrum-15"
+area = "ways-of-working"
+level = "foundation"
+statement = "The Scrum Guide time-boxes the Daily Scrum to 15 minutes."
+answer = true
+explanation = "The 2020 Scrum Guide sets a 15-minute Daily Scrum and Sprints of one month or less. The Daily Scrum is for the Developers to inspect progress toward the Sprint Goal. When it turns into a status report to a manager, the team loses the point of it."
+link = "playbook/ways-of-working/agile-and-scrum.md"
+
+[[statements]]
+id = "ways-of-working.single-date"
+area = "ways-of-working"
+level = "foundation"
+statement = "A single delivery date is a more useful forecast than a range, because people can plan around it."
+answer = false
+explanation = "A single date hides the uncertainty, so it becomes a promise that gets broken. Give a range with a confidence level, for example 'between 3 and 6 weeks, 85% likely'. Re-forecast every week as work finishes."
+link = "playbook/ways-of-working/planning-and-forecasting.md"
+
+[[statements]]
+id = "ways-of-working.forecast-without-estimates"
+area = "ways-of-working"
+level = "standard"
+statement = "A team can forecast a delivery date from its past throughput without estimating any individual task."
+answer = true
+explanation = "A Monte Carlo forecast replays the team's real history of finished items thousands of times. The result reads as '50% likely within X weeks, 85% within Y'. It needs right-sized items that you count, not hours or points."
+link = "playbook/ways-of-working/planning-and-forecasting.md"
+
+[[statements]]
+id = "ways-of-working.delay-is-typing"
+area = "ways-of-working"
+level = "foundation"
+statement = "Most delivery delay comes from engineers working more slowly than they estimated."
+answer = false
+explanation = "Most delay comes from waiting, interruptions and work discovered along the way, not from slow typing. That is why more careful task estimates rarely fix dates. Splitting work small and removing waits does."
+link = "playbook/ways-of-working/planning-and-forecasting.md"
+
+[[statements]]
+id = "ways-of-working.ranges-too-wide"
+area = "ways-of-working"
+level = "standard"
+statement = "If work almost always lands inside your 85% forecast range, your ranges are probably too wide."
+answer = true
+explanation = "An 85% range should be met about 85% of the time. Hitting it nearly every time means the forecast is padded and less useful for planning. Narrow it using your own throughput history."
+link = "playbook/ways-of-working/planning-and-forecasting.md"
+
+[[statements]]
+id = "ways-of-working.hardening-sprint"
+area = "ways-of-working"
+level = "standard"
+statement = "A hardening sprint every few sprints is a healthy way to catch up on quality."
+answer = false
+explanation = "A regular hardening sprint means work is being called done before it is. Fix the definition of done so tests and quality checks happen with each change. The backlog of defects then stops building up."
+link = "playbook/ways-of-working/agile-and-scrum.md"
+
+[[statements]]
+id = "ways-of-working.features-shipped"
+area = "ways-of-working"
+level = "standard"
+statement = "The number of features shipped is the best measure of a product team's success."
+answer = false
+explanation = "Counting features rewards a feature factory, whether or not anything improved for users. Agree an outcome metric before work starts and review it after release. Success is a change in user or business behaviour."
+link = "playbook/ways-of-working/product-partnership.md"
+
+[[statements]]
+id = "ways-of-working.agree-before-outage"
+area = "ways-of-working"
+level = "standard"
+statement = "Product and engineering should agree how reliability work gets priority before an outage happens, not during one."
+answer = true
+explanation = "Reliability negotiated in the middle of an outage is decided under the worst pressure. An error budget policy agreed in advance, and co-signed by the product owner, settles it ahead of time. When the budget runs out, everyone already knows what happens."
+link = "playbook/ways-of-working/product-partnership.md"
+
+# ---------------------------------------------------------------- delivery
+
+[[statements]]
+id = "delivery.coverage-100"
+area = "delivery"
+level = "foundation"
+statement = "Setting a team goal of 100% test coverage is a reliable way to raise quality."
+answer = false
+explanation = "A coverage goal produces tests that run code without checking anything. Treat coverage as a floor, not a target: the playbook starts at 80% line coverage on changed lines. Review the quality of the tests, not only the number."
+link = "playbook/delivery/testing.md"
+
+[[statements]]
+id = "delivery.big-pr-review"
+area = "delivery"
+level = "foundation"
+statement = "Large pull requests get reviewed as carefully as small ones."
+answer = false
+explanation = "A 2,000-line pull request tends to get a quick 'LGTM' rather than a careful read. Aim for under about 400 changed lines and split refactoring from behaviour changes. Feature flags let one feature arrive as a series of small, safe pull requests."
+link = "playbook/delivery/code-review.md"
+
+[[statements]]
+id = "delivery.gitflow-for-services"
+area = "delivery"
+level = "standard"
+statement = "A GitFlow-style develop branch is a good default for a web service you deploy yourself."
+answer = false
+explanation = "Long-lived branches delay integration and hide conflicts until late. For software you run yourself, merge small changes into one protected main branch at least once a day and hide unfinished work behind flags. Keep release branches for software that customers install and run."
+link = "playbook/delivery/source-control.md"
+
+[[statements]]
+id = "delivery.slow-ci"
+area = "delivery"
+level = "foundation"
+statement = "A pull request pipeline that takes much longer than 10 minutes makes people batch changes and skip checks."
+answer = true
+explanation = "Slow feedback pushes people to bundle work into fewer, bigger changes, and bigger changes are riskier. The playbook keeps the pull request pipeline under 10 minutes. Cache, parallelise and move slow suites after merge, and track duration weekly."
+link = "playbook/delivery/continuous-integration.md"
+
+[[statements]]
+id = "delivery.retry-until-green"
+area = "delivery"
+level = "foundation"
+statement = "Retrying a failing pipeline until it goes green is a reasonable way to handle flaky tests."
+answer = false
+explanation = "A flaky test is a defect, and retries hide it while it erodes trust in every result. Quarantine a flaky test within 24 hours and fix or delete it within 14 days. Record retries so flakes stay visible."
+link = "playbook/delivery/testing.md"
+
+[[statements]]
+id = "delivery.rebuild-for-production"
+area = "delivery"
+level = "standard"
+statement = "Rebuilding the production image from the same tested commit can still put untested code into production."
+answer = true
+explanation = "A rebuild can pick up a different base image or dependency version, so production may run something nobody tested. Build once and promote the tested image by its digest. Environments should differ only in size, data and configuration."
+link = "playbook/delivery/environments.md"
+
+[[statements]]
+id = "delivery.migrate-on-startup"
+area = "delivery"
+level = "standard"
+statement = "Database migrations should not run automatically when the application starts."
+answer = true
+explanation = "Several instances starting at once can race on the same migration, and a slow migration blocks start-up. Run migrations as a separate, reviewed pipeline step before the new version starts. Destructive steps come last, after a backup check."
+link = "playbook/delivery/database-changes.md"
+
+[[statements]]
+id = "delivery.rename-column"
+area = "delivery"
+level = "standard"
+statement = "Renaming a database column and deploying the code that uses the new name in one release is safe if the deploy is quick."
+answer = false
+explanation = "During any deploy the old version is still running, and a rollback needs the old schema. Use expand and contract: add the new column, write to both, backfill, switch reads, then remove the old column in a later release. Each step stays compatible with the version before it."
+link = "playbook/delivery/database-changes.md"
+
+[[statements]]
+id = "delivery.breaking-patch"
+area = "delivery"
+level = "foundation"
+statement = "A breaking change is acceptable in a patch release if it fixes a bug."
+answer = false
+explanation = "Under Semantic Versioning 2.0.0, a breaking change needs a new major version, whatever the reason. A version number is a promise about compatibility. Mark breaking commits with the Conventional Commits '!' and let CI check for breaking changes."
+link = "playbook/delivery/versioning-and-changelogs.md"
+
+[[statements]]
+id = "delivery.stage-config"
+area = "delivery"
+level = "standard"
+statement = "Configuration and content updates need staged rollouts, just like code."
+answer = true
+explanation = "The July 2024 CrowdStrike incident came from a content update pushed to Windows hosts worldwide, not from a code release. A change that reaches every machine at once has no chance to be caught early. Roll out configuration in stages with health checks and a pause."
+link = "playbook/delivery/gitops-and-deployment.md"
+
+# ----------------------------------------------------------------- quality
+
+[[statements]]
+id = "quality.qa-at-the-end"
+area = "quality"
+level = "foundation"
+statement = "Quality is best assured by a separate QA team that tests after development is finished."
+answer = false
+explanation = "Testing at the end turns QA into a queue, releases slip, and defects still escape. Make quality the whole team's job while the code is written. Testers become quality engineers who coach, automate and explore."
+link = "playbook/quality/quality-engineering.md"
+
+[[statements]]
+id = "quality.test-cases-executed"
+area = "quality"
+level = "standard"
+statement = "The number of test cases executed before a release is a good measure of quality."
+answer = false
+explanation = "Running more test cases measures effort, not what users experience. Measure escaped defects, change fail rate and recovery time instead. These show whether quality reached production."
+link = "playbook/quality/quality-engineering.md"
+
+[[statements]]
+id = "quality.exploratory"
+area = "quality"
+level = "standard"
+statement = "Human testers add the most value through exploratory testing, not by re-running scripted manual checks."
+answer = true
+explanation = "Stable, repeatable checks are cheaper and faster when automated. People are better at finding what nobody thought to script. Automate the stable checks and spend human time exploring."
+link = "playbook/quality/quality-engineering.md"
+
+[[statements]]
+id = "quality.tdd-everywhere"
+area = "quality"
+level = "standard"
+statement = "TDD should be mandated for all code and checked by looking at commit order."
+answer = false
+explanation = "Use TDD where mistakes are expensive and the expected behaviour can be stated up front, such as pricing or permission rules. Policing commit order rewards the ritual, not the result. Judge it by test quality and escaped defects."
+link = "playbook/quality/test-driven-development.md"
+
+[[statements]]
+id = "quality.refactor-is-a-step"
+area = "quality"
+level = "foundation"
+statement = "Refactoring is a required step of the TDD cycle, not an optional extra."
+answer = true
+explanation = "TDD works in short cycles of test, code and refactor. Skip the refactor and the design never improves, even though the tests pass. The passing tests are what make the refactor safe."
+link = "playbook/quality/test-driven-development.md"
+
+[[statements]]
+id = "quality.mock-everything"
+area = "quality"
+level = "standard"
+statement = "Good unit tests mock every collaborator and assert the order of calls."
+answer = false
+explanation = "Tests like this check how the code is written, so they break on every refactor and miss real behaviour. Test what the code observably does. Use real objects inside the module boundary and real dependencies in containers for integration tests."
+link = "playbook/quality/test-driven-development.md"
+
+[[statements]]
+id = "quality.tests-written-last"
+area = "quality"
+level = "foundation"
+statement = "Tests written after the code tend to confirm what the code already does, rather than what it should do."
+answer = true
+explanation = "When the code exists first, it is natural to write tests that match it. Cases the author did not think of stay untested. Writing the failing test from the requirement first avoids that."
+link = "playbook/quality/test-driven-development.md"
+
+[[statements]]
+id = "quality.many-e2e"
+area = "quality"
+level = "standard"
+statement = "The safest test suite has hundreds of end-to-end tests covering every feature."
+answer = false
+explanation = "Hundreds of end-to-end tests are slow and flaky, and they take an hour to tell you little. Push checks down to unit, component and contract tests. Keep 5 to 20 end-to-end tests for the critical paths."
+link = "playbook/delivery/testing.md"
+
+[[statements]]
+id = "quality.mutation-testing"
+area = "quality"
+level = "assured"
+statement = "Mutation testing can reveal weak tests even when coverage numbers look good."
+answer = true
+explanation = "Mutation testing changes the code on purpose and checks whether any test fails. If the tests still pass, they run the code without really checking it. Use it on critical modules such as pricing, permissions and tax rules."
+link = "playbook/delivery/testing.md"
+
+[[statements]]
+id = "quality.stuck-revert"
+area = "quality"
+level = "foundation"
+statement = "In TDD, if you have been stuck without a passing test for about 10 minutes, it is often better to revert and take a smaller step."
+answer = true
+explanation = "Being stuck usually means the step was too large. Reverting to the last green state costs little and gives a clean start. Write a smaller test and continue from there."
+link = "playbook/quality/test-driven-development.md"
+
+# ------------------------------------------------------------- reliability
+
+[[statements]]
+id = "reliability.slo-100"
+area = "reliability"
+level = "foundation"
+statement = "A 100% availability SLO shows users that you take reliability seriously."
+answer = false
+explanation = "A 100% target leaves no error budget for any change, so it either stops all releases or gets ignored. No dependency you rely on achieves 100% either. Set the target from your last 4 weeks of data and what users tolerate."
+link = "playbook/reliability/service-levels.md"
+
+[[statements]]
+id = "reliability.three-nines"
+area = "reliability"
+level = "foundation"
+statement = "A 99.9% SLO over 28 days allows about 40 minutes of full outage."
+answer = true
+explanation = "The error budget is 0.1% of 28 days, which is about 40 minutes. At 99.99% it drops to about 4 minutes. Every extra nine costs much more to reach, so choose the target users need."
+link = "playbook/reliability/service-levels.md"
+
+[[statements]]
+id = "reliability.page-on-cpu"
+area = "reliability"
+level = "foundation"
+statement = "Paging on-call engineers when CPU passes 90% is good practice."
+answer = false
+explanation = "Users feel failed or slow requests, not CPU. Page on symptoms, ideally on SLO burn rate, and send resource alerts to dashboards or tickets. On-call people who get paged for noise soon start ignoring pages."
+link = "playbook/reliability/service-levels.md"
+
+[[statements]]
+id = "reliability.one-root-cause"
+area = "reliability"
+level = "standard"
+statement = "Every incident has one root cause, and the goal of analysis is to find it."
+answer = false
+explanation = "In complex systems, failures need several things to go wrong at once: a change, a missing test, a quiet alert, a deadline. Fixing only the last step leaves the others in place for the next incident. Look for the set of contributing factors."
+link = "playbook/reliability/root-cause-analysis.md"
+
+[[statements]]
+id = "reliability.five-whys-alone"
+area = "reliability"
+level = "standard"
+statement = "The 5 Whys, used on its own, is enough to analyse a serious incident."
+answer = false
+explanation = "Used alone, the 5 Whys follows a single chain and usually stops at a person or one bug. Treat it as a starting prompt. For serious incidents, build a timeline and list contributing factors, and add a fishbone diagram or CAST when the cause is disputed."
+link = "playbook/reliability/root-cause-analysis.md"
+
+[[statements]]
+id = "reliability.human-error"
+area = "reliability"
+level = "foundation"
+statement = "'Human error' is an acceptable root cause in a postmortem."
+answer = false
+explanation = "People make mistakes in every system, so 'human error' explains nothing you can fix. Ask what made the error possible, easy and uncaught. Those conditions are the contributing factors to fix."
+link = "playbook/reliability/postmortems.md"
+
+[[statements]]
+id = "reliability.roll-back-first"
+area = "reliability"
+level = "foundation"
+statement = "When a recent change causes an incident, the default should be to roll back rather than fix forward."
+answer = true
+explanation = "Undoing the last change is the fastest way to end most incidents. Roll forward only when the fix is known, small, already reviewed and in production within 30 minutes. If someone is still 'nearly there' after 30 minutes, roll back."
+link = "playbook/reliability/rollbacks.md"
+
+[[statements]]
+id = "reliability.cab-is-safer"
+area = "reliability"
+level = "standard"
+statement = "A weekly change advisory board makes production changes safer than peer review plus automated testing."
+answer = false
+explanation = "The research behind the DORA metrics found that approval by an external body did not improve stability and was linked to slower delivery. Peer review plus automated testing did better. Keep a board only for the few changes that carry risk across teams."
+link = "playbook/reliability/change-management.md"
+
+[[statements]]
+id = "reliability.replication-is-backup"
+area = "reliability"
+level = "foundation"
+statement = "Database replication to a second site counts as a backup."
+answer = false
+explanation = "Replication copies deletions and ransomware encryption to the second site within seconds. Keep separate, versioned backups, with one copy that attackers cannot change or delete. Replication helps availability; backups help recovery."
+link = "playbook/reliability/backup-and-recovery.md"
+
+[[statements]]
+id = "reliability.untested-backup"
+area = "reliability"
+level = "foundation"
+statement = "A backup that has never been restored should not be counted as a backup."
+answer = true
+explanation = "Until you restore it, you do not know whether the backup is complete or how long recovery takes. The playbook calls an untested backup a hope, not a control. Restore Tier 1 data automatically every month and time it against the RTO."
+link = "playbook/reliability/backup-and-recovery.md"
+
+[[statements]]
+id = "reliability.one-week-in-six"
+area = "reliability"
+level = "standard"
+statement = "A sustainable on-call rotation means nobody carries the pager more than one week in six."
+answer = true
+explanation = "That needs at least six people in the rotation. Three people covering every night burn out and then leave. Merge rotations, move to business hours or hire, rather than asking for heroics."
+link = "playbook/reliability/on-call.md"
+
+# ---------------------------------------------------------------- security
+
+[[statements]]
+id = "security.cvss-emergency"
+area = "security"
+level = "standard"
+statement = "A vulnerability with a medium CVSS score can be more urgent than one scored 9.8."
+answer = true
+explanation = "Severity scores say how bad a vulnerability could be, not whether anyone is exploiting it. A medium-scored flaw listed in the CISA Known Exploited Vulnerabilities catalog on an internet-facing system beats an unexploited 9.8 on an internal one. Combine CVSS with EPSS, KEV and exposure, and fix KEV entries on internet-facing systems within 72 hours."
+link = "playbook/security/vulnerability-management.md"
+
+[[statements]]
+id = "security.force-push-secret"
+area = "security"
+level = "foundation"
+statement = "If a secret is committed to git, removing it with a force-push makes it safe again."
+answer = false
+explanation = "A pushed secret lives on in every clone, fork and cache, so assume someone has copied it. Revoke and rotate the secret first. Then clean the history if you want to."
+link = "playbook/security/secrets.md"
+
+[[statements]]
+id = "security.sms-mfa"
+area = "security"
+level = "standard"
+statement = "Security keys and passkeys resist phishing in a way that SMS codes do not."
+answer = true
+explanation = "An attacker can phish an SMS code through a fake login page or intercept it, while a security key or passkey is bound to the real site. The playbook requires phishing-resistant MFA for anything that touches production. Make admin rights temporary as well."
+link = "playbook/security/access-control.md"
+
+[[statements]]
+id = "security.buy-zero-trust"
+area = "security"
+level = "standard"
+statement = "An organisation can achieve zero trust by buying a zero trust product."
+answer = false
+explanation = "Zero trust is a set of changes across five pillars in the CISA Zero Trust Maturity Model: identity, devices, networks, applications and workloads, and data. A product can help with one pillar. Start with identity and MFA, and show progress per pillar every quarter."
+link = "playbook/security/zero-trust.md"
+
+[[statements]]
+id = "security.internal-apis"
+area = "security"
+level = "standard"
+statement = "Internal APIs do not need authentication because they sit behind the firewall."
+answer = false
+explanation = "On a flat internal network, one phished laptop or compromised server can reach everything. Give each workload its own identity and authorise every call. NIST SP 800-207 grants no implicit trust based on network location."
+link = "playbook/security/zero-trust.md"
+
+[[statements]]
+id = "security.quantum-can-wait"
+area = "security"
+level = "standard"
+statement = "There is no need to start post-quantum work until a large quantum computer exists."
+answer = false
+explanation = "Attackers can record encrypted traffic today and decrypt it later, so long-lived secrets are already exposed. NIST plans to deprecate RSA and elliptic-curve algorithms after 2030 and disallow them after 2035. Past cryptographic migrations took 10 to 20 years, so start with an inventory now."
+link = "playbook/security/post-quantum-readiness.md"
+
+[[statements]]
+id = "security.replace-aes"
+area = "security"
+level = "assured"
+statement = "AES-256 does not need to be replaced to stay safe against quantum computers."
+answer = true
+explanation = "NIST believes approved symmetric algorithms with at least 128 bits of classical security meet its lowest post-quantum security category. The urgent risk is public-key cryptography such as RSA and ECDH. Spend the effort on key exchange and signatures, starting with hybrid key exchange that includes ML-KEM."
+link = "playbook/security/post-quantum-readiness.md"
+
+[[statements]]
+id = "security.lockfile"
+area = "security"
+level = "foundation"
+statement = "Applications should commit their dependency lockfile and install from it in CI."
+answer = true
+explanation = "Version ranges without a lockfile mean two builds of the same commit can pull different code. The lockfile pins exactly what was tested. An update bot then proposes changes in small, reviewable steps."
+link = "playbook/security/dependencies.md"
+
+[[statements]]
+id = "security.unchecked-signatures"
+area = "security"
+level = "standard"
+statement = "Signing build artifacts protects you even if nothing checks the signatures at deployment."
+answer = false
+explanation = "A signature nobody verifies stops nothing. Check signatures at admission, so unverified artifacts do not run. Keep the signing key out of reach of ordinary CI jobs, or use keyless signing."
+link = "playbook/security/supply-chain.md"
+
+[[statements]]
+id = "security.pen-test-is-enough"
+area = "security"
+level = "foundation"
+statement = "A yearly penetration test is enough security testing for most teams."
+answer = false
+explanation = "A pen test finds what the pipeline missed; it does not replace the pipeline. Model threats at design time and run security checks on every pull request. Those checks cost minutes, while issues found by attackers cost weeks."
+link = "playbook/security/secure-development.md"
+
+[[statements]]
+id = "security.pin-to-sha"
+area = "security"
+level = "standard"
+statement = "CI actions should be pinned to a full commit SHA rather than a tag such as @v4."
+answer = true
+explanation = "A tag can be moved to point at different code, including malicious code, without any change in your repository. A full commit SHA cannot. Keep the version in a comment and let an update bot bump the SHA."
+link = "playbook/security/supply-chain.md"
+
+# -------------------------------------------------------------------- data
+
+[[statements]]
+id = "data.copy-production"
+area = "data"
+level = "foundation"
+statement = "Copying the production database to staging is the best way to get realistic test data."
+answer = false
+explanation = "Staging usually has weaker access controls, so personal data copied there is exposed. Use synthetic data or approved masking with a deletion date. Keep production personal data in production."
+link = "playbook/data/data-security-and-privacy.md"
+
+[[statements]]
+id = "data.everything-confidential"
+area = "data"
+level = "foundation"
+statement = "Marking all data as confidential is the safest classification policy."
+answer = false
+explanation = "When everything is confidential, the label tells nobody what really needs protection. Use the definitions for public, internal, confidential and restricted. Over-classifying hides what matters and slows every request."
+link = "playbook/data/data-governance.md"
+
+[[statements]]
+id = "data.mesh-by-default"
+area = "data"
+level = "standard"
+statement = "Data mesh is the recommended default model for organising data work in most organisations."
+answer = false
+explanation = "The playbook treats data mesh, as described by Zhamak Dehghani, as an option for large organisations with many domains and strong platform support. Start with ownership by the team that produces the data. Fix ownership and contracts first; adopt mesh only if scale requires it."
+link = "playbook/data/data-governance.md"
+
+[[statements]]
+id = "data.fix-at-source"
+area = "data"
+level = "foundation"
+statement = "Data quality problems should be fixed at the source rather than by each team that uses the data."
+answer = true
+explanation = "When every consumer cleans data in its own way, two dashboards show two different numbers. Fixing it once at the source corrects it for everyone. Publish the rule in the data contract."
+link = "playbook/data/data-quality.md"
+
+[[statements]]
+id = "data.contracts-in-ci"
+area = "data"
+level = "standard"
+statement = "A data contract can be checked in CI so that a breaking schema change fails the producer's build."
+answer = true
+explanation = "A data contract is an agreement in version control between the producing team and the teams that use the data. Checking it in the producer's CI catches a breaking change before it reaches consumers. Version contracts with Semantic Versioning."
+link = "playbook/data/data-quality.md"
+
+[[statements]]
+id = "data.dpia-after-launch"
+area = "data"
+level = "standard"
+statement = "A data protection impact assessment can be written after launch, once the design is settled."
+answer = false
+explanation = "A DPIA (GDPR Article 35) exists to change the design while that is still cheap. Do it before high-risk processing starts, such as profiling or AI on personal data. Update it when the processing changes."
+link = "playbook/data/data-security-and-privacy.md"
+
+[[statements]]
+id = "data.personal-data-in-logs"
+area = "data"
+level = "foundation"
+statement = "Keeping full personal data in logs for years is fine as long as only engineers can read the logs."
+answer = false
+explanation = "Logs are copied widely and kept long, so they quietly become one of the largest stores of personal data. Mask personal data in the logging library. Keep raw logs for a short period."
+link = "playbook/data/data-security-and-privacy.md"
+
+[[statements]]
+id = "data.privacy-by-design"
+area = "data"
+level = "foundation"
+statement = "GDPR Article 25 expects data protection to be built into the design of a system, not added later."
+answer = true
+explanation = "Article 25 covers data protection by design and by default. Building privacy in from the start costs far less than retrofitting it after a breach or a complaint. Collect only what you need and delete it on schedule."
+link = "playbook/data/data-security-and-privacy.md"
+
+[[statements]]
+id = "data.ai-needs-owner-approval"
+area = "data"
+level = "standard"
+statement = "Confidential or restricted data should go to an external AI service only with the data owner's approval and a contract covering use, retention and location."
+answer = true
+explanation = "Sending data to a hosted model is a transfer to a supplier. The data owner decides whether that use is allowed. The contract must say how the data is used, how long it is kept and where it is stored."
+link = "playbook/data/data-governance.md"
+
+[[statements]]
+id = "data.policy-retention"
+area = "data"
+level = "standard"
+statement = "A retention period written in a policy document is enough to meet deletion obligations."
+answer = false
+explanation = "A policy that nothing enforces leaves the data in place. Run automated deletion jobs and monitor that they succeed. Make sure you can also find and delete all of one person's data on request."
+link = "playbook/data/data-security-and-privacy.md"
+
+# ---------------------------------------------------------------------- ai
+
+[[statements]]
+id = "ai.system-prompt-control"
+area = "ai"
+level = "foundation"
+statement = "Telling a model in its system prompt not to reveal certain data is an effective security control."
+answer = false
+explanation = "Prompt injection can override instructions, and the system prompt itself can leak. Assume the system prompt is public. Enforce what the model may see and do in code and permissions."
+link = "playbook/ai/ai-application-security.md"
+
+[[statements]]
+id = "ai.better-model-fixes-injection"
+area = "ai"
+level = "standard"
+statement = "Prompt injection can be fully fixed by choosing a better model."
+answer = false
+explanation = "Prompt injection is LLM01 in the OWASP Top 10 for LLM Applications 2025, and it has no complete fix inside the model. The defences that work sit outside it: least-privilege tools, output handling, approval steps and monitoring. Treat retrieved content as data, never as instructions."
+link = "playbook/ai/ai-application-security.md"
+
+[[statements]]
+id = "ai.output-is-untrusted"
+area = "ai"
+level = "foundation"
+statement = "Model output should be treated as untrusted input before it reaches SQL, HTML or a shell."
+answer = true
+explanation = "Model output can carry injected or simply wrong content. Validate it against a schema, encode it for the context and use parameterised queries. Never pass it to eval or a shell."
+link = "playbook/ai/ai-application-security.md"
+
+[[statements]]
+id = "ai.good-demo"
+area = "ai"
+level = "foundation"
+statement = "If an AI feature looks good in the demo, it is ready for production."
+answer = false
+explanation = "A demo shows a few hand-picked cases, while model output is probabilistic. Build an evaluation set of 100 to 500 labelled examples covering normal, edge and adversarial cases, and agree a pass threshold before launch. Run the evaluations in CI on every change."
+link = "playbook/ai/building-with-ai.md"
+
+[[statements]]
+id = "ai.ban-all-tools"
+area = "ai"
+level = "foundation"
+statement = "Banning all AI tools is the safest policy for most organisations."
+answer = false
+explanation = "A ban pushes staff to use unapproved tools with personal accounts, where you have no control at all. Provide approved tools quickly, with clear rules on which data may go into them. Block the rest where you can."
+link = "playbook/ai/ai-governance.md"
+
+[[statements]]
+id = "ai.pin-model-versions"
+area = "ai"
+level = "standard"
+statement = "You should pin model versions and rerun evaluations before switching to a new one."
+answer = true
+explanation = "Providers change models, and a new version can behave differently on your cases. Pinning stops silent changes from reaching users. Rerun the evaluation suite and compare before you switch."
+link = "playbook/ai/building-with-ai.md"
+
+[[statements]]
+id = "ai.approve-irreversible"
+area = "ai"
+level = "standard"
+statement = "An AI agent should need human approval before any irreversible action, such as sending a payment."
+answer = true
+explanation = "Excessive agency, LLM06 in the OWASP list, is an agent with more tools or power than the task needs. Give each agent the smallest tool set, read-only by default, with scoped credentials. Require a person to approve actions that cannot be undone."
+link = "playbook/ai/ai-application-security.md"
+
+[[statements]]
+id = "ai.pilot-end-date"
+area = "ai"
+level = "standard"
+statement = "Every AI pilot should have an end date, with 90 days as a sensible default."
+answer = true
+explanation = "Pilots without an end date drift on without ever reaching production or stopping. A 90-day gate in the AI register forces a decision. Move to production, change scope or stop."
+link = "playbook/ai/ai-governance.md"
+
+[[statements]]
+id = "ai.eu-ai-act-not-yet"
+area = "ai"
+level = "assured"
+statement = "No part of the EU AI Act applies yet, because the high-risk rules were delayed."
+answer = false
+explanation = "Prohibited practices and AI literacy duties apply from 2 Feb 2025, and general-purpose AI model obligations from 2 Aug 2025. The 2026 Digital Omnibus on AI mainly moved the high-risk obligations, to 2 Dec 2027 for stand-alone systems and 2 Aug 2028 for systems embedded in regulated products. Check EUR-Lex for the current dates."
+link = "playbook/ai/ai-governance.md"
+
+[[statements]]
+id = "ai.non-ai-baseline"
+area = "ai"
+level = "standard"
+statement = "Before building an AI feature, you should compare it with a simpler non-AI approach, such as a rule or a search."
+answer = true
+explanation = "Some problems are solved more cheaply and reliably by a rule or a search. The use case assessment asks for a non-AI baseline for that reason. If AI does not beat it clearly, ship the simpler option."
+link = "playbook/ai/building-with-ai.md"
+
+# ------------------------------------------------------------ architecture
+
+[[statements]]
+id = "architecture.microservices-for-speed"
+area = "architecture"
+level = "standard"
+statement = "Splitting a slow system into microservices is usually the first fix for performance problems."
+answer = false
+explanation = "Scale in order: measure, fix the slow query or code path, add caching, move work to queues, scale out, and only then partition data or split services. Each step is cheaper and less risky than the next. Most systems never need the last two, and a modular monolith serves many organisations better."
+link = "playbook/architecture/scaling.md"
+
+[[statements]]
+id = "architecture.distributed-monolith"
+area = "architecture"
+level = "standard"
+statement = "Services that must always be deployed together are a sign of a distributed monolith."
+answer = true
+explanation = "If services cannot change on their own, you pay the network and operations cost of services without their independence. Either merge them back or fix the boundaries between them. A monolith with clear modules is better than this."
+link = "playbook/architecture/scaling.md"
+
+[[statements]]
+id = "architecture.big-bang-rewrite"
+area = "architecture"
+level = "standard"
+statement = "When a core system is 20 years old, a full rewrite with a single go-live date is usually the safest path."
+answer = false
+explanation = "Big-bang rewrites tend to run late, chase a moving target and arrive missing features nobody wrote down. Replace the old system piece by piece behind a stable interface, using the strangler fig pattern. Each slice ships value, so the programme can stop at any point and still have paid for itself."
+link = "playbook/architecture/legacy-modernisation.md"
+
+[[statements]]
+id = "architecture.edit-old-adr"
+area = "architecture"
+level = "foundation"
+statement = "When the built system differs from an accepted ADR, you should edit the ADR to match what was built."
+answer = false
+explanation = "Editing the record erases the history of why the plan changed. Write a new ADR that supersedes the old one. The gap between the plan and reality is useful information for whoever comes next."
+link = "playbook/architecture/decision-records.md"
+
+[[statements]]
+id = "architecture.refactoring-quarter"
+area = "architecture"
+level = "standard"
+statement = "A dedicated refactoring quarter is the best way to pay down technical debt."
+answer = false
+explanation = "Refactoring quarters are hard to fund and rarely arrive. Pay debt down continuously from a fixed share of every team's capacity. Rank the register each quarter by the cost each item causes today."
+link = "playbook/architecture/technical-debt.md"
+
+[[statements]]
+id = "architecture.price-the-interest"
+area = "architecture"
+level = "standard"
+statement = "Technical debt is easier to fund when it is described by the cost it causes today."
+answer = true
+explanation = "'The code is ugly' does not compete with a feature for budget. Price the interest in time lost, failures, risk or missed opportunity. Debt you can name, price and rank becomes a normal business decision."
+link = "playbook/architecture/technical-debt.md"
+
+[[statements]]
+id = "architecture.user-id-metric-label"
+area = "architecture"
+level = "standard"
+statement = "Adding user ID as a metric label is a good way to debug problems for individual users."
+answer = false
+explanation = "Each distinct label value creates a new time series, so user IDs make metric cardinality and cost explode. Put user IDs in traces and logs instead. Enforce this with a rule in the OpenTelemetry Collector."
+link = "playbook/architecture/observability.md"
+
+[[statements]]
+id = "architecture.200-with-error"
+area = "architecture"
+level = "foundation"
+statement = "Returning HTTP 200 with an error message in the body is a fine way to report API errors."
+answer = false
+explanation = "Clients, proxies and monitoring read the status code, so a 200 hides the failure from all of them. Use real status codes and the Problem Details format (RFC 9457). One error shape across the organisation means consumers learn it once."
+link = "playbook/architecture/api-standards.md"
+
+[[statements]]
+id = "architecture.idempotency-key"
+area = "architecture"
+level = "standard"
+statement = "Unsafe POST requests, such as payments, should accept an Idempotency-Key so that retries do not create duplicates."
+answer = true
+explanation = "Networks fail after a request is processed but before the reply arrives, so clients retry. Without an idempotency key, a retry can charge a customer twice. Test the retry path, not only the happy path."
+link = "playbook/architecture/api-standards.md"
+
+[[statements]]
+id = "architecture.copy-external-radar"
+area = "architecture"
+level = "standard"
+statement = "You can copy the rings from a well-known external tech radar, because what works elsewhere will work for you."
+answer = false
+explanation = "External radars show what works in other organisations. Your rings depend on your own skills, scale and hosting. An Adopt entry must also be something your platform team can support on the golden path."
+link = "playbook/architecture/tech-radar.md"
+
+[[statements]]
+id = "architecture.rfc-needs-consensus"
+area = "architecture"
+level = "standard"
+statement = "An RFC can be decided by one named approver even when some commenters still disagree."
+answer = true
+explanation = "Waiting for full agreement leads to comment periods that never end and design by committee. Each RFC has a fixed time box and one named approver who decides with the information available. Consensus is welcome, not required."
+link = "playbook/architecture/rfcs.md"
+
+# ---------------------------------------------------------------- platform
+
+[[statements]]
+id = "platform.kubernetes-small-team"
+area = "platform"
+level = "foundation"
+statement = "Kubernetes is the right default for one small team running three services."
+answer = false
+explanation = "Kubernetes brings real operating work: upgrades, security, networking and skills. For a small team, a PaaS or managed containers meet the need with far less effort. Choose Kubernetes when you need its control or must run the same way on-premises or air-gapped."
+link = "playbook/platform/cloud-native.md"
+
+[[statements]]
+id = "platform.mesh-for-the-future"
+area = "platform"
+level = "standard"
+statement = "Installing a service mesh early saves effort later, even before you need one."
+answer = false
+explanation = "A service mesh adds moving parts that someone has to run, upgrade and debug. Add it only when a measured need exists and someone owns it. The same rule applies to multiple clusters and multiple regions."
+link = "playbook/platform/cloud-native.md"
+
+[[statements]]
+id = "platform.platform-for-15"
+area = "platform"
+level = "standard"
+statement = "An organisation with 15 engineers is usually better served by managed services and a good template than by its own developer platform."
+answer = true
+explanation = "With one or two teams, a platform team costs more than it saves. Start one when 3 or more teams repeat the same infrastructure work, or at about 40 engineers. Air-gapped organisations may need one earlier, because they cannot buy managed services."
+link = "playbook/platform/developer-platform.md"
+
+[[statements]]
+id = "platform.mandatory-golden-path"
+area = "platform"
+level = "standard"
+statement = "A golden path should be optional, not mandatory."
+answer = true
+explanation = "A mandatory path that is slow makes teams route around it in secret. Make it the easiest route, not the only one, and measure time to first deploy. Teams that leave the path own the extra work and write down why."
+link = "playbook/platform/golden-paths.md"
+
+[[statements]]
+id = "platform.portal-first"
+area = "platform"
+level = "standard"
+statement = "Building a developer portal is a good first step for a new platform team."
+answer = false
+explanation = "A portal on top of manual steps is a slower ticket form. Build the self-service capabilities first: provisioning, pipelines, observability and secrets. Add a portal when there is something behind it."
+link = "playbook/platform/developer-platform.md"
+
+[[statements]]
+id = "platform.one-image"
+area = "platform"
+level = "foundation"
+statement = "The same container image should run in every environment, with configuration coming from the environment."
+answer = true
+explanation = "This is one of the Twelve-Factor principles. An image built per environment means production runs something you did not test. Build one image and inject configuration when it starts."
+link = "playbook/platform/cloud-native.md"
+
+[[statements]]
+id = "platform.commit-first"
+area = "platform"
+level = "standard"
+statement = "Buying reserved capacity or savings commitments is the first step to cutting a cloud bill."
+answer = false
+explanation = "Committing before rightsizing locks in waste for one to three years. Rightsize first, then commit only to the stable baseline. Make cost visible to the teams that create it so the savings last."
+link = "playbook/platform/finops.md"
+
+[[statements]]
+id = "platform.unit-cost"
+area = "platform"
+level = "standard"
+statement = "A rising cloud bill can be a good sign if the cost per unit of business value is falling."
+answer = true
+explanation = "When the business grows, total spend often rises too. Cost per order, per customer or per transaction shows whether you are getting more efficient. Track unit cost, not only the total."
+link = "playbook/platform/finops.md"
+
+[[statements]]
+id = "platform.offsets-lower-sci"
+area = "platform"
+level = "assured"
+statement = "Buying carbon offsets lowers a service's Software Carbon Intensity (SCI) score."
+answer = false
+explanation = "SCI, published as ISO/IEC 21031:2024, is a rate per unit of work. Offsets and renewable energy certificates do not change it. Only using less energy, cleaner energy or less hardware lowers the score."
+link = "playbook/platform/green-software.md"
+
+[[statements]]
+id = "platform.air-gap-lighter-process"
+area = "platform"
+level = "assured"
+statement = "An air-gapped site can use a lighter engineering process, because attackers cannot reach it from the internet."
+answer = false
+explanation = "Code, packages and people still cross the gap, so supply chain and insider risks remain. Run the same practices with different tools: code review, signed builds, scanned dependencies and tested restores. Build once, sign once and transfer the signed artifact."
+link = "playbook/platform/cloud-on-prem-air-gapped.md"
+
+# ------------------------------------------------------------------ people
+
+[[statements]]
+id = "people.assistant-wrote-it"
+area = "people"
+level = "foundation"
+statement = "If a code assistant wrote a line, the engineer who submitted it is not responsible for that line."
+answer = false
+explanation = "The engineer who opens a change owns every line of it, however it was produced. They must be able to explain, test and support it. 'The assistant wrote it' is not an answer in review or in a postmortem."
+link = "playbook/people/code-assistants.md"
+
+[[statements]]
+id = "people.same-review-bar"
+area = "people"
+level = "foundation"
+statement = "Code written with an assistant should face the same review standard and size limits as any other change."
+answer = true
+explanation = "The review bar does not change because a tool wrote the first draft. Same tests, same reviewers, same size limits and same security checks. Large generated pull requests waved through are a common failure."
+link = "playbook/people/code-assistants.md"
+
+[[statements]]
+id = "people.percent-generated"
+area = "people"
+level = "standard"
+statement = "The share of code generated by assistants is a good measure of their success."
+answer = false
+explanation = "More generated code does not mean better outcomes; it can mean more to review and more to fix. Watch the DORA metrics, review load and developer surveys. If change fail rate or rework rate rises after adoption, act before expanding use."
+link = "playbook/people/code-assistants.md"
+
+[[statements]]
+id = "people.unstructured-interviews"
+area = "people"
+level = "standard"
+statement = "Unstructured, conversational interviews predict job performance better than structured ones."
+answer = false
+explanation = "Research on selection methods (Schmidt and Hunter, 1998; Sackett and colleagues, 2022) finds the opposite. Structured interviews and work samples predict job performance better than unstructured conversations. Ask every candidate the same questions and score against a written scorecard."
+link = "playbook/people/hiring.md"
+
+[[statements]]
+id = "people.debrief-before-scores"
+area = "people"
+level = "standard"
+statement = "Interviewers should discuss a candidate as a group before writing down their scores."
+answer = false
+explanation = "Once people hear the most senior or most confident voice, their own judgement shifts towards it. Each interviewer completes the scorecard independently first. The debrief then compares written evidence."
+link = "playbook/people/hiring.md"
+
+[[statements]]
+id = "people.first-pr-first-week"
+area = "people"
+level = "foundation"
+statement = "A new engineer should merge a first pull request within their first week."
+answer = true
+explanation = "The playbook targets 5 working days or less, and 3 for a startup. That needs accounts ready and a working build on day one. A small, real first task chosen in advance makes it possible."
+link = "playbook/people/onboarding.md"
+
+[[statements]]
+id = "people.management-only-route"
+area = "people"
+level = "standard"
+statement = "Moving into management should be the only route to senior pay for engineers."
+answer = false
+explanation = "A single route turns good senior engineers into reluctant managers, or sends them elsewhere. Publish parallel individual contributor and manager tracks with equal pay bands up to senior levels. Define levels by scope of impact."
+link = "playbook/people/career-framework.md"
+
+[[statements]]
+id = "people.certifications-prove-skill"
+area = "people"
+level = "standard"
+statement = "Certifications such as CKA are the best measure of an engineer's skill."
+answer = false
+explanation = "Certifications give a structured syllabus and a signal, not proof of skill. Judge skill by the work people do. Pair any course with real work in the following weeks so it sticks."
+link = "playbook/people/skills-gap.md"
+
+[[statements]]
+id = "people.overtime-is-a-signal"
+area = "people"
+level = "foundation"
+statement = "Regular overtime is a sign that planning failed, not a sign of a committed team."
+answer = true
+explanation = "Tired engineers make more mistakes, and those mistakes reach production. Plan to about 80% of capacity and cut scope before adding hours. When a crunch does happen, give the time back."
+link = "playbook/people/sustainable-pace.md"
+
+[[statements]]
+id = "people.bus-factor-two"
+area = "people"
+level = "standard"
+statement = "Every critical system should have at least two people who can support it unaided."
+answer = true
+explanation = "With one expert, a resignation or a holiday becomes an outage risk. Aim for a bus factor of 2 or more, built through pairing and rotations. Record the risk with an owner and a date wherever the bus factor is below 2."
+link = "playbook/people/skills-gap.md"
+
+# ------------------------------------------------------------- measurement
+
+[[statements]]
+id = "measurement.rate-individuals"
+area = "measurement"
+level = "foundation"
+statement = "DORA metrics are a good way to rate individual engineers."
+answer = false
+explanation = "DORA metrics describe a system: a team, its tools and its process. The moment a metric becomes a target for people, it stops telling you the truth. Use the metrics to choose what to improve, never to rate individuals."
+link = "playbook/measurement/metrics.md"
+
+[[statements]]
+id = "measurement.speed-versus-stability"
+area = "measurement"
+level = "standard"
+statement = "In DORA's research, teams that deliver faster also tend to be more stable."
+answer = true
+explanation = "Throughput and stability move together, so teams do not have to trade one for the other. Small, frequent changes are easier to review, test and roll back. That is why the playbook always pairs speed metrics with instability metrics instead of treating them as a trade-off."
+link = "playbook/measurement/metrics.md"
+
+[[statements]]
+id = "measurement.five-dora-metrics"
+area = "measurement"
+level = "standard"
+statement = "DORA now tracks five software delivery metrics, including rework rate."
+answer = true
+explanation = "The five are deployment frequency, change lead time, failed deployment recovery time, change fail rate and rework rate. Rework rate is the share of deployments that are unplanned and caused by an incident in production. Failed deployment recovery time was formerly called mean time to restore."
+link = "playbook/measurement/metrics.md"
+
+[[statements]]
+id = "measurement.aim-for-elite"
+area = "measurement"
+level = "standard"
+statement = "The 2025 DORA report ranks teams as low, medium, high or elite, so every team should aim for elite."
+answer = false
+explanation = "The 2025 DORA report replaced the low, medium, high and elite tiers with team archetypes. Do not set targets by copying a tier threshold. Set them against your own baseline, for example 'halve change lead time in 2 quarters'."
+link = "playbook/measurement/metrics.md"
+
+[[statements]]
+id = "measurement.rank-teams"
+area = "measurement"
+level = "foundation"
+statement = "Ranking teams by deployment frequency helps the slower teams improve."
+answer = false
+explanation = "Teams work on different systems with different constraints, so a ranking mostly measures the context. It also invites gaming, such as splitting deploys to raise the count. Compare each team with its own baseline."
+link = "playbook/measurement/metrics.md"
+
+[[statements]]
+id = "measurement.assured-everywhere"
+area = "measurement"
+level = "foundation"
+statement = "For a startup with no regulatory overlay, Foundation is the right target level in every practice area, including security."
+answer = true
+explanation = "The levels are not grades. Foundation is the minimum that pays for itself immediately and is the default for solo engineers and startups. Assured adds evidence and separation of duties, which is worth its cost only where regulation, public accountability or real risk demands it."
+link = "playbook/measurement/maturity-model.md"
+
+[[statements]]
+id = "measurement.true-on-intent"
+area = "measurement"
+level = "foundation"
+statement = "In the self-assessment, you may answer true for a practice you plan to start next month."
+answer = false
+explanation = "An answer of true needs evidence that exists today. Answering on intent makes the report look better and the next actions wrong. Commit the answers to git and compare them each quarter."
+link = "playbook/measurement/maturity-model.md"
+
+[[statements]]
+id = "measurement.close-every-gap"
+area = "measurement"
+level = "standard"
+statement = "Working on every gap the self-assessment finds at the same time is the fastest way to improve."
+answer = false
+explanation = "Spreading effort across every gap means few of them close. The playbook works on at most 3 gaps per quarter, each with an owner. Reassess every quarter and pick the next ones."
+link = "playbook/measurement/maturity-model.md"
+
+[[statements]]
+id = "measurement.no-single-metric"
+area = "measurement"
+level = "standard"
+statement = "No single metric captures developer productivity."
+answer = true
+explanation = "The SPACE framework (Forsgren and colleagues, 2021) describes five dimensions of productivity. Use at least three of them. Mix survey data with data from your systems."
+link = "playbook/measurement/metrics.md"
+
+[[statements]]
+id = "measurement.speed-only"
+area = "measurement"
+level = "foundation"
+statement = "Deployment frequency and lead time on their own give a fair picture of delivery."
+answer = false
+explanation = "Speed metrics alone reward shipping fast, even when changes break things. Always pair throughput with instability metrics, such as change fail rate and rework rate, and with SLOs. Together they show whether faster delivery is also safe."
+link = "playbook/measurement/metrics.md"
+
+# -------------------------------------------------------------- compliance
+
+[[statements]]
+id = "compliance.regulators-want-cab"
+area = "compliance"
+level = "assured"
+statement = "Financial regulators generally require a weekly change advisory board meeting."
+answer = false
+explanation = "Regulators ask for control and evidence; they rarely require a specific meeting. Separation of duties can be enforced with branch protection and signed releases, with the pipeline producing the change record. Keep a change board for the small set of changes that automation cannot judge."
+link = "playbook/compliance/regulated-industries.md"
+
+[[statements]]
+id = "compliance.screenshots"
+area = "compliance"
+level = "standard"
+statement = "Screenshots are the best form of audit evidence, because auditors can see exactly what happened."
+answer = false
+explanation = "Screenshots are taken by hand, cannot be rerun and are easy to get wrong. Give auditors links and queries into systems of record that they can rerun themselves. The playbook aims for at least 80% of evidence requests answered that way."
+link = "playbook/compliance/control-mapping.md"
+
+[[statements]]
+id = "compliance.evidence-once"
+area = "compliance"
+level = "standard"
+statement = "One body of engineering evidence, such as pull request history and CI logs, can answer several frameworks at once."
+answer = true
+explanation = "Code review records support ISO/IEC 27001:2022 control 8.32 and SOC 2 CC8.1 at the same time. Map each practice to every framework in one register. Do the engineering work once and show the evidence many times."
+link = "playbook/compliance/control-mapping.md"
+
+[[statements]]
+id = "compliance.two-doras"
+area = "compliance"
+level = "standard"
+statement = "The EU DORA regulation and the DORA software delivery metrics come from the same programme."
+answer = false
+explanation = "EU DORA is the Digital Operational Resilience Act, Regulation (EU) 2022/2554, which applies to financial entities from 17 Jan 2025. The DORA metrics come from a separate research programme on software delivery. The two are unrelated and only share a name."
+link = "playbook/compliance/regulated-industries.md"
+
+[[statements]]
+id = "compliance.wcag-aa"
+area = "compliance"
+level = "assured"
+statement = "WCAG 2.2 level AA is a sensible minimum for every public sector web and mobile service."
+answer = true
+explanation = "WCAG 2.2 has been a W3C Recommendation since October 2023. Public services must work for everyone, and accessibility law applies in many countries. Check it with automated tests in CI and a manual audit at least once a year."
+link = "playbook/compliance/public-sector.md"
+
+[[statements]]
+id = "compliance.cra-reporting-first"
+area = "compliance"
+level = "assured"
+statement = "Under the EU Cyber Resilience Act, reporting of actively exploited vulnerabilities applies before most of the other obligations."
+answer = true
+explanation = "Reporting applies from 11 Sep 2026, with an early warning within 24 hours and a notification within 72 hours. Most other obligations apply from 11 Dec 2027. Have an owner, a draft notice and platform access ready before the first real case."
+link = "playbook/security/vulnerability-management.md"
+
+[[statements]]
+id = "compliance.supplier-owns-code"
+area = "compliance"
+level = "assured"
+statement = "In a public sector contract, it is harmless for the supplier to own the code it writes."
+answer = false
+explanation = "If the supplier owns the code, the public body is locked in and cannot easily change supplier or fix things itself. Contract for public ownership or an open licence. Smaller lots, shorter terms and exit clauses also keep the option to leave."
+link = "playbook/compliance/public-sector.md"
+
+[[statements]]
+id = "compliance.accessibility-once"
+area = "compliance"
+level = "assured"
+statement = "Testing accessibility once before launch is enough for a public service."
+answer = false
+explanation = "Every release can break accessibility again. Run automated accessibility checks in CI on every change. Add a manual audit at least once a year, because automated tools catch only part of the problems."
+link = "playbook/compliance/public-sector.md"
+
+[[statements]]
+id = "compliance.separation-of-duties"
+area = "compliance"
+level = "assured"
+statement = "Separation of duties can be enforced by branch protection and signed releases rather than by an approval meeting."
+answer = true
+explanation = "Branch protection stops an author from approving and merging their own change, and signed releases prove what was deployed. Both produce evidence as a side effect of normal work. A meeting adds delay without adding that evidence."
+link = "playbook/compliance/regulated-industries.md"
+
+[[statements]]
+id = "compliance.disband-at-launch"
+area = "compliance"
+level = "assured"
+statement = "A government service team can be disbanded once the service launches."
+answer = false
+explanation = "A live service needs fixes, security updates and improvements for as long as citizens use it. Disbanding the team leaves it to decay until an expensive replacement project. Fund a persistent service team instead."
+link = "playbook/compliance/public-sector.md"
+
+# ----------------------------------------------------------------- leaders
+
+[[statements]]
+id = "leaders.two-way-doors"
+area = "leaders"
+level = "foundation"
+statement = "Most decisions are reversible 'two-way doors' and should be made quickly by an individual or a small group."
+answer = true
+explanation = "Jeff Bezos's 2015 Amazon shareholder letter separates Type 1 decisions, which are hard to reverse, from Type 2 decisions, which can be undone. Most decisions are Type 2. Giving them the heavy process meant for one-way doors makes an organisation slow."
+link = "leaders/decision-making.md"
+
+[[statements]]
+id = "leaders.pre-mortem"
+area = "leaders"
+level = "foundation"
+statement = "A pre-mortem asks the team to imagine that the project has already failed and to explain why."
+answer = true
+explanation = "Gary Klein described the method in Harvard Business Review in 2007. Treating the failure as a fact makes doubt a task instead of disloyalty, so people raise concerns they would otherwise keep quiet. Run it for heavy, hard-to-reverse decisions, while the plan can still change."
+link = "leaders/decision-making.md"
+
+[[statements]]
+id = "leaders.pay-the-ransom"
+area = "leaders"
+level = "standard"
+statement = "Paying the ransom is the quickest safe way to recover from a ransomware attack."
+answer = false
+explanation = "The UK NCSC and US CISA advise against paying, and paying does not guarantee that data will be decrypted or that stolen data will be deleted. Facilitating a payment can also breach sanctions rules, as the 2021 US Treasury OFAC advisory warns, so take legal advice. Recovery usually depends on immutable backups restored into a clean environment."
+link = "leaders/crisis-leadership.md"
+
+[[statements]]
+id = "leaders.cynefin-complex"
+area = "leaders"
+level = "standard"
+statement = "In a complex situation, the Cynefin framework suggests running small, safe experiments before committing to a course."
+answer = true
+explanation = "Snowden and Boone (Harvard Business Review, 2007) describe complex situations as ones where cause and effect are clear only in hindsight. There, leaders probe, sense and respond rather than apply a known best practice. A common failure is commissioning a long analysis when only an experiment will tell you the answer."
+link = "leaders/decision-making.md"
+
+[[statements]]
+id = "leaders.change-in-week-one"
+area = "leaders"
+level = "foundation"
+statement = "A new CTO should announce major changes in the first week to show decisive leadership."
+answer = false
+explanation = "New leaders fail more often from acting on a diagnosis they have not checked than from moving too slowly. Spend the first 30 days listening and measuring, and change little in the first month except what is unsafe. Reorganise only after the strategy is written."
+link = "leaders/first-90-days.md"
+
+[[statements]]
+id = "leaders.okrs-are-tasks"
+area = "leaders"
+level = "standard"
+statement = "OKR key results should be a list of tasks the team will complete."
+answer = false
+explanation = "A key result is a number with a baseline, a target and a data source, and it measures an outcome: a change in what users or systems do. A finished task list can leave the objective untouched. Andy Grove described the method in High Output Management (1983)."
+link = "leaders/strategy-toolkit.md"
+
+[[statements]]
+id = "leaders.time-model"
+area = "leaders"
+level = "standard"
+statement = "Gartner's TIME model sorts applications into Tolerate, Invest, Migrate and Eliminate."
+answer = true
+explanation = "TIME scores each application on business value and technical fit, then gives it one of four decisions. Invest in high value and good fit; eliminate low value and poor fit on a date, with an owner. Use it when run cost rises every year or nobody can list every application."
+link = "leaders/strategy-toolkit.md"
+
+[[statements]]
+id = "leaders.rehearse-crisis"
+area = "leaders"
+level = "standard"
+statement = "The executive team should rehearse a crisis, such as a cyber attack, at least twice a year."
+answer = true
+explanation = "The first time executives meet a crisis should not be the real one. A short exercise twice a year shows who decides, who speaks to customers and regulators, and what is missing. Track the findings like postmortem actions and report them to the board."
+link = "leaders/crisis-leadership.md"
+
+[[statements]]
+id = "leaders.wardley-map"
+area = "leaders"
+level = "standard"
+statement = "A Wardley map places the parts of a service on a scale from novel to commodity, which helps decide what to build and what to buy."
+answer = true
+explanation = "Simon Wardley's maps show the components a user need depends on and how far each has evolved, from genesis to commodity. Novel parts may be worth building. Parts that have moved to product or commodity are candidates to buy or adopt, and building a commodity in-house is a common, expensive mistake."
+link = "leaders/strategy-toolkit.md"
+
+[[statements]]
+id = "leaders.board-leaves-cyber-to-it"
+area = "leaders"
+level = "standard"
+statement = "Cyber security is a technical matter that a board can safely leave to the IT department."
+answer = false
+explanation = "Boards and audit committees are accountable for technology risk, including cyber risk. The UK NCSC Board Toolkit is written for board members, with questions to ask on topics such as risk management, suppliers and incident response. The board sets the risk appetite and checks it with a few measures each quarter."
+link = "leaders/board-and-executive-reporting.md"
