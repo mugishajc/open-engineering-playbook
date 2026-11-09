@@ -40,7 +40,7 @@ Systems tend to copy the communication structure of the organisation that builds
 - Draw the service boundaries you want, then shape teams to match.
 - Give each service exactly one owning team. Shared ownership means no ownership.
 - When a change regularly needs three or more teams, the boundary is wrong. Move the code or the people.
-- Check boundaries with data: count pull requests that touch code owned by more than one team. See [source control](../delivery/source-control.md) for CODEOWNERS.
+- Check boundaries with data: count pull requests that touch code owned by more than one team. As a starting threshold, if more than about 20% of a team's pull requests need another team's approval for a quarter, redraw the boundary. See [source control](../delivery/source-control.md) for CODEOWNERS.
 
 ## Cognitive load
 

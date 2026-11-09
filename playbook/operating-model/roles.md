@@ -36,7 +36,7 @@ These are separation-of-duties limits for the Assured level. At Foundation, writ
 |---|---|
 | Writing a production change | approving the same change |
 | Granting privileged access | using that access |
-| Accepting a security risk | owning the system the risk is in |
+| Requesting a security waiver | approving the same waiver |
 | Running the backup process | verifying restores for audit |
 | Choosing a supplier | approving payment to that supplier |
 | Building a model or AI system | validating it for production use |

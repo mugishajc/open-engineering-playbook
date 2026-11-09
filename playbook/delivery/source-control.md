@@ -57,7 +57,7 @@ Rules for release branches:
 ### Assured
 
 - **Signed commits on protected branches.** Require signatures with the `required_signatures` rule. Engineers sign with SSH keys, GPG keys, or Sigstore `gitsign` for keyless signing tied to company identity. With squash merge, the platform signs the final commit, so also require signed commits on the pull request branch if you need author-level proof.
-- **No bypass without a record.** Limit ruleset bypass to a break-glass group of 2 to 3 people. Every bypass creates a ticket that a second person reviews within 1 working day.
+- **No bypass without a record.** Limit ruleset bypass to a break-glass group of 2 to 3 people. Every bypass creates a ticket that a second person reviews: within 2 working days for an emergency change during a declared incident, within 1 working day for any other bypass (see [change management](../reliability/change-management.md)).
 - **Separation of duties.** The person who writes a change cannot be the only person who approves it. See [code review](code-review.md#assured).
 - **Audit trail.** Export repository audit logs (ruleset changes, permission changes, bypasses, force pushes) to your log store and keep them for your records retention period.
 - **Source provenance.** Track progress against the SLSA Source track (v1.2) so you can show that every change on a protected branch was reviewed and attributable. See [supply chain](../security/supply-chain.md).

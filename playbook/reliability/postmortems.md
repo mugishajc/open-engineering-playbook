@@ -50,8 +50,8 @@ Starting points. Tune them to your incident volume.
 
 3. **Track completion.** Report monthly: action items opened, closed, overdue, and the share of P1 items closed on time. Overdue P1 items go to the engineering lead's staff meeting.
 4. **A facilitator who was not involved** runs the review meeting for SEV1 incidents. They protect the blameless tone and ask the questions insiders skip.
-5. **Share widely.** Send each postmortem to all engineering. Hold a monthly 30-minute session where one team presents an incident to the rest. Tag postmortems by contributing factor (for example `config-change`, `capacity`, `dependency`, `alerting-gap`) so you can see patterns across a year.
-6. **Customer-facing summary** for SEV1 incidents that customers saw: what happened, impact, what you are changing. No internal names, no blame on suppliers.
+5. **Share widely.** Send each postmortem to all engineering. Hold a monthly 30-minute session where one team presents an incident to the rest. Tag postmortems by contributing factor, using the shared tag list in [root cause analysis](root-cause-analysis.md) (for example `change-config`, `capacity`, `dependency`, `alerting-gap`), so you can see patterns across a year.
+6. **Customer-facing summary** for SEV1 and SEV2 incidents that customers saw: what happened, impact, what you are changing. No internal names, no blame on suppliers.
 
 ### Assured
 

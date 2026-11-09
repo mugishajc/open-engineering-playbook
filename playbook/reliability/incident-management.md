@@ -74,13 +74,24 @@ Everything in Standard, plus:
    | EU GDPR Art. 33 (and UK GDPR) | Data controller | Personal data breach | To the supervisory authority without undue delay and, where feasible, within 72 hours of becoming aware. Art. 34: tell affected people without undue delay when the risk to them is high. |
    | EU Cyber Resilience Act Art. 14 (Regulation (EU) 2024/2847), from 11 Sep 2026 | Manufacturers of products with digital elements | Actively exploited vulnerability, or severe incident affecting the security of the product | Early warning within 24 hours; notification within 72 hours; final report within 14 days of a fix being available (vulnerability) or within 1 month (severe incident). Submitted through the single reporting platform run by ENISA. |
    | EU NIS2 Directive Art. 23 ((EU) 2022/2555) | Essential and important entities, as defined in national law | Significant incident | Early warning within 24 hours; incident notification within 72 hours; final report within 1 month. National laws add detail. |
-   | EU DORA (Regulation (EU) 2022/2554) | EU financial entities | Major ICT-related incident | Its own classification and reporting regime, with deadlines set in technical standards. Confirm current timelines with your compliance team. |
+   | EU DORA (Regulation (EU) 2022/2554) | EU financial entities | Major ICT-related incident | Its own classification criteria and deadlines, set in technical standards under Art. 20: initial notification within 4 hours of classifying the incident as major and no later than 24 hours after becoming aware of it; intermediate report within 72 hours; final report within 1 month. Confirm current timelines with your compliance team. |
    | Other data protection laws | Varies | Personal data breach | Many laws have their own clocks, for example Kenya, Nigeria, Brazil and India. List the ones that apply to you, with deadlines, in this checklist. |
 
    This table is not legal advice. Check the current text of each law.
 2. **Evidence.** Keep the incident log, chat export, timeline and decisions for the retention period your regulator or auditor requires. This supports ISO/IEC 27001:2022 controls 5.24 to 5.28 and SOC 2 CC7.3 to CC7.5.
 3. **Security incidents have a parallel track.** Preserve evidence before rebuilding hosts (snapshot disks, export logs). Bring in the security lead as a co-commander. NIST SP 800-61 Rev. 3 describes the security incident response process in CSF 2.0 terms.
 4. **Customer notification approvals.** Pre-approve wording for common cases so the communications lead does not wait for sign-off during a SEV1.
+
+## In the AI era
+
+AI assistants can save responders time during an incident. They can also act fast on a wrong idea. Give them the scribe's and researcher's jobs, not the operator's.
+
+- **Good uses.** Summarise the incident channel for someone joining late. Draft the next status update for the communications lead to edit. Search logs, traces, recent deployments, past postmortems and runbooks, and show the sources it used. Build the first draft of the postmortem timeline from the log.
+- **Read-only by default.** The assistant's credentials can read telemetry, tickets and documents. They cannot change production, configuration, flags or access.
+- **A human approves every action.** If an assistant proposes a command, rollback or flag change, a named responder reads it, decides and runs it. The scribe logs it as that person's action. The incident commander's authority does not move to a tool.
+- **Treat output as a lead, not a finding.** Check every claimed cause against the evidence it cites before acting. A fluent summary can be wrong.
+- **Mind the data.** Incident channels hold customer data, secrets pasted by mistake and security details. Use only assistants approved for that data class (see [code assistants](../people/code-assistants.md)), and keep a security incident's details out of any tool outside your control.
+- **AI features fail too.** When an AI feature itself misbehaves (harmful output, data leak, runaway cost), the fastest mitigation is usually its kill switch or a rollback to the previous prompt or model version. See [release management](../delivery/release-management.md#in-the-ai-era), [AI engineering practices](../ai/ai-engineering-practices.md) and [AI architecture patterns](../ai/ai-architecture-patterns.md).
 
 ## Cloud, on-premises and air-gapped
 

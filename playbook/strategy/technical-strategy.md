@@ -31,7 +31,7 @@ Place each action on one horizon. Review each horizon at a different depth.
 | Horizon | Time span (starting point) | Detail required | Commitment |
 |---|---|---|---|
 | Now | current quarter | owner, dates, measure, budget | committed and funded |
-| Next | 2 to 4 quarters | owner and expected outcome | planned, funding requested |
+| Next | the following 1 to 3 quarters | owner and expected outcome | planned, funding requested |
 | Later | 1 to 3 years | direction only | options kept open on purpose |
 
 Move an item from Later to Next only with a decision record. Remove Later items that have not moved in four quarters, or write one sentence on why they stay.

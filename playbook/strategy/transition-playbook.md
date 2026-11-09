@@ -152,12 +152,13 @@ For a Scale-up or Enterprise starting from zero. Shrink each step for smaller pr
 | Days | Focus | Done when |
 |---|---|---|
 | 1 to 10 | Sponsor, scope, team | sponsor named, programme lead named, Assess funded |
-| 11 to 30 | Baseline and dependency map | 4 weeks of metrics, dependency map covers 80% of scope |
+| 11 to 30 | Baseline and dependency map | at least 4 weeks of metrics (pulled from existing CI, incident and cost systems), dependency map covers 80% of scope |
 | 31 to 40 | Options and business case | 2 to 4 options costed, including "improve what we have" |
 | 41 to 50 | Decide gate | charter signed, decision record merged, pilot team agreed |
 | 51 to 60 | Pilot setup | minimum tooling ready, rollback tested, parallel run configured |
-| 61 to 85 | Pilot running | first production change on new path, fortnightly retrospectives held |
-| 86 to 90 | Pilot gate | pilot report published, gate decision written |
+| 61 to 90 | Pilot running | first production changes on the new path, two retrospectives held, midpoint review against exit criteria written |
+
+The plan compresses Assess and Decide to their shortest, which works only when baseline data already exists in your tools. The Pilot gate falls after day 90: a pilot runs 6 to 16 weeks (see the phase table) and must ship at least 10 times or run 4 weeks, whichever is longer.
 
 ## Cloud, on-premises and air-gapped
 

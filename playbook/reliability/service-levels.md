@@ -8,7 +8,7 @@ Starting points. Tune them to your services and risk appetite.
 
 - Every Tier 1 and Tier 2 service (tiers defined in [production readiness](production-readiness.md)) has 2 or 3 SLOs, each with a named owner.
 - At least 80% of pages come from SLO burn-rate alerts, not from cause-based alerts such as CPU or disk.
-- On-call engineers receive no more than 2 actionable pages per 12-hour shift on average (see [on-call](on-call.md)).
+- On-call engineers handle no more than 2 incidents per 12-hour shift on average, the limit in the Google SRE book (see [on-call](on-call.md)).
 - SLOs and the error budget policy are reviewed every quarter, and the review is recorded.
 - When a service exhausts its error budget, the error budget policy is applied within 1 working day.
 

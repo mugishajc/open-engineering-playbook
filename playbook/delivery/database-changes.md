@@ -21,7 +21,7 @@ Also called parallel change. Example: rename `customer.fullname` to `customer.di
 | Step | Release | Schema | Application |
 |---|---|---|---|
 | 1. Expand | N | Add `display_name`, nullable | Writes both columns, reads `fullname` |
-| 2. Backfill | N (background job) | Copy `fullname` into `display_name` in batches | No change |
+| 2. Backfill | N (background job, started only after release N is fully rolled out) | Copy `fullname` into `display_name` in batches | No change |
 | 3. Switch reads | N+1 | Add constraints if needed (`NOT NULL`) once backfill is complete | Reads `display_name`, still writes both |
 | 4. Stop old writes | N+2 | No change | Writes only `display_name` |
 | 5. Contract | N+3, after a backup | Drop `fullname` | No change |

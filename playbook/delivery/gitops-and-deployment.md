@@ -13,7 +13,7 @@ Starting targets. Tune them to your platform.
 | Drift between Git and a running environment | Detected within 15 minutes, resolved within 1 working day |
 | Production rollouts that use staged delivery with automatic analysis | 100% of user-facing services at Standard |
 | Configuration and content changes rolled out in stages | 100% for anything that can stop the service |
-| Rollback time (decision to previous version serving traffic) | Under 5 minutes |
+| Rollback time (decision to previous version serving all traffic) | Under 15 minutes, the limit in [rollbacks](../reliability/rollbacks.md); a Git revert with automatic sync usually achieves under 5 |
 
 ## GitOps in four principles
 
@@ -44,7 +44,7 @@ Every strategy except recreate runs two versions at once, so every change must b
 
 - **Deploys are code.** Every environment is described in Git (manifests, Helm values, Compose files or IaC). A person changes Git, not the server.
 - **Build once, deploy many.** Environments reference an artifact by version or, better, by image digest. See [environments](environments.md).
-- **Rolling deploys with health checks.** Readiness and liveness checks that test real dependencies, and a maximum unavailable count of 0 for services that must stay up.
+- **Rolling deploys with health checks.** A readiness check that confirms the instance can serve real requests, a liveness check that tests only the process itself, and a maximum unavailable count of 0 for services that must stay up. Never make liveness depend on a database or downstream service: when that dependency fails, every instance restarts at once and a partial outage becomes a full one.
 - **Practise rollback.** Revert the Git change and let the deploy run, at least once a quarter. See [release management](release-management.md).
 - **Solo and startup:** a single CI job that deploys from `main` is fine. Move to a pull-based agent when you have more than one cluster or environment to keep in sync.
 
@@ -53,7 +53,7 @@ Every strategy except recreate runs two versions at once, so every change must b
 - **GitOps agent per cluster or environment** (Argo CD or Flux) with automatic sync and self-heal turned on for application workloads. Templates: [Argo CD Application](../../templates/platform/argocd-application.yaml), [Kubernetes service baseline](../../templates/platform/k8s-service-baseline.yaml).
 - **Repository layout.** Keep application source and environment configuration in separate repositories, or separate directories with separate owners. Use one directory per environment (for example `envs/staging`, `envs/production`) on one branch. Avoid one branch per environment: branches drift and merges between them hide changes.
 - **Promotion.** Promote by changing the image digest in the next environment's directory through a pull request, opened automatically after the previous environment passes its checks. The pull request is the record.
-- **Progressive delivery.** Use Argo Rollouts or Flagger to run canary steps (for example 5%, 25%, 50%, 100%) with analysis against error rate and latency from your metrics system. Abort and roll back automatically when analysis fails.
+- **Progressive delivery.** Use Argo Rollouts or Flagger to run canary steps (for example 1%, 10%, 50%, 100%, holding each step at least 10 minutes; start at 5% or more when 1% of traffic gives too few requests to compare) with analysis against error rate and latency from your metrics system. Abort and roll back automatically when analysis fails.
 - **Drift detection.** The agent alerts when live state differs from Git. Manual changes are reverted by self-heal or turned into a pull request within 1 working day.
 - **Secrets.** Do not store plain secrets in Git. Use an external secrets operator that reads from Vault, OpenBao or a cloud secret manager, or encrypt with SOPS or Sealed Secrets. See [secrets](../security/secrets.md).
 - **Sync windows** instead of freezes: block automatic production sync during agreed high-risk periods, with an override for incident fixes.

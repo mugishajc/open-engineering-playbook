@@ -2,12 +2,6 @@
 
 Replace the weekly change advisory board (CAB) for routine changes with automated controls that run on every change: peer review, passing CI, and a deployment pipeline that records who changed what and when. These controls catch more problems than a meeting reading change tickets, and they produce the evidence auditors need for ISO/IEC 27001:2022 control 8.32 and SOC 2 CC8.1 as a side effect. Keep human approval boards for the small number of changes that are risky across teams.
 
-## Why the weekly CAB goes
-
-The research programme behind the DORA metrics found that approval by an external body, such as a manager or a CAB, did not improve stability and was linked to slower delivery. Peer review plus automated testing did better. Large changes batched for a weekly meeting are harder to review, harder to roll back and fail more often. Small changes reviewed by people who understand the code are safer.
-
-Neither ISO/IEC 27001 nor SOC 2 requires a CAB. Both require that changes are controlled: planned, tested, approved, recorded and reversible.
-
 ## Outcomes
 
 Starting points. Tune them to your risk.
@@ -18,6 +12,12 @@ Starting points. Tune them to your risk.
 - Every emergency change has a retrospective review within 2 working days.
 - For any production deployment, the change record (pull request, reviewer, CI run, deployer, time) can be produced in under 5 minutes.
 - Change fail rate and failed deployment recovery time are reported monthly (see [metrics](../measurement/metrics.md)).
+
+## Why the weekly CAB goes
+
+The research programme behind the DORA metrics found that approval by an external body, such as a manager or a CAB, did not improve stability and was linked to slower delivery. Peer review plus automated testing did better. Large changes batched for a weekly meeting are harder to review, harder to roll back and fail more often. Small changes reviewed by people who understand the code are safer.
+
+Neither ISO/IEC 27001 nor SOC 2 requires a CAB. Both require that changes are controlled: planned, tested, approved, recorded and reversible.
 
 ## Change types
 
@@ -55,7 +55,7 @@ Teams move a change type from normal to standard by showing a track record: for 
 2. **Configuration and content are changes.** Feature flag changes, rule files, routing tables and content pushes go through review and staged rollout. The July 2024 CrowdStrike Falcon incident came from a content configuration update that crashed Windows hosts worldwide. The vendor's own review commits to a staggered deployment for that content, starting with a canary.
 3. **Normal changes** get a short written plan in the pull request: risk, rollback steps, who is watching, when. No meeting unless reviewers ask for one.
 4. **Emergency changes** are labelled in the pipeline. A second engineer reviews within 2 working days and records the outcome.
-5. **Freezes are rare and short.** Freezes push changes into a big batch afterwards. If you freeze (for example around a national tax deadline), keep it under 2 weeks and allow standard fixes through.
+5. **Freezes are rare and short.** Freezes push changes into a big batch afterwards. If you freeze (for example around a national tax deadline), keep it to a few days and never more than 2 weeks, let security and incident fixes through as emergency changes, and restart with small batches. See [release management](../delivery/release-management.md).
 6. **Use the change data.** Once a month, look at change fail rate by service and change type. Services with high failure rates get more controls; reliable change types get fewer.
 
 ### Assured
@@ -71,7 +71,7 @@ Everything in Standard, plus:
    | SOC 2 CC8.1: changes are authorised, designed, developed, configured, documented, tested, approved and implemented | Ticket link (authorised), pull request (designed, documented), CI (tested), approval (approved), deployment log (implemented) |
 
    See [control mapping](../compliance/control-mapping.md) for the wider map.
-2. **No silent bypass.** Administrators are not exempt from rulesets. Any bypass is logged, alerted and reviewed within 1 working day.
+2. **No silent bypass.** Administrators are not exempt from rulesets. Every bypass is logged and alerted. A bypass outside a declared incident is reviewed within 1 working day, because it has no incident to explain it; an emergency change during an incident follows the 2-working-day rule above.
 3. **Evidence on demand.** A script or report produces, for any period, each production deployment with its pull request, reviewers, CI run and deployer. Auditors sample from it instead of asking engineers for screenshots.
 4. **Retention.** Keep change records for at least 12 months, or as long as your regulator requires.
 5. **A risk-based board, not a weekly one.** If a regulator or policy requires a CAB, use it for normal changes that cross teams and for reviewing change data monthly. Standard changes are pre-approved by the board through the policy itself.

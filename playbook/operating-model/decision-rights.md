@@ -55,7 +55,8 @@ Adapt the columns to your organisation. In a startup, TL, SP, EM, HoE and CTO ma
 Notes on specific rows:
 
 - **Row 5 and 6.** In Assured setups the merge approver must be a different person from the author, enforced by branch protection. See [code review](../delivery/code-review.md) and [release management](../delivery/release-management.md).
-- **Row 7.** The incident commander can act first and record afterwards. A retrospective approval is due within 2 working days. See [change management](../reliability/change-management.md).
+- **Rows 7 and 8.** During a declared incident the incident commander holds the "A", whatever their usual role, and can act first and record afterwards. A retrospective review is due within 2 working days. Outside an incident, the on-call engineer may roll back their own service without asking, because rollback is the default response (see [rollbacks](../reliability/rollbacks.md)). See [change management](../reliability/change-management.md).
+- **Row 9.** In Assured setups the service owner proposes the SLO and a reliability or risk function approves it, so the column holding "A" changes. See [service levels](../reliability/service-levels.md).
 - **Row 10.** Every accepted risk has an expiry date of no more than 12 months.
 - **Row 20.** Public sector and Regulated users add the data protection officer as consulted.
 

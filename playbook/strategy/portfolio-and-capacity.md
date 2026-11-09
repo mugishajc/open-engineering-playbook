@@ -35,6 +35,8 @@ Planning only features hides real work. Agree an explicit split for each team or
 | Technical debt | refactoring, upgrades, removing dead code, see [technical debt](../architecture/technical-debt.md) | 10% to 20% |
 | Platform and runway | shared tooling, [architecture runway](../architecture/architecture-practice.md), developer experience | 5% to 15% |
 
+A worked starting split for a product team: 60% features, 20% reliability (including unplanned and support work), 15% debt, 5% platform. The same four categories are used in [planning and forecasting](../ways-of-working/planning-and-forecasting.md), [product partnership](../ways-of-working/product-partnership.md) and the [team working agreement](../../templates/docs/team-working-agreement.md).
+
 Adjust the split with evidence:
 
 - if the error budget is spent (see [service levels](../reliability/service-levels.md)), move capacity to reliability until it recovers;
@@ -59,10 +61,10 @@ Public sector bodies often cannot carry money between budget years. Plan so that
 
 A roadmap is a forecast, not a promise. Show it that way.
 
-- Use three columns: **Now** (committed, this quarter), **Next** (planned, 1 to 2 quarters), **Later** (direction only). This matches the horizons in the [technical strategy](technical-strategy.md).
+- Use three columns: **Now** (committed, this quarter), **Next** (planned, the following 1 to 3 quarters), **Later** (direction only). This matches the horizons in the [technical strategy](technical-strategy.md).
 - For dated items, forecast from measured throughput (items finished per week), not from story point velocity. Run a Monte Carlo simulation over past throughput and report dates at 50% and 85% confidence. See [planning and forecasting](../ways-of-working/planning-and-forecasting.md).
 - State the confidence on every date. "85% likely by 30 June" is honest. "Due 30 June" invites a surprise.
-- Re-forecast every 2 weeks. Report changes as soon as the 85% date moves by more than two weeks.
+- Teams re-forecast weekly (see [planning and forecasting](../ways-of-working/planning-and-forecasting.md)); the portfolio rolls those forecasts up every 2 weeks. Report a change to stakeholders as soon as an 85% date moves by more than two weeks.
 
 ## Wardley mapping for situational awareness
 

@@ -11,7 +11,7 @@ Starting targets. Compare them with the DORA delivery metrics in [metrics](../me
 | Deployment frequency | At least daily per service | One release train every 2 to 6 weeks, patches as needed |
 | Change lead time (merge to production) | Under 1 day | Under one train interval |
 | Change fail rate | Under 15% | Under 15% of releases need a patch |
-| Failed deployment recovery time | Under 1 hour | Patch release within 5 working days, or within 2 days for actively exploited vulnerabilities |
+| Failed deployment recovery time | Under 1 hour | Patch release within 5 working days, or within 72 hours for actively exploited vulnerabilities (P0 in [vulnerability management](../security/vulnerability-management.md)) |
 | Rollback decision after a release alarm | Within 15 minutes | Workaround or advisory to customers within 1 working day |
 | Release notes published with every release | 100% | 100% |
 
@@ -46,7 +46,7 @@ Default: continuous delivery for anything you operate yourself. Pick release tra
   - Whatever the method, both versions run together for a while, so every change must be backward compatible. See [database changes](database-changes.md).
 - **Automated release gates** based on [service levels](../reliability/service-levels.md): stop promotion when the error budget burn rate is high.
 - **Release notes** in the changelog and, for user-facing products, in plain language for customers.
-- **Freeze windows: minimise them.** A freeze builds up a batch of changes that then ship together, which raises risk. Prefer slowing down (smaller canary steps, more approvals) over stopping. If the business needs a freeze (for example a national tax deadline or peak trading), keep it short (days, not weeks), allow security and incident fixes through an exception process, and plan a gentle restart with small batches.
+- **Freeze windows: minimise them.** A freeze builds up a batch of changes that then ship together, which raises risk. Prefer slowing down (smaller canary steps, more approvals) over stopping. If the business needs a freeze (for example a national tax deadline or peak trading), keep it short (a few days, and no more than 2 weeks), allow security and incident fixes through an exception process, and plan a gentle restart with small batches.
 - **Deployment records.** Every production deployment is logged with version, time, who or what triggered it, and the change it contains. Link this to [change management](../reliability/change-management.md).
 
 ### Assured
@@ -80,6 +80,18 @@ For software customers install, publish a support policy before the first custom
 | Security fixes | Back-ported to every supported line |
 
 Every extra supported line multiplies test and back-port effort. Keep the count low and say so in contracts.
+
+## In the AI era
+
+An AI feature can change behaviour without a code change. Prompts, model versions, retrieval indexes, tool definitions and safety filters are all release artifacts.
+
+- **Version each one.** Prompts and tool definitions live in the repository. The model is referenced by an exact version, never an alias that the provider can move. A retrieval index has a build identifier that names its source data snapshot and embedding model.
+- **Release them through the pipeline.** A change to any of them passes the evaluation gate in CI (see [continuous integration](continuous-integration.md#in-the-ai-era)), gets a changelog entry and a deployment record, like code.
+- **Canary them.** Send a small share of traffic to the new prompt, model or index and compare evaluation scores, user feedback signals, refusal rate, latency and cost per request against the current version before going further.
+- **Keep the previous version ready.** Rolling back means switching to the previous prompt version, model version or index build within the same 15-minute limit as code (see [rollbacks](../reliability/rollbacks.md)). Keep the previous index built and loadable; rebuilding an index during an incident can take hours.
+- **Plan for provider retirement.** Hosted models are retired on the provider's schedule. Track retirement dates, and test the replacement version against your evaluation set before you are forced to switch.
+
+See [AI engineering practices](../ai/ai-engineering-practices.md) and [AI architecture patterns](../ai/ai-architecture-patterns.md).
 
 ## Cloud, on-premises and air-gapped
 

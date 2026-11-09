@@ -56,6 +56,17 @@ Starting targets. Tune them after a month of data.
 - **Pipeline changes are changes.** Treat workflow edits like production changes, with code owner review and a record. This supports ISO/IEC 27001:2022 Annex A 8.32 and 8.25, SOC 2 CC8.1, and NIST SSDF PO.3 (implement supporting toolchains) and PS.1 (protect all forms of code).
 - **OpenSSF Scorecard** runs weekly on every repository. Checks such as Pinned-Dependencies, Token-Permissions, Dangerous-Workflow and Branch-Protection map directly to this page.
 
+## In the AI era
+
+- **Evaluation gates run like tests.** A product feature built on a language model has an evaluation set with pass thresholds (see [quality engineering](../quality/quality-engineering.md#in-the-ai-era)). CI runs it on every change to a prompt, model version, retrieval configuration or tool definition, and a failed threshold blocks merge exactly as a failed unit test does. Keep the gating set small enough to fit the 10-minute budget (often 50 to 200 cases) and run the full set nightly.
+- **Pin the model.** CI calls a pinned model version, not an alias such as "latest", so a provider update cannot change results between two runs of the same commit. Record the model version in the build output.
+- **Control evaluation cost.** Cache model responses keyed on prompt, input and model version for unchanged cases, and set a spending limit per pipeline run.
+- **Generated tests are code.** Tests drafted by an assistant go through the same review as any other code. Check that each one fails without the change and asserts the requirement, not whatever the implementation happens to do. See [test-driven development](../quality/test-driven-development.md).
+- **Coding agents get the least privilege of all.** An agent that runs in CI or opens pull requests uses a short-lived token scoped to one repository, with `contents: write` and `pull-requests: write` at most, no access to production secrets or deployment environments, and no bypass permission on rulesets. Its pull requests pass the same required checks and human approval as anyone else's. See [code review](code-review.md#in-the-ai-era).
+- **Untrusted input reaches agents too.** Issue text, pull request descriptions and file contents can carry prompt injection. Never give an agent that reads untrusted input a token that can merge, release or read secrets.
+
+See [AI engineering practices](../ai/ai-engineering-practices.md), [AI architecture patterns](../ai/ai-architecture-patterns.md) and [code assistants](../people/code-assistants.md).
+
 ## Cloud, on-premises and air-gapped
 
 - **Self-hosted runners.** GitHub Enterprise Server, GitLab self-managed, Gitea or Forgejo Actions all support self-hosted runners. Run them as ephemeral containers or VMs, one job each, with no shared workspace between jobs.

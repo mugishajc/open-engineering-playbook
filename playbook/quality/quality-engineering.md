@@ -44,7 +44,7 @@ The research supports a different model. The DORA programme lists test automatio
 - **Quality in production.** Some failures only appear with real traffic. Use [feature flags](../delivery/feature-flags.md), canary releases, synthetic checks on critical user paths, error tracking and [service level objectives](../reliability/service-levels.md). Fast detection and rollback are part of quality.
 - **Learn from escapes.** For every escaped defect above a severity threshold, ask which cheaper check could have caught it, and add that check. Review the list monthly.
 - **Non-functional quality has owners and budgets**: performance budgets (for example page weight, 95th percentile latency), accessibility against WCAG 2.2 AA, security checks. Check them in CI where you can.
-- **Quality characteristics.** Use ISO/IEC 25010 as a checklist of what "quality" can mean (functional suitability, performance efficiency, compatibility, usability, reliability, security, maintainability, portability and more) when you agree non-functional requirements.
+- **Quality characteristics.** Use ISO/IEC 25010:2023 as a checklist of what "quality" can mean when you agree non-functional requirements. Its nine characteristics are functional suitability, performance efficiency, compatibility, interaction capability (called usability in the 2011 edition), reliability, security, maintainability, flexibility (formerly portability) and safety.
 
 ### Assured
 
@@ -52,6 +52,20 @@ The research supports a different model. The DORA programme lists test automatio
 - **Test evidence as a record.** Keep test results per release, tied to the commit and artifact digest, for your retention period. This supports ISO/IEC 27001:2022 Annex A 8.29 and change evidence under 8.32.
 - **Requirements traceability** for regulated functions: requirement or control, the tests that verify it, the result for each release.
 - **Accessibility conformance** statements for public services, with dated manual testing. See [public sector](../compliance/public-sector.md).
+
+## In the AI era
+
+Features built on language models give different answers to the same input, so an exact-match assertion cannot test them. Test them with evaluation sets and thresholds instead.
+
+- **Evaluation set per feature.** Start with 50 to 200 real or realistic inputs, each with the expected outcome or a grading rule. Include the failure cases you care about most: refusals that should happen, personal data that must not leak, prompt injection attempts, empty and very long inputs.
+- **Thresholds, not single answers.** Define pass as a rate, for example "at least 95% of cases graded correct, and zero cases that leak personal data". A hard safety rule is a threshold of zero.
+- **Run it in CI.** Run the evaluation on every change to a prompt, model version, retrieval index or tool definition, and block merge when a threshold fails. Run a larger set nightly. See [continuous integration](../delivery/continuous-integration.md#in-the-ai-era).
+- **Repeat to measure variance.** Run each case 3 to 5 times, or pin sampling settings, so a pass is not luck. Track the pass rate over time, not one run.
+- **Check the graders.** Automated graders, including a model grading another model, need their own check: a person grades a sample (for example 50 cases a month) and you measure how often the grader agrees.
+- **Grow the set from production.** Every user complaint, escaped defect or incident adds at least one case, the same way a bug fix adds a regression test.
+- **Assured.** Keep evaluation results per release with the model version and prompt version, as test evidence.
+
+See [AI engineering practices](../ai/ai-engineering-practices.md), [AI architecture patterns](../ai/ai-architecture-patterns.md) and [code assistants](../people/code-assistants.md).
 
 ## Cloud, on-premises and air-gapped
 

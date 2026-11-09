@@ -45,7 +45,7 @@ Pick one framework as the language for the board and auditors (often COBIT in re
 ## Policies and risk appetite
 
 - Keep a short set of technology policies (security, acceptable use, data, AI, supplier, change, resilience), each approved by a named executive, each reviewed at least every 2 years.
-- Express risk appetite as thresholds the board can check, for example: "No more than 4 hours of unplanned downtime per quarter for tier 1 services", "Critical vulnerabilities on internet-facing systems fixed within 7 days", "No single supplier supports more than two critical functions without an approved exit plan". These are illustrative; set your own.
+- Express risk appetite as thresholds the board can check, for example: "No more than 4 hours of unplanned downtime per quarter for tier 1 services", "Actively exploited vulnerabilities on internet-facing systems fixed within 72 hours, other critical ones within 7 days", "No single supplier supports more than two critical functions without an approved exit plan". These are illustrative; set your own.
 - Link each threshold to a measure in the board report and to the risk register.
 
 ## Board report: a small set of measures
@@ -70,7 +70,7 @@ Write two or three sentences on what changed and what decision, if any, the boar
 
 ## Public sector IT governance
 
-- **Spend controls.** Many governments require approval from a central digital authority for technology spending above a threshold. In the UK, the Cabinet Office runs digital and technology spend controls. Engage early, during Assess in the [transition playbook](../strategy/transition-playbook.md).
+- **Spend controls.** Many governments require approval from a central digital authority for technology spending above a threshold. UK central government, for example, runs digital and technology spend controls; check which body runs them in your jurisdiction and what the threshold is. Engage early, during Assess in the [transition playbook](../strategy/transition-playbook.md).
 - **Assurance gates.** Large programmes pass independent review at fixed points, and citizen-facing services pass service assessments against the national service standard. Plan for them as gates with lead times.
 - **Accountability.** An accounting officer or senior responsible owner is personally accountable for value for money. Give them the same short report as a board.
 - **Transparency.** Publish spend, performance and decisions where policy requires. See [public sector](../compliance/public-sector.md).
