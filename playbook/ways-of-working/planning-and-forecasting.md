@@ -1,6 +1,6 @@
 # Planning and forecasting
 
-The problem: "Our estimates are always wrong, and every date we give becomes a promise we break." Estimating each task in hours or story points takes time and still misses, because most delay comes from waiting, interruptions and discovered work, not from slow typing. Forecast from what the team has actually finished (throughput), give dates as ranges with a stated confidence, and re-forecast every week. Spend the time saved on splitting work small and removing waits.
+The problem: estimates are usually wrong, and every date a team gives becomes a promise it breaks. Estimating each task in hours or story points takes time and still misses, because most delay comes from waiting, interruptions and discovered work, not from slow typing. Forecast from what the team has actually finished (throughput), give dates as ranges with a stated confidence, and re-forecast every week. Spend the time saved on splitting work small and removing waits.
 
 Code assistants shorten typing, not waiting, so throughput-based forecasting matters more as they spread. [Agile in the AI era](agile-in-the-ai-era.md) covers how planning changes when the bottleneck moves to framing, review and verification.
 
@@ -67,6 +67,7 @@ print(forecast_weeks([4, 6, 3, 5, 0, 7, 4, 5, 6, 3], items_left=40))
 
 ### Assured
 
+- Before you replace story points or change how time is recorded, agree with finance how development cost is evidenced for capitalisation (see [agile in the AI era](agile-in-the-ai-era.md#agree-it-with-finance-before-you-stop-estimating)).
 - Contracts and public-sector programmes often need fixed dates. Share forecasts with confidence levels and record each re-forecast and its reason, so the change history is auditable.
 - Report against outcomes and forecast ranges in programme governance, not against percent-complete of a task list.
 - Where procurement rules require a fixed scope, split it into small releases with acceptance at each one.

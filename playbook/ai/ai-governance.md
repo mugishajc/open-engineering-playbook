@@ -1,6 +1,6 @@
 # AI governance
 
-Many organisations have dozens of AI pilots, a few that reach production, and no clear view of which ones touch customers, personal data or decisions about people. Keep one register of AI use cases, classify each by risk, assess the higher-risk ones before production, and give each a named owner who monitors it. Make the process fast for low-risk uses, so teams do not route around it, and rigorous for the few that matter.
+Many organisations run AI pilots with no clear view of which ones touch customers, personal data or decisions about people. Keep one register of AI use cases, classify each by risk, assess the higher-risk ones before production, and give each a named owner who monitors it. Make the process fast for low-risk uses, so teams do not route around it, and rigorous for the few that matter.
 
 ## Outcomes
 
@@ -22,23 +22,34 @@ The playbook uses four tiers that line up with the EU AI Act categories. Organis
 
 | Playbook tier | EU AI Act category | Examples | What is required (starting point) |
 |---|---|---|---|
-| Not allowed | prohibited practices (Article 5) | social scoring, certain manipulative or exploitative systems | do not build or buy |
+| Not allowed | prohibited practices (Article 5) | social scoring, certain manipulative or exploitative systems; from 2 Dec 2026, systems that generate intimate images of an identifiable person without consent, or child sexual abuse material | do not build or buy |
 | High | high-risk (Article 6 and Annex III, or safety components of regulated products) | hiring and worker management, credit scoring, access to essential public services, education admission | full assessment, risk management, data governance, technical documentation, logging, human oversight, accuracy and security testing, independent review |
 | Medium | transparency obligations (Article 50) and internal systems with real impact | customer chatbots, generated content shown to the public, agents that change records | assessment, evaluations, disclosure to users, monitoring, human approval for irreversible actions |
-| Low | minimal risk | code assistants, internal summarisation of non-sensitive text, spam filtering | register entry, acceptable use policy, data rules |
+| Low | minimal risk | code assistants that only suggest text, internal summarisation of non-sensitive text, spam filtering | register entry, acceptable use policy, data rules |
 
-EU AI Act dates (check EUR-Lex for the consolidated text before you plan):
+The EU AI Act category sets the floor, not the ceiling. The Act measures harm to people; your tier must also cover harm to systems. Raise the internal tier to Medium for any system that can act on production, customer data or money, including coding agents that run commands, and apply the controls in [AI application security](ai-application-security.md).
+
+Legal duties do not wait for a maturity level. If the AI Act applies to you, its duties for your role (provider or deployer) and your systems apply whichever playbook level you have chosen.
+
+EU AI Act dates, as amended by the Digital Omnibus on AI, Regulation (EU) 2026/1744 (check EUR-Lex for the consolidated text before you plan):
 
 | Date | What applies |
 |---|---|
 | 1 Aug 2024 | Regulation (EU) 2024/1689 enters into force |
-| 2 Feb 2025 | Prohibited practices (Article 5) and AI literacy (Article 4) |
+| 2 Feb 2025 | Prohibited practices (Article 5) and AI literacy (Article 4, reworded in 2026) |
 | 2 Aug 2025 | Obligations for general-purpose AI models |
-| 2 Aug 2026 | Transparency duties in Article 50, such as telling people they are dealing with an AI system. The Omnibus added transition time for marking AI-generated content in systems already on the market; check the final text for the date that applies to you. |
+| 27 Jul 2026 | Regulation (EU) 2026/1744 enters into force |
+| 2 Aug 2026 | Transparency duties in Article 50, such as telling people they are dealing with an AI system and marking AI-generated content |
+| 2 Dec 2026 | Marking of AI-generated content (Article 50(2)) for systems placed on the market before 2 Aug 2026; new prohibited practices on non-consensual intimate imagery and child sexual abuse material (Article 5(1)(ba) and (bb)) |
 | 2 Dec 2027 | High-risk obligations for stand-alone (Annex III) systems, such as hiring, credit scoring and access to public services |
 | 2 Aug 2028 | High-risk obligations for AI in products covered by the EU safety laws in Annex I |
 
-The 2026 Digital Omnibus on AI, in force since 27 Jul 2026, set the high-risk dates above and adjusted some transparency timings. It also changed the AI literacy duty in Article 4; the Commission proposed a softer duty to support AI literacy, so check the wording of Regulation (EU) 2026/1744 before you rely on either version. Keep records of the training you give.
+The Omnibus also changed four things engineering teams notice:
+
+- **AI literacy (Article 4).** Providers and deployers must take measures to support the AI literacy of their staff and others who operate AI systems for them. The duty does not require any specific level of literacy for any individual. Keep records of the training you give.
+- **Bias detection (new Article 4a).** Providers of high-risk systems may process special category personal data where strictly necessary to detect and correct bias, under safeguards. Record the safeguards in the DPIA.
+- **Small mid-caps.** Simplified technical documentation, previously for SMEs, now also covers small mid-cap enterprises (SMCs).
+- **FRIA and DPIA.** A deployer can cross-reference its GDPR DPIA in the fundamental rights impact assessment (Article 27(4)) instead of repeating it.
 
 ## Lifecycle
 
@@ -105,7 +116,8 @@ Many organisations cannot send data to hosted model APIs. Self-hosted open-weigh
 ## Sources
 
 - EU AI Act, Regulation (EU) 2024/1689: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
-- ISO/IEC 42001:2023: https://www.iso.org/standard/81230.html
+- Digital Omnibus on AI, Regulation (EU) 2026/1744 (OJ 24 Jul 2026): https://eur-lex.europa.eu/eli/reg/2026/1744/oj
+- ISO/IEC 42001:2023: https://www.iso.org/standard/42001
 - NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework
 - NIST AI 600-1, Generative AI Profile: https://doi.org/10.6028/NIST.AI.600-1
 - OWASP Top 10 for LLM Applications: https://genai.owasp.org

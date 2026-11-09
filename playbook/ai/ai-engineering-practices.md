@@ -68,11 +68,13 @@ Several coding agents read a Markdown file at the repository root, commonly name
 | Merge rights | None. Rulesets require a human approval, and the agent is never a bypass actor. See [source control](../delivery/source-control.md). |
 | Execution | A disposable container or VM, no route to production, outbound traffic limited to the git host and the package mirror |
 | Secrets | None in the sandbox. Test credentials only. |
+| Branches | The agent pushes only to a fork, or to a branch prefix such as `agent/` whose CI jobs get no secrets |
+| CI secrets | Kept in deployment environments that only protected branches can use. Workflows that agent branches trigger see none. The agent's app never gets the `workflows` permission, so it cannot edit CI files. |
 | Dependencies | Installed only from your internal mirror or proxy |
 | Limits | Maximum run time, steps and spend per task |
 | Audit | Every command and tool call logged with the task ID, kept at least 90 days |
 
-The person who starts an agent is the author of its pull request. Issue text, comments and file contents can carry prompt injection, so an agent that reads untrusted input never holds a token that can merge, release or read secrets. See [continuous integration](../delivery/continuous-integration.md#in-the-ai-era).
+The person who starts an agent is the author of its pull request. Issue text, comments and file contents can carry prompt injection, so an agent that reads untrusted input never holds a token that can merge, release or read secrets. A narrow token is not enough on its own: an identity that can push a branch to the repository can change the `Makefile` or test scripts that CI runs, and on GitHub, workflows started from a branch in the same repository receive the repository's secrets. The branch and CI secrets rows above close that path. See [continuous integration](../delivery/continuous-integration.md#in-the-ai-era).
 
 ## Review, tests and evaluation
 
@@ -174,4 +176,5 @@ The incident commander is always a person. See [incident management](../reliabil
 - OpenTelemetry semantic conventions for generative AI: https://opentelemetry.io/docs/specs/semconv/gen-ai/
 - NIST SP 800-218A, Secure Software Development Practices for Generative AI and Dual-Use Foundation Models: https://csrc.nist.gov/pubs/sp/800/218/a/final
 - OWASP Top 10 for LLM Applications 2025: https://genai.owasp.org/llm-top-10/
+- GitHub, using secrets in GitHub Actions (secrets and forks): https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets
 - US Copyright Office, Copyright and Artificial Intelligence: https://www.copyright.gov/ai/

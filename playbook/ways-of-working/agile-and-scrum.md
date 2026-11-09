@@ -1,6 +1,6 @@
 # Agile and Scrum
 
-The problem: "We do all the Scrum ceremonies and nothing improves." Stand-ups become status reports, retrospectives produce the same complaints, and velocity charts become targets. Keep the parts of agile that create fast feedback (small batches, working software shown to real users, retrospectives that change something) and drop the rituals that do not. Pick the method that fits the work: Scrum, Kanban or Shape Up are all valid; cargo-culting any of them is not.
+The problem: many teams run every Scrum ceremony and see nothing improve. Stand-ups become status reports, retrospectives produce the same complaints, and velocity charts become targets. Keep the parts of agile that create fast feedback (small batches, working software shown to real users, retrospectives that change something) and drop the rituals that do not. Pick the method that fits the work: Scrum, Kanban or Shape Up are all valid; cargo-culting any of them is not.
 
 When code becomes cheap to produce, the bottleneck moves to framing the problem, review, verification and learning from users. [Agile in the AI era](agile-in-the-ai-era.md) explains how planning and ceremonies change as a result.
 
@@ -13,7 +13,7 @@ Starting targets. They measure feedback and flow, not ceremony attendance.
 | Working software shown to real users or their proxies | At least every 2 weeks |
 | Retrospective actions completed by the next retrospective | At least 70% |
 | Cycle time for a typical work item (start to done), 85th percentile | Under 10 working days |
-| Work in progress per team | No more items in progress than people on the team |
+| Work in progress per team | Fewer items in progress than people on the team (start at team size minus one) |
 | Time in recurring team meetings per engineer | Under 10% of the working week, as a starting point |
 | Change lead time (DORA) | Under 1 week, trending down |
 

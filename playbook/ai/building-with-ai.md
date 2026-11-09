@@ -18,7 +18,7 @@ Starting points. Tune them to your organisation.
 |---|---|
 | 1. Problem and assessment | A real user problem, a measurable success metric, a [use case assessment](../../templates/docs/ai-use-case-assessment.md) covering data, risk and legal basis. A non-AI baseline considered. |
 | 2. Prototype | Works on 20 to 50 hand-picked examples. Rough cost and latency per request known. |
-| 3. Eval set and threshold | 100 to 500 labelled examples covering normal, edge and adversarial cases. Pass threshold agreed. |
+| 3. Eval set and threshold | A labelled set covering normal, edge and adversarial cases: at least 100 to start, 200 to 500 before launch, with a 50 to 200 case gating subset for CI. Sizes are set in [quality engineering](../quality/quality-engineering.md#in-the-ai-era). Pass threshold agreed. |
 | 4. Hardening | Fallbacks, guardrails, rate limits, observability, security review against the OWASP Top 10 for LLM Applications (see [AI application security](ai-application-security.md)). |
 | 5. Limited release | Behind a feature flag to a small group. Online metrics and user feedback collected. |
 | 6. General release | Eval threshold met, budgets met, owner and on-call in place, governance sign-off. |
@@ -26,7 +26,7 @@ Starting points. Tune them to your organisation.
 ## Evals
 
 - **Offline evals** run on a fixed, versioned data set: exact-match checks where answers are well defined, rubric scoring where they are not, and safety checks (refusals, leakage, prompt injection).
-- **Model-graded evals** (one model scoring another) scale well but drift. Check them against human labels on a sample of at least 50 cases each quarter.
+- **Model-graded evals** (one model scoring another) scale well but drift. Check them against human labels on a sample of at least 50 cases a month per feature.
 - **Online evals** after launch: user feedback, task success rate, escalation to a human, and a weekly human review of a random sample of outputs.
 - Add every production failure to the eval set. The eval set is the regression test suite for model behaviour.
 

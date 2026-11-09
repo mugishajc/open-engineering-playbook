@@ -26,7 +26,7 @@ Starting points. Tune them to your organisation.
 
 ### Direct call with structured output
 
-Send one request, ask for a fixed schema (typed fields, an enum of allowed values), and validate the result in code before anything uses it. Retry once on a schema failure, then fall back. This pattern covers more use cases than teams expect, and it is the easiest to evaluate, cache and secure.
+Send one request, ask for a fixed schema (typed fields, an enum of allowed values), and validate the result in code before anything uses it. Use the provider's or inference server's schema-constrained output where it exists, since it removes most schema failures, and still validate. Retry once on a failure, then fall back. This pattern covers more use cases than teams expect, and it is the easiest to evaluate, cache and secure.
 
 ### Retrieval-augmented generation
 
@@ -34,7 +34,11 @@ Send one request, ask for a fixed schema (typed fields, an enum of allowed value
 - **Hybrid search.** Combine keyword search with vector search, then rerank. Keyword search finds exact terms such as product codes and names that embeddings miss.
 - **Freshness.** Give each index build an ID that names its data snapshot and embedding model. Update it incrementally, and propagate deletions within a set time (starting point: 24 hours), so erased personal data stops appearing in answers.
 - **Access control at retrieval time.** Filter by the requesting user's permissions in the query itself, not after generation. Use a separate index per tenant where data must never mix. See [AI application security](ai-application-security.md).
-- **Evaluate retrieval on its own.** Measure whether the right documents appear in the top results before measuring answer quality. Poor retrieval cannot be fixed by a better prompt.
+- **Evaluate retrieval on its own.** Measure whether the right documents appear in the top results (recall at k, plus a ranking measure such as mean reciprocal rank) on a labelled set of at least 100 queries, before measuring answer quality. Poor retrieval cannot be fixed by a better prompt.
+- **A new embedding model means a full re-index.** Vectors from two models cannot be compared. Build a new index, evaluate it, then switch. Never mix models in one index.
+- **Retrieved text is untrusted input.** A document can carry instructions. Mark it clearly as data in the prompt, and never let it widen what tools the model may call.
+- **Propagate permission changes, not only deletions,** within the same time limit as deletions.
+- **Test long context first for small corpora.** If the documents fit comfortably in the model's context window and change rarely, compare that against RAG on your evaluation set before you build an index.
 
 ### Tool-using agents and multi-agent workflows
 
@@ -54,14 +58,14 @@ One service between your applications and every model, hosted or self-hosted. Bu
 | Quotas | Rate limits and spend caps per user, team, tenant and feature |
 | Logging | Records model, version, tokens, latency, cost and trace ID |
 | Redaction | Masks personal data and secrets before requests leave your network |
-| Fallback | Retries on another provider or a self-hosted model when the first fails or is too slow |
+| Fallback | Switches to a second model that has passed the same evaluation set, with its own prompt version, when the first fails or is too slow. An unevaluated fallback is not a fallback. |
 | Data rules | Blocks a data class from going to a model not approved for it |
 
-Keep business logic and prompts out of the gateway. It is plumbing, owned by a platform team. See [developer platform](../platform/developer-platform.md).
+Keep business logic and prompts out of the gateway. It is plumbing, owned by a platform team. Every model call passes through it, so treat it as Tier 1: at least two instances, its own SLO, and a written fail-open or fail-closed decision per feature. Its logs hold prompts and provider keys pass through it, so its logs get the strictest access and retention rules in the estate. See [developer platform](../platform/developer-platform.md).
 
 ### Caching
 
-- **Exact cache:** key on model version, prompt version, parameters and input. Safe and cheap.
+- **Exact cache:** key on model version, prompt version, parameters, the full input including any retrieved context, and the tenant and permission scope of the caller. If the answer depends on who asks, the key must say who asks. Never share an entry across tenants.
 - **Semantic cache:** returns a stored answer for a similar question. Use it only for questions with one correct answer (help-centre questions, for example), within one tenant and one permission scope, with a tested similarity threshold.
 - **Invalidate** every cached entry when the model, prompt or index version changes, and set a time-to-live.
 
@@ -83,6 +87,10 @@ The Model Context Protocol (MCP) is an open protocol for connecting models and a
 - Treat every MCP server as third-party code with privileges. Keep an allow-list, pin versions and review updates.
 - Tool descriptions are read by the model, so a malicious or changed description can steer it. Review them like code.
 - Give each server its own scoped, short-lived credentials. A local server runs with the privileges of the user who started it.
+- A token issued for an MCP server is bound to that server (its audience) and is never forwarded to another API. The MCP specification forbids this token passthrough.
+- Record the tool descriptions you approved, with a hash. When a server changes them, review again before the agent uses the new version.
+- Local servers use the stdio transport, or listen on localhost only with authentication.
+- Record which MCP specification version each client and server uses, and test an upgrade like any other API change.
 - Do not let one agent combine untrusted input, access to sensitive data and a way to send data out. Remove at least one of the three.
 
 ### Self-hosted and on-premises models
@@ -110,7 +118,7 @@ Stream the first tokens where a person waits. Derive the cost budget from the va
 | A fixed workflow needs too many special cases | Allow an agent to choose steps, within limits |
 | Cost per outcome exceeds the budget at real volume | Route to smaller models, add caching, move work to batch |
 | Data class or law forbids sending data to a provider | Self-host for that workload |
-| One provider outage stops a critical feature | Fallback to a second provider or a self-hosted model |
+| One provider outage stops a critical feature | Fallback to a second provider or a self-hosted model that passes the same evaluation set |
 
 Change one layer at a time, behind a feature flag, and compare evaluation scores, cost and latency with the previous version before going further. The path most teams follow is: direct call, then gateway, then retrieval, then workflows with tools, then bounded agents, with self-hosting added per workload. See [scaling](../architecture/scaling.md) for the same principle in general systems.
 
@@ -156,6 +164,7 @@ Every pattern on this page works without the public internet if the model, index
 ## Sources
 
 - Model Context Protocol specification: https://modelcontextprotocol.io/
+- Model Context Protocol, security best practices (token passthrough, local servers): https://modelcontextprotocol.io/specification/latest/basic/security_best_practices
 - OWASP Top 10 for LLM Applications 2025: https://genai.owasp.org/llm-top-10/
 - OpenTelemetry semantic conventions for generative AI: https://opentelemetry.io/docs/specs/semconv/gen-ai/
 - NIST AI 600-1, Generative AI Profile: https://doi.org/10.6028/NIST.AI.600-1

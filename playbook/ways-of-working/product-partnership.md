@@ -1,6 +1,6 @@
 # Product partnership
 
-The problem: "Engineering is a feature factory." Product hands over specifications, engineering builds them, nobody checks whether they worked, and technical debt only gets attention after an outage. Make product, design and engineering jointly own outcomes: decide together what problem to solve, agree a visible split of capacity, and judge success by a change in user or business metrics, not by features shipped.
+The problem: engineering works as a feature factory. Product hands over specifications, engineering builds them, nobody checks whether they worked, and technical debt only gets attention after an outage. Make product, design and engineering jointly own outcomes: decide together what problem to solve, agree a visible split of capacity, and judge success by a change in user or business metrics, not by features shipped.
 
 ## Outcomes
 

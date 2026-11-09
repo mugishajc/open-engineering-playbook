@@ -10,7 +10,7 @@ Starting points. Tune them to your use cases.
 - 100% of AI agents run under their own non-human identity with scoped, short-lived credentials; zero agents use a person's credentials.
 - 100% of agent actions that move money, delete data, send messages outside the organisation or change production need human approval.
 - Every AI feature has an evaluation suite, including adversarial prompts, that runs in CI before each model, prompt or tool change.
-- Prompts, model outputs, tool calls and approvals are logged with trace IDs and kept for at least 90 days (starting point).
+- Prompts, model outputs, tool calls and approvals are logged with trace IDs and kept for at least 90 days (starting point); at least 6 months for high-risk systems under the EU AI Act (Articles 19 and 26(6)), or longer where sector law requires. Personal data is masked at write time; any unmasked copy sits in a restricted store with its own shorter retention.
 - Every AI feature has a spending cap and rate limits per user and per tenant.
 
 ## The OWASP Top 10 for LLM Applications 2025, with a control for each
@@ -28,7 +28,7 @@ Starting points. Tune them to your use cases.
 | LLM09 Misinformation | Model states false things confidently; users act on them | Ground answers in cited sources; show the sources; evaluate factual accuracy; human review for legal, medical, financial or safety outputs |
 | LLM10 Unbounded Consumption | Abuse drives cost or denial of service; model extraction by bulk queries | Per-user and per-tenant rate limits, token limits and spending caps; timeouts; alerts on cost anomalies |
 
-OWASP also publishes a separate Top 10 for Agentic Applications (for 2026). MITRE ATLAS catalogues real attack techniques against AI systems; use it in threat modelling and red teaming.
+OWASP also publishes a separate Top 10 for Agentic Applications (for 2026). MITRE ATLAS catalogues real attack techniques against AI systems; use it in threat modelling and red teaming. Teams that train or fine-tune models should also use NIST SP 800-218A, which adds AI-specific tasks to each practice of the Secure Software Development Framework.
 
 ## Prompt injection: design so the model cannot do much harm
 
@@ -66,7 +66,7 @@ No prompt wording, filter or classifier reliably stops prompt injection. Design 
 Everything in Standard, plus:
 
 1. **Risk management framework.** Run AI risk management under ISO/IEC 42001 or the NIST AI Risk Management Framework (Govern, Map, Measure, Manage), using NIST AI 600-1 for generative AI risks. See [AI governance](ai-governance.md).
-2. **EU AI Act.** High-risk systems must meet requirements for record-keeping (Article 12), human oversight (Article 14) and accuracy, robustness and cybersecurity (Article 15). These apply from 2 Dec 2027 for stand-alone Annex III systems and 2 Aug 2028 for systems in regulated products, after the 2026 Digital Omnibus on AI; check EUR-Lex for current dates (see [AI governance](ai-governance.md)).
+2. **EU AI Act.** High-risk systems must meet requirements for record-keeping (Article 12), human oversight (Article 14) and accuracy, robustness and cybersecurity (Article 15). Providers and deployers keep the automatically generated logs for at least 6 months (Articles 19 and 26(6)). Providers report serious incidents within 15 days of becoming aware, 2 days for a widespread infringement or a serious and irreversible disruption of critical infrastructure, and 10 days for a death (Article 73). These apply from 2 Dec 2027 for stand-alone Annex III systems and 2 Aug 2028 for systems in regulated products, after Regulation (EU) 2026/1744; check EUR-Lex for current dates (see [AI governance](ai-governance.md)). If the AI Act applies to your system, these are legal duties at every level, not an Assured choice.
 3. **Independent testing** of high-impact agents before launch and after major changes.
 4. **Evidence.** Threat models, evaluation results, red team reports, approval logs and incident records kept for the audit period.
 
@@ -101,4 +101,5 @@ Everything in Standard, plus:
 - NIST AI Risk Management Framework: https://www.nist.gov/itl/ai-risk-management-framework
 - NIST AI 600-1, *Generative Artificial Intelligence Profile*: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
 - ISO/IEC 42001:2023: https://www.iso.org/standard/42001
-- Regulation (EU) 2024/1689 (AI Act): https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- NIST SP 800-218A, *Secure Software Development Practices for Generative AI and Dual-Use Foundation Models*: https://csrc.nist.gov/pubs/sp/800/218/a/final
+- Regulation (EU) 2024/1689 (AI Act), Articles 12, 14, 15, 19, 26 and 73: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
