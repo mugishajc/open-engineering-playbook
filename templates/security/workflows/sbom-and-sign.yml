@@ -1,0 +1,155 @@
+# Build a container image, generate a CycloneDX SBOM, sign the image and attest
+# the SBOM with Sigstore keyless signing, and attach SLSA build provenance.
+# Every step uses the job's short-lived OIDC identity: there are no signing keys
+# or registry passwords to store or rotate.
+#
+# Copy to .github/workflows/sbom-and-sign.yml. It runs on version tags (v1.2.3)
+# and on demand. It pushes to GitHub Container Registry (ghcr.io); change
+# REGISTRY and the login step for another registry.
+# Guidance: playbook/security/supply-chain.md
+#
+# What consumers run to verify (replace OWNER/REPO and the tag):
+#   cosign verify \
+#     --certificate-identity "https://github.com/OWNER/REPO/.github/workflows/sbom-and-sign.yml@refs/tags/v1.2.3" \
+#     --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+#     ghcr.io/owner/repo@sha256:<digest>
+#   gh attestation verify oci://ghcr.io/owner/repo@sha256:<digest> --owner OWNER
+#
+# Keyless signing records signatures in the public Sigstore transparency log.
+# For private or air-gapped work, use key-pair signing instead (see
+# templates/security/gitlab-supply-chain.yml for the pattern).
+#
+# Actions are pinned to full commit SHAs with the version in a comment.
+
+name: SBOM and sign
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sbom-and-sign-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  build-sbom-sign:
+    name: Build, SBOM, sign, attest
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      # Push the image and its signatures to ghcr.io.
+      packages: write
+      # Mint the OIDC token used for keyless signing.
+      id-token: write
+      # Store the build provenance attestation.
+      attestations: write
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set image name (registry paths must be lower case)
+        id: image
+        env:
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          echo "name=${REGISTRY}/${REPOSITORY,,}" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
+
+      - name: Log in to the registry
+        uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate tags and labels
+        id: meta
+        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
+        with:
+          images: ${{ steps.image.outputs.name }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=sha
+
+      - name: Build and push
+        id: build
+        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Generate CycloneDX SBOM
+        uses: anchore/sbom-action@fffec3d851af758d56fee099cf3fbf8aa8779843 # v0.24.3
+        with:
+          image: ${{ steps.image.outputs.name }}@${{ steps.build.outputs.digest }}
+          registry-username: ${{ github.actor }}
+          registry-password: ${{ secrets.GITHUB_TOKEN }}
+          format: cyclonedx-json
+          output-file: sbom.cdx.json
+          upload-artifact: true
+          upload-release-assets: false
+          dependency-snapshot: false
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@756fe2d284c7292c4e9b62c8a28f1e5629c59532 # v4.1.3
+
+      - name: Sign the image (keyless)
+        env:
+          IMAGE: ${{ steps.image.outputs.name }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          cosign sign --yes "${IMAGE}@${DIGEST}"
+
+      - name: Attest the SBOM (keyless)
+        env:
+          IMAGE: ${{ steps.image.outputs.name }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          cosign attest --yes --type cyclonedx --predicate sbom.cdx.json "${IMAGE}@${DIGEST}"
+
+      - name: Attest SLSA build provenance
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-name: ${{ steps.image.outputs.name }}
+          subject-digest: ${{ steps.build.outputs.digest }}
+          push-to-registry: true
+          # Storage records need an organisation-owned repository and the
+          # artifact-metadata permission. Turn on if both apply.
+          create-storage-record: false
+
+      - name: Verify signature and SBOM attestation
+        env:
+          IMAGE: ${{ steps.image.outputs.name }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+        run: |
+          identity="${GITHUB_SERVER_URL}/${GITHUB_WORKFLOW_REF}"
+          issuer="https://token.actions.githubusercontent.com"
+          cosign verify \
+            --certificate-identity "${identity}" \
+            --certificate-oidc-issuer "${issuer}" \
+            "${IMAGE}@${DIGEST}" > /dev/null
+          cosign verify-attestation --type cyclonedx \
+            --certificate-identity "${identity}" \
+            --certificate-oidc-issuer "${issuer}" \
+            "${IMAGE}@${DIGEST}" > /dev/null
+          {
+            echo "### Signed image"
+            echo ""
+            echo "\`${IMAGE}@${DIGEST}\`"
+            echo ""
+            echo "Signer identity: \`${identity}\`"
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,141 @@
+# Supply chain jobs for GitLab CI: CycloneDX SBOM, cosign key-pair signing,
+# SBOM attestation and verification. Built for GitLab self-managed and for
+# air-gapped networks: nothing here calls a public service, and signatures are
+# not sent to a public transparency log.
+# Guidance: playbook/security/supply-chain.md
+#
+# HOW TO USE
+# 1. Build a tools image once, on the connected side, and mirror it into your
+#    internal registry. It needs a POSIX shell plus `syft` (v1.x) and `cosign`
+#    (v3.x) on PATH. Download the release binaries, check their published
+#    checksums and signatures, then for example:
+#      FROM alpine:3.22
+#      COPY syft cosign /usr/local/bin/
+#    Set SUPPLY_CHAIN_TOOLS_IMAGE (below) to its address, pinned by digest.
+#    Add your internal CA certificate to the image if the registry uses one.
+#
+# 2. Create a signing key pair. Keep the private key in a KMS, an HSM or Vault
+#    where possible (cosign supports hashivault://, awskms://, gcpkms://,
+#    azurekms:// and PKCS#11 key references); a file key is the simplest start:
+#      cosign generate-key-pair
+#    In Settings > CI/CD > Variables add:
+#      COSIGN_PRIVATE_KEY  type File, protected, holding cosign.key
+#                          (or type Variable holding a KMS key reference)
+#      COSIGN_PASSWORD     masked and protected, the key's password
+#      COSIGN_PUBLIC_KEY   type File, holding cosign.pub (verification only)
+#    Protected variables are only given to protected branches and tags, so only
+#    those pipelines can sign.
+#
+# 3. Your build job must export the pushed image's digest as a dotenv artifact:
+#      build-image:
+#        stage: build
+#        script:
+#          - buildah bud -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA" .
+#          - buildah push --digestfile image.digest "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA"
+#          - echo "IMAGE_DIGEST=$(cat image.digest)" > build.env
+#        artifacts:
+#          reports:
+#            dotenv: build.env
+#
+# 4. Include this file and extend the hidden jobs:
+#      include:
+#        - project: platform/ci-templates        # or: local: templates/security/gitlab-supply-chain.yml
+#          ref: v1.0.0
+#          file: templates/security/gitlab-supply-chain.yml
+#      sbom:
+#        extends: .supply-chain-sbom
+#        stage: test
+#        needs: [build-image]
+#      sign:
+#        extends: .supply-chain-sign
+#        stage: test
+#        needs: [build-image, sbom]
+#      verify:
+#        extends: .supply-chain-verify
+#        stage: deploy
+#        needs: [build-image, sign]
+#    Deploy jobs should `needs: [verify]`, and the cluster should also verify
+#    at admission (for example Kyverno or Sigstore policy-controller with the
+#    same public key).
+#
+# Consumers verify with:
+#   cosign verify --key cosign.pub --insecure-ignore-tlog=true <image>@<digest>
+#   cosign verify-attestation --key cosign.pub --insecure-ignore-tlog=true --type cyclonedx <image>@<digest>
+# --insecure-ignore-tlog=true is expected here: these signatures are
+# deliberately not in a public transparency log. If you run your own Rekor
+# inside the network, supply a signing config that points to it instead.
+
+variables:
+  SUPPLY_CHAIN_TOOLS_IMAGE: "$CI_REGISTRY/platform/supply-chain-tools:1.0.0"
+  SBOM_FILE: "sbom.cdx.json"
+  # Optional: path to a cosign signing config that lists internal Rekor or
+  # timestamp services. Empty means sign with the key only, no log.
+  COSIGN_SIGNING_CONFIG: ""
+
+.supply-chain-base:
+  image: "$SUPPLY_CHAIN_TOOLS_IMAGE"
+  variables:
+    # Keep tool caches and registry credentials inside the job directory.
+    DOCKER_CONFIG: "$CI_PROJECT_DIR/.docker"
+  before_script:
+    - |
+      if [ -z "${IMAGE_DIGEST:-}" ]; then
+        echo "IMAGE_DIGEST is not set. Export it from the build job as a dotenv artifact." >&2
+        exit 1
+      fi
+    - export IMAGE_REF="${IMAGE_NAME:-$CI_REGISTRY_IMAGE}@${IMAGE_DIGEST}"
+    - echo "Image under test: ${IMAGE_REF}"
+    - mkdir -p "$DOCKER_CONFIG"
+    - printf '%s' "$CI_REGISTRY_PASSWORD" | cosign login "$CI_REGISTRY" --username "$CI_REGISTRY_USER" --password-stdin
+  rules:
+    - if: $CI_COMMIT_TAG
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+.supply-chain-sbom:
+  extends: .supply-chain-base
+  script:
+    # syft reads registry credentials from the Docker config written by cosign login.
+    - syft scan "registry:${IMAGE_REF}" -o "cyclonedx-json=${SBOM_FILE}"
+    - echo "SBOM written to ${SBOM_FILE}"
+  artifacts:
+    paths:
+      - "$SBOM_FILE"
+    # Starting point. Regulated and public sector teams usually keep release
+    # SBOMs for the support period; store them in your artifact repository too.
+    expire_in: 90 days
+
+.supply-chain-sign:
+  extends: .supply-chain-base
+  script:
+    - |
+      if [ -z "${COSIGN_PRIVATE_KEY:-}" ] || [ -z "${COSIGN_PASSWORD:-}" ]; then
+        echo "COSIGN_PRIVATE_KEY and COSIGN_PASSWORD must be set (protected variables)." >&2
+        exit 1
+      fi
+    - |
+      if [ -n "${COSIGN_SIGNING_CONFIG:-}" ]; then
+        sc="$COSIGN_SIGNING_CONFIG"
+      else
+        # An empty signing config: no certificate authority, no transparency
+        # log, no timestamp authority. cosign signs with the key only and does
+        # not try to reach any service.
+        cosign signing-config create --out signing-config.json
+        sc="signing-config.json"
+      fi
+      echo "Signing ${IMAGE_REF}"
+      cosign sign --yes --key "$COSIGN_PRIVATE_KEY" --signing-config "$sc" "$IMAGE_REF"
+      echo "Attaching SBOM attestation"
+      cosign attest --yes --key "$COSIGN_PRIVATE_KEY" --signing-config "$sc" \
+        --type cyclonedx --predicate "$SBOM_FILE" "$IMAGE_REF"
+
+.supply-chain-verify:
+  extends: .supply-chain-base
+  script:
+    - |
+      if [ -z "${COSIGN_PUBLIC_KEY:-}" ]; then
+        echo "COSIGN_PUBLIC_KEY must be set (File variable holding cosign.pub)." >&2
+        exit 1
+      fi
+    - cosign verify --key "$COSIGN_PUBLIC_KEY" --insecure-ignore-tlog=true "$IMAGE_REF" > /dev/null
+    - cosign verify-attestation --key "$COSIGN_PUBLIC_KEY" --insecure-ignore-tlog=true --type cyclonedx "$IMAGE_REF" > /dev/null
+    - echo "Signature and SBOM attestation verified for ${IMAGE_REF}"

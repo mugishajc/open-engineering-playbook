@@ -1,0 +1,65 @@
+# OpenSSF Scorecard: checks this repository's supply chain practices every week
+# and on every push to the default branch. Results appear in the repository's
+# Security tab (code scanning) and, with publish_results, on the public
+# Scorecard API and badge.
+#
+# Copy to .github/workflows/scorecard.yml in the repository's default branch.
+# Guidance: playbook/security/supply-chain.md
+#
+# Rules from the Scorecard action when publish_results is true: keep top-level
+# permissions read-only, do not add `run:` steps, workflow-level `env:` or
+# `defaults:` to this job, and use only the approved actions below.
+#
+# Actions are pinned to full commit SHAs, with the version in a comment, so a
+# moved tag cannot change what runs. Let Dependabot or Renovate update them.
+# For private repositories, set publish_results to false.
+
+name: Scorecard supply-chain security
+
+on:
+  # Re-run when branch protection settings change.
+  branch_protection_rule:
+  schedule:
+    # Weekly, Monday 06:17 UTC.
+    - cron: "17 6 * * 1"
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: read-all
+
+jobs:
+  analysis:
+    name: Scorecard analysis
+    runs-on: ubuntu-latest
+    permissions:
+      # Upload results to code scanning.
+      security-events: write
+      # Publish results to the Scorecard API and badge (OIDC token).
+      id-token: write
+      contents: read
+      actions: read
+    steps:
+      - name: Check out code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run Scorecard
+        uses: ossf/scorecard-action@46dc3187a971a9febf3aeb7f94ccde489f7bb46a # v2.5.0
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          publish_results: true
+
+      - name: Keep results as a build artifact
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: scorecard-sarif
+          path: results.sarif
+          retention-days: 7
+
+      - name: Upload results to code scanning
+        uses: github/codeql-action/upload-sarif@f3bbb05694c2f74569081c28664c0866d64dec21 # v4.39.3
+        with:
+          sarif_file: results.sarif
