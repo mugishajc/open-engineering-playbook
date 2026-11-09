@@ -2,6 +2,8 @@
 
 The problem: "We do all the Scrum ceremonies and nothing improves." Stand-ups become status reports, retrospectives produce the same complaints, and velocity charts become targets. Keep the parts of agile that create fast feedback (small batches, working software shown to real users, retrospectives that change something) and drop the rituals that do not. Pick the method that fits the work: Scrum, Kanban or Shape Up are all valid; cargo-culting any of them is not.
 
+When code becomes cheap to produce, the bottleneck moves to framing the problem, review, verification and learning from users. [Agile in the AI era](agile-in-the-ai-era.md) explains how planning and ceremonies change as a result.
+
 ## Outcomes
 
 Starting targets. They measure feedback and flow, not ceremony attendance.

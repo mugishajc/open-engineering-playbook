@@ -39,7 +39,7 @@ Record these in your [decision rights](../operating-model/decision-rights.md). A
 ### Standard
 
 - **Product trio per team** that meets at least weekly on discovery: what we learned, what to test next.
-- **Capacity split** agreed per quarter, for example 60% roadmap, 20% maintenance and technical debt, 20% unplanned work. Engineering owns how the 20% maintenance is spent. See [planning and forecasting](planning-and-forecasting.md).
+- **Capacity split** agreed per quarter in the categories from [portfolio and capacity](../strategy/portfolio-and-capacity.md), for example 60% features, 20% reliability (including unplanned work), 15% technical debt, 5% platform. Product orders the feature share; engineering decides how the debt and platform shares are spent and reports what they bought. See [planning and forecasting](planning-and-forecasting.md).
 - **Error budgets as the shared rule for reliability.** When a service exhausts its error budget, the team shifts effort to reliability until it recovers, by prior agreement with product, not by negotiation during the incident. See [service levels](../reliability/service-levels.md).
 - **Outcome roadmaps.** Show Now, Next and Later as problems and outcomes. Dates appear only as forecast ranges.
 - **Shared metrics.** Product and engineering leaders review the same dashboard: product outcomes, DORA delivery metrics and reliability. See [metrics](../measurement/metrics.md).

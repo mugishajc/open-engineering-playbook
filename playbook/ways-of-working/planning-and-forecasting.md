@@ -2,6 +2,8 @@
 
 The problem: "Our estimates are always wrong, and every date we give becomes a promise we break." Estimating each task in hours or story points takes time and still misses, because most delay comes from waiting, interruptions and discovered work, not from slow typing. Forecast from what the team has actually finished (throughput), give dates as ranges with a stated confidence, and re-forecast every week. Spend the time saved on splitting work small and removing waits.
 
+Code assistants shorten typing, not waiting, so throughput-based forecasting matters more as they spread. [Agile in the AI era](agile-in-the-ai-era.md) covers how planning changes when the bottleneck moves to framing, review and verification.
+
 ## Outcomes
 
 Starting targets. Tune them after a quarter of data.
@@ -13,7 +15,7 @@ Starting targets. Tune them after a quarter of data.
 | Delivery inside the 85% forecast range | About 85% of the time (if it is much higher, your ranges are too wide) |
 | Work items that finish within the team's service level expectation | At least 85% |
 | Time spent in estimation meetings per engineer | Under 1 hour per 2 weeks |
-| Capacity reserved for maintenance, debt and unplanned work | Agreed and visible, starting at 20% |
+| Capacity reserved for reliability, debt and unplanned work | Agreed and visible, at least 20% |
 
 ## Why points and velocity fail as forecasts
 
@@ -60,7 +62,7 @@ print(forecast_weeks([4, 6, 3, 5, 0, 7, 4, 5, 6, 3], items_left=40))
 - **Service level expectation.** From your cycle time history, publish "85% of items finish within N days". Look at any item older than N days at the daily sync.
 - **Weekly re-forecast.** Run the forecast every week and share changes early. A forecast that moves is information, not failure.
 - **Quarterly planning on outcomes.** Agree 2 to 4 outcomes per team per quarter (for example "cut failed sign-ups by half"), not a list of features. Link them to the [technical strategy](../strategy/technical-strategy.md).
-- **Capacity split.** Agree with product a visible split, for example 60% roadmap, 20% maintenance and technical debt, 20% unplanned work and support. Measure the real split monthly and adjust.
+- **Capacity split.** Agree with product a visible split in the four categories from [portfolio and capacity](../strategy/portfolio-and-capacity.md), for example 60% features, 20% reliability (including unplanned and support work), 15% technical debt, 5% platform. Label work items by category and measure the real split monthly. If unplanned work alone takes more than its share two months running, forecast with the lower feature capacity rather than hoping it falls.
 - **Dependencies.** For work that needs another team, agree a date for their part first and forecast your part from that date. Reduce dependencies through [team topology](../operating-model/team-topology.md) rather than through planning meetings.
 
 ### Assured
