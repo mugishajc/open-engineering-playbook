@@ -1,6 +1,6 @@
 # Business case for engineering investment
 
-Justify engineering work in the units finance and boards already use: money per year, payback period and risk. Count four kinds of benefit (toil removed, incident cost avoided, risk reduced and delay avoided), then show a conservative case that still pays back. Keep each formula simple enough that a finance partner can check it in ten minutes.
+Justify engineering work in the units finance and boards already use: money per year, payback period and risk. Count four kinds of benefit (toil removed, incident cost avoided, risk reduced and delay avoided), keep cash apart from released capacity, and compute payback on cash only. Show a conservative case, with lower benefits and higher costs, that still pays back, using formulas a finance partner can check in ten minutes.
 
 ## Outcomes
 
@@ -9,6 +9,7 @@ Starting points. Tune them to your organisation.
 - Every investment above an agreed threshold (for example 3 engineer-months) has a one to two page business case before work starts.
 - Every number in the case has a source: a system report, a time study, an invoice, or a stated assumption.
 - The case shows a low, expected and high scenario. The low scenario is the one you commit to.
+- Payback is computed on cash benefits only. Released capacity is shown separately, with what it will be used for.
 - Benefits are checked 6 and 12 months after delivery. At least 70% of cases deliver their low scenario or better.
 
 ## The four benefit types
@@ -28,14 +29,19 @@ Illustrative: 6 engineers each spend 5 hours a week on manual releases. That is 
 
 Measure toil with a two-week time study or ticket labels. Do not guess.
 
+Removed toil is **capacity, not cash**. It becomes cash only if headcount, contractor or overtime spend falls. Otherwise show it as hours released and say what they will be used for.
+
 ### 2. Incident cost avoided
 
 ```
-cost per incident = duration in hours x (revenue lost per hour + responders x hourly cost) + penalties
-annual cost       = incidents per year x cost per incident
+lost margin per hour = revenue lost per hour (not deferred) x contribution margin
+cost per incident    = duration in hours x (lost margin per hour + responders x hourly cost) + penalties
+annual cost          = incidents per year x cost per incident
 ```
 
-Illustrative: 12 incidents a year, each lasting 3 hours. Revenue lost is 2,000 CU per hour. Four responders at 60 CU per hour add 240 CU per hour. Cost per incident is 3 x 2,240 = 6,720 CU. Annual cost is 80,640 CU. Better observability and rollback cut average recovery to 1 hour, so the new annual cost is 12 x 2,240 = 26,880 CU. The benefit is 53,760 CU a year.
+Most revenue during an outage is deferred, not lost: customers come back and buy later. Count only the revenue that does not come back, and only its contribution margin. Ask finance for both figures.
+
+Illustrative: 12 incidents a year, each lasting 3 hours. Lost margin is 800 CU per hour. Four responders at 60 CU per hour add 240 CU per hour. Cost per incident is 3 x 1,040 = 3,120 CU. Annual cost is 37,440 CU. Better observability and rollback cut average recovery to 1 hour, so the new annual cost is 12 x 1,040 = 12,480 CU. The benefit is 24,960 CU a year: 19,200 CU of margin (cash) and 5,760 CU of responder time (capacity).
 
 Take incident counts and durations from your [incident records](../reliability/incident-management.md). Include contractual service credits and regulatory penalties only where a contract or law states them.
 
@@ -60,7 +66,7 @@ cost of delay = value per week of the change x weeks of delay removed x changes 
 
 Illustrative: four major features a year are each worth 10,000 CU a week once live. The current release process adds three weeks to each. Removing that delay is worth 4 x 3 x 10,000 = 120,000 CU a year.
 
-Ask product and finance to agree the value per week. If they will not, leave this benefit out rather than invent it.
+Ask product and finance to agree the value per week, as margin rather than revenue. If they will not, leave this benefit out rather than invent it.
 
 ### Option value
 
@@ -74,35 +80,39 @@ Illustrative: using open standards for container images and telemetry costs 20,0
 
 ## Putting it together
 
-Illustrative totals for the fictional organisation.
+Illustrative totals for the fictional organisation. Cash and capacity are kept apart.
 
-| Line | Expected (CU per year) |
-|---|---|
-| Toil removed | 66,240 |
-| Incident cost avoided | 53,760 |
-| Risk reduced | 40,000 |
-| Delay avoided | 120,000 |
-| **Total annual benefit** | **280,000** |
-| Annual running cost of the new tooling | 30,000 |
-| **Net annual benefit** | **250,000** |
+| Line | Type | Expected (CU per year) |
+|---|---|---|
+| Incident margin avoided | cash | 19,200 |
+| Risk reduced | cash (expected value, not certain in any one year) | 40,000 |
+| Delay avoided | cash | 120,000 |
+| **Cash benefit** | | **179,200** |
+| Annual running cost of the new tooling | cash | -30,000 |
+| **Net annual cash benefit** | | **149,200** |
+| Toil removed | capacity, not cash | 66,240 (about 1,100 hours) |
+| Incident responder time | capacity, not cash | 5,760 |
+| **Capacity released** | | **72,000**, used for the reliability backlog |
 
 One-time investment: 150,000 CU (two engineers for six months plus tooling).
 
 ```
-payback period (years) = one-time investment / net annual benefit
-                       = 150,000 / 250,000 = 0.6 years (about 7 months)
-three-year net value   = 3 x 250,000 - 150,000 = 600,000 CU (undiscounted)
+payback period (years) = one-time investment / net annual cash benefit
+                       = 150,000 / 149,200 = about 1 year
+three-year net cash    = 3 x 149,200 - 150,000 = 297,600 CU (undiscounted)
 ```
 
-**Low scenario.** Halve every benefit: 140,000 CU benefit, 110,000 CU net, payback in about 1.4 years. If the low scenario still pays back within the period your finance team accepts, commit to it. If it does not, cut scope.
+**Low scenario.** Halve every benefit and raise the one-time cost by 50%, because cost overrun is the most common way IT investments fail. Cash benefit 89,600 CU, net 59,600 CU a year, one-time cost 225,000 CU, payback in about 3.8 years. If finance accepts 3 years, this case does not pass as written: cut scope or phase it, and run the numbers again. If the low scenario pays back within the period your finance team accepts, commit to it.
 
-Use your organisation's discount rate if finance asks for net present value. Keep the undiscounted figures alongside so engineers can follow the numbers.
+For large programmes, do not trust a single estimate. Check the cost and duration against the outcomes of similar past projects, inside or outside your organisation (reference class forecasting). Flyvbjerg and Budzier found that IT project cost overruns have a fat tail: a small share overrun by very large amounts.
+
+Use your organisation's discount rate if finance asks for net present value. Keep the undiscounted figures alongside so engineers can follow the numbers. Show capital and operating costs separately where finance capitalises development cost (see [technology budget and cost](technology-budget-and-cost.md)).
 
 ## Practice
 
 ### Foundation
 
-Solo and Startup. One page: problem, the two largest benefits with their formulas, cost, payback. Use the [business case template](../../templates/strategy/business-case.md). Toil and delay are usually enough.
+Solo and Startup. One page: problem, the two largest benefits with their formulas, cost, payback. Use the [business case template](../../templates/strategy/business-case.md). Delay and toil are usually enough; show toil as capacity unless spend falls.
 
 ### Standard
 
@@ -126,7 +136,9 @@ Cloud costs are mostly operating spending and scale with use. On-premises and ai
 | Anti-pattern | Fix |
 |---|---|
 | "Engineers will be happier" as the only benefit | Measure the toil, delay or incident cost behind the complaint. |
-| Counting saved hours as cash | Say what the hours will be used for. Finance only counts cash if headcount or spend falls. |
+| Counting saved hours as cash | Show them as capacity released, with what the hours will be used for. Count them as cash only if headcount or spend falls. |
+| Counting revenue during an outage as lost | Count only revenue that does not come back, times contribution margin. |
+| A low scenario that cuts benefits but keeps costs fixed | Raise the one-time cost too. Check large programmes against similar past projects. |
 | One optimistic number | Show low, expected and high. Commit to low. |
 | Invented probabilities | Use the risk register or a named estimator. Show the range. |
 | Never checking afterwards | Review realised benefits at 6 and 12 months. |
@@ -138,6 +150,7 @@ Cloud costs are mostly operating spending and scale with use. On-premises and ai
 
 ## Sources
 
+- Bent Flyvbjerg and Alexander Budzier, "Why Your IT Project May Be Riskier Than You Think", Harvard Business Review, September 2011: https://papers.ssrn.com/abstract=2229735
 - Google, "Site Reliability Engineering", chapter "Eliminating Toil": https://sre.google/sre-book/eliminating-toil/
 - Donald G. Reinertsen, "The Principles of Product Development Flow", Celeritas Publishing, 2009.
 - HM Treasury, "The Green Book": https://www.gov.uk/government/publications/the-green-book-appraisal-and-evaluation-in-central-government

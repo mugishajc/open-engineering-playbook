@@ -58,6 +58,16 @@ Keep the survey short: 10 to 15 questions, the same each time, with one free-tex
 
 The open source Four Keys project shows one way to compute delivery metrics from event data. Whatever you use, store raw events, not only aggregates, so you can fix definitions later.
 
+## Rolling up across many teams
+
+With dozens or hundreds of teams, the roll-up is where most reports go wrong.
+
+- **Report medians and the spread** (for example the 25th and 75th percentile) per value stream or division. One very slow or very fast team moves a mean and hides everything else.
+- **Never average percentages across teams of very different size.** Compute the rate from the pooled events instead: total failed deployments divided by total deployments.
+- **Group by value stream or product**, not by reporting line, so the numbers match how work flows to users.
+- **Show coverage.** State what share of services report each metric. A median over 30% of services is a sample, not the organisation.
+- **Trend before level.** Leaders act on the direction over 4 quarters; a single quarter's level invites comparison between teams.
+
 ## What not to measure
 
 | Do not measure | Why |
@@ -73,7 +83,7 @@ Goodhart's law, as Marilyn Strathern phrased it in 1997: "When a measure becomes
 
 ## In the AI era
 
-Code assistants and agents change how fast code is written. Whether they change outcomes is an empirical question for each team. The 2025 DORA report found AI adoption associated with higher delivery throughput and also with more delivery instability, so measure both sides (see [code assistants](../people/code-assistants.md) and [AI engineering practices](../ai/ai-engineering-practices.md)).
+Code assistants and agents change how fast code is written. Whether they change outcomes is an empirical question for each team. DORA's 2024 report found AI adoption associated with lower throughput and lower stability; the 2025 report found higher throughput and still more instability. A 2025 randomised trial by METR found experienced open source developers slower with AI tools, although they felt faster. Measure both sides (see [code assistants](../people/code-assistants.md) and [AI engineering practices](../ai/ai-engineering-practices.md)).
 
 | Measure | How | What it tells you |
 |---|---|---|
@@ -108,11 +118,13 @@ Do not count lines of code generated, suggestion acceptance rate or "share of co
 
 - Metrics used in reports to boards or regulators have documented definitions, data sources, owners and retention.
 - Raw event data is retained and access-controlled, so figures can be reproduced for an auditor.
+- Where employee representatives have rights over systems that can monitor performance or behaviour (for example works councils in Germany), agree metric definitions, aggregation level and retention with them before collection starts. Collect at team level and delete individual event data you do not need.
 - Change fail rate and incident data feed [change management](../reliability/change-management.md): low-risk change types with good records can earn lighter approval.
 
 ## Cloud, on-premises and air-gapped
 
 - Hosted DORA dashboards need the data to leave your network. On-premises and air-gapped, compute the metrics locally from git, CD and incident events, and store them in your own metrics stack.
+- Delivery events carry author names. Pseudonymise or drop them at collection when the metric does not need them.
 - Survey tools must meet data protection rules. Use a self-hosted tool where responses cannot leave the network.
 
 ## Anti-patterns
@@ -133,6 +145,7 @@ Do not count lines of code generated, suggestion acceptance rate or "share of co
 
 - DORA metrics guide: https://dora.dev/guides/dora-metrics-four-keys/
 - DORA research programme and reports: https://dora.dev/research/
+- METR, "Measuring the Impact of Early-2025 AI on Experienced Open-Source Developer Productivity", July 2025: https://arxiv.org/abs/2507.09089
 - Forsgren et al., "The SPACE of Developer Productivity", ACM Queue (2021): https://queue.acm.org/detail.cfm?id=3454124
 - Google SRE book, "Service Level Objectives": https://sre.google/sre-book/service-level-objectives/
 - GitLab DORA metrics documentation: https://docs.gitlab.com/user/analytics/dora_metrics/

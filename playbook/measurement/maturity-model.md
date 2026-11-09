@@ -25,7 +25,7 @@ An area reaches a level only when every criterion at that level and at every lev
 
 | Area | Foundation | Standard | Assured |
 |---|---|---|---|
-| Strategy | A written strategy of 2 pages or less with the top 3 priorities. Build, buy or adopt reasoning written down. ([strategy](../strategy/technical-strategy.md)) | Strategy reviewed quarterly with a horizon scan. Business cases for major investments. | Strategy linked to risk appetite and regulatory obligations. Exit plans for critical suppliers. |
+| Strategy | A one-page written strategy with no more than five actions. Build, buy or adopt reasoning written down. ([strategy](../strategy/technical-strategy.md)) | Strategy reviewed quarterly with a horizon scan. Business cases for major investments. | Strategy linked to risk appetite and regulatory obligations. Exit plans for critical suppliers. |
 | Operating model | Clear owner for every system. Small, stable teams. ([team topology](../operating-model/team-topology.md)) | Written decision rights. Team types and interaction modes chosen on purpose. | Separation of duties defined and enforced. Governance with recorded decisions. |
 | Ways of working | Visible work, small batches, a regular team retrospective. ([agile and Scrum](../ways-of-working/agile-and-scrum.md)) | Forecasts from throughput data. Product and engineering plan together. | Planning records and traceability from requirement to release where required. |
 | Delivery | Protected main branch, code review on every change, CI on every pull request. ([code review](../delivery/code-review.md)) | Trunk-based development, automated releases, feature flags, safe database changes. | Signed, traceable releases. Approvals recorded. Environments separated. |

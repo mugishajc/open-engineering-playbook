@@ -77,6 +77,7 @@ Rules:
 - For SaaS, model price increases explicitly. Use the contract's cap, or assume a rise if there is none.
 - For Adopt, include the cost of tracking upstream releases and of paid support if you need guaranteed response times.
 - Show exit cost even if you never plan to leave. Regulators and auditors ask for it.
+- For cloud services in the EU, the Data Act ends provider switching fees from 12 January 2027. Your own migration work, parallel running and re-engineering still count. See [suppliers and contracts](suppliers-and-contracts.md#eu-data-act-cloud-switching).
 
 ## Lock-in and sovereignty checks
 
@@ -89,6 +90,10 @@ Answer each question yes or no. Two or more "no" answers for a critical system n
 5. Can it run disconnected from the internet, including licence checks and updates?
 6. If the supplier stops trading, do we keep a working copy (source escrow, open source licence or perpetual licence)?
 7. Do we have at least one alternative that could replace it within 12 months?
+
+## After the decision
+
+Selection is a small part of the cost of a supplier. Put the chosen supplier into the supplier register with a tier and an owner, add the contract end date to the renewal calendar, and agree the contract terms for exit, audit and price control before signing. See [suppliers and contracts](suppliers-and-contracts.md).
 
 ## Practice
 
@@ -128,10 +133,12 @@ Many SaaS products cannot run on-premises or air-gapped at all. Score them 1 on 
 - [Decision record](../../templates/docs/adr.md)
 - [Business case](../../templates/strategy/business-case.md)
 - [Risk register](../../templates/strategy/risk-register.csv)
+- [Suppliers and contracts](suppliers-and-contracts.md)
 
 ## Sources
 
 - UK Technology Code of Practice: https://www.gov.uk/guidance/the-technology-code-of-practice
 - UK Open Standards principles: https://www.gov.uk/government/publications/open-standards-principles
 - OpenSSF Scorecard: https://scorecard.dev
+- Regulation (EU) 2023/2854 (Data Act): https://eur-lex.europa.eu/eli/reg/2023/2854/oj
 - Regulation (EU) 2022/2554 (Digital Operational Resilience Act): https://eur-lex.europa.eu/eli/reg/2022/2554/oj

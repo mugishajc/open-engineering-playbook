@@ -46,6 +46,30 @@ Systems tend to copy the communication structure of the organisation that builds
 
 A team can own only as much as it can understand well enough to run it at 3 a.m. Signs of overload: rising change fail rate, long onboarding, frequent "nobody knows how this works". Reduce load by moving infrastructure to a platform, splitting a domain, or retiring services. Do not reduce it by adding more people to one team.
 
+## Structure above teams
+
+Teams need managers, and managers need a structure. Keep it as flat as the spans allow.
+
+| Role | Direct reports (starting point) | Add a layer when |
+|---|---|---|
+| Engineering manager | 5 to 8 engineers, usually one or two teams | spans above 8 for two quarters, or a manager has more than two teams |
+| Director or head of engineering | 4 to 8 engineering managers | spans above 8, or more than about 60 engineers in the group |
+| CTO or VP of engineering | 5 to 9 leaders, including staff or principal engineers | the leadership team can no longer decide in one weekly meeting |
+
+Add a layer only when spans stay above the range. A manager with two or three reports adds a handoff, not capacity. Count layers from an engineer to the CTO. As a starting point, keep it to four or fewer for a few hundred engineers.
+
+## Running a reorganisation
+
+A reorganisation moves ownership, reporting lines and often people's jobs. Run it as a short, planned change, not an announcement.
+
+1. **Design.** Write the problem the change solves, with evidence: cross-team pull request counts, lead time, on-call load, survey results. Draw the target team boundaries against the service catalogue. Every service must still have exactly one owner.
+2. **Consult.** Bring in HR and legal before anything is final. Where employee representatives exist, consult them while the design can still change; in many countries this is a legal duty when jobs are affected. Agree the plan for each person whose role changes or ends.
+3. **Announce.** Each affected person hears from their manager before any general announcement, on the same day. Publish the reasons, the new structure, the timeline and a list of questions with answers.
+4. **Cut over on one day.** Change CODEOWNERS, the service catalogue, on-call rotas, access rights and budget codes on the same date.
+5. **Review at 90 days.** Compare delivery metrics, on-call load and the team survey with the baseline. Fix what broke before the next change.
+
+Do not reorganise the same team more than once in 12 months. Look after the people who stay: they carry the extra load and the lost knowledge. Track their attrition and survey results for two quarters. See [decision rights](decision-rights.md#money-people-and-contracts) for who approves.
+
 ## Practice
 
 ### Foundation
@@ -85,6 +109,8 @@ On-premises and air-gapped environments often need a platform team earlier, beca
 | Permanent "collaboration" | Set an end date. Write the interface. |
 | Separate operations team carries all on-call | Teams that build a service also run it, with platform support. |
 | Reorganising without moving ownership of code | Update CODEOWNERS and the service catalogue on the same day. |
+| Adding a management layer to create promotions | Keep spans in range. Use the staff and principal track for senior technical roles. |
+| Announcing a reorganisation before consulting | Consult HR and, where required, employee representatives while the design can still change. |
 
 ## Templates
 

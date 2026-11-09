@@ -16,13 +16,13 @@ Starting points. Tune them to your organisation.
 
 Classify every funded initiative into one of three groups and show the mix to finance and the board.
 
-| Group | Meaning | Examples | Typical share (starting point) |
+| Group | Meaning | Examples | Illustrative share (not a benchmark) |
 |---|---|---|---|
 | Run | keep current services working, safe and compliant | patching, support, licence renewals, regulatory changes, capacity | 50% to 70% |
 | Grow | improve and extend current products and services | new features, new markets, performance work | 20% to 35% |
 | Transform | change the business model or the way of building software | new products, a [transition](transition-playbook.md), a new platform | 5% to 20% |
 
-Run that keeps rising year on year is a warning: it usually means debt and complexity are growing faster than they are retired. Report the trend, not only the current split.
+The shares are illustrative starting points for discussion, not industry benchmarks. Set your own from your cost data and compare with your own trend. Run that keeps rising year on year is a warning: it usually means debt and complexity are growing faster than they are retired. Report the trend, not only the current split.
 
 ## Capacity allocation inside teams
 
@@ -55,7 +55,19 @@ Track allocation from labels on work items. A rough split from labels is better 
 
 Fund teams, not projects, for anything that will run for more than a year. Project funding ends at launch and leaves the service without owners.
 
+Team funding changes how finance records cost. Before you switch, agree with finance how development cost is capitalised (IAS 38, or ASC 350-40 as amended by ASU 2025-06) and what records it needs: usually work items labelled by product and as capitalisable or not, plus team time per product. See [technology budget and cost](technology-budget-and-cost.md).
+
 Public sector bodies often cannot carry money between budget years. Plan so that each year ends at a usable state, and ask for multi-year funding for platforms and live services. See [public sector](../compliance/public-sector.md).
+
+## Cost transparency
+
+The investment mix is only as good as the cost data under it.
+
+- Allocate all technology cost (people, licences, hosting, suppliers) to services and to the business units that use them, with a published taxonomy. The TBM Council taxonomy is one widely used starting point.
+- Start with showback: each business unit sees what its services cost. Move to chargeback only when units can change how much they consume.
+- Report cost per unit the business recognises (per customer, per transaction, per case), not only totals.
+
+Details: [technology budget and cost](technology-budget-and-cost.md).
 
 ## Roadmaps as forecasts
 
@@ -132,6 +144,8 @@ On-premises and air-gapped estates carry hardware refresh, data centre and impor
 
 ## Sources
 
+- TBM Council, TBM Taxonomy: https://www.tbmcouncil.org/learn-tbm/tbm-taxonomy/
+- Mik Kersten, "Project to Product", IT Revolution, 2018.
 - Simon Wardley, "Wardley Maps" (book published openly): https://medium.com/wardleymaps
 - Donald G. Reinertsen, "The Principles of Product Development Flow", Celeritas Publishing, 2009.
 - DORA software delivery metrics: https://dora.dev/guides/dora-metrics-four-keys/

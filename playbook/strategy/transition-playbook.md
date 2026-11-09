@@ -22,6 +22,8 @@ Starting points. Tune them to your organisation.
 - Old and new run in parallel for no longer than the planned limit (default 6 months per system).
 - The old path is switched off on a date set at the Decide gate. Slips longer than one quarter go back to the sponsor.
 - Delivery metrics for migrated teams do not get worse for more than one quarter: change lead time, deployment frequency, change fail rate and failed deployment recovery time. See [metrics](../measurement/metrics.md).
+- Every role the transition changes or removes has a written plan, agreed with HR and, where they exist, employee representatives, before the Pilot gate.
+- No team is in more than one major change at a time.
 
 ## Phase overview
 
@@ -52,7 +54,7 @@ Typical durations are planning assumptions, not promises. Public sector and Regu
 - **Inputs:** Assess outputs, [build, buy or adopt](build-buy-adopt.md) scoring, a [business case](business-case.md).
 - **Activities:** score the options. Write a decision record. Write the [transition charter](../../templates/strategy/transition-charter.md): scope, sponsor, budget per phase, success measures, stop conditions, switch-off date for the old path. Agree the pilot team. Start any procurement and regulator conversations now.
 - **Outputs:** signed charter, decision record, business case, pilot plan, [stakeholder map](../../templates/strategy/stakeholder-map.md).
-- **Exit criteria:** sponsor and finance approve Pilot funding. Success measures have baseline values and targets. Stop conditions are written as numbers, for example "stop if pilot change lead time is more than 20% worse after 8 weeks".
+- **Exit criteria:** sponsor and finance approve Pilot funding. The change impact table (see [people and roles](#people-and-roles)) is complete and consultation has started where required. Success measures have baseline values and targets. Stop conditions are written as numbers, for example "stop if pilot change lead time is more than 20% worse after 8 weeks".
 - **Gate:** stop if no option beats "improve what we have" on the business case, or if exit costs are unknown for the chosen supplier.
 
 ### 3. Pilot
@@ -102,19 +104,43 @@ Pick a team that meets at least five of these seven criteria:
 - **Use flags for the switch.** Move traffic in steps with [feature flags](../delivery/feature-flags.md) (1%, 10%, 50%, 100%) with a tested rollback at each step.
 - **Cap the overlap.** Parallel running doubles operating cost and on-call load. Set a limit in the charter (default 6 months per system) and report the extra cost monthly.
 
+## People and roles
+
+Most transitions fail on people, not tools. Plan the people side with the same care as the technology.
+
+**Change impact table.** In Assess, list every role the change touches. Complete the table before the Decide gate and update it at every gate.
+
+| Role | What changes | When | Support offered | New role or path |
+|---|---|---|---|---|
+| Release manager | Releases move to the pipeline | Scale, wave 2 | Training on pipeline controls | Platform team, release controls owner |
+| Change board secretariat | Most changes pre-authorised | Scale | Help to define standard changes | Change and risk analyst |
+| Manual tester | More automated checks | Pilot onwards | Test automation training, pairing | Quality engineer |
+| Scrum Master | Fewer ceremonies | Scale | Flow metrics coaching | Delivery lead or engineering manager |
+
+These rows are examples; write your own.
+
+**Rules.**
+
+- No role is removed by the transition without a redeployment or consultation plan agreed with HR and, where they exist, employee representatives, before the Pilot gate. In the EU, Directive 2002/14/EC sets general duties to inform and consult employees; national law often adds more, and changes to systems that can monitor staff may need works council agreement.
+- Budget training time per wave. A starting point: 2 days per person moving to the new way, plus pairing during the wave. Correct it after the pilot.
+- Check change load before each wave: no team is in more than one major change at once (a reorganisation, a platform move and a new tool count as three).
+- Size change support to the programme. For Scale-up, a part-time [technical evangelist](stakeholders-and-communication.md#the-technical-evangelist) per few teams can be enough. For Enterprise, fund a named change team (communications, training, HR partner and evangelists) for the whole of Scale.
+- Watch attrition, the team survey and on-call load for affected teams at every gate.
+
 ## Funding per phase
 
-Release money one phase at a time. Shares below are starting points for planning, as a share of the total transition budget.
+Release money one phase at a time. The planning share is a starting point for the expected case and adds up to 100% of the phase budget. The range shows typical variation.
 
-| Phase | Typical share | What it pays for |
-|---|---|---|
-| Assess | 2% to 5% | engineer time for discovery, data collection |
-| Decide | 1% to 3% | option analysis, legal and procurement review |
-| Pilot | 10% to 20% | one team's time, minimum tooling, parallel running |
-| Scale | 55% to 75% | platform team, migration support, double running costs, training |
-| Sustain | 5% to 10% in year one, then normal run budget | decommissioning, contract exit, documentation |
+| Phase | Planning share | Typical range | What it pays for |
+|---|---|---|---|
+| Assess | 4% | 2% to 5% | engineer time for discovery, data collection |
+| Decide | 2% | 1% to 3% | option analysis, legal and procurement review |
+| Pilot | 15% | 10% to 20% | one team's time, minimum tooling, parallel running |
+| Scale | 70% | 55% to 75% | platform team, migration support, double running costs, training, change support |
+| Sustain | 9% | 5% to 10% in year one, then normal run budget | decommissioning, contract exit, documentation |
+| **Total** | **100%** | | |
 
-Hold back a contingency of 10% to 20%, released only by the sponsor at a gate.
+Hold contingency **on top of** the phase budget, released only by the sponsor at a gate. For Solo, Startup and Scale-up, 10% to 20% is a starting point. For Enterprise transitions, size it from the outcomes of similar past programmes (reference class forecasting), not a fixed percentage: IT cost overruns have a fat tail, and 10% to 20% is a floor, not a ceiling.
 
 ## Practice
 
@@ -173,6 +199,8 @@ Moves into or out of a hyperscaler change cost structure: capital spending becom
 | Pilot with the best team only | Run a second pilot with an average team. |
 | Funding the whole programme up front | Release funds per phase at each gate. |
 | Measuring activity (tickets closed) | Measure delivery metrics and cost against baseline. |
+| Roles removed by surprise at the end | Change impact table at Assess; consultation before Pilot. |
+| A team in three changes at once | Check change load before each wave. |
 | Treating stop as failure | Write stop conditions in the charter and honour them. |
 
 ## Templates
@@ -185,6 +213,8 @@ Moves into or out of a hyperscaler change cost structure: capital spending becom
 
 ## Sources
 
+- Bent Flyvbjerg and Alexander Budzier, "Why Your IT Project May Be Riskier Than You Think", Harvard Business Review, September 2011: https://papers.ssrn.com/abstract=2229735
+- Directive 2002/14/EC on informing and consulting employees: https://eur-lex.europa.eu/eli/dir/2002/14/oj
 - Martin Fowler, "Strangler Fig Application": https://martinfowler.com/bliki/StranglerFigApplication.html
 - Regulation (EU) 2022/2554 (Digital Operational Resilience Act): https://eur-lex.europa.eu/eli/reg/2022/2554/oj
 - UK Government Service Standard: https://www.gov.uk/service-manual/service-standard

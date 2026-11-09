@@ -40,17 +40,31 @@ Columns: Team = owning engineering team; TL = tech lead; SP = staff or principal
 | 9 | Set or change an SLO | R | R | C | C | | | | C | A | |
 | 10 | Accept a security risk (waiver) | R | R | C | C | I | | A | | C | |
 | 11 | Severity and disclosure of a vulnerability | R | C | | | I | | A | | I | C |
-| 12 | Adopt a new third-party product or supplier | R | C | C | C | A | I | C | C | C | R |
+| 12 | Adopt a new third-party product or supplier, within the delegated limit | R | C | C | C | A | I | C | C | C | R |
 | 13 | Open source an internal project | R | R | C | C | A | | C | | | C |
 | 14 | Add a golden path or platform capability | C | C | C | | I | | C | A | | |
 | 15 | Change an engineering standard | C | C | R | | A | I | C | C | | |
 | 16 | Team boundaries and ownership of services | C | C | C | R | A | I | | C | C | |
-| 17 | Hire into a team | C | C | | A | I | | | | C | |
+| 17 | Select a candidate for an approved role | C | C | | A | I | | | | C | |
 | 18 | Start a transition programme | | | R | C | C | A | C | C | C | C |
 | 19 | Technical strategy | C | C | R | C | R | A | C | C | C | |
 | 20 | Data residency or hosting jurisdiction | C | C | C | | C | A | C | C | | R |
 
 Adapt the columns to your organisation. In a startup, TL, SP, EM, HoE and CTO may be two people. Keep the rows.
+
+### Money, people and contracts
+
+These decisions cause the most conflict in large organisations and need finance, HR and procurement at the table. Match the thresholds to your delegated authority policy.
+
+| # | Decision | Accountable | Responsible | Consulted | Informed |
+|---|---|---|---|---|---|
+| 21 | Approve new headcount | HoE within the approved budget; CTO above it | EM | Finance, HR | Team |
+| 22 | Move budget between teams within a quarter | CTO | HoE | Finance | Affected EMs |
+| 23 | Sign or exit a supplier contract above the delegated limit | Per the delegated authority policy | Procurement | HoE, CISO, legal, finance | CTO |
+| 24 | Approve a reorganisation affecting more than one team | CTO | HoE | HR, finance, affected EMs, employee representatives where required | All affected staff |
+| 25 | Remove or materially change roles | CTO with HR | HR | Legal, employee representatives where required | Affected staff first, then others |
+
+See [team topology](team-topology.md#running-a-reorganisation) for how to run a reorganisation.
 
 Notes on specific rows:
 
@@ -65,13 +79,27 @@ Notes on specific rows:
 1. **Team level.** The owning team decides within the time box of the work, default 5 working days.
 2. **Cross-team.** If two teams disagree, their tech leads meet with a staff or principal engineer within 3 working days. The staff or principal engineer decides if they cannot agree.
 3. **Organisation.** If the decision is still blocked, or changes strategy, cost or risk beyond the mandate, the head of engineering decides within 5 working days. Security risks go to the CISO.
-4. **Executive.** Only decisions in rows 18 to 20, or those over an agreed money threshold, go to the CTO or executive committee.
+4. **Executive.** Only decisions in rows 18 to 25, or those over an agreed money threshold, go to the CTO or executive committee.
 
 Rules for every escalation:
 
 - The person escalating writes one page: the options, a recommendation, the cost of waiting.
 - The decider answers in writing, even if the answer is "go back and decide yourselves".
 - Once decided, everyone carries out the decision. Disagreement goes into the decision record, not into delay.
+
+## Group and division
+
+In a group with several business units, write down which decisions the group keeps and which each division makes. Without this, every division builds its own identity, security and supplier set, and the group pays for all of them.
+
+| Group decides | Division decides |
+|---|---|
+| Risk appetite, security and data standards | Its own strategy, inside group policy |
+| Shared platforms: identity, network, logging, the delivery pipeline | Team design and product roadmaps |
+| Strategic suppliers and contracts above the group threshold | Suppliers below the threshold, from the approved list |
+| Architecture principles and Hold entries on the tech radar | Adopting anything in Adopt; trials within its own budget |
+| Funding of shared services and how their cost is allocated | Its investment mix within its budget |
+
+A division departs from a group standard only with a time-limited waiver recorded by the group architecture forum. Shared services publish their service levels and their cost per unit, so divisions can see what they pay for. See [engineering governance](engineering-governance.md) and [technology budget and cost](../strategy/technology-budget-and-cost.md).
 
 ## Practice
 
@@ -101,7 +129,7 @@ Rows 12 and 20 matter more off the public cloud. Hosting jurisdiction, hardware 
 | Anti-pattern | Fix |
 |---|---|
 | Two "A"s on a row | Pick one. The other becomes "C". |
-| Everything escalates to the CTO | Add thresholds. Delegate rows 1 to 17. |
+| Everything escalates to the CTO | Add thresholds. Delegate rows 1 to 17 and row 21 within budget. |
 | Decisions made in meetings with no record | One decision record or one message in a known channel. |
 | Consulted means veto | Consulted people give input by a deadline. The accountable person decides. |
 

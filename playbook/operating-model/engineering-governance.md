@@ -38,6 +38,20 @@ Everything else follows the advice process: the deciding team asks the people af
 
 Measure the review group like any service: request count, time to outcome, share returned for rework. Publish the numbers each quarter.
 
+In a group with several divisions, each division runs its own review group on these rules. A group-level forum hears only cross-division decisions and appeals, and answers within 10 working days.
+
+## If you already have a PMO, an EA board or a change board
+
+Large organisations rarely start from nothing. Convert existing bodies rather than abolish them: their members hold knowledge and relationships you need.
+
+| Existing body | Keep | Change |
+|---|---|---|
+| Project management office (PMO) | Portfolio data, benefits tracking, the link to finance | Report forecasts as ranges from throughput, not percent complete. Fund teams, not projects (see [portfolio and capacity](../strategy/portfolio-and-capacity.md)). |
+| Enterprise architecture board | Principles, the capability map, cross-division decisions | Becomes the review group above, with the 5-day answer limit and the advice process for everything else |
+| Change advisory board (CAB) | Review of major and high-risk changes | Standard changes pre-authorised by the pipeline; the board sees only what the [change management](../reliability/change-management.md) criteria send it |
+
+Agree each conversion with the body's chair and measure it: decisions per month, time to answer, share of changes that skip the board.
+
 ## Communities of practice (guilds)
 
 Communities of practice spread skills across teams: testing, front end, security champions, data, platform users.

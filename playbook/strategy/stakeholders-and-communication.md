@@ -66,7 +66,7 @@ When an objection identifies a real problem, change the plan and say so publicly
 
 ## The technical evangelist
 
-The technical evangelist (also called advocate or champion) is a respected engineer who explains the change to engineers and explains engineers' concerns to leadership. It is a part-time role, typically 20% to 50% of one person during a transition.
+The technical evangelist (also called advocate or champion) is a respected engineer who explains the change to engineers and explains engineers' concerns to leadership. It is a part-time role, typically 20% to 50% of one person during a transition. One evangelist is not enough change capacity for an enterprise programme: there, evangelists work inside a named change team with communications, training and an HR partner (see [people and roles](transition-playbook.md#people-and-roles)).
 
 They:
 
