@@ -36,7 +36,7 @@ jobs:
       - name: check relative links between pages
         uses: lycheeverse/lychee-action@v2
         with:
-          args: --offline --no-progress --include-fragments=false './**/*.md'
+          args: --offline --no-progress './**/*.md'
           fail: true
 
   templates:
