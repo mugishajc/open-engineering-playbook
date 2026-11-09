@@ -27,7 +27,18 @@ The playbook uses four tiers that line up with the EU AI Act categories. Organis
 | Medium | transparency obligations (Article 50) and internal systems with real impact | customer chatbots, generated content shown to the public, agents that change records | assessment, evaluations, disclosure to users, monitoring, human approval for irreversible actions |
 | Low | minimal risk | code assistants, internal summarisation of non-sensitive text, spam filtering | register entry, acceptable use policy, data rules |
 
-EU AI Act dates (check EUR-Lex for current text): the regulation entered into force on 1 Aug 2024. Prohibited practices and AI literacy duties apply from 2 Feb 2025. General-purpose AI model obligations apply from 2 Aug 2025. Following the 2026 Digital Omnibus on AI, high-risk obligations are expected from 2 Dec 2027 for stand-alone Annex III systems and 2 Aug 2028 for systems embedded in regulated products.
+EU AI Act dates (check EUR-Lex for the consolidated text before you plan):
+
+| Date | What applies |
+|---|---|
+| 1 Aug 2024 | Regulation (EU) 2024/1689 enters into force |
+| 2 Feb 2025 | Prohibited practices (Article 5) and AI literacy (Article 4) |
+| 2 Aug 2025 | Obligations for general-purpose AI models |
+| 2 Aug 2026 | Transparency duties in Article 50, such as telling people they are dealing with an AI system. The Omnibus added transition time for marking AI-generated content in systems already on the market; check the final text for the date that applies to you. |
+| 2 Dec 2027 | High-risk obligations for stand-alone (Annex III) systems, such as hiring, credit scoring and access to public services |
+| 2 Aug 2028 | High-risk obligations for AI in products covered by the EU safety laws in Annex I |
+
+The 2026 Digital Omnibus on AI, in force since 27 Jul 2026, set the high-risk dates above and adjusted some transparency timings. It also changed the AI literacy duty in Article 4; the Commission proposed a softer duty to support AI literacy, so check the wording of Regulation (EU) 2026/1744 before you rely on either version. Keep records of the training you give.
 
 ## Lifecycle
 

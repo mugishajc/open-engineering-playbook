@@ -81,7 +81,7 @@ Start with prompting plus retrieval. Fine-tune only when evals show a gap that t
 - AI risk management aligned with the NIST AI Risk Management Framework (Govern, Map, Measure, Manage) and its Generative AI Profile (NIST AI 600-1), or with an ISO/IEC 42001 management system.
 - Eval results, model versions, data sources and approvals kept as records for each release.
 - Human oversight designed in and documented for decisions that affect people's rights, money, health or access to services.
-- EU AI Act obligations assessed per use case. High-risk obligations are being phased in, with dates changed by the 2026 Digital Omnibus on AI. Check current dates on EUR-Lex before you plan.
+- EU AI Act obligations assessed per use case. Transparency duties (Article 50) apply from 2 Aug 2026; high-risk obligations from 2 Dec 2027 (Annex III) or 2 Aug 2028 (regulated products), as set by the 2026 Digital Omnibus on AI. See [AI governance](ai-governance.md) and check EUR-Lex before you plan.
 
 ## Cloud, on-premises and air-gapped
 

@@ -66,7 +66,7 @@ No prompt wording, filter or classifier reliably stops prompt injection. Design 
 Everything in Standard, plus:
 
 1. **Risk management framework.** Run AI risk management under ISO/IEC 42001 or the NIST AI Risk Management Framework (Govern, Map, Measure, Manage), using NIST AI 600-1 for generative AI risks. See [AI governance](ai-governance.md).
-2. **EU AI Act.** High-risk systems must meet requirements for accuracy, robustness and cybersecurity, logging and human oversight. Timelines changed in 2026; check EUR-Lex for current dates (see [AI governance](ai-governance.md)).
+2. **EU AI Act.** High-risk systems must meet requirements for record-keeping (Article 12), human oversight (Article 14) and accuracy, robustness and cybersecurity (Article 15). These apply from 2 Dec 2027 for stand-alone Annex III systems and 2 Aug 2028 for systems in regulated products, after the 2026 Digital Omnibus on AI; check EUR-Lex for current dates (see [AI governance](ai-governance.md)).
 3. **Independent testing** of high-impact agents before launch and after major changes.
 4. **Evidence.** Threat models, evaluation results, red team reports, approval logs and incident records kept for the audit period.
 
