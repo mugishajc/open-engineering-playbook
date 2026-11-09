@@ -26,7 +26,7 @@ TEXT_SUFFIXES = {".md", ".yml", ".yaml", ".toml", ".txt", ".json", ".sh", ".py",
 SKIP_DIRS = {".git", "node_modules", ".venv", "venv", "__pycache__", "dist", "build", ".terraform"}
 DEFAULT_WORDLIST = Path(__file__).with_name("plain-language.txt")
 
-DASHES = {"—": "em dash", "–": "en dash"}
+DASHES = {"\u2014": "em dash", "\u2013": "en dash"}
 # Common emoji blocks. Not exhaustive, but catches what people actually paste.
 EMOJI = re.compile(
     "[\U0001F300-\U0001FAFF\U00002600-\U000027BF\U0001F000-\U0001F2FF\U0001F900-\U0001F9FF]"
