@@ -14,6 +14,8 @@ Treat adoption as a transition, not a mandate: baseline a few representative tea
 |---|---|---|
 | Strategy | Standard | Horizon scan every 6 months, feeding the quarterly strategy review; a charter for each transition |
 | Operating model | Standard | Team types and decision rights published; separation of duties where regulated |
+| Product | Standard | A product strategy per product area under one company strategy; teams get problems, not features |
+| Project management | Standard | A small PMO with governance scaled by class; most projects are Small |
 | Ways of working | Standard | Common forecasting from throughput; teams choose their own method |
 | Delivery | Standard | Staged rollout for configuration and content, not only code |
 | Quality | Standard | Accessibility testing for every user-facing service |
@@ -59,6 +61,7 @@ At this size Assess takes 6 to 12 weeks and Decide 4 to 8 weeks. Do not start pi
 | Set the investment mix (run, grow, transform) and a capacity split per team, tied to the budget cycle | [Portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md) | |
 | Publish team types and interaction modes; name the top three dependency bottlenecks | [Team topology](../playbook/operating-model/team-topology.md) | |
 | Baseline the five DORA metrics for the pilot teams, by hand if the tooling is not ready | [Metrics](../playbook/measurement/metrics.md) | |
+| Label every funded piece of work project or product, and name the persistent team that will run what each project builds | [Projects and products](../playbook/project-management/projects-and-products.md) | [project-charter.md](../templates/project/project-charter.md) |
 | Vulnerability fix time limits for Tier 1 services | [Vulnerability management](../playbook/security/vulnerability-management.md) | |
 | Review critical suppliers and SaaS tools that hold restricted data | [Third-party and SaaS risk](../playbook/security/third-party-and-saas-risk.md) | [vendor-risk-questionnaire.md](../templates/docs/vendor-risk-questionnaire.md) |
 | Start a cryptographic inventory for systems holding data that must stay secret 10 years or more | [Post-quantum readiness](../playbook/security/post-quantum-readiness.md) | [crypto-inventory.csv](../templates/docs/crypto-inventory.csv) |
@@ -81,6 +84,8 @@ At this size Assess takes 6 to 12 weeks and Decide 4 to 8 weeks. Do not start pi
 | One career framework and structured hiring across the group | [Career framework](../playbook/people/career-framework.md), [Hiring](../playbook/people/hiring.md) | [career-ladder.csv](../templates/people/career-ladder.csv), [interview-scorecard.md](../templates/people/interview-scorecard.md) |
 | Cost per team and per service, plus a first carbon estimate for the largest workloads | [FinOps](../playbook/platform/finops.md), [Green software](../playbook/platform/green-software.md) | |
 | A control map shared with audit, so evidence comes from pipelines | [Control mapping](../playbook/compliance/control-mapping.md) | |
+| Status reports built from team systems, colours set by rule, steering groups that decide, and stage gates funded one stage at a time | [Status reporting](../playbook/project-management/status-reporting.md), [A modern PMO](../playbook/project-management/modern-pmo.md) | [status-report.md](../templates/project/status-report.md), [stage-gate-checklist.md](../templates/project/stage-gate-checklist.md) |
+| A test strategy per product, with performance, security and accessibility testing on a schedule and quality engineers who coach | [Test strategy](../playbook/quality/test-strategy.md), [For QA and test leaders](../leaders/for-qa-and-test-leaders.md) | [test-strategy.md](../templates/quality/test-strategy.md) |
 
 ## Skip at this size
 

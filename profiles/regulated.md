@@ -55,6 +55,8 @@ Examples, not legal advice. Check the current text with your compliance team.
 |---|---|
 | Strategy | Technical risks in the enterprise risk register, reviewed every 90 days |
 | Operating model | Separation of duties enforced in tooling; regular reporting to the board or audit committee |
+| Product | No experiments on prices, credit or entitlements without compliance sign-off; customer communications reviewed before launch; a fair value assessment per product where rules require it |
+| Project management | A written project management method tailored from a recognised standard; independent assurance at major gates; gate records kept. EU financial entities keep an ICT project management policy |
 | Ways of working | Every change traceable to an approved requirement or risk item |
 | Delivery | Change evidence (request, reviewer, CI result, deployer) for any single change retrievable within 1 hour, and a sample of 25 changes within 1 working day, for 12 months or longer |
 | Quality | Test results kept as release evidence |
@@ -97,6 +99,7 @@ Examples, not legal advice. Check the current text with your compliance team.
 | Make every release rollback-safe, and record time to rollback | [Rollbacks](../playbook/reliability/rollbacks.md) | |
 | Start a cryptographic inventory, beginning with data that must stay secret for 10 years or more | [Post-quantum readiness](../playbook/security/post-quantum-readiness.md) | [crypto-inventory.csv](../templates/docs/crypto-inventory.csv) |
 | Report to the board or audit committee on a short set of agreed measures | [IT governance](../playbook/operating-model/it-governance.md) | |
+| Agree with compliance which product experiments and price tests may be shown to customers, and keep each brief as a record | [Product metrics and experiments](../playbook/product/product-metrics-and-experiments.md#assured), [Pricing and packaging](../playbook/product/pricing-and-packaging.md#assured) | [experiment-brief.md](../templates/product/experiment-brief.md) |
 
 ## Year 1
 
@@ -109,6 +112,7 @@ Examples, not legal advice. Check the current text with your compliance team.
 | Adopt an AI management framework for AI used in decisions about customers | [AI governance](../playbook/ai/ai-governance.md) | |
 | A post-quantum migration plan for the systems in the inventory | [Post-quantum readiness](../playbook/security/post-quantum-readiness.md) | |
 | Exit plans for critical ICT suppliers, reviewed every year and tested with a real, timed data export and import (paper walk-throughs count only for less critical suppliers) | [Third-party and SaaS risk](../playbook/security/third-party-and-saas-risk.md) | |
+| A written project management method with independent assurance at major gates; EU financial entities map it to their ICT project management policy | [Risks, RAID logs and stage gates](../playbook/project-management/risks-raid-and-stage-gates.md#assured), [A modern PMO](../playbook/project-management/modern-pmo.md) | [stage-gate-checklist.md](../templates/project/stage-gate-checklist.md) |
 | Internal mirrors for packages and images in the release path | [Cloud, on-premises and air-gapped](../playbook/platform/cloud-on-prem-air-gapped.md) | |
 | Four committed assessments; every in-scope system at Assured or with recorded exceptions | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 

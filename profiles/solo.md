@@ -16,6 +16,8 @@ Foundation everywhere. The right column says when one area is worth taking to St
 |---|---|---|
 | Strategy | Foundation | A client or investor asks for a roadmap |
 | Operating model | Foundation | You bring in a second engineer or a subcontractor |
+| Product | Foundation | You sell your own product to more than a handful of paying customers |
+| Project management | Foundation | You sign a fixed-price contract, or one with a legal or launch date |
 | Ways of working | Foundation | You work in a client's team with their cadence |
 | Delivery | Foundation | You ship a library or API that others depend on |
 | Quality | Foundation | A bug would cost a client money or data |
@@ -66,13 +68,14 @@ Done when: a direct push to main is rejected, CI runs on every change, and the s
 | Put production infrastructure in code and stop console changes | [Infrastructure as code](../playbook/delivery/infrastructure-as-code.md) | |
 | Make the README good enough that someone new runs the project in under one hour | [Documentation](../playbook/people/documentation.md), [Golden paths](../playbook/platform/golden-paths.md) | [onboarding-checklist.md](../templates/docs/onboarding-checklist.md) |
 | List the laws and contract terms that apply to you, and add a licence check to CI | [Control mapping](../playbook/compliance/control-mapping.md) | |
+| For every fixed-price quote, give the date as a range, write your assumptions into the quote and price changes against them | [Planning fixed scope and budget](../playbook/project-management/planning-fixed-scope-and-budget.md) | [project-charter.md](../templates/project/project-charter.md) |
 | Run the assessment and commit the answers file | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 
 ## Year 1
 
 | Do this | Read | Template |
 |---|---|---|
-| Reach Foundation in all 14 areas, shown by four committed assessments | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
+| Reach Foundation in all 16 areas, shown by four committed assessments | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 | Threat model your main product once, and again after any major change | [Secure development](../playbook/security/secure-development.md) | [threat-model.md](../templates/docs/threat-model.md) |
 | Publish a security contact and a vulnerability disclosure policy | [Vulnerability management](../playbook/security/vulnerability-management.md) | [SECURITY.md](../templates/repo/SECURITY.md), [vulnerability-disclosure-policy.md](../templates/docs/vulnerability-disclosure-policy.md) |
 | Test a full restore every 90 days (four times this year) | [Backup and recovery](../playbook/reliability/backup-and-recovery.md) | |
@@ -92,6 +95,7 @@ Done when: a direct push to main is rejected, CI runs on every change, and the s
 | Developer platform, service catalog | One README is your platform. | You run more than three services |
 | Tooling for all five DORA metrics | A deployment log in a spreadsheet is enough. | Clients ask for delivery evidence |
 | Career framework, structured hiring | Nobody to level or hire. | You hire |
+| Stage gates, steering groups, a PMO | A charter and a weekly check of dates cover one person's projects. | A project spans several teams or suppliers |
 
 ## Check your progress
 

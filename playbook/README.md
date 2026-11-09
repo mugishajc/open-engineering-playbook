@@ -1,6 +1,6 @@
 # The playbook
 
-Fourteen areas, 87 pages. Each page follows the same layout: the decision up front, measurable outcomes, the practice at three levels (Foundation, Standard, Assured), what changes on-premises and air-gapped, common failures, templates and primary sources.
+Sixteen areas, 105 pages. Each page follows the same layout: the decision up front, measurable outcomes, the practice at three levels (Foundation, Standard, Assured), what changes on-premises and air-gapped, common failures, templates and primary sources.
 
 Start with [principles.md](principles.md). Then pick your [profile](../profiles/README.md), which tells you which pages to read first and at which level. If you arrived with a specific problem, [PROBLEMS.md](../PROBLEMS.md) takes you straight to the right page.
 
@@ -30,7 +30,32 @@ How to decide where engineering is going and how to get there without stopping t
 | [Engineering governance](operating-model/engineering-governance.md) | You need standards without a bottleneck |
 | [IT governance](operating-model/it-governance.md) | The board and auditors need to see that IT is under control |
 
-## 3. Ways of working
+## 3. Product
+
+How to decide what to build, find out whether it worked, and stop what did not.
+
+| Page | Read it when |
+|---|---|
+| [Product strategy](product/product-strategy.md) | The roadmap is a list of requests and nobody can say which few results the product exists to change |
+| [Product discovery](product/product-discovery.md) | Teams build what was asked for and learn months later that users did not need it |
+| [Roadmaps and prioritisation](product/roadmaps-and-prioritisation.md) | The roadmap is a dated list of promises and everything is priority one |
+| [Product metrics and experiments](product/product-metrics-and-experiments.md) | Success is reported as features shipped, or experiments stop the day the dashboard turns green |
+| [Pricing and packaging](product/pricing-and-packaging.md) | Prices were copied from a competitor and nobody knows which customers you lose money on |
+| [Launch and adoption](product/launch-and-adoption.md) | Features are merged and announced, and nobody checks whether anyone uses them |
+
+## 4. Project management
+
+How to run work with a fixed end, a contract or a legal date alongside teams that ship continuously.
+
+| Page | Read it when |
+|---|---|
+| [Projects and products](project-management/projects-and-products.md) | You need to decide whether work is a project, a programme or a product, and who owns what |
+| [Planning fixed scope and budget](project-management/planning-fixed-scope-and-budget.md) | A contract, tender, law or budget year fixes the answer and single-number estimates keep failing |
+| [Risks, RAID logs and stage gates](project-management/risks-raid-and-stage-gates.md) | The RAID log is read by nobody, gates never stop anything, or a cutover is coming |
+| [Status reporting](project-management/status-reporting.md) | Projects are green until two weeks before go-live, then red |
+| [A modern PMO](project-management/modern-pmo.md) | The PMO chases status that teams already hold in their own tools |
+
+## 5. Ways of working
 
 | Page | Read it when |
 |---|---|
@@ -39,7 +64,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [Product partnership](ways-of-working/product-partnership.md) | Product and engineering pull in different directions |
 | [Agile in the AI era](ways-of-working/agile-in-the-ai-era.md) | Code can be drafted in hours, but planning and ceremonies still assume weeks |
 
-## 4. Delivery
+## 6. Delivery
 
 | Page | Read it when |
 |---|---|
@@ -55,14 +80,21 @@ How to decide where engineering is going and how to get there without stopping t
 | [GitOps and deployment](delivery/gitops-and-deployment.md) | Deployments are manual or a change reached everyone at once |
 | [Infrastructure as code](delivery/infrastructure-as-code.md) | Nobody could rebuild production from scratch |
 
-## 5. Quality
+## 7. Quality
 
 | Page | Read it when |
 |---|---|
 | [Quality engineering](quality/quality-engineering.md) | QA is a phase at the end and a bottleneck |
 | [Test-driven development](quality/test-driven-development.md) | You want design feedback from tests, not only coverage |
+| [Test strategy](quality/test-strategy.md) | You have thousands of test cases and defects still escape where nobody looked |
+| [Test automation](quality/test-automation.md) | The end-to-end suite is slow, flaky and nobody trusts a red build |
+| [Performance testing](quality/performance-testing.md) | The load test passed and the service still fell over on launch day |
+| [Security testing](quality/security-testing.md) | You pass a yearly penetration test and still ship flaws between tests |
+| [Accessibility testing](quality/accessibility-testing.md) | The automated checker shows zero errors and disabled users still cannot finish the task |
+| [Exploratory and acceptance testing](quality/exploratory-and-acceptance-testing.md) | UAT is a rubber stamp and the real problems appear in the first week live |
+| [Test data and environments](quality/test-data-and-environments.md) | Tests share data, or the only realistic data is a copy of production |
 
-## 6. Reliability
+## 8. Reliability
 
 | Page | Read it when |
 |---|---|
@@ -77,7 +109,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [Change management](reliability/change-management.md) | A change board slows everything down |
 | [Resilience testing](reliability/resilience-testing.md) | Nobody has checked that failover, rollback or degraded modes work |
 
-## 7. Security
+## 9. Security
 
 | Page | Read it when |
 |---|---|
@@ -91,7 +123,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [Post-quantum readiness](security/post-quantum-readiness.md) | You need a plan before RSA and elliptic curves are deprecated |
 | [Third-party and SaaS risk](security/third-party-and-saas-risk.md) | A supplier's breach could become yours |
 
-## 8. Data
+## 10. Data
 
 | Page | Read it when |
 |---|---|
@@ -99,7 +131,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [Data quality](data/data-quality.md) | Upstream changes break pipelines silently |
 | [Data security and privacy](data/data-security-and-privacy.md) | You cannot say where personal data lives |
 
-## 9. AI
+## 11. AI
 
 | Page | Read it when |
 |---|---|
@@ -109,7 +141,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [AI engineering practices](ai/ai-engineering-practices.md) | Assistants and coding agents raised output, and review queues and rework rose with it |
 | [AI architecture patterns](ai/ai-architecture-patterns.md) | You are choosing between a direct model call, retrieval, agents, a gateway or self-hosting |
 
-## 10. Architecture
+## 12. Architecture
 
 | Page | Read it when |
 |---|---|
@@ -124,7 +156,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [Legacy modernisation](architecture/legacy-modernisation.md) | A critical old system cannot be changed safely |
 | [Technical debt](architecture/technical-debt.md) | Debt slows every change |
 
-## 11. Platform
+## 13. Platform
 
 | Page | Read it when |
 |---|---|
@@ -135,7 +167,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [FinOps](platform/finops.md) | The cloud bill grows faster than usage |
 | [Green software](platform/green-software.md) | You need to measure and cut the carbon cost of your systems |
 
-## 12. People
+## 14. People
 
 | Page | Read it when |
 |---|---|
@@ -148,14 +180,14 @@ How to decide where engineering is going and how to get there without stopping t
 | [Sustainable pace](people/sustainable-pace.md) | The team is tired |
 | [Skills gap](people/skills-gap.md) | You lack people with Kubernetes, cloud, security or AI skills |
 
-## 13. Measurement
+## 15. Measurement
 
 | Page | Read it when |
 |---|---|
 | [Metrics](measurement/metrics.md) | You want to know if things are getting better |
 | [Maturity model](measurement/maturity-model.md) | You want to see where you stand across all areas |
 
-## 14. Compliance
+## 16. Compliance
 
 | Page | Read it when |
 |---|---|

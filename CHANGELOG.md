@@ -2,6 +2,31 @@
 
 All notable changes to the Open Engineering Playbook are listed here. It uses calendar versions (`YYYY.MM`). The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/).
 
+## [2026.11.2] - 2026-11-09
+
+Product management, project management and testing join the playbook. Four expert challenges followed: a chief product officer on the product pages, a head of quality and testing on the quality pages, a programme director on the project management pages, and a board chair, a bank chief risk officer and a permanent secretary on the decision-making and board pages for leaders. Each finding was fixed in place, or handed to the page that owns the topic and fixed there.
+
+### Added
+
+- A product area with six pages: [product strategy](playbook/product/product-strategy.md), [product discovery](playbook/product/product-discovery.md), [roadmaps and prioritisation](playbook/product/roadmaps-and-prioritisation.md), [product metrics and experiments](playbook/product/product-metrics-and-experiments.md), [pricing and packaging](playbook/product/pricing-and-packaging.md) and [launch and adoption](playbook/product/launch-and-adoption.md). They cover B2B products, internal platforms and public services where users cannot choose another provider, and what changes when code is cheap to produce.
+- A project management area with five pages: [projects and products](playbook/project-management/projects-and-products.md), [planning fixed scope and budget](playbook/project-management/planning-fixed-scope-and-budget.md), [risks, RAID logs and stage gates](playbook/project-management/risks-raid-and-stage-gates.md), [status reporting](playbook/project-management/status-reporting.md) and [a modern PMO](playbook/project-management/modern-pmo.md). They cover reference class forecasting, contingency and management reserve, fixed-price contracts with systems integrators, public procurement change limits, go/no-go, cutover and rollback, and benefits after go-live.
+- Seven quality pages: [test strategy](playbook/quality/test-strategy.md), [test automation](playbook/quality/test-automation.md), [performance testing](playbook/quality/performance-testing.md), [security testing](playbook/quality/security-testing.md), [accessibility testing](playbook/quality/accessibility-testing.md), [exploratory and acceptance testing](playbook/quality/exploratory-and-acceptance-testing.md) and [test data and environments](playbook/quality/test-data-and-environments.md).
+- Leaders pages [for product leaders](leaders/for-product-leaders.md), [for programme and portfolio leaders](leaders/for-programme-and-portfolio-leaders.md) and [for QA and test leaders](leaders/for-qa-and-test-leaders.md).
+- Templates in `templates/product/`, `templates/project/` and `templates/quality/`: a product strategy on a page, an opportunity solution tree, an experiment brief, a product one-pager, a launch checklist, a project charter, a RAID log, a status report, a stage gate checklist, lessons learned, a test strategy, a UAT sign-off, a performance test plan and an exploratory testing charter. `tools/adopt.sh` copies them to `docs/templates/product/`, `docs/templates/project/` and `docs/templates/quality/`.
+- A decision game: [the red project before go-live](exercises/decision-games/red-project-before-go-live.md).
+- Assessment: areas `product` and `project-management` with 6 questions each, and `quality.risk-based-strategy`. The SME profile skips product and gets one owner-level project question (`project-management.sme-system-change`): a one-page plan with a way back before a big IT change.
+- Quiz: Product and Project management areas with 10 statements each, and 6 more quality statements on performance, security, accessibility, exploratory testing and test data. 94 true and 95 false out of 189.
+- 27 problems in PROBLEMS.md, 63 glossary terms (from A/B test to vanity metric), product, programme, project manager and QA rows in the README's "Pick your door", and a learning path for product, programme and quality leaders.
+
+### Changed
+
+- The playbook index has 16 areas: Product and Project management are areas 3 and 4. The maturity model, profiles and scoring cover them. The scale-up target is now at least 11 of the 16 areas at Standard within a year.
+- Quality questions link to the new pages, and the accessibility question now asks for manual keyboard, zoom and screen reader checks as well as automated ones. The assessment allows 4 to 7 questions per area.
+- Leaders pages: "off track" for a programme now means outside the board's tolerance (forecast cost more than 10% over budget, or the 85% date past the plan); overdue P0 and P1 security findings must be zero; DORA terms aligned to "failed deployment recovery time"; starting points for large product bets and for concurrent launches.
+- Leaders pages on [decision making](leaders/decision-making.md), [board and executive reporting](leaders/board-and-executive-reporting.md), [business executives](leaders/for-business-executives.md) and [government](leaders/for-government.md) now cover staged funding with kill criteria, speed against control, escalation thresholds for what reaches the board, what the board decides, and the decisions accounting officers keep.
+- Notice periods in [API standards](playbook/architecture/api-standards.md) now cover removing user-facing features.
+- Links from related pages to the new ones: suppliers and contracts (acceptance, warranty and delay damages terms), business case (benefit owners and baselines), public sector (tender flexibility, US accessibility dates), regulated industries (price and value rules), release management (mobile store releases), developer platform and decision rights.
+
 ## [2026.11.1] - 2026-11-09
 
 An expert review of the first release. Five reviewers read the playbook as a CTO, an enterprise architect, a CISO, an SRE lead and an adoption panel (a clinic owner, a ministry digital lead, a corporate trainer and a plain-language editor). Each finding was fixed, or rejected with a written reason.

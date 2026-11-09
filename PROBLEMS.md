@@ -58,6 +58,43 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 | Database migrations mean downtime | [Database changes](playbook/delivery/database-changes.md) |
 | Infrastructure is clicked together in a console and nobody can rebuild it | [Infrastructure as code](playbook/delivery/infrastructure-as-code.md) |
 | Users cannot tell what changed between versions | [Versioning and changelogs](playbook/delivery/versioning-and-changelogs.md) |
+| We have thousands of test cases and defects still escape where nobody looked | [Test strategy](playbook/quality/test-strategy.md), [test strategy template](templates/quality/test-strategy.md) |
+| The end-to-end suite takes hours, fails at random, and nobody trusts a red build | [Test automation](playbook/quality/test-automation.md) |
+| The load test passed and the service still fell over on launch day | [Performance testing](playbook/quality/performance-testing.md), [performance test plan](templates/quality/performance-test-plan.md) |
+| We pass the yearly penetration test and still ship security flaws between tests | [Security testing](playbook/quality/security-testing.md) |
+| The accessibility checker shows zero errors and a blind user still cannot finish the form | [Accessibility testing](playbook/quality/accessibility-testing.md) |
+| User acceptance testing is a signature, and the real problems appear in the first week live | [Exploratory and acceptance testing](playbook/quality/exploratory-and-acceptance-testing.md), [UAT sign-off](templates/quality/uat-sign-off.md) |
+| Test environments hold copies of production with real customer names | [Test data and environments](playbook/quality/test-data-and-environments.md) |
+| Leadership asks why we need testers now that developers, or AI, write the tests | [For QA and test leaders](leaders/for-qa-and-test-leaders.md) |
+
+## Product
+
+| Problem | Go to |
+|---|---|
+| Teams ship steadily, yet the outcomes the board cares about do not move | [Product strategy](playbook/product/product-strategy.md), [for product leaders](leaders/for-product-leaders.md) |
+| We build what was asked for and find out months later that nobody uses it | [Product discovery](playbook/product/product-discovery.md), [opportunity solution tree](templates/product/opportunity-solution-tree.md) |
+| The roadmap is a list of dated promises made by sales, the board or ministers | [Roadmaps and prioritisation](playbook/product/roadmaps-and-prioritisation.md) |
+| Our biggest customers set the roadmap deal by deal | [Roadmaps and prioritisation: B2B and enterprise roadmaps](playbook/product/roadmaps-and-prioritisation.md#b2b-and-enterprise-roadmaps) |
+| Every A/B test is called a win the day the dashboard turns green | [Product metrics and experiments](playbook/product/product-metrics-and-experiments.md#reading-results-honestly), [experiment brief](templates/product/experiment-brief.md) |
+| Features are launched and nobody checks whether anyone uses them | [Launch and adoption](playbook/product/launch-and-adoption.md), [launch checklist](templates/product/launch-checklist.md) |
+| We copied a competitor's prices and do not know which customers we lose money on | [Pricing and packaging](playbook/product/pricing-and-packaging.md) |
+| The product only grows: features are added and never removed | [Product strategy](playbook/product/product-strategy.md), [a product leader's rhythm](leaders/for-product-leaders.md#a-product-leaders-rhythm) |
+
+## Projects and programmes
+
+| Problem | Go to |
+|---|---|
+| The service lost its team the day the project closed | [Projects and products](playbook/project-management/projects-and-products.md) |
+| A contract, tender or law fixes the scope, date and price, and our single-number estimates keep failing | [Planning fixed scope and budget](playbook/project-management/planning-fixed-scope-and-budget.md) |
+| The project was green for months and went red two weeks before go-live | [Status reporting](playbook/project-management/status-reporting.md), [status report](templates/project/status-report.md) |
+| Our steering group reads the report and decides nothing | [Status reporting: steering groups that decide](playbook/project-management/status-reporting.md#steering-groups-that-decide) |
+| The RAID log has 200 items and nobody reads it | [Risks, RAID logs and stage gates](playbook/project-management/risks-raid-and-stage-gates.md), [RAID log](templates/project/raid-log.csv) |
+| Our stage gates have never stopped anything | [Stage gates that can stop work](playbook/project-management/risks-raid-and-stage-gates.md#stage-gates-that-can-stop-work), [stage gate checklist](templates/project/stage-gate-checklist.md) |
+| A cutover weekend is coming and nobody has rehearsed the rollback | [Cutover and rollback](playbook/project-management/risks-raid-and-stage-gates.md#cutover-and-rollback) |
+| Our systems integrator says everything is on track and we cannot check | [Fixed-price contracts and systems integrators](playbook/project-management/planning-fixed-scope-and-budget.md#fixed-price-contracts-and-systems-integrators), [for programme and portfolio leaders](leaders/for-programme-and-portfolio-leaders.md#systems-integrators) |
+| Nobody checks whether the benefits in the business case arrived | [Benefits after go-live](playbook/project-management/projects-and-products.md#benefits-after-go-live) |
+| The PMO chases status that teams already hold in their own tools | [A modern PMO](playbook/project-management/modern-pmo.md) |
+| I have been asked to rescue a late programme that still reports green | [For programme and portfolio leaders](leaders/for-programme-and-portfolio-leaders.md#the-first-30-days-on-a-programme-in-trouble), [decision game: a red project before go-live](exercises/decision-games/red-project-before-go-live.md) |
 
 ## Architecture, scale and reliability
 

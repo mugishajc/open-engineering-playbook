@@ -1,6 +1,6 @@
 # Scale-up profile
 
-Take at least 10 of the 14 areas to Standard within a year, starting with ownership, review speed and incident learning, because those break first when one team becomes five. A scale-up's risk is that what the founding team carried in its heads stops reaching new teams. Write it down, make the default path the easy path, and measure whether it works.
+Take at least 11 of the 16 areas to Standard within a year, starting with ownership, review speed and incident learning, because those break first when one team becomes five. A scale-up's risk is that what the founding team carried in its heads stops reaching new teams. Write it down, make the default path the easy path, and measure whether it works.
 
 ## Who this is for
 
@@ -15,6 +15,8 @@ Take at least 10 of the 14 areas to Standard within a year, starting with owners
 |---|---|---|
 | Strategy | Standard | Add a transition charter before any migration that spans teams |
 | Operating model | Standard | Name team types and owners before you add teams |
+| Product | Standard | Give each team outcomes, not features, and publish one outcome roadmap per product area |
+| Project management | Standard | Use project routines only for work that crosses teams, suppliers or business units |
 | Ways of working | Standard | Let teams choose Scrum or Kanban; require throughput data either way |
 | Delivery | Standard | Code review within one working day is the first number to track |
 | Quality | Standard | Flaky tests are the main cause of slow CI at this size |
@@ -64,6 +66,7 @@ Take at least 10 of the 14 areas to Standard within a year, starting with owners
 | Structured interviews and a career framework | [Hiring](../playbook/people/hiring.md), [Career framework](../playbook/people/career-framework.md) | [interview-scorecard.md](../templates/people/interview-scorecard.md), [career-ladder.csv](../templates/people/career-ladder.csv) |
 | Set a quarterly capacity split for features, reliability, debt and platform | [Portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md) | |
 | Collect the five DORA metrics from tooling; review monthly per team | [Metrics](../playbook/measurement/metrics.md) | |
+| Outcome roadmaps in Now, Next and Later with forecast ranges; a written brief before every A/B test | [Roadmaps and prioritisation](../playbook/product/roadmaps-and-prioritisation.md), [Product metrics and experiments](../playbook/product/product-metrics-and-experiments.md) | [experiment-brief.md](../templates/product/experiment-brief.md) |
 
 ## Year 1
 
@@ -78,7 +81,9 @@ Take at least 10 of the 14 areas to Standard within a year, starting with owners
 | A skills matrix per team, with pairing or rotation until each critical system has two capable people | [Skills gap](../playbook/people/skills-gap.md) | |
 | Monthly cost per team, with an owner for every cost line | [FinOps](../playbook/platform/finops.md) | |
 | A technical debt register per team and a plan for the largest legacy system | [Technical debt](../playbook/architecture/technical-debt.md), [Legacy modernisation](../playbook/architecture/legacy-modernisation.md) | [tech-debt-register.csv](../templates/docs/tech-debt-register.csv) |
-| Four quarterly assessments; every team at Standard in at least 10 of 14 areas | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
+| A charter, a RAID log, status colours set by rule and stage gates for each cross-team project | [Risks, RAID logs and stage gates](../playbook/project-management/risks-raid-and-stage-gates.md), [Status reporting](../playbook/project-management/status-reporting.md) | [project-charter.md](../templates/project/project-charter.md), [raid-log.csv](../templates/project/raid-log.csv), [status-report.md](../templates/project/status-report.md) |
+| A risk-based test strategy per service, with performance, security and accessibility checks on a schedule | [Test strategy](../playbook/quality/test-strategy.md), [Performance testing](../playbook/quality/performance-testing.md) | [test-strategy.md](../templates/quality/test-strategy.md), [performance-test-plan.md](../templates/quality/performance-test-plan.md) |
+| Four quarterly assessments; every team at Standard in at least 11 of 16 areas | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 
 ## Skip at this size
 

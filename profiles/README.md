@@ -8,7 +8,7 @@ A profile tells you which pages of the Open Engineering Playbook to adopt first,
 
 | Engineers | Profile | Default level |
 |---|---|---|
-| None: a small or medium business that uses software but does not build it | [SME](sme.md) | Foundation, in 8 of 14 areas |
+| None: a small or medium business that uses software but does not build it | [SME](sme.md) | Foundation, in 9 of 16 areas |
 | 1 | [Solo](solo.md) | Foundation |
 | 2 to about 20, one team | [Startup](startup.md) | Foundation |
 | About 20 to 200, several teams | [Scale-up](scale-up.md) | Standard |
@@ -33,7 +33,7 @@ An overlay does not replace your size profile. You still follow the size profile
 | Standard | Shared practice across several teams, measured | Scale-up, Enterprise |
 | Assured | Standard plus evidence, separation of duties and audit trails | Any profile with an overlay |
 
-Each profile page has a table with the target level for all 14 practice areas and the signs that one area should go higher early. The SME profile skips six areas that need in-house engineers.
+Each profile page has a table with the target level for all 16 practice areas and the signs that one area should go higher early. The SME profile skips seven areas that need in-house engineers or a product team.
 
 Levels never lower a legal duty. Records of processing, impact assessments, processor contracts, breach registers, transfer mechanisms and reporting deadlines apply from the day the law applies to you, at every level and in every profile. See the [legal floor](../playbook/data/data-security-and-privacy.md#legal-floor-applies-at-every-level).
 
@@ -58,6 +58,6 @@ overlays = ["regulated"]        # optional: "public-sector", "regulated"
 python3 assessment/assess.py --init --profile scale-up > my-answers.toml
 ```
 
-With `--profile sme` the assessment asks its own 18 questions and leaves out the areas the SME profile skips.
+With `--profile sme` the assessment asks its own 19 questions and leaves out the areas the SME profile skips.
 
 Then copy the templates the profile names into your repository with `tools/adopt.sh`. It never overwrites a file you already have.

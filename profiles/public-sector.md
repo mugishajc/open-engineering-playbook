@@ -26,6 +26,8 @@ A school, small municipality or other public body that does not build software p
 |---|---|
 | Strategy | Horizon scan covering procurement cycles, regulation and sovereignty; risk register reviewed every 90 days |
 | Operating model | Separation of duties enforced in tooling; engineering reports fit the department's IT governance and spend controls |
+| Product | Services move through discovery, alpha, beta and live with an assessment at each step; outcomes measured separately for assisted-channel users; no experiments on who receives an entitlement |
+| Project management | Independent assurance at the major gates; gate decisions and re-baselines kept as records; tenders written with the flexibility the project will need |
 | Ways of working | Every change traceable to an approved requirement |
 | Delivery | Change evidence (request, reviewer, CI result, deployer) for any single change retrievable within 1 hour, and a sample of 25 changes within 1 working day, for 12 months or your records period |
 | Quality | WCAG 2.2 level AA testing before every major release; test evidence kept |
@@ -71,6 +73,8 @@ A school, small municipality or other public body that does not build software p
 | Set a page weight budget and test key journeys on a slow mobile network and a low-cost phone | [For government](../leaders/for-government.md) | |
 | Internal mirrors for packages and images on restricted networks | [Cloud, on-premises and air-gapped](../playbook/platform/cloud-on-prem-air-gapped.md) | |
 | Cryptographic inventory, starting with data that must stay secret for 10 years or more | [Post-quantum readiness](../playbook/security/post-quantum-readiness.md) | [crypto-inventory.csv](../templates/docs/crypto-inventory.csv) |
+| Write MoSCoW priorities, priced options, an exchange clause and a change budget into every new tender | [Planning fixed scope and budget](../playbook/project-management/planning-fixed-scope-and-budget.md#public-procurement-put-the-flexibility-in-the-tender) | |
+| Gate each service at the end of discovery, alpha and beta, with criteria written before the phase and independent assurance at alpha and go/no-go | [Risks, RAID logs and stage gates](../playbook/project-management/risks-raid-and-stage-gates.md#a-gate-map-for-digital-projects) | [stage-gate-checklist.md](../templates/project/stage-gate-checklist.md) |
 
 ## Year 1
 

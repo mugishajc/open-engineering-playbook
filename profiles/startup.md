@@ -14,6 +14,8 @@ Adopt Foundation in every area in the first quarter, then take delivery, securit
 |---|---|---|
 | Strategy | Foundation | You raise a round or plan a platform migration |
 | Operating model | Foundation | You split into a second team |
+| Product | Foundation | You add a second product team, or deals start to ask for roadmap commitments |
+| Project management | Foundation | A contract, tender or legal date fixes scope, date or price, or a supplier builds part of the work |
 | Ways of working | Foundation | Forecasts are missed two cycles in a row |
 | Delivery | Foundation | More than 5 engineers merge to the same repository daily |
 | Quality | Foundation | Customers find more bugs than your tests do |
@@ -52,6 +54,7 @@ Run `tools/adopt.sh --target <repo> --platform github --with-security` on your m
 | Write the onboarding checklist; the next hire merges a change in week one | [Onboarding](../playbook/people/onboarding.md) | [onboarding-checklist.md](../templates/docs/onboarding-checklist.md) |
 | Record significant decisions as decision records | [Decision records](../playbook/architecture/decision-records.md) | [adr.md](../templates/docs/adr.md) |
 | Encrypt confidential and restricted data; limit access to named roles | [Data security and privacy](../playbook/data/data-security-and-privacy.md) | |
+| Write a one-page product strategy (target users, the problem, what you will not build, 2 to 4 outcomes) and talk with at least one user every week | [Product strategy](../playbook/product/product-strategy.md), [Product discovery](../playbook/product/product-discovery.md) | [product-strategy-on-a-page.md](../templates/product/product-strategy-on-a-page.md) |
 
 ## Quarter 1
 
@@ -63,6 +66,8 @@ Run `tools/adopt.sh --target <repo> --platform github --with-security` on your m
 | Hold a blameless postmortem within 5 working days of every major incident; list contributing factors, not one root cause | [Postmortems](../playbook/reliability/postmortems.md), [Root cause analysis](../playbook/reliability/root-cause-analysis.md) | [postmortem.md](../templates/docs/postmortem.md) |
 | Threat model the product's riskiest flow (login, payments or data export) | [Secure development](../playbook/security/secure-development.md) | [threat-model.md](../templates/docs/threat-model.md) |
 | Hire with a structured interview and a scored work sample | [Hiring](../playbook/people/hiring.md) | [interview-scorecard.md](../templates/people/interview-scorecard.md) |
+| Release new features behind a flag with success and stop criteria; check each one after 2 to 6 weeks and remove what failed | [Launch and adoption](../playbook/product/launch-and-adoption.md) | [launch-checklist.md](../templates/product/launch-checklist.md) |
+| Write a one-page test strategy: the top 10 risks, the check for each and what you do not test | [Test strategy](../playbook/quality/test-strategy.md) | [test-strategy.md](../templates/quality/test-strategy.md) |
 | Track deployment frequency and change lead time; run the assessment and commit it | [Metrics](../playbook/measurement/metrics.md), [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 
 ## Year 1
@@ -79,7 +84,7 @@ Run `tools/adopt.sh --target <repo> --platform github --with-security` on your m
 | Set a quarterly capacity split for features, reliability, debt and platform, and check it against actual time | [Portfolio and capacity](../playbook/strategy/portfolio-and-capacity.md) | |
 | Keep a skills matrix so every critical system has at least two people who can run it | [Skills gap](../playbook/people/skills-gap.md) | |
 | Forecast dates from throughput, as ranges | [Planning and forecasting](../playbook/ways-of-working/planning-and-forecasting.md) | |
-| Four committed assessments, Foundation in all 14 areas | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
+| Four committed assessments, Foundation in all 16 areas | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 
 ## Skip at this size
 

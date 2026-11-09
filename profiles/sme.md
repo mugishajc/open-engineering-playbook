@@ -22,6 +22,8 @@ The rows in each table are in order: the first row removes the most risk for the
 |---|---|---|
 | Strategy | Foundation (one-page yearly IT plan) | You are choosing a core system that will run the business for years |
 | Operating model | Foundation (who owns IT decisions, written down) | You have more than one IT person or provider |
+| Product | Skip | You sell your own software or digital service |
+| Project management | Foundation (a one-page plan before a big IT change) | You replace a core system or change IT provider |
 | Ways of working | Skip | You employ developers |
 | Delivery | Skip | You employ developers or commission custom software |
 | Quality | Skip | You commission custom software; then require tests in the contract |
@@ -79,6 +81,7 @@ The rows in each table are in order: the first row removes the most risk for the
 | Ask your IT provider or IT person the eight yearly questions, and record the answers | [Questions to ask your IT provider](../leaders/for-small-and-medium-businesses.md#questions-to-ask-your-it-provider-every-year) | [it-provider-questions.md](../templates/sme/it-provider-questions.md) |
 | Rehearse the first-hour incident plan with the people named in it, for 30 minutes: "our files are encrypted, what do we do?" | [The first hour of an incident](../leaders/for-small-and-medium-businesses.md#the-first-hour-of-an-incident) | |
 | Gain a recognised certification if customers, insurers or public contracts ask for one (for example UK Cyber Essentials) | [Recognised schemes](../leaders/for-small-and-medium-businesses.md#how-these-map-to-recognised-schemes) | |
+| Before you replace a system or change IT provider, write a one-page plan: an owner, a date range, a tested way back to the old way, and what would make you stop | [Projects and products](../playbook/project-management/projects-and-products.md#foundation) | [project-charter.md](../templates/project/project-charter.md) |
 | Replace devices that will stop getting security updates in the next year | [A simple yearly IT plan](../leaders/for-small-and-medium-businesses.md#a-simple-yearly-it-plan-and-budget) | |
 
 ## Skip at this size
@@ -90,12 +93,13 @@ The rows in each table are in order: the first row removes the most risk for the
 | Service level objectives and on-call | Your suppliers hold the service levels. Put them in the contracts. | You run a system customers use directly, around the clock |
 | Change advisory board | A short note of what changed and when is enough for a small team. | A regulator requires one |
 | Delivery metrics | They measure software teams. | You employ developers |
+| Product management pages | They are for teams that build and sell their own software. | You sell your own software or digital service |
 | Data governance roles, catalogues and data contracts | A one-page data list does the job. | Several systems share the same customer data and disagree |
 | Post-quantum and zero trust programmes | Your suppliers carry most of this work. Ask them about it at renewal. | You hold data that must stay secret for 10 years or more |
 
 ## Check your progress
 
-Most owners can skip the assessment: the five numbers below are enough. If your IT person or provider wants a fuller check, the [assessment](../assessment/README.md) has an `sme` profile. It asks 18 questions written for a business without developers, leaves out the six areas this page marks Skip, and lists the essential controls first:
+Most owners can skip the assessment: the five numbers below are enough. If your IT person or provider wants a fuller check, the [assessment](../assessment/README.md) has an `sme` profile. It asks 19 questions written for a business without developers, leaves out the seven areas this page marks Skip, and lists the essential controls first:
 
 ```bash
 python3 assessment/assess.py --init --profile sme > my-answers.toml
