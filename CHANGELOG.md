@@ -2,6 +2,41 @@
 
 All notable changes to the Open Engineering Playbook are listed here. It uses calendar versions (`YYYY.MM`). The format follows [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/).
 
+## [2026.11.1] - 2026-11-09
+
+An expert review of the first release. Five reviewers read the playbook as a CTO, an enterprise architect, a CISO, an SRE lead and an adoption panel (a clinic owner, a ministry digital lead, a corporate trainer and a plain-language editor). Each finding was fixed, or rejected with a written reason.
+
+### Added
+
+- `GLOSSARY.md`: acronyms and terms in plain words, from ADR to zero trust, including DORA metrics versus the EU DORA regulation. Linked from README, STYLE and the leaders section.
+- Playbook pages: [technology budget and cost](playbook/strategy/technology-budget-and-cost.md), [suppliers and contracts](playbook/strategy/suppliers-and-contracts.md), [events and messaging](playbook/architecture/events-and-messaging.md) and [resilience testing](playbook/reliability/resilience-testing.md).
+- Privacy and exit templates in `templates/security/`: records of processing, a personal data breach register, a data protection impact assessment and an exit plan. A legal floor in [data security and privacy](playbook/data/data-security-and-privacy.md): levels never lower a legal duty.
+- Templates for small businesses in `templates/sme/`: a printable first-hour plan with a downtime procedure, IT provider questions, an online services list and a one-page staff AI use policy.
+- A solo GitHub ruleset that a single engineer can merge with; `tools/adopt.sh --solo` copies it and `--updates dependabot|renovate` copies one update bot only.
+- Assessment: profile rules in the question bank (`[profiles.<name>]` with `skip_areas`, `area_order` and `overlays_raise_target`, and per-question `only_profiles` and `skip_profiles`). The SME profile now skips the six areas that need in-house engineers and asks 14 Foundation questions written for owners and IT providers, so a clinic or school gets actions such as "turn on multi-factor authentication for every email account" first.
+- Assessment: report links point at the public repository when the answers file lives elsewhere.
+- Quiz: a "Business owners" area, `--save FILE` to keep a record of each session and `--retry-missed FILE` to replay misses. `--check` now fails when true and false answers are unbalanced, overall, per area, or for statements with absolute words.
+- Exercises: learning paths by role for trainers, and a retry storm tabletop.
+- `tools/check_structure.py`, which fails when a page lacks a required section, and a `--long-sentences N` warning in `tools/plain_lint.py`.
+- Leaders: choosing an IT provider and the cost type of each essential control; hiring and reviewing your technology leader; a section for chief digital officers; a large groups section in the enterprise profile; public sector and data rows and newer editions in the reading list.
+- GOVERNANCE: continuity rules, a 3-maintainer target and how the second approval works until there are two maintainers. CONTRIBUTING: a translation policy and every check, including the exercises.
+
+### Changed
+
+- One set of numbers everywhere, matching the practice pages: on-call at least 6 people per 24 by 7 rotation (one week in six; 8 at one site if the same people cover backup), flaky tests quarantined in 24 hours and fixed in 14 days, setup from the README in under one hour, first review response within one working day with a median under 4 working hours, governance answers within 5 working days, restore tests every 3 months (monthly for Tier 1).
+- Enterprise profile follows the transition phases: quarter 1 is Assess and Decide; pilots, SLOs, the group incident process and SBOMs arrive wave by wave, in waves of 2 to 5 teams.
+- Scale-up profile: at least 10 of the 14 areas at Standard within a year, as its year 1 check already said.
+- README quick start explains the Python 3.11 requirement and the alternatives (`python3.12`, `py -3` on Windows), offers a no-tools start for owners and executives, and suggests a quarterly return. Both scripts now say how to fix an old Python.
+- Quiz: "it depends", negative and recall-only statements rewritten; jargon in explanations spelled out; 82 true and 81 false out of 163.
+- SME first-hour plan: keep evidence, call the insurer earlier, switch to a downtime procedure.
+- AI Act dates on the data officers page now cite Regulation (EU) 2026/1744.
+- Principle 4 is "Golden paths, not gates"; principle 9 says levels never lower a legal duty.
+- Many more fixes across the security, reliability, delivery, architecture and strategy pages: sourced claims, corrected dates and aligned targets.
+
+### Removed
+
+- The quiz statement on "one week in six", replaced by a statement that tests the principle (`reliability.three-person-rota`).
+
 ## [2026.11] - 2026-11-09
 
 First public release.

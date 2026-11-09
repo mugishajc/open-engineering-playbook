@@ -1,6 +1,6 @@
 # The playbook
 
-Fourteen areas, about ninety pages. Each page follows the same layout: the decision up front, measurable outcomes, the practice at three levels (Foundation, Standard, Assured), what changes on-premises and air-gapped, common failures, templates and primary sources.
+Fourteen areas, 87 pages. Each page follows the same layout: the decision up front, measurable outcomes, the practice at three levels (Foundation, Standard, Assured), what changes on-premises and air-gapped, common failures, templates and primary sources.
 
 Start with [principles.md](principles.md). Then pick your [profile](../profiles/README.md), which tells you which pages to read first and at which level. If you arrived with a specific problem, [PROBLEMS.md](../PROBLEMS.md) takes you straight to the right page.
 
@@ -17,6 +17,8 @@ How to decide where engineering is going and how to get there without stopping t
 | [Stakeholders and communication](strategy/stakeholders-and-communication.md) | A change affects people outside engineering |
 | [Horizon scan](strategy/horizon-scan.md) | You want to know what to prepare for between now and 2030 |
 | [Portfolio and capacity](strategy/portfolio-and-capacity.md) | You plan budgets and capacity across many teams |
+| [Technology budget and cost](strategy/technology-budget-and-cost.md) | Finance asks how technology cost is built, capitalised or allocated |
+| [Suppliers and contracts](strategy/suppliers-and-contracts.md) | Contracts renew unnoticed, suppliers miss service levels, or you need exit terms |
 
 ## 2. Operating model
 
@@ -35,7 +37,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [Agile and Scrum](ways-of-working/agile-and-scrum.md) | The ceremonies run but nothing improves |
 | [Planning and forecasting](ways-of-working/planning-and-forecasting.md) | Estimates are always wrong |
 | [Product partnership](ways-of-working/product-partnership.md) | Product and engineering pull in different directions |
-| [Agile in the AI era](ways-of-working/agile-in-the-ai-era.md) | Code takes hours to write, but planning and ceremonies still assume weeks |
+| [Agile in the AI era](ways-of-working/agile-in-the-ai-era.md) | Code can be drafted in hours, but planning and ceremonies still assume weeks |
 
 ## 4. Delivery
 
@@ -67,12 +69,13 @@ How to decide where engineering is going and how to get there without stopping t
 | [Service levels](reliability/service-levels.md) | You cannot say how reliable is reliable enough |
 | [Incident management](reliability/incident-management.md) | Incidents are chaotic |
 | [Postmortems](reliability/postmortems.md) | The same incidents keep happening |
-| [Root cause analysis](reliability/root-cause-analysis.md) | Your RCAs stop at one cause and nothing changes |
+| [Root cause analysis](reliability/root-cause-analysis.md) | Your root cause analyses stop at one cause and nothing changes |
 | [Rollbacks](reliability/rollbacks.md) | Undoing a bad change takes too long |
 | [On-call](reliability/on-call.md) | People are tired of being paged |
 | [Production readiness](reliability/production-readiness.md) | A new service is about to go live |
 | [Backup and recovery](reliability/backup-and-recovery.md) | You have never tested a restore |
 | [Change management](reliability/change-management.md) | A change board slows everything down |
+| [Resilience testing](reliability/resilience-testing.md) | Nobody has checked that failover, rollback or degraded modes work |
 
 ## 7. Security
 
@@ -115,6 +118,7 @@ How to decide where engineering is going and how to get there without stopping t
 | [RFCs](architecture/rfcs.md) | A change is big enough to need wider input |
 | [Tech radar](architecture/tech-radar.md) | Teams keep picking different tools for the same job |
 | [API standards](architecture/api-standards.md) | Every API looks different |
+| [Events and messaging](architecture/events-and-messaging.md) | Messages get lost, duplicated or stuck in a queue |
 | [Observability](architecture/observability.md) | You find out about problems from users |
 | [Scaling](architecture/scaling.md) | The system struggles under load |
 | [Legacy modernisation](architecture/legacy-modernisation.md) | A critical old system cannot be changed safely |

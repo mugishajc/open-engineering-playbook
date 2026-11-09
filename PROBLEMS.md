@@ -43,6 +43,7 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 | We do not know where personal data lives | [Data security and privacy](playbook/data/data-security-and-privacy.md), [data classification](templates/docs/data-classification.md) |
 | Upstream changes break our pipelines without warning | [Data quality: data contracts](playbook/data/data-quality.md) |
 | We must keep citizen or customer data inside the country | [Public sector](playbook/compliance/public-sector.md), [cloud, on-premises and air-gapped](playbook/platform/cloud-on-prem-air-gapped.md) |
+| We have no record of processing or breach log to show the data protection authority | [Data security and privacy: legal floor](playbook/data/data-security-and-privacy.md#legal-floor-applies-at-every-level), [records of processing](templates/security/records-of-processing.csv), [breach register](templates/security/personal-data-breach-register.csv) |
 
 ## Delivery and quality
 
@@ -62,6 +63,8 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 
 | Problem | Go to |
 |---|---|
+| Messages between services get lost, duplicated or stuck in a queue | [Events and messaging](playbook/architecture/events-and-messaging.md) |
+| Nobody has checked that failover, rollback or degraded modes actually work | [Resilience testing](playbook/reliability/resilience-testing.md) |
 | The system falls over at peak load | [Scaling](playbook/architecture/scaling.md), [service levels](playbook/reliability/service-levels.md) |
 | We split into microservices and now everything is slower and harder | [Scaling: modular monolith first](playbook/architecture/scaling.md), [cloud native](playbook/platform/cloud-native.md) |
 | A legacy system runs the business and nobody dares touch it | [Legacy modernisation](playbook/architecture/legacy-modernisation.md) |
@@ -101,6 +104,8 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 | We have a strategy deck that nobody follows | [Technical strategy](playbook/strategy/technical-strategy.md), [one-pager template](templates/strategy/strategy-one-pager.md) |
 | We need to move to the cloud, off the cloud, or to a new platform without stopping the business | [Transition playbook](playbook/strategy/transition-playbook.md), [transition charter](templates/strategy/transition-charter.md) |
 | Finance will not fund engineering improvements | [Business case](playbook/strategy/business-case.md) |
+| Finance asks how technology cost is capitalised or allocated, and we cannot answer | [Technology budget and cost](playbook/strategy/technology-budget-and-cost.md) |
+| Supplier contracts renew without anyone noticing, and we have no exit terms | [Suppliers and contracts](playbook/strategy/suppliers-and-contracts.md), [exit plan](templates/security/exit-plan.md) |
 | Nobody knows who can approve an architecture decision | [Decision rights](playbook/operating-model/decision-rights.md), [engineering governance](playbook/operating-model/engineering-governance.md) |
 | The board cannot see whether IT is under control | [IT governance](playbook/operating-model/it-governance.md) |
 | ITIL processes and continuous delivery are fighting each other | [IT governance](playbook/operating-model/it-governance.md), [change management](playbook/reliability/change-management.md) |
@@ -123,12 +128,19 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 | We have too many applications doing the same job | [Strategy toolkit: application portfolio](leaders/strategy-toolkit.md) |
 | Our data strategy is a slide, not a plan | [For data and digital officers](leaders/for-data-and-digital-officers.md) |
 | Each ministry builds its own systems and none of them talk to each other | [For government](leaders/for-government.md) |
+| A donor-funded or project-funded system ends with no budget to run it | [For government: funding continuous services in budget years](leaders/for-government.md#funding-continuous-services-in-budget-years) |
+| Our service does not work on the phones and networks most citizens use | [For government: accessibility and inclusion](leaders/for-government.md#accessibility-and-inclusion) |
+| As chief digital officer, I own services and channels, not data, and the data pages do not fit | [Chief digital officers](leaders/for-data-and-digital-officers.md#chief-digital-officers) |
 | The regulator asks how we stay within impact tolerances | [For financial services](leaders/for-financial-services.md) |
 | We are an EU financial entity and must show evidence for the EU DORA regulation | [For financial services](leaders/for-financial-services.md), [control mapping](playbook/compliance/control-mapping.md) |
 | A major outage or cyber attack is happening and the executives do not know their role | [Crisis leadership](leaders/crisis-leadership.md), [crisis decision log](templates/leaders/crisis-decision-log.md) |
 | We are a small business with one IT person, or none, and do not know what matters most | [For small and medium businesses](leaders/for-small-and-medium-businesses.md), [SME profile](profiles/sme.md) |
 | Our outside IT provider holds all the passwords and we have never read the contract | [For small and medium businesses: managing an outside IT provider](leaders/for-small-and-medium-businesses.md#managing-an-outside-it-provider) |
+| We need to choose an IT provider and do not know what to ask | [Choosing an IT provider](leaders/for-small-and-medium-businesses.md#choosing-an-it-provider), [IT provider questions](templates/sme/it-provider-questions.md) |
+| If our computers stopped today, we could not see patients, teach or take payment | [The first hour of an incident](leaders/for-small-and-medium-businesses.md#the-first-hour-of-an-incident), [first-hour plan and downtime procedure](templates/sme/first-hour-plan.md) |
+| Staff paste customer or patient records into free AI chat tools | [Staff AI use policy](templates/sme/staff-ai-use-policy.md), [AI governance](playbook/ai/ai-governance.md) |
 | As a CEO or CFO, I cannot tell whether our technology function is healthy | [For business executives](leaders/for-business-executives.md) |
+| We are hiring a CTO or CIO and do not know how to judge the candidates | [For business executives: hiring and reviewing your technology leader](leaders/for-business-executives.md#hiring-and-reviewing-your-technology-leader) |
 
 ## Practice
 
@@ -136,4 +148,6 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 |---|---|
 | We have never practised a major incident or cyber attack | [Tabletop exercises](exercises/README.md) |
 | People read the playbook but nothing sticks | [True or false quizzes](exercises/README.md), [katas](exercises/README.md) |
+| We are building a training programme and need a sequence by role | [Exercises: learning paths](exercises/README.md#learning-paths) |
+| Our team keeps tripping over acronyms in the playbook | [Glossary](GLOSSARY.md) |
 | Leaders keep repeating the same expensive decisions | [Decision games](exercises/README.md) |

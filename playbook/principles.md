@@ -14,9 +14,9 @@ Small changes are easier to review, test, ship and undo. Most delivery problems 
 
 A control that relies on someone remembering is not a control. Put the rule in the pipeline, the repository settings or the platform, and let the system record that it ran. Auditors get better evidence and engineers get their time back.
 
-## 4. Paved roads, not gates
+## 4. Golden paths, not gates
 
-Make the safe way the easy way. Teams that follow the paved road get speed and support for free. Teams that leave it can, but they own the extra work and write down why.
+Make the safe way the easy way. Teams that follow the [golden path](platform/golden-paths.md) (some call it the paved road) get speed and support for free. Teams that leave it can, but they own the extra work and write down why.
 
 ## 5. Write decisions down
 
@@ -36,7 +36,7 @@ Incidents are information about the system, not verdicts on people. Postmortems 
 
 ## 9. Scale the practice to the context
 
-A solo engineer and a central bank should not run the same process. The playbook gives three levels for every practice (Foundation, Standard, Assured) and profiles that pick a sensible level for you. Adopt the lowest level that controls your real risk.
+A solo engineer and a central bank should not run the same process. The playbook gives three levels for every practice (Foundation, Standard, Assured) and profiles that pick a sensible level for you. Adopt the lowest level that controls your real risk. Levels never lower a legal duty. Records of processing, impact assessments, processor contracts, breach registers, transfer mechanisms and reporting deadlines apply from the day the law applies to you, at every level. See the [legal floor](data/data-security-and-privacy.md#legal-floor-applies-at-every-level).
 
 ## 10. The same practice in every environment
 
