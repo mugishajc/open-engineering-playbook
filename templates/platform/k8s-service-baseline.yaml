@@ -3,8 +3,12 @@
 # HorizontalPodAutoscaler, and NetworkPolicies (default deny, allow from the
 # ingress namespace, allow DNS).
 #
-# Replace every value in angle brackets. Tune resources, replicas and
-# autoscaling from measurement after 2 weeks in production.
+# Replace every value in angle brackets. Tune resources and autoscaling from
+# measurement after 2 weeks in production.
+#
+# Check in CI before merge: kubeconform for schema, and a policy rule (Kyverno
+# or conftest) that fails when a Deployment sets spec.replicas and an HPA
+# targets it.
 #
 # The platform team creates the namespace (the Argo CD project template does not
 # allow teams to create cluster-scoped objects). It must enforce the Pod Security
@@ -39,8 +43,12 @@ metadata:
     app.kubernetes.io/name: orders-service
     app.kubernetes.io/part-of: commerce
 spec:
-  # The HorizontalPodAutoscaler manages replicas. This is the starting value.
-  replicas: 2
+  # No replicas field. The HorizontalPodAutoscaler below owns the replica count;
+  # if this field were set, every Argo CD sync (and self-heal) would reset the
+  # count and undo scaling at peak. minReplicas in the HPA sets the floor.
+  # Adding autoscaling to a running Deployment that had replicas set: scale the
+  # HPA in first, then remove the field, or the count can drop to 1 on apply.
+  # The Argo CD template also ignores /spec/replicas as a second guard.
   revisionHistoryLimit: 5
   selector:
     matchLabels:
@@ -66,10 +74,12 @@ spec:
         seccompProfile:
           type: RuntimeDefault
       # Spread replicas across zones and nodes so one failure does not take all of them.
+      # Tier 1: DoNotSchedule on the zone constraint, so replicas never pile into
+      # one zone. Lower tiers may use ScheduleAnyway.
       topologySpreadConstraints:
         - maxSkew: 1
           topologyKey: topology.kubernetes.io/zone
-          whenUnsatisfiable: ScheduleAnyway
+          whenUnsatisfiable: DoNotSchedule
           labelSelector:
             matchLabels:
               app.kubernetes.io/name: orders-service
@@ -94,8 +104,11 @@ spec:
           env:
             - name: OTEL_SERVICE_NAME
               value: orders-service
+            # TLS on every hop, including telemetry (see API standards). Mount the
+            # cluster CA bundle and point OTEL_EXPORTER_OTLP_CERTIFICATE at it.
+            # Plain http is acceptable only inside a mesh that adds mutual TLS.
             - name: OTEL_EXPORTER_OTLP_ENDPOINT
-              value: http://otel-collector.observability.svc:4318
+              value: https://otel-collector.observability.svc:4318
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true
@@ -130,13 +143,14 @@ spec:
               port: http
             periodSeconds: 20
             failureThreshold: 3
-          # Optional on Kubernetes 1.30 or later: wait a few seconds before
-          # SIGTERM so load balancers stop sending traffic first. Older clusters
-          # need an exec sleep in the image instead.
-          # lifecycle:
-          #   preStop:
-          #     sleep:
-          #       seconds: 5
+          # Wait a few seconds before SIGTERM so endpoints and load balancers
+          # stop sending traffic first. Without it, every rolling deploy sends
+          # some requests to terminating pods. The sleep action needs Kubernetes
+          # 1.30 or later; older clusters need an exec sleep in the image.
+          lifecycle:
+            preStop:
+              sleep:
+                seconds: 5
           volumeMounts:
             # Writable scratch space, since the root filesystem is read-only.
             - name: tmp
@@ -169,8 +183,10 @@ metadata:
   name: orders-service
   namespace: orders
 spec:
-  # Keep at least one replica running during node drains and upgrades.
-  minAvailable: 1
+  # Evict at most one replica at a time during node drains and upgrades.
+  # maxUnavailable stays correct at any replica count; minAvailable: 1 would
+  # let a drain evict 9 of 10 pods at once.
+  maxUnavailable: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: orders-service
@@ -185,7 +201,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: orders-service
-  minReplicas: 2
+  # At least one replica per zone, so losing a zone leaves two thirds of capacity.
+  minReplicas: 3
   # Always set a maximum, and a budget alert to match.
   maxReplicas: 10
   metrics:
@@ -194,7 +211,11 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 70
+          # Size for peak with one zone lost (N+1): at most (zones - 1) / zones
+          # of the safe limit from your load test. With 3 zones and a safe limit
+          # of about 80% CPU, that is about 50%. Do not count on autoscaling to
+          # catch up during a zone failure. See playbook/architecture/scaling.md.
+          averageUtilization: 50
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 300

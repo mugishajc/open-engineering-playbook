@@ -38,12 +38,28 @@ spec:
       kind: HorizontalPodAutoscaler
     - group: networking.k8s.io
       kind: NetworkPolicy
-  # Optional: block automatic syncs to production outside agreed hours.
+    # Add only the kinds the team uses, for example:
+    # - group: argoproj.io
+    #   kind: Rollout
+    # - group: argoproj.io
+    #   kind: AnalysisTemplate
+    # - group: external-secrets.io
+    #   kind: ExternalSecret
+    # - group: networking.k8s.io
+    #   kind: Ingress
+    # - group: gateway.networking.k8s.io
+    #   kind: HTTPRoute
+  # Warn about resources in the namespace that no Application manages.
+  orphanedResources:
+    warn: true
+  # Optional: block syncs to production outside agreed hours. A deny window
+  # blocks manual syncs too unless manualSync is true.
   # syncWindows:
   #   - kind: deny
   #     schedule: "0 18 * * 5"
   #     duration: 62h
   #     applications: ["*"]
+  #     manualSync: true   # lets the incident commander sync a fix by hand
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -53,15 +69,19 @@ metadata:
   labels:
     team: orders
     environment: production
-  # Remove the cluster resources when the Application is deleted.
-  finalizers:
-    - resources-finalizer.argocd.argoproj.io
+  # Production: no cascade finalizer, so deleting the Application (a bad
+  # app-of-apps change, a renamed file) leaves the workload running. Add
+  # resources-finalizer.argocd.argoproj.io only for preview and test
+  # environments, where clean-up matters more.
 spec:
   project: team-orders
   source:
     repoURL: https://git.example.org/<org>/orders-deploy.git
-    # Pin production to a tag or commit so promotion is an explicit change in git.
-    targetRevision: <release-tag>
+    # Promotion is a pull request that changes the image digest in this
+    # directory on main. The directory, not a branch or tag, says what runs.
+    # Teams that promote by moving a tag pin targetRevision to the tag instead;
+    # do not use both.
+    targetRevision: main
     path: environments/production/orders-service
   destination:
     server: https://kubernetes.default.svc
@@ -70,17 +90,35 @@ spec:
     automated:
       # Delete resources that were removed from git.
       prune: true
-      # Revert manual changes made directly in the cluster (drift).
+      # Revert manual changes made directly in the cluster (drift). During an
+      # incident, pause auto-sync for this one Application before changing the
+      # cluster by hand; see playbook/delivery/gitops-and-deployment.md.
       selfHeal: true
     syncOptions:
       # The namespace is created by the platform with its labels and policies.
       - CreateNamespace=false
       - PruneLast=true
+      # Apply ignoreDifferences during sync as well as in the diff, so a sync
+      # never writes the ignored fields.
+      - RespectIgnoreDifferences=true
     retry:
       limit: 5
       backoff:
         duration: 10s
         factor: 2
         maxDuration: 3m
+  # The HorizontalPodAutoscaler owns the replica count. Without this, a
+  # manifest that sets spec.replicas makes self-heal scale the service back
+  # down at peak load.
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
+    # With Argo Rollouts, ignore the Rollout's replicas too:
+    # - group: argoproj.io
+    #   kind: Rollout
+    #   jsonPointers:
+    #     - /spec/replicas
   # Keep the last 10 synced revisions for rollback.
   revisionHistoryLimit: 10
