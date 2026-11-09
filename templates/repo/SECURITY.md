@@ -24,8 +24,12 @@ Include, where you can:
 |---|---|
 | We acknowledge your report | Within 2 working days |
 | We confirm whether it is a vulnerability and share a severity | Within 10 working days |
-| We fix critical and high severity issues | Within 30 days of confirmation, sooner if actively exploited |
+| We fix or mitigate actively exploited issues | Within 72 hours of confirmation |
+| We fix or mitigate critical issues | Within 7 days of confirmation |
+| We fix or mitigate high severity issues | Within 30 days of confirmation |
 | We publish an advisory and credit you (if you wish) | When the fix is released |
+
+These targets match our vulnerability management policy. If you change one, change both.
 
 We will keep you informed and agree a disclosure date with you. We ask you to give us reasonable time to fix the issue before you publish details. We will not take legal action against people who report in good faith and follow this policy.
 

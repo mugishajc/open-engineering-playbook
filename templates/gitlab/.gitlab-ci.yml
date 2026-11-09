@@ -7,15 +7,23 @@
 # Pinning: the images below use version tags so the file works when copied.
 # Before relying on it, pin each image by digest, for example
 #   image: docker.io/library/buildpack-deps:bookworm@sha256:<digest>
-# In air-gapped networks, set CI_REGISTRY_MIRROR to your internal registry
+# In air-gapped networks, set REGISTRY_MIRROR to your internal registry
 # (Harbor, Nexus or Artifactory) and mirror the images there.
+# Custom variables avoid the CI_ prefix, which GitLab keeps for its own
+# predefined variables.
 
 variables:
-  CI_REGISTRY_MIRROR: "docker.io"
-  BUILD_IMAGE: "${CI_REGISTRY_MIRROR}/library/buildpack-deps:bookworm"
-  # Replace "latest" with a pinned release-cli version or digest.
-  RELEASE_IMAGE: "registry.gitlab.com/gitlab-org/release-cli:latest"
+  REGISTRY_MIRROR: "docker.io"
+  BUILD_IMAGE: "${REGISTRY_MIRROR}/library/buildpack-deps:bookworm"
+  # The release keyword runs the GitLab CLI (glab) from this image.
+  # release-cli is deprecated since GitLab 18.0 and planned for removal in 20.0.
+  # Mirror this image too in air-gapped networks.
+  RELEASE_IMAGE: "registry.gitlab.com/gitlab-org/cli:v1.128.0"
   GIT_DEPTH: "50"
+  # GitLab caches only paths inside the project directory, so point each
+  # tool's download cache there. Add the same for any other tool you use.
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  npm_config_cache: "$CI_PROJECT_DIR/.cache/npm"
 
 stages:
   - lint
@@ -57,7 +65,10 @@ mr-title:
     GIT_STRATEGY: none
   script:
     # The title is untrusted input: read it from the variable, never eval it.
-    # The pattern is single-quoted so bash keeps the backslashes.
+    # The pattern sits inside the single-quoted bash -c script, so the outer
+    # shell does not expand it.
+    # GitLab does not start a new pipeline when only the title changes.
+    # After fixing the title, run a new pipeline for the merge request.
     - |
       bash -c 'pattern="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z0-9._/-]+\))?!?: [^ ].{0,99}$"
       if [[ "$CI_MERGE_REQUEST_TITLE" =~ $pattern ]]; then

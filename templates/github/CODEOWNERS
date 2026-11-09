@@ -5,7 +5,9 @@
 # - Use teams (@org/team), never individuals who might leave.
 # - The last matching pattern wins, so put the general rule first.
 # - Every owning team should have at least 3 members.
-# - Turn on "require review from code owners" in the default-branch ruleset.
+# - The team ruleset (docs/repository-rules/default-branch.json after
+#   tools/adopt.sh) turns on "require review from code owners". The solo
+#   ruleset does not, because nobody else can review.
 # Replace @your-org/... with your own teams.
 
 # Default owner for everything
@@ -28,6 +30,11 @@
 /.github/dependabot.yml         @your-org/platform
 /release-please-config.json     @your-org/platform
 /.release-please-manifest.json  @your-org/platform
+/docs/repository-rules/         @your-org/platform @your-org/security-champions
+
+# Agent instructions: a change here changes how code gets written
+/AGENTS.md                      @your-org/platform @your-org/security-champions
+**/AGENTS.md                    @your-org/platform
 
 # Ownership of ownership: changes here need platform review
 /.github/CODEOWNERS             @your-org/platform

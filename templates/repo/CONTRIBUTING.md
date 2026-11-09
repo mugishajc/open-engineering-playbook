@@ -43,6 +43,8 @@ type(optional-scope): short description in the imperative
 | `feat!` or `fix!` | Breaking change. Explain it in the description. | Major |
 | `docs`, `test`, `refactor`, `perf`, `build`, `ci`, `chore`, `style`, `revert` | Everything else | None |
 
+Before version 1.0.0, a breaking change bumps the minor version, not the major (the `bump-minor-pre-major` setting in `release-please-config.json`).
+
 Examples: `feat(export): add CSV export`, `fix(auth): reject expired tokens`, `docs: explain local setup on Windows`.
 
 ## Review

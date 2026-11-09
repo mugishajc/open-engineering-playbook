@@ -4,7 +4,7 @@ All notable changes to this project are documented in this file.
 
 The format is based on [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/), and this project follows [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.0.html).
 
-If you use release-please, it writes new entries at the top of this file from Conventional Commits. Edit the release pull request so each entry makes sense to a user.
+If you use release-please, it writes new entries at the top of this file from Conventional Commits. Edit the release pull request so each entry makes sense to a user. Before your first release, delete the Unreleased section and the link list at the bottom of this file: release-please writes its own headings with compare links and never updates them.
 
 ## [Unreleased]
 

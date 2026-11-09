@@ -7,6 +7,8 @@
 # - [Section][2] requires two approvals from that section's owners.
 # - ^[Section] makes a section optional (owners are suggested, not required).
 # - Turn on "Require approval from code owners" for the protected branch.
+# - Code Owners needs GitLab Premium or Ultimate. On the Free tier GitLab
+#   does not use this file: name reviewers on each merge request instead.
 # Replace @your-group/... with your own groups.
 
 [Default] @your-group/service-team
@@ -28,6 +30,8 @@
 /.gitlab-ci.yml
 /.gitlab/
 /.gitlab/CODEOWNERS
+/AGENTS.md
+**/AGENTS.md
 
 ^[Documentation] @your-group/tech-writers
 /docs/

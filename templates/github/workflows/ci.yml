@@ -2,7 +2,10 @@
 #
 # Runs lint, test and build on every pull request and every push to main.
 # The job names (lint, test, build) are the required status checks in
-# templates/github/rulesets/default-branch.json. Keep them in step.
+# templates/github/rulesets/default-branch.json (and the solo variant).
+# Keep them in step: a renamed job leaves the required check waiting forever.
+# The rulesets bind each check to the GitHub Actions app, so the checks
+# must come from GitHub Actions, not from another CI service.
 #
 # The jobs call make targets so engineers run the same commands locally.
 # Replace the make calls with your own task runner if you prefer.
@@ -10,7 +13,7 @@
 # Pinning: actions are pinned to major version tags so this file works
 # when copied. Before relying on it, pin each action to a full commit SHA
 # and keep the version in a comment, for example:
-#   uses: actions/checkout@<40-character-commit-sha> # v4
+#   uses: actions/checkout@<40-character-commit-sha> # v7
 # Renovate (helpers:pinGitHubActionDigests) or Dependabot keep SHAs current.
 
 name: ci
@@ -36,18 +39,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       # Set up your language toolchain here, reading the version from the repo.
       # Example for Node.js:
-      # - uses: actions/setup-node@v4
+      # - uses: actions/setup-node@v7
       #   with:
       #     node-version-file: .nvmrc
       #     cache: npm
       # Example for Python:
-      # - uses: actions/setup-python@v5
+      # - uses: actions/setup-python@v7
       #   with:
       #     python-version-file: .python-version
       #     cache: pip
@@ -60,13 +63,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
 
       # Cache dependency downloads keyed on the lockfile. Adjust path and key
       # for your package manager (setup-* actions can also cache for you).
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: ~/.cache
           key: deps-${{ runner.os }}-${{ hashFiles('**/package-lock.json', '**/poetry.lock', '**/requirements*.txt', '**/go.sum', '**/Cargo.lock') }}
@@ -82,7 +85,7 @@ jobs:
     timeout-minutes: 15
     needs: [lint, test]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
 
@@ -90,7 +93,7 @@ jobs:
         run: make build
 
       # Upload the artifact once so later stages promote it instead of rebuilding.
-      # - uses: actions/upload-artifact@v4
+      # - uses: actions/upload-artifact@v7
       #   with:
       #     name: build-${{ github.sha }}
       #     path: dist/

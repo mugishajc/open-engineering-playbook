@@ -1,17 +1,39 @@
 # Open Engineering Playbook release automation. Copy to .github/workflows/release-please.yml,
 # and copy release-please-config.json and .release-please-manifest.json to
-# the repository root.
+# the repository root. tools/adopt.sh does both.
 #
 # On every push to main, release-please opens or updates a release pull
 # request that bumps the version and CHANGELOG.md from Conventional Commits.
 # Merging that pull request creates the Git tag and the GitHub release.
 #
-# Pin the action to a full commit SHA before relying on this file:
-#   uses: googleapis/release-please-action@<40-character-commit-sha> # v4
+# Why this workflow uses a GitHub App token, not the default GITHUB_TOKEN:
+# the default-branch ruleset requires the lint, test, build and pr-title
+# checks on every pull request. Pull requests that GITHUB_TOKEN opens or
+# updates start CI only after a person clicks "Approve workflows to run",
+# every time the release branch changes. Tags that GITHUB_TOKEN creates start
+# no workflow at all, so a tag-triggered workflow such as
+# templates/security/workflows/sbom-and-sign.yml would never run.
+# An App token makes both start on their own.
+# Source: https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/trigger-a-workflow
 #
-# Note: pull requests opened with the default GITHUB_TOKEN do not trigger
-# other workflows, so CI will not run on the release pull request. If you
-# need CI there, use a GitHub App token with the same permissions.
+# One-time set-up (about 10 minutes, repository admin):
+#   1. Create a GitHub App owned by your organisation or account. No webhook.
+#      Repository permissions: Contents read and write, Pull requests read
+#      and write. Nothing else.
+#   2. Install it on this repository only.
+#   3. Generate a private key. Store the App's client ID as the Actions
+#      variable RELEASE_APP_CLIENT_ID and the key as the Actions secret
+#      RELEASE_APP_PRIVATE_KEY.
+#   One App can serve every repository in the organisation.
+#
+# Alternative for a personal account: a fine-grained personal access token
+# limited to this repository, with Contents and Pull requests read and write,
+# stored as the secret RELEASE_TOKEN. Delete the app-token step and pass
+# token: ${{ secrets.RELEASE_TOKEN }} instead. It expires and is tied to one
+# person, so put its expiry date in your calendar.
+#
+# Pin each action to a full commit SHA before relying on this file:
+#   uses: googleapis/release-please-action@<40-character-commit-sha> # v5
 
 name: release-please
 
@@ -29,16 +51,25 @@ jobs:
   release-please:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    permissions:
-      contents: write
-      pull-requests: write
+    # The App token does the writing, so GITHUB_TOKEN needs nothing.
+    permissions: {}
     outputs:
       release_created: ${{ steps.release.outputs.release_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
-      - uses: googleapis/release-please-action@v4
+      - name: Create a short-lived App token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ vars.RELEASE_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASE_APP_PRIVATE_KEY }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - uses: googleapis/release-please-action@v5
         id: release
         with:
+          token: ${{ steps.app-token.outputs.token }}
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json
 
@@ -50,8 +81,12 @@ jobs:
     timeout-minutes: 20
     permissions:
       contents: read
+      # Grant only what your publish steps use:
+      # contents: write      (upload files to the GitHub release)
+      # id-token: write      (keyless signing and provenance)
+      # attestations: write  (GitHub build attestations)
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
       - name: Build release artifact
@@ -60,5 +95,5 @@ jobs:
         run: |
           echo "Building $TAG_NAME"
           make build
-      # Add SBOM generation, signing and upload here.
-      # See templates/security/workflows/sbom-and-sign.yml.
+      # Add SBOM generation, signing and upload here, or let the tag start
+      # templates/security/workflows/sbom-and-sign.yml. Do not do both.

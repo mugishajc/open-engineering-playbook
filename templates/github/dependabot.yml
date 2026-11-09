@@ -5,6 +5,13 @@
 # Uncomment the ecosystems your repository uses.
 # Commit prefixes are Conventional Commit types, so titles such as
 # "ci(deps): bump actions/checkout" pass the pr-title check.
+#
+# cooldown: wait 3 days after a release before proposing it, so a hijacked
+# version is more likely to be found and pulled first. This matches the
+# starting point in playbook/security/dependencies.md and Renovate's
+# minimumReleaseAge in templates/repo/renovate.json. Security updates are
+# never delayed. Dependabot already waits 3 days by default; writing it down
+# makes the control visible and easy to raise.
 
 version: 2
 updates:
@@ -15,6 +22,8 @@ updates:
     schedule:
       interval: weekly
       day: monday
+    cooldown:
+      default-days: 3
     commit-message:
       prefix: ci
       include: scope
@@ -29,6 +38,8 @@ updates:
     schedule:
       interval: weekly
       day: monday
+    cooldown:
+      default-days: 3
     commit-message:
       prefix: build
       include: scope
@@ -41,6 +52,8 @@ updates:
   #     interval: weekly
   #     day: monday
   #   open-pull-requests-limit: 10
+  #   cooldown:
+  #     default-days: 3
   #   commit-message:
   #     prefix: fix
   #     prefix-development: chore
@@ -55,6 +68,8 @@ updates:
   #   directory: /
   #   schedule:
   #     interval: weekly
+  #   cooldown:
+  #     default-days: 3
   #   commit-message:
   #     prefix: fix
   #     prefix-development: chore
