@@ -10,7 +10,7 @@ Starting points. Tune them to your organisation.
 - Every number in the case has a source: a system report, a time study, an invoice, or a stated assumption.
 - The case shows a low, expected and high scenario. The low scenario is the one you commit to.
 - Payback is computed on cash benefits only. Released capacity is shown separately, with what it will be used for.
-- Benefits are checked 6 and 12 months after delivery. At least 70% of cases deliver their low scenario or better.
+- Benefits are checked 6 and 12 months after delivery. At least 70% of cases deliver their low scenario or better. Each benefit has a business owner, a baseline measured before go-live and its dis-benefits recorded; see [benefits after go-live](../project-management/projects-and-products.md#benefits-after-go-live).
 
 ## The four benefit types
 

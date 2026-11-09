@@ -22,6 +22,7 @@ Starting points. Tune them to your organisation.
 | Exit built in | Contract for data export, documentation, knowledge transfer and a transition period. Price the exit in the [build, buy or adopt](../strategy/build-buy-adopt.md) comparison. |
 | Own the code | Make sure the public body owns or has an open licence to code written for it. |
 | Start early | Begin procurement during the Assess phase of the [transition playbook](../strategy/transition-playbook.md). Use framework agreements where they exist. |
+| Flexibility in the tender | A large change to a signed contract can need a new procurement. Write priorities, priced options, an exchange clause and a change budget into the tender. See [public procurement](../project-management/planning-fixed-scope-and-budget.md#public-procurement-put-the-flexibility-in-the-tender). |
 
 ## Budget years and funding
 
@@ -33,7 +34,7 @@ Starting points. Tune them to your organisation.
 ## Accessibility
 
 - Target WCAG 2.2 level AA as the minimum for every public web and mobile service.
-- In the EU, public sector websites and apps fall under Directive (EU) 2016/2102, and the European Accessibility Act applies to many private-sector products and services from 28 Jun 2025. Both rely on the harmonised standard EN 301 549, which currently references WCAG 2.1 level AA; targeting WCAG 2.2 AA meets it and covers the newer criteria. In the US, Section 508 applies to federal technology.
+- In the EU, public sector websites and apps fall under Directive (EU) 2016/2102, and the European Accessibility Act applies to many private-sector products and services from 28 Jun 2025. Both rely on the harmonised standard EN 301 549, which currently references WCAG 2.1 level AA; targeting WCAG 2.2 AA meets it and covers the newer criteria. In the US, Section 508 applies to federal technology, and the ADA Title II rule covers state and local government web content and apps; the compliance dates moved in April 2026, so see [accessibility testing](../quality/accessibility-testing.md) for the current dates.
 - Run automated accessibility checks in [continuous integration](../delivery/continuous-integration.md). They catch only part of the problems, so add manual testing with assistive technology and testing with disabled users.
 - Publish an accessibility statement for each service and update it after each audit.
 

@@ -2,6 +2,8 @@
 
 The problem: engineering works as a feature factory. Product hands over specifications, engineering builds them, nobody checks whether they worked, and technical debt only gets attention after an outage. Make product, design and engineering jointly own outcomes: decide together what problem to solve, agree a visible split of capacity, and judge success by a change in user or business metrics, not by features shipped.
 
+This page covers how product and engineering share decisions. The product practice itself is in the product pages: [product strategy](../product/product-strategy.md), [product discovery](../product/product-discovery.md), [roadmaps and prioritisation](../product/roadmaps-and-prioritisation.md), [product metrics and experiments](../product/product-metrics-and-experiments.md), [pricing and packaging](../product/pricing-and-packaging.md) and [launch and adoption](../product/launch-and-adoption.md).
+
 ## Outcomes
 
 Starting targets. Tune them to your product.
@@ -11,6 +13,7 @@ Starting targets. Tune them to your product.
 | Roadmap items stated as an outcome with a metric | At least 80% |
 | Shipped features reviewed against their metric | 100% within 1 quarter of release |
 | Engineers who took part in user research or support in the last quarter | Every engineer on product teams |
+| Customer commitments made without product and engineering agreement | Zero (see [roadmaps and prioritisation](../product/roadmaps-and-prioritisation.md#b2b-and-enterprise-roadmaps)) |
 | Capacity split between roadmap, maintenance and unplanned work | Agreed, published and measured monthly |
 | Features switched off or removed because they did not work | More than zero per year (if zero, you are not checking) |
 
@@ -34,17 +37,18 @@ Record these in your [decision rights](../operating-model/decision-rights.md). A
 - **Start from a problem.** Each piece of work begins with: who has the problem, how we know, what will change if we solve it, and how we will measure it. Use the [feature request form](../../templates/github/ISSUE_TEMPLATE/feature_request.yml) for this.
 - **Engineers hear users directly.** Every engineer joins at least one user interview, support shadowing session or usability test per quarter. In a startup, the founders and engineers do support themselves.
 - **One shared backlog** with product and engineering work in it. Maintenance and debt are visible, ordered and discussed in the same meeting as features.
-- **Check results.** For each shipped feature, look at its metric after 2 to 6 weeks and write one line: worked, did not work, unclear. Remove or change what did not work.
+- **Check results.** For each shipped feature, look at its metric after 2 to 6 weeks and write one line: worked, did not work, unclear. Remove or change what did not work. See [launch and adoption](../product/launch-and-adoption.md).
 
 ### Standard
 
 - **Product trio per team** that meets at least weekly on discovery: what we learned, what to test next.
 - **Capacity split** agreed per quarter in the categories from [portfolio and capacity](../strategy/portfolio-and-capacity.md), for example 60% features, 20% reliability (including unplanned work), 15% technical debt, 5% platform. Product orders the feature share; engineering decides how the debt and platform shares are spent and reports what they bought. See [planning and forecasting](planning-and-forecasting.md).
 - **Error budgets as the shared rule for reliability.** When a service exhausts its error budget, the team shifts effort to reliability until it recovers, by prior agreement with product, not by negotiation during the incident. See [service levels](../reliability/service-levels.md).
-- **Outcome roadmaps.** Show Now, Next and Later as problems and outcomes. Dates appear only as forecast ranges.
+- **Outcome roadmaps.** Show Now, Next and Later as problems and outcomes. Dates appear only as forecast ranges. See [roadmaps and prioritisation](../product/roadmaps-and-prioritisation.md).
 - **Shared metrics.** Product and engineering leaders review the same dashboard: product outcomes, DORA delivery metrics and reliability. See [metrics](../measurement/metrics.md).
 - **Technical work in business terms.** Engineers explain maintenance and platform work by what it changes: risk removed, lead time cut, cost avoided. See [business case](../strategy/business-case.md).
-- **Experiments behind flags.** Test ideas with a share of users before building them in full. See [feature flags](../delivery/feature-flags.md).
+- **Test before building in full.** Test the riskiest assumption with a prototype or a thin version behind a flag, shown to a share of users, before the team builds the whole feature. Engineers help design the test and own the instrumentation. See [product metrics and experiments](../product/product-metrics-and-experiments.md) and [feature flags](../delivery/feature-flags.md).
+- **Engineering in commercial decisions.** In products sold to organisations, the engineering lead approves the forecast behind any customer commitment and states the cost to serve for pricing decisions. See [pricing and packaging](../product/pricing-and-packaging.md).
 
 ### Assured
 
@@ -66,12 +70,15 @@ For software customers install, product and engineering need direct feedback fro
 | Engineers never meet a user | Quarterly research or support session per engineer. |
 | Reliability work negotiated during an outage | Error budget policy agreed in advance. |
 | Product manager acts as a ticket writer for stakeholders | Product owns problem selection and says no with evidence. |
+| Sales commits a date that engineering hears about from the customer | Commitment review with product and engineering before anything is promised. |
 
 ## Templates
 
 - [Feature request form](../../templates/github/ISSUE_TEMPLATE/feature_request.yml)
 - [Team working agreement](../../templates/docs/team-working-agreement.md)
 - [Strategy one-pager](../../templates/strategy/strategy-one-pager.md)
+- [Product one-pager](../../templates/product/product-one-pager.md)
+- [Opportunity solution tree](../../templates/product/opportunity-solution-tree.md)
 
 ## Sources
 
@@ -79,5 +86,5 @@ For software customers install, product and engineering need direct feedback fro
 - Marty Cagan, *Inspired*, second edition (Wiley, 2017).
 - Google SRE workbook, implementing SLOs and error budget policy: https://sre.google/workbook/implementing-slos/
 - UK Government Service Standard: https://www.gov.uk/service-manual/service-standard
-- US Digital Services Playbook: https://playbook.cio.gov/
+- US Digital Services Playbook: https://playbook.usds.gov/
 - DORA metrics: https://dora.dev/guides/dora-metrics-four-keys/

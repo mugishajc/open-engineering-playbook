@@ -87,6 +87,8 @@ Rules for every escalation:
 - The decider answers in writing, even if the answer is "go back and decide yourselves".
 - Once decided, everyone carries out the decision. Disagreement goes into the decision record, not into delay.
 
+When speed and a control conflict, use the default rules in [speed and control](../../leaders/decision-making.md#speed-and-control). The decisions leaders keep for themselves are in [what you never delegate](../../leaders/decision-making.md#what-you-never-delegate).
+
 ## Group and division
 
 In a group with several business units, write down which decisions the group keeps and which each division makes. Without this, every division builds its own identity, security and supplier set, and the group pays for all of them.

@@ -26,6 +26,8 @@ Starting targets. Compare them with the DORA delivery metrics in [metrics](../me
 
 Default: continuous delivery for anything you operate yourself. Pick release trains only when customers control when they upgrade.
 
+Mobile apps go through the app stores, so a bad release cannot be rolled back in minutes. Use the stores' staged rollouts (Google Play staged rollout, Apple phased release), keep new behaviour behind [feature flags](feature-flags.md), and keep a tested forced-upgrade path for old versions. See [test strategy: platform and device coverage](../quality/test-strategy.md#platform-and-device-coverage).
+
 ## Practice
 
 ### Foundation

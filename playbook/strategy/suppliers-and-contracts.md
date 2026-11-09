@@ -48,6 +48,11 @@ Ask legal and procurement to put these into every strategic contract at signing 
 | Escrow or open licence | source code escrow, an open source licence or a perpetual licence, for software you cannot replace quickly |
 | Step-in rights (outsourcing) | the right to take over or appoint another provider if the supplier fails |
 | Change of control | review or exit rights if the supplier is sold |
+| Acceptance period (delivery contracts) | a set time to test each release, with named signers; no acceptance by silence or by first use in production |
+| Warranty (delivery contracts) | defects found after acceptance fixed at no charge, with fix times by severity, and part of each payment held until the warranty ends |
+| Delay damages (delivery contracts) | a known cap and trigger for late delivery; they compensate for part of a delay, they do not deliver the system |
+
+For delivery contracts with a systems integrator, see [planning fixed scope and budget](../project-management/planning-fixed-scope-and-budget.md#fixed-price-contracts-and-systems-integrators). In public procurement, a large change to a signed contract may need a new procurement, so write options, an exchange clause and a change budget into the tender; see [public procurement](../project-management/planning-fixed-scope-and-budget.md#public-procurement-put-the-flexibility-in-the-tender).
 
 Regulated firms have more required terms. Financial entities in the EU must include the contractual terms in Article 30 of the Digital Operational Resilience Act. See [regulated industries](../compliance/regulated-industries.md).
 

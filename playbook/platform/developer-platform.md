@@ -25,7 +25,7 @@ Signals that you need one: every team writes its own pipeline, teams wait days f
 
 ## Platform as a product
 
-- **Users.** The platform's customers are the engineers in stream-aligned teams. Interview 5 teams before building anything, then at least 2 teams every quarter.
+- **Users.** The platform's customers are the engineers in stream-aligned teams. Interview 5 teams before building anything, then at least 2 teams every quarter. Judge the platform by the work it removes for those teams, not by adoption you mandated; see [internal platforms and staff systems](../../leaders/for-product-leaders.md#internal-platforms-and-staff-systems).
 - **Product owner.** Someone owns the roadmap and says no. Without this the platform becomes a queue of tickets.
 - **Thinnest viable platform.** Team Topologies uses this phrase: start with the smallest set of services, docs and APIs that removes real work. It may be a wiki page and three templates.
 - **Interfaces.** Expose capabilities as self-service: a portal, a command-line tool, an API or a GitOps repository. Ticket queues are a last resort.

@@ -87,6 +87,9 @@ jobs:
           tools/adopt.sh --target "$tmp" --platform github --with-security
           test -f "$tmp/.github/PULL_REQUEST_TEMPLATE.md"
           test -f "$tmp/.github/dependabot.yml"
+          test -f "$tmp/docs/templates/product/experiment-brief.md"
+          test -f "$tmp/docs/templates/project/raid-log.csv"
+          test -f "$tmp/docs/templates/quality/test-strategy.md"
           solo=$(mktemp -d)
           tools/adopt.sh --target "$solo" --platform github --solo --updates renovate
           test -f "$solo/docs/repository-rules/default-branch-solo.json"

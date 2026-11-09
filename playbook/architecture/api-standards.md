@@ -88,13 +88,14 @@ Every error response uses Problem Details for HTTP APIs (RFC 9457) with media ty
 - Event schemas evolve only in backward-compatible ways. A breaking change is a new event type or a new major version in the type name.
 - Announce deprecation with the `Deprecation` header (RFC 9745) and the removal date with the `Sunset` header (RFC 8594). Link the migration guide with a `Link` header.
 
-This table is the playbook's single rule for notice periods, for APIs, events and libraries. [Versioning and changelogs](../delivery/versioning-and-changelogs.md) links here.
+This table is the playbook's single rule for notice periods, for APIs, events, libraries and user-facing features. [Versioning and changelogs](../delivery/versioning-and-changelogs.md) and [launch and adoption](../product/launch-and-adoption.md) link here.
 
 | Consumer | Minimum notice from deprecation to removal (starting point) |
 |---|---|
 | Public or paying customers | 12 months |
 | Partners and other organisations | 6 months |
 | Internal teams | 3 months, or until the last caller has migrated, whichever is longer |
+| Users of a feature in a product (removing a screen, report or workflow, not an API) | 3 months for a feature customers pay for or need to finish a task, or the contract period if longer; announce it in the product as well as in release notes |
 
 ### Security
 
