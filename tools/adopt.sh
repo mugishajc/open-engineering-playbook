@@ -3,8 +3,8 @@
 #
 # Never overwrites a file that already exists in the target: it prints SKIP
 # and moves on, so it is safe to run again after the playbook adds new templates.
-# It copies whatever files exist under templates/, so new templates need no
-# change to this script.
+# It copies whatever files exist under the folders listed below, so new
+# templates in those folders need no change to this script.
 #
 #   templates/github/*     -> .github/            (--platform github)
 #                             release-please files go to the repository root
@@ -15,6 +15,9 @@
 #                             .gitlab-ci.yml goes to the repository root
 #   templates/repo/*       -> repository root
 #   templates/docs/*       -> docs/templates/
+#   templates/product/*    -> docs/templates/product/
+#   templates/project/*    -> docs/templates/project/
+#   templates/quality/*    -> docs/templates/quality/
 #   templates/security/*   -> only with --with-security:
 #                             workflows/*  -> .github/workflows/  (github)
 #                             gitlab-*.yml -> .gitlab/ci/         (gitlab)
@@ -171,6 +174,20 @@ map_docs() {
   printf 'docs/templates/%s' "$1"
 }
 
+# Product, project and quality templates keep their folder name under
+# docs/templates/, so they never collide with the general document templates.
+map_product() {
+  printf 'docs/templates/product/%s' "$1"
+}
+
+map_project() {
+  printf 'docs/templates/project/%s' "$1"
+}
+
+map_quality() {
+  printf 'docs/templates/quality/%s' "$1"
+}
+
 map_security() {
   case "$platform:$1" in
     github:workflows/*) printf '.github/%s' "$1" ;;
@@ -222,6 +239,9 @@ printf 'Copying playbook templates into %s (%s)\n\n' "$target" "$platform"
 copy_tree "$platform" "map_${platform}"
 copy_tree repo map_repo
 copy_tree docs map_docs
+copy_tree product map_product
+copy_tree project map_project
+copy_tree quality map_quality
 if [ "$with_security" -eq 1 ]; then
   copy_tree security map_security
 fi
