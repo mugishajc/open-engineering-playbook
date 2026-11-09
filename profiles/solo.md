@@ -35,14 +35,14 @@ Run `tools/adopt.sh --target <your-repo> --platform github` (or `gitlab`) first.
 
 | Do this | Read | Template |
 |---|---|---|
+| Turn on multi-factor authentication for source control, cloud, registrar and email | [Access control](../playbook/security/access-control.md) | |
 | Protect the default branch: no direct pushes, CI must pass before merge | [Source control](../playbook/delivery/source-control.md) | [default-branch.json](../templates/github/rulesets/default-branch.json) |
 | Run build, lint and tests in CI on every pull or merge request | [Continuous integration](../playbook/delivery/continuous-integration.md) | [ci.yml](../templates/github/workflows/ci.yml), [.gitlab-ci.yml](../templates/gitlab/.gitlab-ci.yml) |
-| Turn on multi-factor authentication for source control, cloud, registrar and email | [Access control](../playbook/security/access-control.md) | |
 | Move every secret into a secrets manager and turn on secret scanning | [Secrets](../playbook/security/secrets.md) | [.pre-commit-config.yaml](../templates/repo/.pre-commit-config.yaml) |
 | Turn on automated dependency update pull requests | [Dependencies](../playbook/security/dependencies.md) | [dependabot.yml](../templates/github/dependabot.yml), [renovate.json](../templates/repo/renovate.json) |
 | List every data store and give each a class: public, internal, confidential or restricted | [Data governance](../playbook/data/data-governance.md) | [data-classification.md](../templates/docs/data-classification.md) |
 
-Done when: a direct push to main is rejected, CI runs on every change, and `git log -p | grep -i password` finds nothing current.
+Done when: a direct push to main is rejected, CI runs on every change, and the secret scanner reports no live secret in the repository or its history.
 
 ## Month 1
 

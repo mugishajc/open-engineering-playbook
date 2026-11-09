@@ -4,12 +4,12 @@ Apply this overlay on top of your size profile when you are a government body or
 
 ## How overlays work
 
-1. Pick your size profile first: [solo](solo.md), [startup](startup.md), [scale-up](scale-up.md) or [enterprise](enterprise.md). Its week 1 to year 1 tables still apply.
+1. Pick your size profile first: [SME](sme.md), [solo](solo.md), [startup](startup.md), [scale-up](scale-up.md) or [enterprise](enterprise.md). Its week 1 to year 1 tables still apply.
 2. Add the rows below at each horizon. Where both tables name the same page, do the overlay version.
 3. Your target becomes Assured in every area. The assessment does this when your answers file says `overlays = ["public-sector"]`.
 4. Scope Assured by service. A citizen-facing service that handles personal data needs all of it. An internal prototype may not. Record each exception, its reason and its owner in a [decision record](../playbook/architecture/decision-records.md), so an auditor can see it was a choice.
 
-A small digital unit inside a ministry usually pairs this overlay with the startup or scale-up profile. A large department or national agency pairs it with enterprise. A supplier to government applies it to the contracts in scope.
+A school, small municipality or other public body that does not build software pairs it with the SME profile and applies it only to records, data protection, accessibility of its website and supplier contracts. A small digital unit inside a ministry usually pairs this overlay with the startup or scale-up profile. A large department or national agency pairs it with enterprise. A supplier to government applies it to the contracts in scope.
 
 ## Who this is for
 

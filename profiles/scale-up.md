@@ -32,6 +32,7 @@ Take every area to Standard within a year, starting with ownership, review speed
 
 | Do this | Read | Template |
 |---|---|---|
+| Check that every engineer has multi-factor authentication on source control, cloud and the identity provider, and that leavers have no access | [Access control](../playbook/security/access-control.md) | |
 | Run the assessment with each team lead; commit one answers file per team or one for the whole group | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 | Name one owning team for every repository and production service | [Roles](../playbook/operating-model/roles.md) | [CODEOWNERS](../templates/github/CODEOWNERS), [service-catalog-entry.yaml](../templates/docs/service-catalog-entry.yaml) |
 | Write who decides what: production changes, architecture, vendors, hiring | [Decision rights](../playbook/operating-model/decision-rights.md) | [raci.csv](../templates/strategy/raci.csv) |

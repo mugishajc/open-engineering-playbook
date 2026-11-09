@@ -33,10 +33,10 @@ Run `tools/adopt.sh --target <repo> --platform github --with-security` on your m
 
 | Do this | Read | Template |
 |---|---|---|
+| Require multi-factor authentication everywhere; remove leavers' access | [Access control](../playbook/security/access-control.md) | |
 | Protect the default branch and require a passing CI run and one approval | [Source control](../playbook/delivery/source-control.md) | [default-branch.json](../templates/github/rulesets/default-branch.json) |
 | Run build, lint and tests in CI on every pull or merge request | [Continuous integration](../playbook/delivery/continuous-integration.md) | [ci.yml](../templates/github/workflows/ci.yml), [.gitlab-ci.yml](../templates/gitlab/.gitlab-ci.yml) |
 | Add a pull request template and CODEOWNERS with real names | [Code review](../playbook/delivery/code-review.md) | [PULL_REQUEST_TEMPLATE.md](../templates/github/PULL_REQUEST_TEMPLATE.md), [CODEOWNERS](../templates/github/CODEOWNERS) |
-| Require multi-factor authentication everywhere; remove leavers' access | [Access control](../playbook/security/access-control.md) | |
 | Move secrets out of code; turn on secret scanning and dependency updates | [Secrets](../playbook/security/secrets.md), [Dependencies](../playbook/security/dependencies.md) | [dependabot.yml](../templates/github/dependabot.yml), [renovate.json](../templates/repo/renovate.json) |
 | Classify every data store: public, internal, confidential or restricted | [Data governance](../playbook/data/data-governance.md) | [data-classification.md](../templates/docs/data-classification.md) |
 

@@ -4,12 +4,25 @@ Apply this overlay on top of your size profile when a regulator can fine you, st
 
 ## How overlays work
 
-1. Pick your size profile first: [solo](solo.md), [startup](startup.md), [scale-up](scale-up.md) or [enterprise](enterprise.md). Its week 1 to year 1 tables still apply.
+1. Pick your size profile first: [SME](sme.md), [solo](solo.md), [startup](startup.md), [scale-up](scale-up.md) or [enterprise](enterprise.md). Its week 1 to year 1 tables still apply.
 2. Add the rows below at each horizon. Where both tables name the same page, do the overlay version.
 3. Your target becomes Assured in every area. The assessment does this when your answers file says `overlays = ["regulated"]`.
 4. Scope by regulation and service tier. Systems in the regulator's scope need all of it. A marketing site may not. Record each exception, its reason and its owner in a [decision record](../playbook/architecture/decision-records.md).
 
 You can apply both overlays. A state-owned bank or a public health service applies regulated and [public sector](public-sector.md) together.
+
+## With the SME profile
+
+A clinic, pharmacy, insurance broker or other small regulated business that does not build software does not need most of this page. Assured applies to the controls your regulator inspects, not to engineering practices you do not run. Add only these rows to the [SME profile](sme.md):
+
+| When | Add this |
+|---|---|
+| Week 1 | List the rules that apply to you, the regulator for each, and every reporting deadline, for example a data breach report within 72 hours |
+| Month 1 | Name who reports an incident to the regulator, including out of hours, and put the deadlines in the printed first-hour plan |
+| Quarter 1 | Check that every supplier holding regulated data (for example patient records) has a contract with breach notice, data location and exit terms |
+| Year 1 | Restore your most important system from backup, compare the time with your recovery target, and keep the written result as evidence |
+
+Ask your sector body or regulator whether it publishes guidance for small firms, and follow that first.
 
 ## Who this is for
 

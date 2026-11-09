@@ -8,6 +8,7 @@ A profile tells you which pages of the Open Engineering Playbook to adopt first,
 
 | Engineers | Profile | Default level |
 |---|---|---|
+| None: a small or medium business that uses software but does not build it | [SME](sme.md) | Foundation |
 | 1 | [Solo](solo.md) | Foundation |
 | 2 to about 20, one team | [Startup](startup.md) | Foundation |
 | About 20 to 200, several teams | [Scale-up](scale-up.md) | Standard |
@@ -22,7 +23,7 @@ Between two sizes? Pick the smaller one and go up a level in the areas that hurt
 | Are you a government body, or do you build or run software for one? | [Public sector](public-sector.md) overlay |
 | Can a financial, health, telecom or critical infrastructure regulator inspect how you build or run software? | [Regulated](regulated.md) overlay |
 
-An overlay does not replace your size profile. You still follow the size profile's week 1 to year 1 plan, and you add the overlay's rows at each step. Any overlay raises the target to Assured, scoped to the systems the rules cover.
+An overlay does not replace your size profile. You still follow the size profile's week 1 to year 1 plan, and you add the overlay's rows at each step. Any overlay raises the target to Assured, scoped to the systems the rules cover. With the SME profile, apply only the SME note in each overlay, not the full tables.
 
 ## What the levels mean
 
@@ -47,7 +48,7 @@ Each profile page has a table with the target level for all 14 practice areas an
 The [assessment](../assessment/README.md) reads your profile and overlays from the answers file and sets your targets from them:
 
 ```toml
-profile = "scale-up"            # solo, startup, scale-up or enterprise
+profile = "scale-up"            # sme, solo, startup, scale-up or enterprise
 overlays = ["regulated"]        # optional: "public-sector", "regulated"
 ```
 

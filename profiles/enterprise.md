@@ -35,6 +35,7 @@ Treat adoption as a transition, not a mandate: baseline a few representative tea
 | Baseline 3 to 5 representative teams with the assessment, including one legacy team | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 | Map the people affected: who decides, who must be told, who can block | [Stakeholders and communication](../playbook/strategy/stakeholders-and-communication.md) | [stakeholder-map.md](../templates/strategy/stakeholder-map.md) |
 | Write down current decision rights for production changes, architecture and vendors | [Decision rights](../playbook/operating-model/decision-rights.md) | [raci.csv](../templates/strategy/raci.csv) |
+| Check three risks for every tier 1 service before the transition starts: date of the last restore test, privileged accounts without phishing-resistant MFA, and critical vulnerabilities past their fix deadline. Fix the worst gap now. | [Board and executive reporting](../leaders/board-and-executive-reporting.md), [Backup and recovery](../playbook/reliability/backup-and-recovery.md), [Access control](../playbook/security/access-control.md) | [risk-register.csv](../templates/strategy/risk-register.csv) |
 
 ## Month 1
 
