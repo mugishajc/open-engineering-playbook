@@ -1,0 +1,49 @@
+# Open Engineering Playbook pull request title check. Copy to .github/workflows/pr-title.yml.
+#
+# With squash merge, the pull request title becomes the commit message on
+# main, and release-please reads it to choose the next version. This job
+# checks the title against Conventional Commits 1.0.0:
+#   type(optional-scope)!: description
+#
+# It uses no third-party action, so there is nothing to pin or trust.
+# It runs on pull_request (not pull_request_target), so code from forks
+# never runs with write access or secrets.
+#
+# The job name (pr-title) is a required status check in
+# templates/github/rulesets/default-branch.json.
+
+name: pr-title
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+  # A required check must also report in the merge queue. The job is
+  # skipped there, and GitHub treats a skipped job as passing.
+  merge_group:
+
+permissions: {}
+
+jobs:
+  pr-title:
+    name: pr-title
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - name: Check title follows Conventional Commits
+        # The title is untrusted input. Pass it through an environment
+        # variable and never interpolate it into the script itself.
+        env:
+          TITLE: ${{ github.event.pull_request.title }}
+        shell: bash
+        run: |
+          types='build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test'
+          pattern="^(${types})(\([a-z0-9._/-]+\))?!?: [^ ].{0,99}$"
+          if [[ "$TITLE" =~ $pattern ]]; then
+            echo "Title OK: $TITLE"
+          else
+            echo "::error::Pull request title must follow Conventional Commits, for example 'feat(api): add order search' or 'fix: handle empty cart'."
+            echo "Allowed types: ${types//|/, }"
+            echo "Got: $TITLE"
+            exit 1
+          fi

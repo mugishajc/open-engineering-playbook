@@ -1,0 +1,33 @@
+# Open Engineering Playbook CODEOWNERS template for GitLab. Copy to .gitlab/CODEOWNERS.
+# Docs: https://docs.gitlab.com/ee/user/project/codeowners/
+#
+# Rules:
+# - Use groups (@group/subgroup), never individuals who might leave.
+# - Sections group rules; within a section the last matching pattern wins.
+# - [Section][2] requires two approvals from that section's owners.
+# - ^[Section] makes a section optional (owners are suggested, not required).
+# - Turn on "Require approval from code owners" for the protected branch.
+# Replace @your-group/... with your own groups.
+
+[Default] @your-group/service-team
+*
+
+[Database][2] @your-group/service-team @your-group/data-platform
+/migrations/
+/db/
+
+[Security][2] @your-group/security-champions
+/src/auth/
+/src/crypto/
+
+[Infrastructure] @your-group/platform
+/infra/
+*.tf
+
+[CI and repository rules][2] @your-group/platform @your-group/security-champions
+/.gitlab-ci.yml
+/.gitlab/
+/.gitlab/CODEOWNERS
+
+^[Documentation] @your-group/tech-writers
+/docs/

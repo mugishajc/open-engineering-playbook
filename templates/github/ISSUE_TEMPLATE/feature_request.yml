@@ -1,0 +1,57 @@
+# Open Engineering Playbook feature request form. Copy to .github/ISSUE_TEMPLATE/feature_request.yml.
+# Schema: https://docs.github.com/en/communities/using-templates-to-encourage-useful-issues-and-pull-requests/syntax-for-issue-forms
+name: Feature request
+description: Suggest a change or a new capability.
+title: "feat: "
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem first. A clear problem is more useful than a proposed solution.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      description: Who has this problem, how often, and what does it cost them today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: What alternatives have you considered?
+      description: Workarounds you use today, or other ways to solve it.
+    validations:
+      required: false
+  - type: dropdown
+    id: users
+    attributes:
+      label: Who benefits?
+      multiple: true
+      options:
+        - End users
+        - Administrators or operators
+        - Developers integrating with this
+        - Internal teams
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: How will we know it worked?
+      description: A measurable sign of success, for example fewer support tickets or a task taking less time.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I searched existing issues and this is not a duplicate.
+          required: true

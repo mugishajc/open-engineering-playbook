@@ -1,0 +1,10 @@
+# Open Engineering Playbook issue chooser configuration. Copy to .github/ISSUE_TEMPLATE/config.yml.
+# Replace OWNER/REPO and the URLs with your own.
+blank_issues_enabled: false
+contact_links:
+  - name: Report a security vulnerability
+    url: https://github.com/OWNER/REPO/security/policy
+    about: Please do not report security issues in public issues. Follow the security policy.
+  - name: Ask a question
+    url: https://github.com/OWNER/REPO/discussions
+    about: Questions and ideas that are not yet a clear bug or feature request.

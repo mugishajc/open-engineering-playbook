@@ -1,0 +1,64 @@
+# Open Engineering Playbook Dependabot configuration. Copy to .github/dependabot.yml.
+# Docs: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+#
+# Use either Dependabot or Renovate (templates/repo/renovate.json), not both.
+# Uncomment the ecosystems your repository uses.
+# Commit prefixes are Conventional Commit types, so titles such as
+# "ci(deps): bump actions/checkout" pass the pr-title check.
+
+version: 2
+updates:
+  # GitHub Actions used in workflows. Also updates SHA pins that carry a
+  # version comment.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: ci
+      include: scope
+    labels: [dependencies]
+    groups:
+      actions:
+        patterns: ["*"]
+
+  # Container base images in Dockerfiles.
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    commit-message:
+      prefix: build
+      include: scope
+    labels: [dependencies]
+
+  # Example: npm packages. Minor and patch updates grouped into one pull request.
+  # - package-ecosystem: npm
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
+  #     day: monday
+  #   open-pull-requests-limit: 10
+  #   commit-message:
+  #     prefix: fix
+  #     prefix-development: chore
+  #     include: scope
+  #   labels: [dependencies]
+  #   groups:
+  #     minor-and-patch:
+  #       update-types: [minor, patch]
+
+  # Example: Python packages (pip, Poetry, pip-tools and similar).
+  # - package-ecosystem: pip
+  #   directory: /
+  #   schedule:
+  #     interval: weekly
+  #   commit-message:
+  #     prefix: fix
+  #     prefix-development: chore
+  #     include: scope
+  #   groups:
+  #     minor-and-patch:
+  #       update-types: [minor, patch]

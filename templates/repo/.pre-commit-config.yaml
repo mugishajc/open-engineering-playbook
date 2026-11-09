@@ -1,0 +1,47 @@
+# Open Engineering Playbook pre-commit configuration. Copy to the repository root, then run:
+#   pip install pre-commit   (or pipx install pre-commit)
+#   pre-commit install
+#   pre-commit autoupdate     (moves each rev to the latest release)
+# Docs: https://pre-commit.com/
+#
+# Run the same hooks in CI with: pre-commit run --all-files
+# For stronger pinning, replace each rev tag with a full commit SHA and keep
+# the tag in a comment (pre-commit autoupdate --freeze does this for you).
+# In air-gapped networks, point each repo URL at your internal Git mirror.
+
+minimum_pre_commit_version: "3.0.0"
+default_install_hook_types: [pre-commit]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: detect-private-key
+      - id: no-commit-to-branch
+        args: [--branch, main]
+
+  # Secret scanning. Also run in CI, because hooks can be skipped locally.
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.18.0
+    hooks:
+      - id: gitleaks
+
+  # Plain-language check from the Open Engineering Playbook. Copy tools/plain_lint.py and
+  # tools/plain-language.txt into your repository to use it.
+  - repo: local
+    hooks:
+      - id: plain-lint
+        name: plain-language check
+        entry: python3 tools/plain_lint.py
+        language: system
+        types_or: [markdown, yaml]

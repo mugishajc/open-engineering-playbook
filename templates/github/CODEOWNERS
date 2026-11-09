@@ -1,0 +1,36 @@
+# Open Engineering Playbook CODEOWNERS template for GitHub. Copy to .github/CODEOWNERS.
+# Docs: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+#
+# Rules:
+# - Use teams (@org/team), never individuals who might leave.
+# - The last matching pattern wins, so put the general rule first.
+# - Every owning team should have at least 3 members.
+# - Turn on "require review from code owners" in the default-branch ruleset.
+# Replace @your-org/... with your own teams.
+
+# Default owner for everything
+*                               @your-org/service-team
+
+# Database migrations: service team plus data specialists
+/migrations/                    @your-org/service-team @your-org/data-platform
+/db/                            @your-org/service-team @your-org/data-platform
+
+# Security-sensitive code
+/src/auth/                      @your-org/service-team @your-org/security-champions
+/src/crypto/                    @your-org/security-champions
+
+# Infrastructure as code
+/infra/                         @your-org/platform
+*.tf                            @your-org/platform
+
+# CI, release automation and repository rules
+/.github/workflows/             @your-org/platform @your-org/security-champions
+/.github/dependabot.yml         @your-org/platform
+/release-please-config.json     @your-org/platform
+/.release-please-manifest.json  @your-org/platform
+
+# Ownership of ownership: changes here need platform review
+/.github/CODEOWNERS             @your-org/platform
+
+# Public documentation
+/docs/                          @your-org/service-team @your-org/tech-writers

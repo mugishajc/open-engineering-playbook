@@ -1,0 +1,116 @@
+# Open Engineering Playbook GitLab CI pipeline. Copy to .gitlab-ci.yml at the repository root.
+# Reference: https://docs.gitlab.com/ee/ci/yaml/
+#
+# Stages: lint, test, build, release.
+# Jobs call make targets so engineers run the same commands locally.
+#
+# Pinning: the images below use version tags so the file works when copied.
+# Before relying on it, pin each image by digest, for example
+#   image: docker.io/library/buildpack-deps:bookworm@sha256:<digest>
+# In air-gapped networks, set CI_REGISTRY_MIRROR to your internal registry
+# (Harbor, Nexus or Artifactory) and mirror the images there.
+
+variables:
+  CI_REGISTRY_MIRROR: "docker.io"
+  BUILD_IMAGE: "${CI_REGISTRY_MIRROR}/library/buildpack-deps:bookworm"
+  # Replace "latest" with a pinned release-cli version or digest.
+  RELEASE_IMAGE: "registry.gitlab.com/gitlab-org/release-cli:latest"
+  GIT_DEPTH: "50"
+
+stages:
+  - lint
+  - test
+  - build
+  - release
+
+# Run for merge requests, for the default branch and for tags.
+# Avoid duplicate branch and merge request pipelines.
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_COMMIT_TAG
+
+default:
+  image: $BUILD_IMAGE
+  interruptible: true
+  timeout: 15 minutes
+  retry:
+    max: 1
+    # Retry only infrastructure failures, never test failures.
+    when:
+      - runner_system_failure
+      - stuck_or_timeout_failure
+
+lint:
+  stage: lint
+  script:
+    - make lint
+
+mr-title:
+  stage: lint
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  variables:
+    GIT_STRATEGY: none
+  script:
+    # The title is untrusted input: read it from the variable, never eval it.
+    # The pattern is single-quoted so bash keeps the backslashes.
+    - |
+      bash -c 'pattern="^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\([a-z0-9._/-]+\))?!?: [^ ].{0,99}$"
+      if [[ "$CI_MERGE_REQUEST_TITLE" =~ $pattern ]]; then
+        echo "Title OK"
+      else
+        echo "Merge request title must follow Conventional Commits, for example: feat(api): add order search"
+        exit 1
+      fi'
+
+test:
+  stage: test
+  cache:
+    key:
+      files:
+        - package-lock.json
+        - requirements.txt
+    paths:
+      - .cache/
+  script:
+    - make test
+  artifacts:
+    when: always
+    expire_in: 7 days
+    reports:
+      junit: reports/junit.xml
+
+build:
+  stage: build
+  script:
+    - make build
+  artifacts:
+    expire_in: 7 days
+    paths:
+      - dist/
+
+# Creates a GitLab release when a tag such as v1.4.0 is pushed.
+# The release description is the matching section of CHANGELOG.md.
+release:
+  stage: release
+  image: $RELEASE_IMAGE
+  rules:
+    - if: $CI_COMMIT_TAG =~ /^v\d+\.\d+\.\d+/
+  variables:
+    GIT_DEPTH: "1"
+  script:
+    - |
+      awk -v ver="${CI_COMMIT_TAG#v}" '
+        $0 ~ "^## \\[" ver "\\]" { found = 1; next }
+        found && /^## \[/ { exit }
+        found { print }
+      ' CHANGELOG.md > release-notes.md
+    - test -s release-notes.md || echo "See CHANGELOG.md" > release-notes.md
+  release:
+    tag_name: $CI_COMMIT_TAG
+    name: $CI_COMMIT_TAG
+    description: ./release-notes.md
