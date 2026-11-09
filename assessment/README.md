@@ -2,7 +2,7 @@
 
 The assessment turns the playbook's practice levels into a yes or no checklist you keep in git. You answer the questions in a TOML file. The script shows the level each practice area has reached, the level your profile calls for, and the next five things to do. Every quarter's result is a commit you can diff, review and show an auditor.
 
-Teams that build software answer 84 questions in 14 areas. The SME profile, for businesses that use software but do not build it, answers 18 questions in 8 areas (see [the SME profile](#the-sme-profile)).
+Teams that build software answer 97 questions in 16 areas. The SME profile, for businesses that use software but do not build it, answers 19 questions in 9 areas (see [the SME profile](#the-sme-profile)).
 
 You need Python 3.11 or later. Check with `python3 --version`. If it is older, use `python3.12` or `python3.11` if installed, `py -3` on Windows, or install the current release from [python.org](https://www.python.org/downloads/). Standard library only: no network access, no account, no data leaves your machine.
 
@@ -68,8 +68,8 @@ There is no weighted score. A single number hides which control is missing, and 
 
 A clinic, school or shop with an outside IT provider cannot honestly answer questions about pull requests or CI. With `--profile sme` the script:
 
-- skips the six areas that need in-house engineers: ways of working, delivery, quality, architecture, platform and measurement, as the [SME profile](../profiles/sme.md) does;
-- asks 14 Foundation questions written for an owner and an IT provider (multi-factor authentication on email, an offline backup with a tested restore, the business owning its domain and admin accounts, a printed first-hour plan) instead of the engineering ones;
+- skips the seven areas that need in-house engineers or a product team: product, ways of working, delivery, quality, architecture, platform and measurement, as the [SME profile](../profiles/sme.md) does;
+- asks 15 Foundation questions written for an owner and an IT provider (multi-factor authentication on email, an offline backup with a tested restore, the business owning its domain and admin accounts, a printed first-hour plan, a one-page plan with a way back before a big IT change) instead of the engineering ones;
 - lists security and reliability gaps first, so the first actions are the controls that block the most common attacks;
 - keeps the Foundation target when you add an overlay. Read the short SME section of the [regulated overlay](../profiles/regulated.md#with-the-sme-profile) instead.
 
@@ -104,7 +104,7 @@ assessments/
 
 ## Change the questions
 
-`questions.toml` is plain TOML. Fork it to tune numbers (for example, a review time limit of two working days instead of one) or add questions for your own rules. Each question needs an `id` of the form `area.short-name`, a `level`, the question `text`, the `action` to take when the answer is false, and a `link` to the page that explains it. Keep 4 to 6 questions per area and at least one per level, so every level is reachable. `only_profiles` or `skip_profiles` limit a question to some profiles.
+`questions.toml` is plain TOML. Fork it to tune numbers (for example, a review time limit of two working days instead of one) or add questions for your own rules. Each question needs an `id` of the form `area.short-name`, a `level`, the question `text`, the `action` to take when the answer is false, and a `link` to the page that explains it. Keep 4 to 7 questions per area and at least one per level, so every level is reachable. `only_profiles` or `skip_profiles` limit a question to some profiles.
 
 A `[profiles.<name>]` table changes scoring for one profile:
 

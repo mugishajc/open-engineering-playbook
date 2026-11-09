@@ -23,7 +23,8 @@ import plain_lint  # noqa: E402
 import quiz  # noqa: E402
 
 AREAS = (
-    "strategy", "operating-model", "ways-of-working", "delivery", "quality",
+    "strategy", "operating-model", "product", "project-management",
+    "ways-of-working", "delivery", "quality",
     "reliability", "security", "data", "ai", "architecture", "platform",
     "people", "measurement", "compliance", "leaders", "business-owners",
 )
@@ -92,7 +93,7 @@ class RealBankTest(unittest.TestCase):
     def setUpClass(cls):
         cls.bank = quiz.load_bank(quiz.DEFAULT_BANK)
 
-    def test_areas_are_the_fourteen_plus_leaders(self):
+    def test_areas_are_the_sixteen_plus_leaders(self):
         self.assertEqual(tuple(a.id for a in self.bank.areas), AREAS)
 
     def test_about_ten_statements_per_area(self):

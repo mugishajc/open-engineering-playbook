@@ -6,7 +6,7 @@ Reading a practice is not the same as being able to do it at 02:00 with the chat
 
 | Format | What it is | Who | Time |
 |---|---|---|---|
-| [True or false](true-or-false/README.md) | About 160 statements across all fourteen areas, plus leaders and business owners. Myths that sound right, facts that sound wrong. Play on GitHub or in a terminal with [`quiz.py`](quiz.py), which can save each session and replay your misses. | Anyone | 10 to 20 minutes |
+| [True or false](true-or-false/README.md) | About 190 statements across all sixteen areas, plus leaders and business owners. Myths that sound right, facts that sound wrong. Play on GitHub or in a terminal with [`quiz.py`](quiz.py), which can save each session and replay your misses. | Anyone | 10 to 20 minutes |
 | [Katas](#katas) | Short, focused practice on one skill, with a model answer to compare against | One person or a pair | 30 to 45 minutes |
 | [Tabletop exercises](#tabletop-exercises) | A bad day rehearsed around a table: a scenario, timed injects, decisions, a scored debrief | A team of 4 to 10, with a facilitator | 60 to 90 minutes |
 | [Decision games](#decision-games) | Choose-your-path decisions for leaders, with the consequences of each option revealed | A leader alone, or a leadership group | 30 to 45 minutes |
@@ -45,6 +45,7 @@ Start with the [facilitator guide](tabletop/facilitator-guide.md). It covers rol
 | [Build, buy or adopt](decision-games/build-buy-or-adopt.md) | A public agency's sign-in system with a data residency rule | 30 |
 | [Cloud exit](decision-games/cloud-exit.md) | A cloud bill that tripled and a spreadsheet that promises 60% savings | 30 |
 | [AI pilot to production](decision-games/ai-pilot-to-production.md) | A bank's credit memo assistant and a three-week deadline | 30 |
+| [The red project before go-live](decision-games/red-project-before-go-live.md) | A pensions system six weeks from go-live, a green supplier report and two failed migration rehearsals | 30 to 45 |
 
 ## Learning paths
 
@@ -56,6 +57,7 @@ For trainers and team leads who plan a programme. Each path is in order; do the 
 | Team lead or senior engineer | [Write the ADR](katas/write-the-adr.md) · [Threat model a feature](katas/threat-model-a-feature.md) · [Find the contributing factors](katas/find-the-contributing-factors.md) · lead one tabletop with the [facilitator guide](tabletop/facilitator-guide.md) | about 5 hours | record a decision fairly, threat model a design, run a blameless review and facilitate an exercise |
 | On-call and SRE engineers | [Error budget math](katas/error-budget-math.md) · [Retry storm](tabletop/retry-storm.md) · [Cloud region outage](tabletop/cloud-region-outage.md) · [Ransomware at 2 a.m.](tabletop/ransomware-at-2am.md) | about 5 hours | set burn-rate alerts, shed load, decide on failover and act on a security incident |
 | Executive or board member | Leaders quiz · [Ransomware at 2 a.m.](tabletop/ransomware-at-2am.md) or [Supplier breach](tabletop/supplier-breach.md) with the executive team · one [decision game](#decision-games) · [The quantum question from the board](tabletop/quantum-question-from-the-board.md) | about 4 hours | decide during a crisis, test a large proposal and explain a long-term risk |
+| Product, programme or quality leader | The quiz for your area (product, project management or quality) · [The red project before go-live](decision-games/red-project-before-go-live.md) · [Bad deploy at peak](tabletop/bad-deploy-at-peak.md) as an observer | about 2 hours | say what evidence a go/no-go needs, give a forecast as a range and spot a status report that hides bad news |
 | Business owner or office manager | Business owners quiz · the [first-hour plan](../templates/sme/first-hour-plan.md) rehearsed for 30 minutes: "our files are encrypted, what do we do?" | about 1 hour | lead the first hour of an incident and keep the business working without its systems |
 
 To record progress, keep each learner's `--save` file and look at the score by area every quarter.
@@ -79,7 +81,7 @@ To record progress, keep each learner's `--save` file and look at the score by a
 
 - **Twice a year, 60 to 90 minutes:** a tabletop with the executive team: ransomware, supplier breach or the quantum question. Read [crisis leadership](../leaders/crisis-leadership.md) first.
 - **Before a large decision:** play the matching decision game as a group, each person choosing alone first, then compare. Disagreement in the room is useful data. See [decision making](../leaders/decision-making.md).
-- **New leaders:** the four decision games and the quantum tabletop make a good first-month set alongside the [first 90 days](../leaders/first-90-days.md) plan.
+- **New leaders:** the five decision games and the quantum tabletop make a good first-month set alongside the [first 90 days](../leaders/first-90-days.md) plan.
 
 ## Running a session
 

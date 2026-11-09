@@ -27,7 +27,8 @@ import plain_lint  # noqa: E402
 QUESTIONS = ASSESSMENT / "questions.toml"
 EXAMPLE = ASSESSMENT / "example-answers.toml"
 AREAS = (
-    "strategy", "operating-model", "ways-of-working", "delivery", "quality",
+    "strategy", "operating-model", "product", "project-management",
+    "ways-of-working", "delivery", "quality",
     "reliability", "security", "data", "ai", "architecture", "platform",
     "people", "measurement", "compliance",
 )
@@ -294,13 +295,17 @@ class ProfileRules(unittest.TestCase):
         r = ka.assess(self.bank, self.blank("sme"))
         ids = [a["id"] for a in r["areas"]]
         self.assertEqual(
-            ids, ["strategy", "operating-model", "reliability", "security", "data", "ai", "people", "compliance"]
+            ids,
+            [
+                "strategy", "operating-model", "project-management", "reliability",
+                "security", "data", "ai", "people", "compliance",
+            ],
         )
         self.assertEqual(
             [a["id"] for a in r["skipped_areas"]],
-            ["ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"],
+            ["product", "ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"],
         )
-        self.assertEqual(r["summary"]["areas_total"], 8)
+        self.assertEqual(r["summary"]["areas_total"], 9)
 
     def test_sme_next_actions_start_with_the_essential_controls(self):
         r = ka.assess(self.bank, self.blank("sme"))
@@ -344,7 +349,7 @@ class ProfileRules(unittest.TestCase):
 
     def test_sme_init_round_trip(self):
         text = ka.render_init(self.bank, "sme")
-        self.assertIn("Not assessed for the SME profile: Ways of working", text)
+        self.assertIn("Not assessed for the SME profile: Product, Ways of working", text)
         self.assertNotIn('"delivery.', text)
         self.assertIn('"security.sme-mfa" = false', text)
         parsed = ka.parse_answers(tomllib.loads(text), self.bank)
@@ -420,7 +425,7 @@ class ProfileRules(unittest.TestCase):
     def test_markdown_for_sme_passes_plain_language_check(self):
         r = ka.assess(self.bank, self.blank("sme"))
         text = ka.render_markdown(r, self.bank)
-        self.assertIn("Not assessed for this profile: Ways of working", text)
+        self.assertIn("Not assessed for this profile: Product, Ways of working", text)
         patterns = plain_lint.compile_phrases(plain_lint.load_phrases(plain_lint.DEFAULT_WORDLIST))
         findings = list(plain_lint.check_text(Path("report.md"), text, patterns))
         self.assertEqual(findings, [], "\n".join(str(f) for f in findings))
@@ -480,21 +485,21 @@ class QuestionBank(unittest.TestCase):
     def setUp(self):
         self.bank = ka.load_bank(QUESTIONS)
 
-    def test_fourteen_areas_in_order(self):
+    def test_sixteen_areas_in_order(self):
         self.assertEqual(tuple(a.id for a in self.bank.areas), AREAS)
 
-    def test_four_to_six_questions_per_area_covering_every_level(self):
+    def test_four_to_seven_questions_per_area_covering_every_level(self):
         for profile in ("solo", "startup", "scale-up", "enterprise"):
             for area in AREAS:
                 qs = self.bank.in_area(area, profile)
-                self.assertTrue(4 <= len(qs) <= 6, f"{profile}: {area} has {len(qs)} questions")
+                self.assertTrue(4 <= len(qs) <= 7, f"{profile}: {area} has {len(qs)} questions")
                 self.assertEqual({q.level for q in qs}, set(ka.LEVELS), f"{profile}: {area}")
 
     def test_sme_profile_has_its_own_questions(self):
         skipped = set(self.bank.rule("sme").skip_areas)
         self.assertEqual(
             skipped,
-            {"ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"},
+            {"product", "ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"},
         )
         for area in self.bank.areas_for("sme"):
             qs = self.bank.in_area(area.id, "sme")

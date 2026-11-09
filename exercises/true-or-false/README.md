@@ -2,7 +2,7 @@
 
 # True or false
 
-163 statements about the playbook, in 16 areas. Some are myths that sound right; others are facts that sound wrong. Each answer explains why in a few sentences and links to the page that teaches the practice.
+189 statements about the playbook, in 18 areas. Some are myths that sound right; others are facts that sound wrong. Each answer explains why in a few sentences and links to the page that teaches the practice.
 
 Play on GitHub by opening an area below, or in a terminal from the repository root:
 
@@ -21,9 +21,11 @@ The terminal quiz keeps a running score, shows your result by area and suggests 
 |---|---|---|
 | [Strategy](strategy.md) | 10 | Most engineering waste starts here: goals with no diagnosis, tools chosen before problems, and work that never stops. See how well you can tell a real strategy from a wish list. |
 | [Operating model](operating-model.md) | 10 | Who decides, who is consulted and how teams are shaped set the speed of everything else. These statements test the beliefs that slow organisations down. |
+| [Product](product.md) | 10 | Strategy, discovery, roadmaps, experiments, pricing and launches. Building got cheaper; deciding what is worth building and proving it helped did not. |
+| [Project management](project-management.md) | 10 | Fixed dates, fixed prices, RAID logs, stage gates and status reports. Test the habits that keep a project green on paper and red underneath. |
 | [Ways of working](ways-of-working.md) | 10 | Story points, velocity, sprints and estimates: some of the most repeated beliefs in software are not in the Scrum Guide at all. Find out which ones. |
 | [Delivery](delivery.md) | 10 | Branches, pipelines, reviews, migrations and releases. Small, frequent, reversible changes are the theme; check whether your habits agree. |
-| [Quality](quality.md) | 10 | Quality is built in while the code is written, not inspected at the end. These statements check what you believe about testers, TDD and test suites. |
+| [Quality](quality.md) | 16 | Quality is built in while the code is written, not inspected at the end. These statements check what you believe about testers, TDD, test suites, and performance, security and accessibility testing. |
 | [Reliability](reliability.md) | 11 | SLOs, on-call, incidents, rollbacks and backups. Several of these statements sound responsible and make outages longer. |
 | [Security](security.md) | 11 | Vulnerabilities, secrets, dependencies, zero trust and the quantum timeline. Separate the controls that work from the ones that only feel safe. |
 | [Data](data.md) | 10 | Ownership, classification, quality and privacy. Most data problems are ownership problems; see which common habits make them worse. |

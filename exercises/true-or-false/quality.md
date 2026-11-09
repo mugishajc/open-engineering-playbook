@@ -2,9 +2,9 @@
 
 # True or false: Quality
 
-Quality is built in while the code is written, not inspected at the end. These statements check what you believe about testers, TDD and test suites.
+Quality is built in while the code is written, not inspected at the end. These statements check what you believe about testers, TDD, test suites, and performance, security and accessibility testing.
 
-10 statements (Foundation 4, Standard 5, Assured 1). Decide whether each one is true or false before you open the answer. Every answer says why and links to the page that teaches it.
+16 statements (Foundation 6, Standard 8, Assured 2). Decide whether each one is true or false before you open the answer. Every answer says why and links to the page that teaches it.
 
 Prefer the terminal? From the repository root, run `python3 exercises/quiz.py --area quality`.
 
@@ -125,6 +125,78 @@ Level: Foundation
 **True.** Being stuck usually means the step was too large. Reverting to the last green state costs little and gives a clean start. Write a smaller test and continue from there.
 
 Read more: [playbook/quality/test-driven-development.md](../../playbook/quality/test-driven-development.md)
+
+</details>
+
+### 11. A load test with a fixed number of virtual users, each waiting for a response before sending the next request, shows how an internet-facing service behaves at its real peak.
+
+Level: Standard
+
+<details><summary>Answer</summary>
+
+**False.** When the system slows, those users send less, so the load drops exactly when the system struggles and the slowest waits are never measured. This is called coordinated omission. Real users do not wait for each other: drive load by arrival rate instead.
+
+Read more: [playbook/quality/performance-testing.md](../../playbook/quality/performance-testing.md)
+
+</details>
+
+### 12. Average response time is a good way to judge whether a service meets its latency target.
+
+Level: Foundation
+
+<details><summary>Answer</summary>
+
+**False.** An average hides the slow requests that users notice. Report the 50th, 95th and 99th percentiles and the maximum, and judge them against the service level objective.
+
+Read more: [playbook/quality/performance-testing.md](../../playbook/quality/performance-testing.md)
+
+</details>
+
+### 13. A page that passes an automated accessibility checker with zero errors meets WCAG 2.2 level AA.
+
+Level: Foundation
+
+<details><summary>Answer</summary>
+
+**False.** Automated tools check only part of the Web Content Accessibility Guidelines; most success criteria need a person to judge them. Add manual keyboard, zoom and screen reader checks on every new or changed journey, and test with disabled people before major releases.
+
+Read more: [playbook/quality/accessibility-testing.md](../../playbook/quality/accessibility-testing.md)
+
+</details>
+
+### 14. Most masked copies of production data are pseudonymised, so data protection law still applies to them in test environments.
+
+Level: Assured
+
+<details><summary>Answer</summary>
+
+**True.** Under GDPR, data that can be linked back to a person with extra information is still personal data. Use synthetic data by default. Allow masked copies only through an approved pipeline that fails closed, with a deletion date.
+
+Read more: [playbook/quality/test-data-and-environments.md](../../playbook/quality/test-data-and-environments.md)
+
+</details>
+
+### 15. For a service that changes every week, a yearly penetration test is sufficient security testing.
+
+Level: Standard
+
+<details><summary>Answer</summary>
+
+**False.** A yearly test sees one moment; the code changes every day. Layer the testing: scans on every pull request, an authenticated dynamic scan every night, authorisation tests for every endpoint, and expert testing for what automation cannot find.
+
+Read more: [playbook/quality/security-testing.md](../../playbook/quality/security-testing.md)
+
+</details>
+
+### 16. Exploratory testing should be run as time-boxed sessions, each with a written charter and notes.
+
+Level: Standard
+
+<details><summary>Answer</summary>
+
+**True.** A charter gives the session a mission, the time box keeps it focused, and notes make the findings usable. Aim sessions at the highest risks, and turn each defect found into an automated regression test where one is possible.
+
+Read more: [playbook/quality/exploratory-and-acceptance-testing.md](../../playbook/quality/exploratory-and-acceptance-testing.md)
 
 </details>
 

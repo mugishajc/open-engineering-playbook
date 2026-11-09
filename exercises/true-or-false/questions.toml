@@ -46,6 +46,16 @@ title = "Operating model"
 intro = "Who decides, who is consulted and how teams are shaped set the speed of everything else. These statements test the beliefs that slow organisations down."
 
 [[areas]]
+id = "product"
+title = "Product"
+intro = "Strategy, discovery, roadmaps, experiments, pricing and launches. Building got cheaper; deciding what is worth building and proving it helped did not."
+
+[[areas]]
+id = "project-management"
+title = "Project management"
+intro = "Fixed dates, fixed prices, RAID logs, stage gates and status reports. Test the habits that keep a project green on paper and red underneath."
+
+[[areas]]
 id = "ways-of-working"
 title = "Ways of working"
 intro = "Story points, velocity, sprints and estimates: some of the most repeated beliefs in software are not in the Scrum Guide at all. Find out which ones."
@@ -58,7 +68,7 @@ intro = "Branches, pipelines, reviews, migrations and releases. Small, frequent,
 [[areas]]
 id = "quality"
 title = "Quality"
-intro = "Quality is built in while the code is written, not inspected at the end. These statements check what you believe about testers, TDD and test suites."
+intro = "Quality is built in while the code is written, not inspected at the end. These statements check what you believe about testers, TDD, test suites, and performance, security and accessibility testing."
 
 [[areas]]
 id = "reliability"
@@ -298,6 +308,190 @@ statement = "An organisation can adopt ITIL 4 without adding change approval mee
 answer = true
 explanation = "ITIL 4 describes a service value system, not a meeting schedule. Copying it as a set of approval meetings can add a week to every change. Use pre-authorised standard changes and evidence that the pipeline produces automatically."
 link = "playbook/operating-model/it-governance.md"
+
+# ----------------------------------------------------------------- product
+
+[[statements]]
+id = "product.vision-as-strategy"
+area = "product"
+level = "foundation"
+statement = "A product strategy is complete once it has a clear vision statement."
+answer = false
+explanation = "A vision says where you want to be. A strategy also names the target users, the problem, what the product will not do and 2 to 4 measured outcomes. Without those, nobody can use it to decline a request."
+link = "playbook/product/product-strategy.md"
+
+[[statements]]
+id = "product.name-who-it-is-not-for"
+area = "product"
+level = "foundation"
+statement = "Naming the users a product is not for helps the team turn down requests that pull the product sideways."
+answer = true
+explanation = "Most early products fail by serving everyone a little. A written \"not for\" line lets product and sales decline the same requests for the same reason, even from a paying customer."
+link = "playbook/product/product-strategy.md"
+
+[[statements]]
+id = "product.ask-about-the-future"
+area = "product"
+level = "foundation"
+statement = "Asking users in an interview whether they would use a proposed feature gives reliable evidence of its value."
+answer = false
+explanation = "People cannot predict what they will do, and they are polite about your ideas. Ask about the last time they had the problem and follow the story. Do not pitch the solution in the interview."
+link = "playbook/product/product-discovery.md"
+
+[[statements]]
+id = "product.synthetic-users"
+area = "product"
+level = "standard"
+statement = "Interviews with a language model that plays a customer are good evidence of a user need."
+answer = false
+explanation = "A model asked to play a customer returns the average of what it has read, politely. Use it to draft interview guides or rehearse. Evidence of a need, a price or usability comes from real users."
+link = "playbook/product/product-discovery.md"
+
+[[statements]]
+id = "product.roadmap-dates-as-ranges"
+area = "product"
+level = "standard"
+statement = "Dates on a roadmap shared outside the team should be given as a range with a confidence level."
+answer = true
+explanation = "Dates come from measured throughput, for example a Monte Carlo forecast. Say \"85% likely by 30 June\", not \"due 30 June\", and tell stakeholders when the 85% date moves."
+link = "playbook/product/roadmaps-and-prioritisation.md"
+
+[[statements]]
+id = "product.peeking"
+area = "product"
+level = "standard"
+statement = "Checking an A/B test every day and stopping it when the result first turns significant raises the chance of a false win."
+answer = true
+explanation = "Repeated looks give chance many opportunities to cross the line. Fix the duration and read once at the end, or set up a sequential method designed for repeated looks before launch. Stopping early for harm is always allowed."
+link = "playbook/product/product-metrics-and-experiments.md"
+
+[[statements]]
+id = "product.no-significant-harm"
+area = "product"
+level = "assured"
+statement = "A guardrail that shows no significant change in a small experiment proves the change caused no harm."
+answer = false
+explanation = "A small test cannot see small harm, so \"no significant change\" is not proof. Give each guardrail a margin, the largest harm you would accept. It passes only when its confidence interval rules out harm bigger than the margin."
+link = "playbook/product/product-metrics-and-experiments.md"
+
+[[statements]]
+id = "product.randomise-by-organisation"
+area = "product"
+level = "assured"
+statement = "When a business product is randomised by organisation, the sample size of the experiment is the number of organisations, not the number of users."
+answer = true
+explanation = "Users in one organisation behave alike and see the same version, so they are not independent. Forty organisations of 500 users each is a test of 40. Analyse per organisation, or use a method that allows for clustering."
+link = "playbook/product/product-metrics-and-experiments.md"
+
+[[statements]]
+id = "product.done-at-deploy"
+area = "product"
+level = "foundation"
+statement = "A feature counts as done when its code reaches production."
+answer = false
+explanation = "Deploy is not release, and release is not value. A feature is done when users get value from it. Write success and stop criteria before rollout and check the feature after 2 to 6 weeks."
+link = "playbook/product/launch-and-adoption.md"
+
+[[statements]]
+id = "product.price-from-value"
+area = "product"
+level = "standard"
+statement = "A price should start from the value to the customer and the cost of their alternative, with cost to serve as the floor."
+answer = true
+explanation = "Cost plus a margin tells you the lowest price you can afford, not what the product is worth. The customer's alternative is often a spreadsheet, a person or doing nothing. Check the price against cost to serve so no plan loses money by accident."
+link = "playbook/product/pricing-and-packaging.md"
+
+# ------------------------------------------------------ project management
+
+[[statements]]
+id = "project-management.long-lived-as-project"
+area = "project-management"
+level = "foundation"
+statement = "Software that will be changed for years after launch should be funded as a project that closes at go-live."
+answer = false
+explanation = "Project funding ends at launch and leaves the service without owners, so it starts to decay. Fund a persistent product team for anything that will change for more than a year. Wrap a project around it only for a fixed end, a contract or a legal date."
+link = "playbook/project-management/projects-and-products.md"
+
+[[statements]]
+id = "project-management.fix-two"
+area = "project-management"
+level = "foundation"
+statement = "When a contract fixes scope, date and cost all at once, quality and risk become the hidden variable."
+answer = true
+explanation = "You can fix at most two of the three. When all three are fixed, testing gets cut and defects ship. Say so in writing before signing, and protect the go/no-go criteria, because they are the last place quality is defended."
+link = "playbook/project-management/planning-fixed-scope-and-budget.md"
+
+[[statements]]
+id = "project-management.reference-class"
+area = "project-management"
+level = "standard"
+statement = "Estimating from how similar past projects actually turned out gives a better forecast than building the estimate from the current plan alone."
+answer = true
+explanation = "People forecast from the plan in front of them and ignore how similar work went, which Kahneman and Tversky called the planning fallacy. Reference class forecasting starts from the real outcomes of past projects and adjusts the plan's own estimate by them."
+link = "playbook/project-management/planning-fixed-scope-and-budget.md"
+
+[[statements]]
+id = "project-management.spread-contingency"
+area = "project-management"
+level = "standard"
+statement = "Contingency should be spread across work packages so that each team holds its own buffer."
+answer = false
+explanation = "Work expands to fill the time available, so buffers spread across tasks get spent whether the risks happen or not. Hold contingency centrally, release it against a named item in the RAID log, and return what is not needed at each gate."
+link = "playbook/project-management/planning-fixed-scope-and-budget.md"
+
+[[statements]]
+id = "project-management.add-people-late"
+area = "project-management"
+level = "foundation"
+statement = "Adding people to a late software project is a reliable way to bring the date back."
+answer = false
+explanation = "Fred Brooks wrote in 1975 that adding people to a late software project makes it later. New people need time to learn and take time from those who know the system. Re-forecast, cut scope and remove waiting first."
+link = "playbook/project-management/planning-fixed-scope-and-budget.md"
+
+[[statements]]
+id = "project-management.add-up-risk-scores"
+area = "project-management"
+level = "standard"
+statement = "Likelihood and impact scores from 1 to 5 can be added up to size a project's contingency."
+answer = false
+explanation = "Scores sort the RAID log, but they cannot be added or compared with a budget. Size each top risk in money: its probability as a percentage times its impact. The sum of open money exposure is what contingency is held against."
+link = "playbook/project-management/risks-raid-and-stage-gates.md"
+
+[[statements]]
+id = "project-management.gate-on-remaining"
+area = "project-management"
+level = "standard"
+statement = "At a stage gate, the decision should rest on the remaining cost and the remaining value of the project."
+answer = true
+explanation = "Money already spent cannot be recovered, so it is not a reason to continue. Ask: knowing what we know now, would we start this today? A stop supported by the evidence is a good result."
+link = "playbook/project-management/risks-raid-and-stage-gates.md"
+
+[[statements]]
+id = "project-management.no-evidence-no-green"
+area = "project-management"
+level = "standard"
+statement = "A status dimension whose key evidence is missing, such as a migration rehearsal that has not run, should be reported as amber at best."
+answer = true
+explanation = "Unknown is not green. An untested payment run, an unrun rehearsal or a supplier figure nobody has checked hides the risk until it is too late. Set colours by written rules that compare the forecast with the tolerance."
+link = "playbook/project-management/status-reporting.md"
+
+[[statements]]
+id = "project-management.percent-complete"
+area = "project-management"
+level = "foundation"
+statement = "Percent complete of a task list is a reliable measure of project progress."
+answer = false
+explanation = "Tasks can be 90% complete for months, and the list hides scope growth. Report accepted increments, a burn-up chart with the scope line drawn, and a forecast range with a confidence level."
+link = "playbook/project-management/status-reporting.md"
+
+[[statements]]
+id = "project-management.spi-drifts"
+area = "project-management"
+level = "assured"
+statement = "In earned value management, the schedule performance index drifts back towards 1.0 near the end of a project whether or not the project is late."
+answer = true
+explanation = "The schedule performance index (SPI) is measured in money, and earned value approaches the plan as work finishes. Use the cost performance index for cost and a throughput forecast for dates."
+link = "playbook/project-management/planning-fixed-scope-and-budget.md"
 
 # --------------------------------------------------------- ways of working
 
@@ -574,6 +768,60 @@ statement = "In TDD, if you have been stuck without a passing test for about 10 
 answer = true
 explanation = "Being stuck usually means the step was too large. Reverting to the last green state costs little and gives a clean start. Write a smaller test and continue from there."
 link = "playbook/quality/test-driven-development.md"
+
+[[statements]]
+id = "quality.closed-model-peak"
+area = "quality"
+level = "standard"
+statement = "A load test with a fixed number of virtual users, each waiting for a response before sending the next request, shows how an internet-facing service behaves at its real peak."
+answer = false
+explanation = "When the system slows, those users send less, so the load drops exactly when the system struggles and the slowest waits are never measured. This is called coordinated omission. Real users do not wait for each other: drive load by arrival rate instead."
+link = "playbook/quality/performance-testing.md"
+
+[[statements]]
+id = "quality.average-latency"
+area = "quality"
+level = "foundation"
+statement = "Average response time is a good way to judge whether a service meets its latency target."
+answer = false
+explanation = "An average hides the slow requests that users notice. Report the 50th, 95th and 99th percentiles and the maximum, and judge them against the service level objective."
+link = "playbook/quality/performance-testing.md"
+
+[[statements]]
+id = "quality.automated-a11y-checker"
+area = "quality"
+level = "foundation"
+statement = "A page that passes an automated accessibility checker with zero errors meets WCAG 2.2 level AA."
+answer = false
+explanation = "Automated tools check only part of the Web Content Accessibility Guidelines; most success criteria need a person to judge them. Add manual keyboard, zoom and screen reader checks on every new or changed journey, and test with disabled people before major releases."
+link = "playbook/quality/accessibility-testing.md"
+
+[[statements]]
+id = "quality.masked-data-is-personal"
+area = "quality"
+level = "assured"
+statement = "Most masked copies of production data are pseudonymised, so data protection law still applies to them in test environments."
+answer = true
+explanation = "Under GDPR, data that can be linked back to a person with extra information is still personal data. Use synthetic data by default. Allow masked copies only through an approved pipeline that fails closed, with a deletion date."
+link = "playbook/quality/test-data-and-environments.md"
+
+[[statements]]
+id = "quality.yearly-pentest"
+area = "quality"
+level = "standard"
+statement = "For a service that changes every week, a yearly penetration test is sufficient security testing."
+answer = false
+explanation = "A yearly test sees one moment; the code changes every day. Layer the testing: scans on every pull request, an authenticated dynamic scan every night, authorisation tests for every endpoint, and expert testing for what automation cannot find."
+link = "playbook/quality/security-testing.md"
+
+[[statements]]
+id = "quality.exploratory-charters"
+area = "quality"
+level = "standard"
+statement = "Exploratory testing should be run as time-boxed sessions, each with a written charter and notes."
+answer = true
+explanation = "A charter gives the session a mission, the time box keeps it focused, and notes make the findings usable. Aim sessions at the highest risks, and turn each defect found into an automated regression test where one is possible."
+link = "playbook/quality/exploratory-and-acceptance-testing.md"
 
 # ------------------------------------------------------------- reliability
 

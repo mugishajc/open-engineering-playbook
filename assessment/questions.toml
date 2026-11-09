@@ -27,11 +27,13 @@ version = 1
 #   overlays_raise_target  false keeps the profile's target when an overlay
 #                          applies
 # The SME profile is for businesses that use software but do not build it.
-# It skips the areas that need in-house engineers (see profiles/sme.md) and
-# is asked its own questions, written for an owner and an IT provider.
+# It skips the areas that need in-house engineers or a product team (see
+# profiles/sme.md) and is asked its own questions, written for an owner and
+# an IT provider. Project management stays: replacing a system or an IT
+# provider is a project, so the SME profile gets one owner-level question.
 [profiles.sme]
-skip_areas = ["ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"]
-area_order = ["security", "reliability", "operating-model", "data", "people", "ai", "compliance", "strategy"]
+skip_areas = ["product", "ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"]
+area_order = ["security", "reliability", "operating-model", "data", "people", "ai", "compliance", "project-management", "strategy"]
 overlays_raise_target = false
 
 [[areas]]
@@ -41,6 +43,14 @@ title = "Strategy"
 [[areas]]
 id = "operating-model"
 title = "Operating model"
+
+[[areas]]
+id = "product"
+title = "Product"
+
+[[areas]]
+id = "project-management"
+title = "Project management"
 
 [[areas]]
 id = "ways-of-working"
@@ -189,6 +199,106 @@ text = "Does engineering report to the board or audit committee at least twice a
 action = "Agree a short set of measures with the board or audit committee and report on them at least twice a year."
 link = "playbook/operating-model/it-governance.md"
 
+# --------------------------------------------------------------- product
+
+[[questions]]
+id = "product.strategy-on-a-page"
+level = "foundation"
+skip_profiles = ["sme"]
+text = "Does each product with its own team have a one-page product strategy that names the target users, the problem, what it will not do and 2 to 4 measured outcomes, reviewed in the last quarter?"
+action = "Write a one-page product strategy for each product: target users, the problem, what it will not do and 2 to 4 outcomes with a baseline and a target. Review it every quarter."
+link = "playbook/product/product-strategy.md"
+
+[[questions]]
+id = "product.weekly-user-contact"
+level = "foundation"
+skip_profiles = ["sme"]
+text = "Do the people who decide what each product team builds talk with at least one real user every week?"
+action = "Book at least 30 minutes of conversation with real users every week for each product trio (product manager, designer and tech lead), with a standing way to recruit them."
+link = "playbook/product/product-discovery.md"
+
+[[questions]]
+id = "product.outcome-roadmap"
+level = "standard"
+skip_profiles = ["sme"]
+text = "Is each roadmap published as Now, Next and Later, with most items stated as a problem or outcome and every date shared outside the team given as a range with a confidence level?"
+action = "Rewrite the roadmap as Now, Next and Later, state at least 80% of items as problems or outcomes, and give every external date as a range with a confidence level."
+link = "playbook/product/roadmaps-and-prioritisation.md"
+
+[[questions]]
+id = "product.experiment-briefs"
+level = "standard"
+skip_profiles = ["sme"]
+text = "Does every controlled experiment have a written brief with the hypothesis, primary metric, guardrails with margins, sample size and decision rule before launch, and a sample ratio check before anyone reads the results?"
+action = "Write an experiment brief before each test, and check the split between variants before reading any result."
+link = "playbook/product/product-metrics-and-experiments.md#experiment-design"
+
+[[questions]]
+id = "product.launch-criteria"
+level = "standard"
+skip_profiles = ["sme"]
+text = "Do launches in launch tiers 1 and 2 have success and stop criteria written before rollout, and a review against their adoption measure within 6 weeks of full rollout?"
+action = "Write success and stop criteria before each tier 1 and tier 2 launch, and review adoption within 6 weeks of full rollout."
+link = "playbook/product/launch-and-adoption.md"
+
+[[questions]]
+id = "product.fair-experiments"
+level = "assured"
+skip_profiles = ["sme"]
+text = "Are experiments limited to presentation and service design, never who receives a benefit, a price, credit or a legal protection, with a legal or ethics review wherever a test could affect people's outcomes?"
+action = "Write down which experiments may be shown to customers or citizens, agree it with legal or compliance, and keep each brief as a record."
+link = "playbook/product/product-metrics-and-experiments.md#assured"
+
+# ---------------------------------------------------- project-management
+
+[[questions]]
+id = "project-management.charter"
+level = "foundation"
+skip_profiles = ["sme"]
+text = "Does every piece of work with an external date, a contract or real money at stake have a one-page charter that names the outcome, what is fixed and why, the stop conditions and who decides?"
+action = "Write a one-page project charter for each project: the outcome, what is fixed and why, the stop conditions and the decision maker."
+link = "playbook/project-management/projects-and-products.md"
+
+[[questions]]
+id = "project-management.estimate-ranges"
+level = "foundation"
+skip_profiles = ["sme"]
+text = "Are project dates and costs given outside the project as ranges with a confidence level, with Must have scope kept to no more than 60% of the estimated effort?"
+action = "Give every external date and cost as a range with a confidence level, and sort the scope with MoSCoW so Must haves stay under 60% of the effort."
+link = "playbook/project-management/planning-fixed-scope-and-budget.md"
+
+[[questions]]
+id = "project-management.raid-log"
+level = "standard"
+skip_profiles = ["sme"]
+text = "Does each cross-team project keep one RAID log, reviewed weekly, in which every open item has an owner, a next action and a due date?"
+action = "Keep one risks, assumptions, issues and dependencies (RAID) log per project, review it weekly, and give every open item an owner, a next action and a date."
+link = "playbook/project-management/risks-raid-and-stage-gates.md#the-raid-log"
+
+[[questions]]
+id = "project-management.status-by-rule"
+level = "standard"
+skip_profiles = ["sme"]
+text = "Are project status colours set by written rules that compare the 85% forecast with the tolerance, with no green for any dimension that lacks current evidence?"
+action = "Write red, amber and green rules against the charter's tolerances and apply them in every status report."
+link = "playbook/project-management/status-reporting.md#define-red-amber-and-green-by-rule"
+
+[[questions]]
+id = "project-management.gates-can-stop"
+level = "standard"
+skip_profiles = ["sme"]
+text = "Does every stage gate judge working evidence against criteria written before the stage started, and record a decision to continue, continue with conditions, rescope, pause or stop?"
+action = "Write gate criteria and stop conditions in the charter before each stage, fund one stage at a time, and record the gate decision with its reason."
+link = "playbook/project-management/risks-raid-and-stage-gates.md#stage-gates-that-can-stop-work"
+
+[[questions]]
+id = "project-management.independent-assurance"
+level = "assured"
+skip_profiles = ["sme"]
+text = "Do the largest projects get independent assurance at the alpha and go/no-go gates, with every gate decision and re-baseline recorded with its decision maker and reason?"
+action = "Book independent reviewers for the alpha and go/no-go gates of large projects, and keep gate decisions and re-baselines as records."
+link = "playbook/project-management/risks-raid-and-stage-gates.md#assured"
+
 # ------------------------------------------------------- ways-of-working
 
 [[questions]]
@@ -291,14 +401,14 @@ id = "quality.fast-feedback"
 level = "foundation"
 text = "Does the test suite that gates a merge finish in under 10 minutes?"
 action = "Split or speed up the merge-gating tests until they finish in under 10 minutes."
-link = "playbook/delivery/testing.md"
+link = "playbook/quality/test-automation.md"
 
 [[questions]]
 id = "quality.flaky-tests"
 level = "standard"
 text = "Are flaky tests quarantined within 24 hours of the first confirmed flake and fixed or deleted within 14 days, with the count tracked?"
 action = "Track flaky tests, quarantine each one within 24 hours and fix or delete it within 14 days."
-link = "playbook/delivery/testing.md"
+link = "playbook/quality/test-automation.md"
 
 [[questions]]
 id = "quality.test-first"
@@ -310,16 +420,23 @@ link = "playbook/quality/test-driven-development.md"
 [[questions]]
 id = "quality.accessibility"
 level = "standard"
-text = "Are user-facing services tested against WCAG 2.2 level AA before each major release?"
-action = "Test user-facing services against WCAG 2.2 level AA before each major release."
-link = "playbook/compliance/public-sector.md"
+text = "Are user-facing services tested against WCAG 2.2 level AA before each major release, with automated checks and manual keyboard, zoom and screen reader checks?"
+action = "Run automated accessibility checks in CI and manual keyboard, zoom and screen reader checks on every new or changed journey before each major release."
+link = "playbook/quality/accessibility-testing.md"
+
+[[questions]]
+id = "quality.risk-based-strategy"
+level = "standard"
+text = "Does each product or Tier 1 and Tier 2 service have a risk-based test strategy of 1 to 3 pages, reviewed in the last 6 months, that maps each high risk to a check, including performance, security and accessibility where they apply?"
+action = "Write a 1 to 3 page test strategy per product: the top risks, the check for each, what you do not test, and the performance, security and accessibility checks. Review it every 6 months."
+link = "playbook/quality/test-strategy.md"
 
 [[questions]]
 id = "quality.test-evidence"
 level = "assured"
 text = "Are the test results for each release kept as evidence and linked to the release record?"
 action = "Store test results with each release record and keep them for the required period."
-link = "playbook/quality/quality-engineering.md"
+link = "playbook/quality/test-strategy.md#assured"
 
 # ----------------------------------------------------------- reliability
 
@@ -778,6 +895,14 @@ only_profiles = ["sme"]
 text = "Is there a list of every online service the business uses, with a named owner in the business, the data it holds, the cost and the renewal date?"
 action = "List every online service with its owner in the business, the data it holds, the cost and the renewal date."
 link = "leaders/for-small-and-medium-businesses.md#choosing-and-leaving-software-subscriptions"
+
+[[questions]]
+id = "project-management.sme-system-change"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Before a big IT change, such as a new system or a new IT provider, do you write a one-page plan with an owner, a date range, a tested way back and the point at which you would stop?"
+action = "For each big IT change, write a one-page plan: the owner, a date range, how you would go back to the old way, and what would make you stop."
+link = "playbook/project-management/projects-and-products.md#foundation"
 
 [[questions]]
 id = "reliability.sme-offline-backup"

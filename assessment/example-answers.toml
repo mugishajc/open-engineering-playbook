@@ -14,6 +14,8 @@
 # Commit this file and repeat the assessment every quarter.
 
 # One of: solo, sme, startup, scale-up, enterprise.
+# The questions below are the ones this profile is asked. If you change
+# the profile, run --init again or score with --allow-missing.
 profile = "startup"
 # Add "public-sector" and/or "regulated" when they apply.
 overlays = []
@@ -48,6 +50,34 @@ overlays = []
 "operating-model.separation-of-duties" = false
 # [assured] Does engineering report to the board or audit committee at least twice a year on a small agreed set of measures, under a named IT governance framework such as ISO/IEC 38500 or COBIT?
 "operating-model.it-governance" = false
+
+# Product
+# [foundation] Does each product with its own team have a one-page product strategy that names the target users, the problem, what it will not do and 2 to 4 measured outcomes, reviewed in the last quarter?
+"product.strategy-on-a-page" = true
+# [foundation] Do the people who decide what each product team builds talk with at least one real user every week?
+"product.weekly-user-contact" = true
+# [standard] Is each roadmap published as Now, Next and Later, with most items stated as a problem or outcome and every date shared outside the team given as a range with a confidence level?
+"product.outcome-roadmap" = false
+# [standard] Does every controlled experiment have a written brief with the hypothesis, primary metric, guardrails with margins, sample size and decision rule before launch, and a sample ratio check before anyone reads the results?
+"product.experiment-briefs" = false
+# [standard] Do launches in launch tiers 1 and 2 have success and stop criteria written before rollout, and a review against their adoption measure within 6 weeks of full rollout?
+"product.launch-criteria" = false
+# [assured] Are experiments limited to presentation and service design, never who receives a benefit, a price, credit or a legal protection, with a legal or ethics review wherever a test could affect people's outcomes?
+"product.fair-experiments" = false
+
+# Project management
+# [foundation] Does every piece of work with an external date, a contract or real money at stake have a one-page charter that names the outcome, what is fixed and why, the stop conditions and who decides?
+"project-management.charter" = true
+# [foundation] Are project dates and costs given outside the project as ranges with a confidence level, with Must have scope kept to no more than 60% of the estimated effort?
+"project-management.estimate-ranges" = true
+# [standard] Does each cross-team project keep one RAID log, reviewed weekly, in which every open item has an owner, a next action and a due date?
+"project-management.raid-log" = false
+# [standard] Are project status colours set by written rules that compare the 85% forecast with the tolerance, with no green for any dimension that lacks current evidence?
+"project-management.status-by-rule" = false
+# [standard] Does every stage gate judge working evidence against criteria written before the stage started, and record a decision to continue, continue with conditions, rescope, pause or stop?
+"project-management.gates-can-stop" = false
+# [assured] Do the largest projects get independent assurance at the alpha and go/no-go gates, with every gate decision and re-baseline recorded with its decision maker and reason?
+"project-management.independent-assurance" = false
 
 # Ways of working
 # [foundation] Is all planned work for each team visible on one board or list, with a written limit on work in progress?
@@ -86,8 +116,10 @@ overlays = []
 "quality.flaky-tests" = false
 # [standard] Do engineers write tests before or alongside new logic, and do reviewers check that changed lines are tested?
 "quality.test-first" = false
-# [standard] Are user-facing services tested against WCAG 2.2 level AA before each major release?
+# [standard] Are user-facing services tested against WCAG 2.2 level AA before each major release, with automated checks and manual keyboard, zoom and screen reader checks?
 "quality.accessibility" = false
+# [standard] Does each product or Tier 1 and Tier 2 service have a risk-based test strategy of 1 to 3 pages, reviewed in the last 6 months, that maps each high risk to a check, including performance, security and accessibility where they apply?
+"quality.risk-based-strategy" = false
 # [assured] Are the test results for each release kept as evidence and linked to the release record?
 "quality.test-evidence" = false
 
