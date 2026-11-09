@@ -56,13 +56,13 @@ Read more: [playbook/architecture/decision-records.md](../../playbook/architectu
 
 </details>
 
-### 5. A dedicated refactoring quarter is the best way to pay down technical debt.
+### 5. Paying down technical debt from a fixed share of every cycle usually works better than waiting for a dedicated refactoring quarter.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**False.** Refactoring quarters are hard to fund and rarely arrive. Pay debt down continuously from a fixed share of every team's capacity. Rank the register each quarter by the cost each item causes today.
+**True.** Refactoring quarters are hard to fund and rarely arrive. Pay debt down continuously from a fixed share of every team's capacity. Rank the register each quarter by the cost each item causes today.
 
 Read more: [playbook/architecture/technical-debt.md](../../playbook/architecture/technical-debt.md)
 

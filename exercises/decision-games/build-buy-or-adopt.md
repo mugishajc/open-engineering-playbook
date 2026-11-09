@@ -20,13 +20,13 @@ A national social security agency runs an identity system built in-house 12 year
 
 Four proposals are on the table.
 
-**A. Build.** The agency's engineers write a new identity service. "We know our users and we keep full control."
+**A. Build.** "We know our users, and identity is too important to rent. Our engineers write it, we keep every line of code, and no vendor can raise prices or move the data abroad."
 
-**B. Buy SaaS.** A leading identity SaaS vendor offers its product, hosted in a neighbouring country, with a contractual promise to add an in-country region "within 24 months".
+**B. Buy SaaS.** A leading identity vendor, used by thousands of organisations, with MFA, recovery and accessibility already done. It is hosted in a neighbouring country today, with a contractual promise of an in-country region "within 24 months".
 
-**C. Adopt open source with support.** Deploy Keycloak, an open source identity and access management project, in both government data centres, with a paid support contract from a local company and two more engineers hired.
+**C. Run open source ourselves.** Deploy Keycloak, an open source identity and access management project, in both government data centres and operate it 24/7 with a local support contract and two more hires. The team takes on a security-critical system of a kind it has never run, and owns every upgrade.
 
-**D. Partner.** A national systems integrator builds and runs a custom identity solution on its own framework under a 7-year managed service contract.
+**D. Partner.** A national systems integrator with a government track record builds and runs a custom identity solution in-country under a 7-year managed service contract, with penalties for missed service levels. The agency buys an outcome, not a project.
 
 Choose before you open the consequences.
 
@@ -49,7 +49,7 @@ On the scoring matrix, B scores 1 on sovereignty. When a hosting rule is mandato
 </details>
 
 <details>
-<summary>Consequences of C: adopt open source with support</summary>
+<summary>Consequences of C: run open source ourselves</summary>
 
 Keycloak supports OpenID Connect, SAML, MFA and federation, and it runs in the agency's own data centres. The first 4 months go into building the deployment properly: high availability across both data centres, a tested upgrade process, backups of the identity configuration, and monitoring. Staff move over at month 7, citizens in phases from month 10. The old system is retired at month 16.
 
@@ -86,7 +86,7 @@ C leads by more than 10%, so it is not a tie. B is also excluded outright by the
 
 ## What the playbook recommends, and why
 
-**C, adopt with paid support,** for this agency. The [build, buy or adopt](../../playbook/strategy/build-buy-adopt.md) page says: build only what differentiates you; compare the rest with a weighted matrix and total cost of ownership over 3 to 5 years, including the cost of leaving; prefer open standards you can run where your data must live. Identity is not a differentiator for a social security agency, the hosting rule is mandatory, and an open source project with a support contract is the only option that meets the rule, keeps exit cheap and follows open standards.
+**C, run open source with paid support,** for this agency, even though it is the option that asks most of the team. The [build, buy or adopt](../../playbook/strategy/build-buy-adopt.md) page says: build only what differentiates you; compare the rest with a weighted matrix and total cost of ownership over 3 to 5 years, including the cost of leaving; prefer open standards you can run where your data must live. Identity is not a differentiator for a social security agency, the hosting rule is mandatory, and an open source project with a support contract is the only option that meets the rule, keeps exit cheap and follows open standards.
 
 The answer changes with the facts. If the law allowed hosting abroad and the agency had no platform team, B could win. Write the decision, its drivers and its exit plan in an [ADR](../../templates/docs/adr.md), and check the [public sector](../../playbook/compliance/public-sector.md) guidance on open standards and publishing code.
 

@@ -14,7 +14,7 @@ Level: Standard
 
 <details><summary>Answer</summary>
 
-**True.** Severity scores say how bad a vulnerability could be, not whether anyone is exploiting it. A medium-scored flaw listed in the CISA Known Exploited Vulnerabilities catalog on an internet-facing system beats an unexploited 9.8 on an internal one. Combine CVSS with EPSS, KEV and exposure, and fix KEV entries on internet-facing systems within 72 hours.
+**True.** Severity scores say how bad a vulnerability could be, not whether anyone is exploiting it. A medium-scored flaw listed in the CISA Known Exploited Vulnerabilities (KEV) catalog on an internet-facing system beats an unexploited 9.8 on an internal one. Combine the severity score with EPSS (the estimated chance of exploitation), KEV and exposure, and fix KEV entries on internet-facing systems within 72 hours.
 
 Read more: [playbook/security/vulnerability-management.md](../../playbook/security/vulnerability-management.md)
 
@@ -86,7 +86,7 @@ Level: Assured
 
 <details><summary>Answer</summary>
 
-**True.** NIST believes approved symmetric algorithms with at least 128 bits of classical security meet its lowest post-quantum security category. The urgent risk is public-key cryptography such as RSA and ECDH. Spend the effort on key exchange and signatures, starting with hybrid key exchange that includes ML-KEM.
+**True.** NIST believes approved symmetric algorithms with at least 128 bits of classical security meet its lowest post-quantum security category. The urgent risk is public-key cryptography such as RSA and elliptic-curve key exchange. Spend the effort on key exchange and signatures, starting with hybrid key exchange that includes the new NIST standard ML-KEM.
 
 Read more: [playbook/security/post-quantum-readiness.md](../../playbook/security/post-quantum-readiness.md)
 
@@ -116,25 +116,25 @@ Read more: [playbook/security/supply-chain.md](../../playbook/security/supply-ch
 
 </details>
 
-### 10. A yearly penetration test is enough security testing for most teams.
+### 10. A yearly penetration test cannot replace security checks that run on every change.
 
 Level: Foundation
 
 <details><summary>Answer</summary>
 
-**False.** A pen test finds what the pipeline missed; it does not replace the pipeline. Model threats at design time and run security checks on every pull request. Those checks cost minutes, while issues found by attackers cost weeks.
+**True.** A pen test finds what the pipeline missed; it does not replace the pipeline. Model threats at design time and run security checks on every pull request. Those checks cost minutes, while issues found by attackers cost weeks.
 
 Read more: [playbook/security/secure-development.md](../../playbook/security/secure-development.md)
 
 </details>
 
-### 11. CI actions should be pinned to a full commit SHA rather than a tag such as @v4.
+### 11. CI actions should be pinned to a full commit hash (SHA) rather than a tag such as @v4.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**True.** A tag can be moved to point at different code, including malicious code, without any change in your repository. A full commit SHA cannot. Keep the version in a comment and let an update bot bump the SHA.
+**True.** A tag can be moved to point at different code, including malicious code, without any change in your repository. A full commit hash cannot. Keep the version in a comment and let an update bot bump the hash.
 
 Read more: [playbook/security/supply-chain.md](../../playbook/security/supply-chain.md)
 

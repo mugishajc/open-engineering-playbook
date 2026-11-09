@@ -6,7 +6,7 @@ Reading a practice is not the same as being able to do it at 02:00 with the chat
 
 | Format | What it is | Who | Time |
 |---|---|---|---|
-| [True or false](true-or-false/README.md) | About 150 statements across all fourteen areas plus leaders. Myths that sound right, facts that sound wrong. Play on GitHub or in a terminal with [`quiz.py`](quiz.py). | Anyone | 10 to 20 minutes |
+| [True or false](true-or-false/README.md) | About 160 statements across all fourteen areas, plus leaders and business owners. Myths that sound right, facts that sound wrong. Play on GitHub or in a terminal with [`quiz.py`](quiz.py), which can save each session and replay your misses. | Anyone | 10 to 20 minutes |
 | [Katas](#katas) | Short, focused practice on one skill, with a model answer to compare against | One person or a pair | 30 to 45 minutes |
 | [Tabletop exercises](#tabletop-exercises) | A bad day rehearsed around a table: a scenario, timed injects, decisions, a scored debrief | A team of 4 to 10, with a facilitator | 60 to 90 minutes |
 | [Decision games](#decision-games) | Choose-your-path decisions for leaders, with the consequences of each option revealed | A leader alone, or a leadership group | 30 to 45 minutes |
@@ -33,6 +33,7 @@ Start with the [facilitator guide](tabletop/facilitator-guide.md). It covers rol
 | [Actively exploited vulnerability: the CRA clock](tabletop/actively-exploited-vulnerability-cra-clock.md) | The EU Cyber Resilience Act 24-hour early warning, staged mitigation, shipping a fix under pressure | 90 |
 | [Bad deploy at peak](tabletop/bad-deploy-at-peak.md) | Roll back or roll forward, schema changes that block rollback, the error budget policy | 75 |
 | [Key engineer resigns](tabletop/key-engineer-resigns.md) | Key-person risk, knowledge transfer in four weeks, what a resignation says about the team | 60 |
+| [Retry storm](tabletop/retry-storm.md) | Load shedding, retry limits, bringing traffic back in steps after a short database failover | 90 |
 | [Supplier breach](tabletop/supplier-breach.md) | Knowing what a supplier can reach, cutting it off without stopping the business, your clock not theirs | 90 |
 | [The quantum question from the board](tabletop/quantum-question-from-the-board.md) | Explaining a long-term risk honestly, cheap work now, procurement that will outlast 2035 | 60 |
 
@@ -45,11 +46,25 @@ Start with the [facilitator guide](tabletop/facilitator-guide.md). It covers rol
 | [Cloud exit](decision-games/cloud-exit.md) | A cloud bill that tripled and a spreadsheet that promises 60% savings | 30 |
 | [AI pilot to production](decision-games/ai-pilot-to-production.md) | A bank's credit memo assistant and a three-week deadline | 30 |
 
+## Learning paths
+
+For trainers and team leads who plan a programme. Each path is in order; do the first item before the rest.
+
+| Who | Path | Total time | Afterwards they can |
+|---|---|---|---|
+| New engineer, first 30 days | Quiz for the team's areas (`--save` the result) · [Review this pull request](katas/review-this-pull-request.md) · [Error budget math](katas/error-budget-math.md) · [Bad deploy at peak](tabletop/bad-deploy-at-peak.md) as an observer · quiz again with `--retry-missed` | about 4 hours | review a pull request against the playbook, read an SLO and its budget, and say what to do first when a deploy goes wrong |
+| Team lead or senior engineer | [Write the ADR](katas/write-the-adr.md) · [Threat model a feature](katas/threat-model-a-feature.md) · [Find the contributing factors](katas/find-the-contributing-factors.md) · lead one tabletop with the [facilitator guide](tabletop/facilitator-guide.md) | about 5 hours | record a decision fairly, threat model a design, run a blameless review and facilitate an exercise |
+| On-call and SRE engineers | [Error budget math](katas/error-budget-math.md) · [Retry storm](tabletop/retry-storm.md) · [Cloud region outage](tabletop/cloud-region-outage.md) · [Ransomware at 2 a.m.](tabletop/ransomware-at-2am.md) | about 5 hours | set burn-rate alerts, shed load, decide on failover and act on a security incident |
+| Executive or board member | Leaders quiz · [Ransomware at 2 a.m.](tabletop/ransomware-at-2am.md) or [Supplier breach](tabletop/supplier-breach.md) with the executive team · one [decision game](#decision-games) · [The quantum question from the board](tabletop/quantum-question-from-the-board.md) | about 4 hours | decide during a crisis, test a large proposal and explain a long-term risk |
+| Business owner or office manager | Business owners quiz · the [first-hour plan](../templates/sme/first-hour-plan.md) rehearsed for 30 minutes: "our files are encrypted, what do we do?" | about 1 hour | lead the first hour of an incident and keep the business working without its systems |
+
+To record progress, keep each learner's `--save` file and look at the score by area every quarter.
+
 ## How to use them
 
 ### Alone
 
-1. Take the true or false quiz for your area. Note the three pages it suggests.
+1. Take the true or false quiz for your area with `--save results.jsonl`. Note the three pages it suggests, read them, then replay your misses with `--retry-missed results.jsonl`.
 2. Do one kata a week. Write your answer before you open the `<details>` blocks; the value is in the attempt, not in reading the answer.
 3. Repeat a kata a month later on your own system: review your last pull request, find the contributing factors in your last postmortem, compute your own service's error budget.
 
@@ -58,6 +73,7 @@ Start with the [facilitator guide](tabletop/facilitator-guide.md). It covers rol
 - **Monthly, 45 minutes:** one kata done in pairs, then 15 minutes comparing answers. Review and threat modelling work best this way.
 - **Quarterly, 90 minutes:** one tabletop exercise. The [incident management](../playbook/reliability/incident-management.md) page sets a starting target of a game day or tabletop every quarter. Rotate the incident commander.
 - **After a real incident:** run the closest tabletop scenario within two months, with the actions from the postmortem in place, to check they work.
+- **After a tabletop:** test the same failure for real in a game day. See [resilience testing](../playbook/reliability/resilience-testing.md).
 
 ### As a leadership group
 
@@ -83,4 +99,4 @@ Start with the [facilitator guide](tabletop/facilitator-guide.md). It covers rol
 
 ## Contributing exercises
 
-New scenarios, katas and decision games are welcome. Use fictional organisations with neutral descriptions, mark all numbers as fictional, link every recommendation to a playbook page, and hide answers in `<details>` blocks. Run `python3 tools/plain_lint.py exercises` before you open a pull request. See [CONTRIBUTING.md](../CONTRIBUTING.md).
+New scenarios, katas and decision games are welcome. Use fictional organisations with neutral descriptions, mark all numbers as fictional, link every recommendation to a playbook page, and hide answers in `<details>` blocks. Start each kata and game with one line: "You will be able to ...". Run `python3 tools/plain_lint.py exercises` before you open a pull request. See [CONTRIBUTING.md](../CONTRIBUTING.md).

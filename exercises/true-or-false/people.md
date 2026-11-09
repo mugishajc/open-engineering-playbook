@@ -92,13 +92,13 @@ Read more: [playbook/people/career-framework.md](../../playbook/people/career-fr
 
 </details>
 
-### 8. Certifications such as CKA are the best measure of an engineer's skill.
+### 8. A certification such as CKA shows that someone learned a syllabus, not that they can run your systems.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**False.** Certifications give a structured syllabus and a signal, not proof of skill. Judge skill by the work people do. Pair any course with real work in the following weeks so it sticks.
+**True.** Certifications give a structured syllabus and a signal, not proof of skill. Judge skill by the work people do. Pair any course with real work in the following weeks so it sticks.
 
 Read more: [playbook/people/skills-gap.md](../../playbook/people/skills-gap.md)
 

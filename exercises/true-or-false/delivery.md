@@ -26,7 +26,7 @@ Level: Foundation
 
 <details><summary>Answer</summary>
 
-**False.** A 2,000-line pull request tends to get a quick 'LGTM' rather than a careful read. Aim for under about 400 changed lines and split refactoring from behaviour changes. Feature flags let one feature arrive as a series of small, safe pull requests.
+**False.** A 2,000-line pull request tends to get a quick 'looks good to me' rather than a careful read. Aim for under about 400 changed lines and split refactoring from behaviour changes. Feature flags let one feature arrive as a series of small, safe pull requests.
 
 Read more: [playbook/delivery/code-review.md](../../playbook/delivery/code-review.md)
 
@@ -80,13 +80,13 @@ Read more: [playbook/delivery/environments.md](../../playbook/delivery/environme
 
 </details>
 
-### 7. Database migrations should not run automatically when the application starts.
+### 7. When several instances of an application start at once, database migrations belong in a separate pipeline step, not in application start-up.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**True.** Several instances starting at once can race on the same migration, and a slow migration blocks start-up. Run migrations as a separate, reviewed pipeline step before the new version starts. Destructive steps come last, after a backup check.
+**True.** Several instances starting at once can race on the same migration, and a slow migration blocks start-up and fails health checks. Run migrations as a separate, reviewed pipeline step before the new version starts. Destructive steps come last, after a backup check.
 
 Read more: [playbook/delivery/database-changes.md](../../playbook/delivery/database-changes.md)
 

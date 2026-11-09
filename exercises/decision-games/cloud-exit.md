@@ -20,13 +20,13 @@ An online learning platform serves video courses to 2 million learners. It has 1
 
 ## Round 1: what do you do?
 
-**A. Full exit.** Move everything to two colocation sites within 12 months.
+**A. Full exit.** Half the bill is steady load, and owned hardware for steady load costs a fraction of cloud prices. Move everything to two colocation sites within 12 months and keep the saving every year after.
 
-**B. FinOps first.** Give one quarter to cost visibility, ownership and quick savings. Then decide with real numbers.
+**B. Negotiate.** The provider wants to keep a 2.9 million CU customer. Sign a larger 3-year commitment for a deeper discount. The bill drops this quarter, with no migration risk and no engineering time.
 
-**C. Partial repatriation.** Move the steady video storage and transcoding to owned hardware; keep the web platform and peak-sensitive services in the cloud.
+**C. Fix ownership, then decide.** Nobody owns the bill, so nobody knows what the 2.9 million CU buys. Spend one quarter on tagging, team ownership and clean-up, and decide where workloads live after that. The board waits a quarter for its answer.
 
-**D. Negotiate.** Sign a larger 3-year committed spend with the provider for a bigger discount, and change nothing else.
+**D. Partial repatriation.** Half the bill is video storage and transcoding at a steady level all year, the classic case for owned hardware. Move that now and keep the peaky web platform in the cloud: most of the saving, half the risk.
 
 Pick one before you open the consequences.
 
@@ -40,7 +40,16 @@ At month 18 the move is done. The real saving, once staff, data transfer, double
 </details>
 
 <details>
-<summary>Consequences of B: FinOps first</summary>
+<summary>Consequences of B: negotiate a bigger commitment</summary>
+
+The discount is real, and the bill drops at once. But the waste is now locked in for 3 years: you have committed to paying for usage that cleanup would have removed. When a later FinOps effort cuts usage by 30%, the commitment means most of the saving never reaches the bill. Your negotiating position at renewal is also weaker, because you have shown no credible alternative.
+
+Commitments belong after cleanup, sized to the steady baseline you have measured, as the [FinOps](../../playbook/platform/finops.md) page describes.
+
+</details>
+
+<details>
+<summary>Consequences of C: fix ownership, then decide</summary>
 
 Week 1: tag every resource by team and service, publish a cost dashboard per team, and name an owner for the bill. Weeks 2 to 8: the teams find test environments running all weekend, video renditions nobody watches stored in the most expensive storage class, oversized database instances and an expired commitment. Savings reach about 30% of the run rate by the end of the quarter, with no migration.
 
@@ -49,18 +58,9 @@ The quarter also produces what the CFO's spreadsheet lacked: unit cost (CU per l
 </details>
 
 <details>
-<summary>Consequences of C: partial repatriation, now</summary>
+<summary>Consequences of D: partial repatriation, now</summary>
 
 The right shape of answer, chosen too early. Without cost visibility, the team moves the transcoding pipeline first and discovers that a third of the storage it planned to buy holds renditions that could simply be deleted. The hardware is oversized. Data transfer out of the cloud for the initial copy is a large one-off bill nobody budgeted. It still saves money in year two, but less than it would have after a quarter of FinOps.
-
-</details>
-
-<details>
-<summary>Consequences of D: negotiate a bigger commitment</summary>
-
-The discount is real, and the bill drops at once. But the waste is now locked in for 3 years: you have committed to paying for usage that cleanup would have removed. When a later FinOps effort cuts usage by 30%, the commitment means most of the saving never reaches the bill. Your negotiating position at renewal is also weaker, because you have shown no credible alternative.
-
-Commitments belong after cleanup, sized to the steady baseline you have measured, as the [FinOps](../../playbook/platform/finops.md) page describes.
 
 </details>
 
@@ -85,7 +85,7 @@ Both are good answers if they come with an exit plan and a review date. The diff
 
 ## What the playbook recommends, and why
 
-**B, then E or F on the numbers.** Visibility and ownership come first: you cannot decide where a workload should live if you do not know what it costs or why. The [FinOps](../../playbook/platform/finops.md) page covers the inform, optimise and operate phases. The [business case](../../playbook/strategy/business-case.md) and [build, buy or adopt](../../playbook/strategy/build-buy-adopt.md#total-cost-of-ownership) pages show how to count full TCO, including staff, migration and exit.
+**C, then E or F on the numbers.** Visibility and ownership come first: you cannot decide where a workload should live if you do not know what it costs or why. The [FinOps](../../playbook/platform/finops.md) page covers the inform, optimise and operate phases. The [business case](../../playbook/strategy/business-case.md) and [build, buy or adopt](../../playbook/strategy/build-buy-adopt.md#total-cost-of-ownership) pages show how to count full TCO, including staff, migration and exit.
 
 Where a move does make sense, it is usually for steady, predictable, storage- or compute-heavy workloads, not for peaky ones. Run it through the [transition playbook](../../playbook/strategy/transition-playbook.md): pilot, measurable exit criteria, a stop decision at each gate. Record the hosting decision per workload in an [ADR](../../templates/docs/adr.md), with the conditions that would make you move it again, as [cloud, on-premises and air-gapped](../../playbook/platform/cloud-on-prem-air-gapped.md) recommends.
 

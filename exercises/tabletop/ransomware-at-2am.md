@@ -55,7 +55,7 @@ Security reads `RESTORE-FILES.txt`. The attackers demand payment within 48 hours
 
 ### T+120 (04:07): the restore estimate
 
-The engineer restoring the warehouse database into a clean, isolated network reports progress. At the current rate, the restore takes 11 hours. The documented RTO for this system is 1 hour. Three large retail customers need deliveries loaded by Monday 06:00.
+The engineer restoring the warehouse database into a clean, isolated network reports progress. At the current rate, the restore takes 11 hours. The documented RTO for this system is 1 hour. It was set for failover to a replica; nobody wrote a separate RTO for a restore from backup, and the restore was never timed at production size. Three large retail customers need deliveries loaded by Monday 06:00.
 
 **Decide:**
 - Do you restore to the clean network, or speed it up by restoring onto existing (possibly infected) hosts?
@@ -80,7 +80,7 @@ A reporter from the regional newspaper calls the main switchboard. Drivers are p
 
 1. How long would it take your organisation to reach the person who can approve disconnecting the whole network?
 2. Which of your backups could an attacker with domain administrator rights delete today?
-3. When did you last time a full restore of your most important system? Did it meet the RTO?
+3. When did you last time a full restore of your most important system? Did it meet the restore RTO, which is not the same as the failover RTO?
 4. Who in your organisation decides on paying a ransom? Is that written down before the day?
 5. Which systems do you rebuild from clean images and infrastructure as code, and which only from backups?
 
@@ -110,7 +110,7 @@ Maximum 12.
 ## Follow-up actions
 
 - Move at least one copy of every Tier 1 and Tier 2 data store to immutable storage in a separate trust domain, and test that production credentials cannot delete it ([backup and recovery](../../playbook/reliability/backup-and-recovery.md)).
-- Time a full restore of the most important system this month. If it misses the RTO, change the design or the RTO.
+- Time a full restore of the most important system this month. If it misses the restore RTO, change the design or the RTO (see [backup and recovery](../../playbook/reliability/backup-and-recovery.md#targets-by-tier)).
 - Print and store an offline escalation list, restore runbook and backup credentials under two-person control.
 - Agree in advance who decides on ransom engagement and which legal advisers to call.
 - Draft holding statements for press, customers and staff, and get them approved now.

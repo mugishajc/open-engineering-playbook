@@ -38,7 +38,7 @@ Level: Foundation
 
 <details><summary>Answer</summary>
 
-**True.** Model output can carry injected or simply wrong content. Validate it against a schema, encode it for the context and use parameterised queries. Never pass it to eval or a shell.
+**True.** Model output can carry injected instructions or plain wrong content. Validate it against a schema, encode it for the context and use parameterised queries. Never pass it to eval or a shell.
 
 Read more: [playbook/ai/ai-application-security.md](../../playbook/ai/ai-application-security.md)
 
@@ -56,13 +56,13 @@ Read more: [playbook/ai/building-with-ai.md](../../playbook/ai/building-with-ai.
 
 </details>
 
-### 5. Banning all AI tools is the safest policy for most organisations.
+### 5. Banning all AI tools tends to push staff to personal accounts, which is riskier than approving a few tools with clear data rules.
 
 Level: Foundation
 
 <details><summary>Answer</summary>
 
-**False.** A ban pushes staff to use unapproved tools with personal accounts, where you have no control at all. Provide approved tools quickly, with clear rules on which data may go into them. Block the rest where you can.
+**True.** A ban pushes staff to use unapproved tools with personal accounts, where you have no control at all. Provide approved tools quickly, with clear rules on which data may go into them. Block the rest where you can.
 
 Read more: [playbook/ai/ai-governance.md](../../playbook/ai/ai-governance.md)
 
@@ -92,13 +92,13 @@ Read more: [playbook/ai/ai-application-security.md](../../playbook/ai/ai-applica
 
 </details>
 
-### 8. Every AI pilot should have an end date, with 90 days as a sensible default.
+### 8. An AI pilot with no end date and no success criteria tends to drift on rather than reach a decision.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**True.** Pilots without an end date drift on without ever reaching production or stopping. A 90-day gate in the AI register forces a decision. Move to production, change scope or stop.
+**True.** Pilots without an end date drift on without ever reaching production or stopping. A gate in the AI register, 90 days as a starting point, forces a decision. Move to production, change scope or stop.
 
 Read more: [playbook/ai/ai-governance.md](../../playbook/ai/ai-governance.md)
 
@@ -110,7 +110,7 @@ Level: Assured
 
 <details><summary>Answer</summary>
 
-**False.** Prohibited practices and AI literacy duties apply from 2 Feb 2025, and general-purpose AI model obligations from 2 Aug 2025. The 2026 Digital Omnibus on AI mainly moved the high-risk obligations, to 2 Dec 2027 for stand-alone systems and 2 Aug 2028 for systems embedded in regulated products. Check EUR-Lex for the current dates.
+**False.** Prohibited practices apply from 2 Feb 2025, together with an AI literacy duty that the 2026 amendment reworded as a duty to take measures to support the development of AI literacy. General-purpose AI model obligations apply from 2 Aug 2025. The 2026 Digital Omnibus on AI mainly moved the high-risk obligations, to 2 Dec 2027 for stand-alone systems and 2 Aug 2028 for systems embedded in regulated products.
 
 Read more: [playbook/ai/ai-governance.md](../../playbook/ai/ai-governance.md)
 

@@ -18,6 +18,17 @@
 #   explanation  2 to 4 plain sentences that say why
 #   link         the page that teaches it, relative to the repository root
 #
+# Writing rules, so the quiz tests understanding and cannot be gamed:
+#   * One clear answer. If a careful reader could say "it depends", rewrite.
+#   * No negative statements ("should not", "is not"): state the claim.
+#   * Write "should" when you mean should; "can" is almost always true.
+#   * Test a principle, not recall of the playbook's chosen number. Keep the
+#     number in the explanation, unless it comes from a standard.
+#   * Keep true and false balanced: --check fails when the bank is outside
+#     40 to 60% true, an area is outside 30 to 70%, or most statements with
+#     absolute words (best, only, always, never) share one answer.
+#   * Spell out acronyms in explanations, or use ones in GLOSSARY.md.
+#
 # After editing this file, run:
 #   python3 exercises/quiz.py --export
 #   python3 exercises/quiz.py --check
@@ -99,6 +110,11 @@ id = "leaders"
 title = "Leaders"
 intro = "For CTOs, CIOs, architects and executives: decisions, crises, boards and portfolios. Test the beliefs that shape how technology is led."
 
+[[areas]]
+id = "business-owners"
+title = "Business owners"
+intro = "For owners and managers of clinics, schools, shops and other businesses that use software but do not build it. No technical knowledge needed."
+
 # ---------------------------------------------------------------- strategy
 
 [[statements]]
@@ -114,7 +130,7 @@ link = "playbook/strategy/technical-strategy.md"
 id = "strategy.one-page"
 area = "strategy"
 level = "foundation"
-statement = "A technical strategy should fit on one page and name no more than seven actions."
+statement = "A technical strategy is more likely to be acted on when it fits on one page and says what the organisation will not do."
 answer = true
 explanation = "The playbook asks for one page: a diagnosis, a guiding policy and three to seven actions. When fifteen actions are all marked high, nothing is a priority. Rank the actions and name what you will not do."
 link = "playbook/strategy/technical-strategy.md"
@@ -150,7 +166,7 @@ link = "playbook/strategy/build-buy-adopt.md"
 id = "strategy.saved-hours-are-cash"
 area = "strategy"
 level = "standard"
-statement = "In a business case, engineering hours saved can be counted as cash savings."
+statement = "In a business case, engineering hours saved count as cash savings even if headcount and spend stay the same."
 answer = false
 explanation = "Finance counts cash only when headcount or spend actually falls. Say what the saved hours will be used for instead. Show low, expected and high cases and commit to the low one."
 link = "playbook/strategy/business-case.md"
@@ -242,8 +258,8 @@ link = "playbook/operating-model/engineering-governance.md"
 id = "operating-model.component-teams"
 area = "operating-model"
 level = "standard"
-statement = "For a single product, separate front end, back end and database teams are the most efficient structure."
-answer = false
+statement = "For a single product, teams that each own a slice of the product end to end usually deliver faster than separate front end, back end and database teams."
+answer = true
 explanation = "Component teams turn every feature into a hand-off between teams. Organise most engineers into stream-aligned teams that own a product or service end to end. Keep specialists as enabling or complicated-subsystem teams."
 link = "playbook/operating-model/team-topology.md"
 
@@ -271,7 +287,7 @@ area = "operating-model"
 level = "assured"
 statement = "A detailed 40-page technology pack gives a board better oversight than a two-page summary."
 answer = false
-explanation = "Long packs arrive late and bury what the board needs to act on. The playbook recommends two pages with 8 to 12 measures, showing trends and thresholds. Board members can then see quickly which numbers are outside the agreed risk appetite."
+explanation = "Long packs arrive late and bury what the board needs to act on. The playbook recommends two pages with no more than 12 measures, one per row, showing trends and thresholds. Board members can then see quickly which numbers are outside the agreed risk appetite."
 link = "playbook/operating-model/it-governance.md"
 
 [[statements]]
@@ -334,8 +350,8 @@ link = "playbook/ways-of-working/planning-and-forecasting.md"
 id = "ways-of-working.delay-is-typing"
 area = "ways-of-working"
 level = "foundation"
-statement = "Most delivery delay comes from engineers working more slowly than they estimated."
-answer = false
+statement = "Most delivery delay comes from waiting and interruptions, not from engineers working more slowly than they estimated."
+answer = true
 explanation = "Most delay comes from waiting, interruptions and work discovered along the way, not from slow typing. That is why more careful task estimates rarely fix dates. Splitting work small and removing waits does."
 link = "playbook/ways-of-working/planning-and-forecasting.md"
 
@@ -392,7 +408,7 @@ area = "delivery"
 level = "foundation"
 statement = "Large pull requests get reviewed as carefully as small ones."
 answer = false
-explanation = "A 2,000-line pull request tends to get a quick 'LGTM' rather than a careful read. Aim for under about 400 changed lines and split refactoring from behaviour changes. Feature flags let one feature arrive as a series of small, safe pull requests."
+explanation = "A 2,000-line pull request tends to get a quick 'looks good to me' rather than a careful read. Aim for under about 400 changed lines and split refactoring from behaviour changes. Feature flags let one feature arrive as a series of small, safe pull requests."
 link = "playbook/delivery/code-review.md"
 
 [[statements]]
@@ -435,9 +451,9 @@ link = "playbook/delivery/environments.md"
 id = "delivery.migrate-on-startup"
 area = "delivery"
 level = "standard"
-statement = "Database migrations should not run automatically when the application starts."
+statement = "When several instances of an application start at once, database migrations belong in a separate pipeline step, not in application start-up."
 answer = true
-explanation = "Several instances starting at once can race on the same migration, and a slow migration blocks start-up. Run migrations as a separate, reviewed pipeline step before the new version starts. Destructive steps come last, after a backup check."
+explanation = "Several instances starting at once can race on the same migration, and a slow migration blocks start-up and fails health checks. Run migrations as a separate, reviewed pipeline step before the new version starts. Destructive steps come last, after a backup check."
 link = "playbook/delivery/database-changes.md"
 
 [[statements]]
@@ -536,8 +552,8 @@ link = "playbook/quality/test-driven-development.md"
 id = "quality.many-e2e"
 area = "quality"
 level = "standard"
-statement = "The safest test suite has hundreds of end-to-end tests covering every feature."
-answer = false
+statement = "Many fast unit and component tests plus a few end-to-end tests give quicker and more reliable feedback than hundreds of end-to-end tests."
+answer = true
 explanation = "Hundreds of end-to-end tests are slow and flaky, and they take an hour to tell you little. Push checks down to unit, component and contract tests. Keep 5 to 20 end-to-end tests for the critical paths."
 link = "playbook/delivery/testing.md"
 
@@ -603,7 +619,7 @@ area = "reliability"
 level = "standard"
 statement = "The 5 Whys, used on its own, is enough to analyse a serious incident."
 answer = false
-explanation = "Used alone, the 5 Whys follows a single chain and usually stops at a person or one bug. Treat it as a starting prompt. For serious incidents, build a timeline and list contributing factors, and add a fishbone diagram or CAST when the cause is disputed."
+explanation = "Used alone, the 5 Whys follows a single chain and usually stops at a person or one bug. Treat it as a starting prompt. For serious incidents, build a timeline and list contributing factors, and add a fishbone diagram or CAST (causal analysis based on system theory) when the cause is disputed."
 link = "playbook/reliability/root-cause-analysis.md"
 
 [[statements]]
@@ -628,8 +644,8 @@ link = "playbook/reliability/rollbacks.md"
 id = "reliability.cab-is-safer"
 area = "reliability"
 level = "standard"
-statement = "A weekly change advisory board makes production changes safer than peer review plus automated testing."
-answer = false
+statement = "Peer review plus automated testing makes production changes at least as safe as approval by a weekly change advisory board."
+answer = true
 explanation = "The research behind the DORA metrics found that approval by an external body did not improve stability and was linked to slower delivery. Peer review plus automated testing did better. Keep a board only for the few changes that carry risk across teams."
 link = "playbook/reliability/change-management.md"
 
@@ -637,8 +653,8 @@ link = "playbook/reliability/change-management.md"
 id = "reliability.replication-is-backup"
 area = "reliability"
 level = "foundation"
-statement = "Database replication to a second site counts as a backup."
-answer = false
+statement = "Database replication to a second site copies deletions and ransomware damage too, so it does not replace a backup."
+answer = true
 explanation = "Replication copies deletions and ransomware encryption to the second site within seconds. Keep separate, versioned backups, with one copy that attackers cannot change or delete. Replication helps availability; backups help recovery."
 link = "playbook/reliability/backup-and-recovery.md"
 
@@ -648,16 +664,16 @@ area = "reliability"
 level = "foundation"
 statement = "A backup that has never been restored should not be counted as a backup."
 answer = true
-explanation = "Until you restore it, you do not know whether the backup is complete or how long recovery takes. The playbook calls an untested backup a hope, not a control. Restore Tier 1 data automatically every month and time it against the RTO."
+explanation = "Until you restore it, you do not know whether the backup is complete or how long recovery takes. The playbook calls an untested backup a hope, not a control. Restore Tier 1 data automatically every month and compare the time with the recovery time objective."
 link = "playbook/reliability/backup-and-recovery.md"
 
 [[statements]]
-id = "reliability.one-week-in-six"
+id = "reliability.three-person-rota"
 area = "reliability"
 level = "standard"
-statement = "A sustainable on-call rotation means nobody carries the pager more than one week in six."
-answer = true
-explanation = "That needs at least six people in the rotation. Three people covering every night burn out and then leave. Merge rotations, move to business hours or hire, rather than asking for heroics."
+statement = "A 24 by 7 on-call rotation of the same three people is sustainable as long as they are paid for it."
+answer = false
+explanation = "Pay does not fix fatigue: each of the three is on call one week in three, and tired responders make mistakes. The playbook asks for at least six people per 24 by 7 rotation, so nobody is primary more than one week in six. Below that, merge rotations, cover business hours only or buy cover."
 link = "playbook/reliability/on-call.md"
 
 # ---------------------------------------------------------------- security
@@ -668,7 +684,7 @@ area = "security"
 level = "standard"
 statement = "A vulnerability with a medium CVSS score can be more urgent than one scored 9.8."
 answer = true
-explanation = "Severity scores say how bad a vulnerability could be, not whether anyone is exploiting it. A medium-scored flaw listed in the CISA Known Exploited Vulnerabilities catalog on an internet-facing system beats an unexploited 9.8 on an internal one. Combine CVSS with EPSS, KEV and exposure, and fix KEV entries on internet-facing systems within 72 hours."
+explanation = "Severity scores say how bad a vulnerability could be, not whether anyone is exploiting it. A medium-scored flaw listed in the CISA Known Exploited Vulnerabilities (KEV) catalog on an internet-facing system beats an unexploited 9.8 on an internal one. Combine the severity score with EPSS (the estimated chance of exploitation), KEV and exposure, and fix KEV entries on internet-facing systems within 72 hours."
 link = "playbook/security/vulnerability-management.md"
 
 [[statements]]
@@ -722,7 +738,7 @@ area = "security"
 level = "assured"
 statement = "AES-256 does not need to be replaced to stay safe against quantum computers."
 answer = true
-explanation = "NIST believes approved symmetric algorithms with at least 128 bits of classical security meet its lowest post-quantum security category. The urgent risk is public-key cryptography such as RSA and ECDH. Spend the effort on key exchange and signatures, starting with hybrid key exchange that includes ML-KEM."
+explanation = "NIST believes approved symmetric algorithms with at least 128 bits of classical security meet its lowest post-quantum security category. The urgent risk is public-key cryptography such as RSA and elliptic-curve key exchange. Spend the effort on key exchange and signatures, starting with hybrid key exchange that includes the new NIST standard ML-KEM."
 link = "playbook/security/post-quantum-readiness.md"
 
 [[statements]]
@@ -747,8 +763,8 @@ link = "playbook/security/supply-chain.md"
 id = "security.pen-test-is-enough"
 area = "security"
 level = "foundation"
-statement = "A yearly penetration test is enough security testing for most teams."
-answer = false
+statement = "A yearly penetration test cannot replace security checks that run on every change."
+answer = true
 explanation = "A pen test finds what the pipeline missed; it does not replace the pipeline. Model threats at design time and run security checks on every pull request. Those checks cost minutes, while issues found by attackers cost weeks."
 link = "playbook/security/secure-development.md"
 
@@ -756,9 +772,9 @@ link = "playbook/security/secure-development.md"
 id = "security.pin-to-sha"
 area = "security"
 level = "standard"
-statement = "CI actions should be pinned to a full commit SHA rather than a tag such as @v4."
+statement = "CI actions should be pinned to a full commit hash (SHA) rather than a tag such as @v4."
 answer = true
-explanation = "A tag can be moved to point at different code, including malicious code, without any change in your repository. A full commit SHA cannot. Keep the version in a comment and let an update bot bump the SHA."
+explanation = "A tag can be moved to point at different code, including malicious code, without any change in your repository. A full commit hash cannot. Keep the version in a comment and let an update bot bump the hash."
 link = "playbook/security/supply-chain.md"
 
 # -------------------------------------------------------------------- data
@@ -767,8 +783,8 @@ link = "playbook/security/supply-chain.md"
 id = "data.copy-production"
 area = "data"
 level = "foundation"
-statement = "Copying the production database to staging is the best way to get realistic test data."
-answer = false
+statement = "Synthetic or masked data is a safer default for staging than a copy of the production database."
+answer = true
 explanation = "Staging usually has weaker access controls, so personal data copied there is exposed. Use synthetic data or approved masking with a deletion date. Keep production personal data in production."
 link = "playbook/data/data-security-and-privacy.md"
 
@@ -776,8 +792,8 @@ link = "playbook/data/data-security-and-privacy.md"
 id = "data.everything-confidential"
 area = "data"
 level = "foundation"
-statement = "Marking all data as confidential is the safest classification policy."
-answer = false
+statement = "Marking all data as confidential weakens protection, because the label stops telling people what really needs care."
+answer = true
 explanation = "When everything is confidential, the label tells nobody what really needs protection. Use the definitions for public, internal, confidential and restricted. Over-classifying hides what matters and slows every request."
 link = "playbook/data/data-governance.md"
 
@@ -879,7 +895,7 @@ area = "ai"
 level = "foundation"
 statement = "Model output should be treated as untrusted input before it reaches SQL, HTML or a shell."
 answer = true
-explanation = "Model output can carry injected or simply wrong content. Validate it against a schema, encode it for the context and use parameterised queries. Never pass it to eval or a shell."
+explanation = "Model output can carry injected instructions or plain wrong content. Validate it against a schema, encode it for the context and use parameterised queries. Never pass it to eval or a shell."
 link = "playbook/ai/ai-application-security.md"
 
 [[statements]]
@@ -895,8 +911,8 @@ link = "playbook/ai/building-with-ai.md"
 id = "ai.ban-all-tools"
 area = "ai"
 level = "foundation"
-statement = "Banning all AI tools is the safest policy for most organisations."
-answer = false
+statement = "Banning all AI tools tends to push staff to personal accounts, which is riskier than approving a few tools with clear data rules."
+answer = true
 explanation = "A ban pushes staff to use unapproved tools with personal accounts, where you have no control at all. Provide approved tools quickly, with clear rules on which data may go into them. Block the rest where you can."
 link = "playbook/ai/ai-governance.md"
 
@@ -922,9 +938,9 @@ link = "playbook/ai/ai-application-security.md"
 id = "ai.pilot-end-date"
 area = "ai"
 level = "standard"
-statement = "Every AI pilot should have an end date, with 90 days as a sensible default."
+statement = "An AI pilot with no end date and no success criteria tends to drift on rather than reach a decision."
 answer = true
-explanation = "Pilots without an end date drift on without ever reaching production or stopping. A 90-day gate in the AI register forces a decision. Move to production, change scope or stop."
+explanation = "Pilots without an end date drift on without ever reaching production or stopping. A gate in the AI register, 90 days as a starting point, forces a decision. Move to production, change scope or stop."
 link = "playbook/ai/ai-governance.md"
 
 [[statements]]
@@ -933,7 +949,7 @@ area = "ai"
 level = "assured"
 statement = "No part of the EU AI Act applies yet, because the high-risk rules were delayed."
 answer = false
-explanation = "Prohibited practices and AI literacy duties apply from 2 Feb 2025, and general-purpose AI model obligations from 2 Aug 2025. The 2026 Digital Omnibus on AI mainly moved the high-risk obligations, to 2 Dec 2027 for stand-alone systems and 2 Aug 2028 for systems embedded in regulated products. Check EUR-Lex for the current dates."
+explanation = "Prohibited practices apply from 2 Feb 2025, together with an AI literacy duty that the 2026 amendment reworded as a duty to take measures to support the development of AI literacy. General-purpose AI model obligations apply from 2 Aug 2025. The 2026 Digital Omnibus on AI mainly moved the high-risk obligations, to 2 Dec 2027 for stand-alone systems and 2 Aug 2028 for systems embedded in regulated products."
 link = "playbook/ai/ai-governance.md"
 
 [[statements]]
@@ -987,8 +1003,8 @@ link = "playbook/architecture/decision-records.md"
 id = "architecture.refactoring-quarter"
 area = "architecture"
 level = "standard"
-statement = "A dedicated refactoring quarter is the best way to pay down technical debt."
-answer = false
+statement = "Paying down technical debt from a fixed share of every cycle usually works better than waiting for a dedicated refactoring quarter."
+answer = true
 explanation = "Refactoring quarters are hard to fund and rarely arrive. Pay debt down continuously from a fixed share of every team's capacity. Rank the register each quarter by the cost each item causes today."
 link = "playbook/architecture/technical-debt.md"
 
@@ -1106,8 +1122,8 @@ link = "playbook/platform/cloud-native.md"
 id = "platform.commit-first"
 area = "platform"
 level = "standard"
-statement = "Buying reserved capacity or savings commitments is the first step to cutting a cloud bill."
-answer = false
+statement = "Removing idle and oversized cloud resources should come before buying reserved capacity or savings commitments."
+answer = true
 explanation = "Committing before rightsizing locks in waste for one to three years. Rightsize first, then commit only to the stable baseline. Make cost visible to the teams that create it so the savings last."
 link = "playbook/platform/finops.md"
 
@@ -1207,8 +1223,8 @@ link = "playbook/people/career-framework.md"
 id = "people.certifications-prove-skill"
 area = "people"
 level = "standard"
-statement = "Certifications such as CKA are the best measure of an engineer's skill."
-answer = false
+statement = "A certification such as CKA shows that someone learned a syllabus, not that they can run your systems."
+answer = true
 explanation = "Certifications give a structured syllabus and a signal, not proof of skill. Judge skill by the work people do. Pair any course with real work in the following weeks so it sticks."
 link = "playbook/people/skills-gap.md"
 
@@ -1281,9 +1297,9 @@ link = "playbook/measurement/metrics.md"
 id = "measurement.assured-everywhere"
 area = "measurement"
 level = "foundation"
-statement = "For a startup with no regulatory overlay, Foundation is the right target level in every practice area, including security."
+statement = "For a startup with no regulatory overlay and no payment, health or identity data, Foundation is the right starting level in every practice area."
 answer = true
-explanation = "The levels are not grades. Foundation is the minimum that pays for itself immediately and is the default for solo engineers and startups. Assured adds evidence and separation of duties, which is worth its cost only where regulation, public accountability or real risk demands it."
+explanation = "The levels are not grades. Foundation is the minimum that pays for itself at once and is the default for solo engineers and startups. Once a startup holds payment, health or identity data, its profile says to take security to Standard early."
 link = "playbook/measurement/maturity-model.md"
 
 [[statements]]
@@ -1337,8 +1353,8 @@ link = "playbook/compliance/regulated-industries.md"
 id = "compliance.screenshots"
 area = "compliance"
 level = "standard"
-statement = "Screenshots are the best form of audit evidence, because auditors can see exactly what happened."
-answer = false
+statement = "Links to pull request records and pipeline logs make better audit evidence than screenshots."
+answer = true
 explanation = "Screenshots are taken by hand, cannot be rerun and are easy to get wrong. Give auditors links and queries into systems of record that they can rerun themselves. The playbook aims for at least 80% of evidence requests answered that way."
 link = "playbook/compliance/control-mapping.md"
 
@@ -1409,7 +1425,7 @@ link = "playbook/compliance/regulated-industries.md"
 id = "compliance.disband-at-launch"
 area = "compliance"
 level = "assured"
-statement = "A government service team can be disbanded once the service launches."
+statement = "A government service team should be disbanded once the service launches."
 answer = false
 explanation = "A live service needs fixes, security updates and improvements for as long as citizens use it. Disbanding the team leaves it to decay until an expensive replacement project. Fund a persistent service team instead."
 link = "playbook/compliance/public-sector.md"
@@ -1483,9 +1499,9 @@ link = "leaders/strategy-toolkit.md"
 id = "leaders.rehearse-crisis"
 area = "leaders"
 level = "standard"
-statement = "The executive team should rehearse a crisis, such as a cyber attack, at least twice a year."
+statement = "A rehearsal finds gaps in an executive crisis plan that reading the written plan does not."
 answer = true
-explanation = "The first time executives meet a crisis should not be the real one. A short exercise twice a year shows who decides, who speaks to customers and regulators, and what is missing. Track the findings like postmortem actions and report them to the board."
+explanation = "The first time executives meet a crisis should not be the real one. An exercise shows who decides, who speaks to customers and regulators, and what is missing; the playbook suggests two a year. Track the findings like postmortem actions and report them to the board."
 link = "leaders/crisis-leadership.md"
 
 [[statements]]
@@ -1505,3 +1521,93 @@ statement = "Cyber security is a technical matter that a board can safely leave 
 answer = false
 explanation = "Boards and audit committees are accountable for technology risk, including cyber risk. The UK NCSC Board Toolkit is written for board members, with questions to ask on topics such as risk management, suppliers and incident response. The board sets the risk appetite and checks it with a few measures each quarter."
 link = "leaders/board-and-executive-reporting.md"
+
+[[statements]]
+id = "business-owners.email-mfa-first"
+area = "business-owners"
+level = "foundation"
+statement = "Multi-factor sign-in on the email account should come before any other account."
+answer = true
+explanation = "Email can reset the password of almost every other service, so whoever controls it controls the rest. Turn on multi-factor authentication for email first, then banking, accounting and admin accounts. Prefer an app or a security key to text-message codes."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.plugged-in-backup"
+area = "business-owners"
+level = "foundation"
+statement = "A backup disk that stays plugged into the office computer protects the business against ransomware."
+answer = false
+explanation = "Ransomware encrypts every drive it can reach, including a backup disk that is always connected. Keep at least one copy offline, or on storage that cannot be changed or deleted for a set period. Then test a restore every 3 months."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.restore-time"
+area = "business-owners"
+level = "foundation"
+statement = "Until you have restored from a backup, you do not know how long the business would be stopped."
+answer = true
+explanation = "A backup can be incomplete, and a restore can take days instead of hours. Ask your IT provider to restore a folder and one key system every 3 months and write down the time. Compare it with how long the business can cope without that system."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.provider-owns-domain"
+area = "business-owners"
+level = "foundation"
+statement = "It is fine for the IT provider to own the business's domain name and admin accounts if the provider is trusted."
+answer = false
+explanation = "If the provider owns them, a dispute, a failure or a breach at the provider can lock you out of your own email and website. Put the domain, admin accounts and backups in the business's name. Keep a copy of the admin credentials that the owner controls."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.evidence-first-hour"
+area = "business-owners"
+level = "standard"
+statement = "In the first hour of a ransomware attack, wiping and reinstalling the affected computers destroys evidence that the insurer and responders need."
+answer = true
+explanation = "Disconnect affected computers from the network but do not switch them off, wipe or reinstall them. Responders use what is on them to find out how the attacker got in and what was taken. Call your insurer early: many policies require notice before you act."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.delete-the-chat"
+area = "business-owners"
+level = "foundation"
+statement = "Staff may paste patient or customer records into a free AI chat tool if they delete the conversation afterwards."
+answer = false
+explanation = "Deleting the conversation on your screen does not remove it from the service, and free tools may keep or reuse what you type. Approve a few tools with a business account and say which data must never go into them. The staff AI use policy template covers this on one page."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.leaver-same-day"
+area = "business-owners"
+level = "foundation"
+statement = "A leaver's access should be removed on their last working day, including shared passwords they knew."
+answer = true
+explanation = "Former staff with working accounts are an easy way in, by mistake or on purpose. Remove access on the last working day and change any shared password the person knew. A password manager makes that change quick."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.subscriptions-no-duties"
+area = "business-owners"
+level = "standard"
+statement = "A business that buys all its software as online subscriptions has no data protection duties, because the supplier holds the data."
+answer = false
+explanation = "The business usually stays the controller of its customers' and staff data, even when a supplier stores it. You still need to know what data you hold and why, tell people in a privacy notice, and report breaches on time. Check that the supplier's contract covers breach notice, data location and exit."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.export-before-signing"
+area = "business-owners"
+level = "standard"
+statement = "Before signing up for an online service, a business should check that it can export all its data in a common format."
+answer = true
+explanation = "If you cannot get your data out, leaving the service later is slow and expensive, and the supplier knows it. Check for export to common formats such as CSV or PDF before you sign. Once a year, export the data from your most important service and open it elsewhere."
+link = "leaders/for-small-and-medium-businesses.md"
+
+[[statements]]
+id = "business-owners.sms-strongest"
+area = "business-owners"
+level = "standard"
+statement = "Text-message codes are the strongest form of multi-factor sign-in a small business can choose."
+answer = false
+explanation = "Text-message codes are much better than a password alone, but attackers can intercept them or trick staff into reading them out. Authenticator apps are stronger, and security keys or passkeys resist phishing. Use the strongest option each service supports."
+link = "leaders/for-small-and-medium-businesses.md"

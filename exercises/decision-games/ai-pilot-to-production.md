@@ -20,27 +20,18 @@ A regional bank lends to small businesses, many of them sole traders. Its innova
 
 ## Round 1: what do you do?
 
-**A. Launch to all 140 officers in three weeks.** Officers must still sign every memo, so a person is in the loop.
+**A. Limited release first.** Build an eval set, move to approved hosting and data terms, add logging and a kill switch, then release to 10 officers behind a feature flag. The board hears "controlled use with measured results" at quarter-end, not "live", and the other 130 officers wait 10 weeks or more.
 
-**B. Limited release with evidence.** Build an eval set, fix the hosting and data terms, add logging and a kill switch, then release to 10 officers behind a feature flag. Report back in 10 weeks.
+**B. Launch to all 140 officers in three weeks.** Officers save hours per memo from day one. Every memo is still signed by a credit officer, who stays accountable for the decision. Fix problems as real use shows them, as the bank does with any new tool.
 
-**C. Narrow the scope first.** Ship only the extraction part (pull figures from statements and accounts into the memo template, with sources) and drop the approve or decline suggestion for now.
+**C. Narrow the scope first.** Ship only the extraction part: pull figures from statements and accounts into the memo template, with sources. Drop the approve or decline suggestion for now. Extraction is easy to check against the documents and leaves the decision with the officer.
 
-**D. Stop and build in-house.** Fine-tune an open-weight model on the bank's own past memos, hosted in the bank's data centre, before anyone uses it.
+**D. Build in-house.** Customer financial data never leaves the bank. Fine-tune an open-weight model on the bank's own past memos, hosted in its data centre. It solves residency for good and builds a capability competitors cannot buy.
 
 Pick one before you open the consequences.
 
 <details>
-<summary>Consequences of A: launch to all in three weeks</summary>
-
-Usage is high in week one. In week three, an internal audit sample of 40 memos finds that 6 contain figures that do not match the bank statements, and in 3 the suggestion was "approve" for applications that breach the bank's own lending policy. Officers under time pressure had signed them. The compliance team asks whether the bank has deployed a high-risk AI system without the required risk management, human oversight design, logging and documentation. The answer is yes.
-
-The feature is switched off, but there is no kill switch, so it takes a deployment. Customer financial data has been sent abroad under a developer's personal terms of service, which nobody reviewed. "A person signs it" did not amount to human oversight: officers were not shown sources, were not trained on the system's limits, and had no time to check.
-
-</details>
-
-<details>
-<summary>Consequences of B: limited release with evidence</summary>
+<summary>Consequences of A: limited release first</summary>
 
 Weeks 1 to 4: the team labels 300 past applications with the memos that experienced officers wrote, sets pass thresholds with the head of credit (figures must match sources in at least 99% of fields; the suggestion must agree with the final human decision in a stated share of cases), and moves to an approved model provider under a business agreement that excludes training on the bank's data and meets its data residency rules. Cost per memo is measured and budgeted. Every prompt, retrieved document and output is logged with personal data masked.
 
@@ -51,18 +42,27 @@ The CEO tells the board at quarter-end that the assistant is in controlled use w
 </details>
 
 <details>
-<summary>Consequences of C: narrow the scope first</summary>
+<summary>Consequences of B: launch to all in three weeks</summary>
 
-Extraction with sources is easier to evaluate (does the figure match the document?) and keeps the credit decision with the officer. It may also fall outside the high-risk category if it only prepares information and does not evaluate creditworthiness; the governance team must confirm that, and the answer may change as the product grows. Officers save a large part of the 3 hours on data entry.
+Usage is high in week one. In week three, an internal audit sample of 40 memos finds that 6 contain figures that do not match the bank statements, and in 3 the suggestion was "approve" for applications that breach the bank's own lending policy. Officers under time pressure had signed them. The compliance team asks whether the bank has deployed a high-risk AI system without the required risk management, human oversight design, logging and documentation. The answer is yes.
 
-This is a strong path when combined with B: ship extraction first through the same eval, flag and logging steps, and treat the recommendation as a separate, later, higher-risk release.
+The feature is switched off, but there is no kill switch, so it takes a deployment. Customer financial data has been sent abroad under a developer's personal terms of service, which nobody reviewed. "A person signs it" did not amount to human oversight: officers were not shown sources, were not trained on the system's limits, and had no time to check.
 
 </details>
 
 <details>
-<summary>Consequences of D: stop and build in-house</summary>
+<summary>Consequences of C: narrow the scope first</summary>
 
-The data residency problem disappears, but six months go into GPU procurement, training data cleaning and model work before anyone knows whether the task needs fine-tuning at all. The bank still needs an eval set, logging, a kill switch and governance, so D does not remove any of B's work; it adds to it. The [building with AI](../../playbook/ai/building-with-ai.md#prompting-retrieval-or-fine-tuning) page says to start with prompting and retrieval and fine-tune only when evals show a gap that cheaper options cannot close.
+Extraction with sources is easier to evaluate (does the figure match the document?) and keeps the credit decision with the officer. It may also fall outside the high-risk category if it only prepares information and does not evaluate creditworthiness; the governance team must confirm that, and the answer may change as the product grows. Officers save a large part of the 3 hours on data entry.
+
+This is a strong path when combined with A: ship extraction first through the same eval, flag and logging steps, and treat the recommendation as a separate, later, higher-risk release.
+
+</details>
+
+<details>
+<summary>Consequences of D: build in-house</summary>
+
+The data residency problem disappears, but six months go into GPU procurement, training data cleaning and model work before anyone knows whether the task needs fine-tuning at all. The bank still needs an eval set, logging, a kill switch and governance, so D does not remove any of A's work; it adds to it. The [building with AI](../../playbook/ai/building-with-ai.md#prompting-retrieval-or-fine-tuning) page says to start with prompting and retrieval and fine-tune only when evals show a gap that cheaper options cannot close.
 
 Self-hosting can be the right answer where law or risk rules out any external provider. Decide that from the use case assessment, not as a reflex.
 
@@ -70,7 +70,7 @@ Self-hosting can be the right answer where law or risk rules out any external pr
 
 ## What the playbook recommends, and why
 
-**B, ideally with C's narrower scope as the first release.** The [building with AI](../../playbook/ai/building-with-ai.md#from-pilot-to-production) page sets the path: problem and assessment, prototype, eval set and threshold, hardening, limited release, general release. This pilot tried to jump from stage 2 to stage 6. The playbook's diagnosis applies: most pilots stall because nobody defined "good enough" or tested it.
+**A, ideally with C's narrower scope as the first release.** The [building with AI](../../playbook/ai/building-with-ai.md#from-pilot-to-production) page sets the path: problem and assessment, prototype, eval set and threshold, hardening, limited release, general release. This pilot tried to jump from stage 2 to stage 6. The playbook's diagnosis applies: most pilots stall because nobody defined "good enough" or tested it.
 
 Before limited release, the bank needs:
 

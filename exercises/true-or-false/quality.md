@@ -92,13 +92,13 @@ Read more: [playbook/quality/test-driven-development.md](../../playbook/quality/
 
 </details>
 
-### 8. The safest test suite has hundreds of end-to-end tests covering every feature.
+### 8. Many fast unit and component tests plus a few end-to-end tests give quicker and more reliable feedback than hundreds of end-to-end tests.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**False.** Hundreds of end-to-end tests are slow and flaky, and they take an hour to tell you little. Push checks down to unit, component and contract tests. Keep 5 to 20 end-to-end tests for the critical paths.
+**True.** Hundreds of end-to-end tests are slow and flaky, and they take an hour to tell you little. Push checks down to unit, component and contract tests. Keep 5 to 20 end-to-end tests for the critical paths.
 
 Read more: [playbook/delivery/testing.md](../../playbook/delivery/testing.md)
 

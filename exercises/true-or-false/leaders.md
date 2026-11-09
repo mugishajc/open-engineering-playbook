@@ -92,13 +92,13 @@ Read more: [leaders/strategy-toolkit.md](../../leaders/strategy-toolkit.md)
 
 </details>
 
-### 8. The executive team should rehearse a crisis, such as a cyber attack, at least twice a year.
+### 8. A rehearsal finds gaps in an executive crisis plan that reading the written plan does not.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**True.** The first time executives meet a crisis should not be the real one. A short exercise twice a year shows who decides, who speaks to customers and regulators, and what is missing. Track the findings like postmortem actions and report them to the board.
+**True.** The first time executives meet a crisis should not be the real one. An exercise shows who decides, who speaks to customers and regulators, and what is missing; the playbook suggests two a year. Track the findings like postmortem actions and report them to the board.
 
 Read more: [leaders/crisis-leadership.md](../../leaders/crisis-leadership.md)
 

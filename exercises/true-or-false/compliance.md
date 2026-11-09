@@ -20,13 +20,13 @@ Read more: [playbook/compliance/regulated-industries.md](../../playbook/complian
 
 </details>
 
-### 2. Screenshots are the best form of audit evidence, because auditors can see exactly what happened.
+### 2. Links to pull request records and pipeline logs make better audit evidence than screenshots.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**False.** Screenshots are taken by hand, cannot be rerun and are easy to get wrong. Give auditors links and queries into systems of record that they can rerun themselves. The playbook aims for at least 80% of evidence requests answered that way.
+**True.** Screenshots are taken by hand, cannot be rerun and are easy to get wrong. Give auditors links and queries into systems of record that they can rerun themselves. The playbook aims for at least 80% of evidence requests answered that way.
 
 Read more: [playbook/compliance/control-mapping.md](../../playbook/compliance/control-mapping.md)
 
@@ -116,7 +116,7 @@ Read more: [playbook/compliance/regulated-industries.md](../../playbook/complian
 
 </details>
 
-### 10. A government service team can be disbanded once the service launches.
+### 10. A government service team should be disbanded once the service launches.
 
 Level: Assured
 

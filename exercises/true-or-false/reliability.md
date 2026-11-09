@@ -62,7 +62,7 @@ Level: Standard
 
 <details><summary>Answer</summary>
 
-**False.** Used alone, the 5 Whys follows a single chain and usually stops at a person or one bug. Treat it as a starting prompt. For serious incidents, build a timeline and list contributing factors, and add a fishbone diagram or CAST when the cause is disputed.
+**False.** Used alone, the 5 Whys follows a single chain and usually stops at a person or one bug. Treat it as a starting prompt. For serious incidents, build a timeline and list contributing factors, and add a fishbone diagram or CAST (causal analysis based on system theory) when the cause is disputed.
 
 Read more: [playbook/reliability/root-cause-analysis.md](../../playbook/reliability/root-cause-analysis.md)
 
@@ -92,25 +92,25 @@ Read more: [playbook/reliability/rollbacks.md](../../playbook/reliability/rollba
 
 </details>
 
-### 8. A weekly change advisory board makes production changes safer than peer review plus automated testing.
+### 8. Peer review plus automated testing makes production changes at least as safe as approval by a weekly change advisory board.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**False.** The research behind the DORA metrics found that approval by an external body did not improve stability and was linked to slower delivery. Peer review plus automated testing did better. Keep a board only for the few changes that carry risk across teams.
+**True.** The research behind the DORA metrics found that approval by an external body did not improve stability and was linked to slower delivery. Peer review plus automated testing did better. Keep a board only for the few changes that carry risk across teams.
 
 Read more: [playbook/reliability/change-management.md](../../playbook/reliability/change-management.md)
 
 </details>
 
-### 9. Database replication to a second site counts as a backup.
+### 9. Database replication to a second site copies deletions and ransomware damage too, so it does not replace a backup.
 
 Level: Foundation
 
 <details><summary>Answer</summary>
 
-**False.** Replication copies deletions and ransomware encryption to the second site within seconds. Keep separate, versioned backups, with one copy that attackers cannot change or delete. Replication helps availability; backups help recovery.
+**True.** Replication copies deletions and ransomware encryption to the second site within seconds. Keep separate, versioned backups, with one copy that attackers cannot change or delete. Replication helps availability; backups help recovery.
 
 Read more: [playbook/reliability/backup-and-recovery.md](../../playbook/reliability/backup-and-recovery.md)
 
@@ -122,19 +122,19 @@ Level: Foundation
 
 <details><summary>Answer</summary>
 
-**True.** Until you restore it, you do not know whether the backup is complete or how long recovery takes. The playbook calls an untested backup a hope, not a control. Restore Tier 1 data automatically every month and time it against the RTO.
+**True.** Until you restore it, you do not know whether the backup is complete or how long recovery takes. The playbook calls an untested backup a hope, not a control. Restore Tier 1 data automatically every month and compare the time with the recovery time objective.
 
 Read more: [playbook/reliability/backup-and-recovery.md](../../playbook/reliability/backup-and-recovery.md)
 
 </details>
 
-### 11. A sustainable on-call rotation means nobody carries the pager more than one week in six.
+### 11. A 24 by 7 on-call rotation of the same three people is sustainable as long as they are paid for it.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**True.** That needs at least six people in the rotation. Three people covering every night burn out and then leave. Merge rotations, move to business hours or hire, rather than asking for heroics.
+**False.** Pay does not fix fatigue: each of the three is on call one week in three, and tired responders make mistakes. The playbook asks for at least six people per 24 by 7 rotation, so nobody is primary more than one week in six. Below that, merge rotations, cover business hours only or buy cover.
 
 Read more: [playbook/reliability/on-call.md](../../playbook/reliability/on-call.md)
 

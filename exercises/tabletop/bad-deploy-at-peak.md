@@ -19,7 +19,7 @@ At 09:41 a deployment went out. It contained a new seat-hold algorithm and a mig
 
 ### T+0 (Friday 10:02): checkout fails
 
-The fast-burn alert fires: 18% of checkout requests return errors and p95 latency is 4 seconds. The queue is letting 2,000 people a minute into checkout. Support chat is filling up. The deployment log shows the 09:41 release as the only change in the last 3 hours.
+The fast-burn alert fires: 18% of checkout requests return errors and p95 latency is 4 seconds. The queue is letting 2,000 people a minute into checkout. Support chat is filling up. The deployment log shows the 09:41 release as the only change in the last 3 hours. Looking back, a small number of errors started at 09:42 during the rollout; traffic was low, so the alert stayed under its threshold.
 
 **Decide:**
 - Severity and incident commander. Who are the operations lead and the communications lead?
@@ -46,10 +46,10 @@ The fix-forward pull request is ready. CI takes 25 minutes. A senior engineer pr
 
 ### T+60 (11:02): the error budget
 
-Checkout is stable again at 10:51. The incident spent about three times the checkout service's whole 28-day error budget. The written error budget policy says: when the budget is exhausted, pause feature releases for that service until the SLO is met again. The product owner wants to ship the new seat-hold algorithm, fixed, before Monday's on-sale for another tour.
+Checkout is stable again at 10:51. The incident spent about three times the checkout service's whole 28-day error budget. The written error budget policy says: when the budget is exhausted, pause feature releases for that service; the pause ends when the postmortem's priority actions are done and the 7-day burn rate is below 1, or when the 28-day SLO is met again. On the rolling window, the SLO is not met again until about four weeks from now. The product owner wants to ship the new seat-hold algorithm, fixed, before Monday's on-sale for another tour.
 
 **Decide:**
-- Does the policy apply? Who decides, and by when?
+- Does the policy apply? Which exit can the team reach before Monday? Who decides, and by when?
 - What would have to be true for Monday's release to go ahead?
 - What is the next external update, and when?
 
@@ -57,6 +57,7 @@ Checkout is stable again at 10:51. The incident spent about three times the chec
 
 - **T+5:** An engineer finds a feature flag called `sh2_enabled`. Nobody is sure what it controls or whether turning it off is safe.
 - **T+45:** A popular fan account posts that the company "sold fake tickets" and it starts trending.
+- **T+10:** The checkout dashboards go blank. The metrics backend is overloaded by the spike in error logs. What do you decide from, and who checks that the monitoring itself is working?
 - **T+75:** The CEO asks the engineering manager for the name of the person who approved the deployment.
 
 ## Discussion questions
@@ -69,13 +70,13 @@ Checkout is stable again at 10:51. The incident spent about three times the chec
 
 ## What good looks like
 
-- Decision to roll back or roll forward within 15 minutes of linking the incident to the change, with a 30-minute limit on fixing forward, enforced by the commander ([rollbacks](../../playbook/reliability/rollbacks.md)).
+- Decision to roll back or roll forward within 15 minutes of declaring the incident, without waiting for proof that the release caused it, with a 30-minute limit on fixing forward, enforced by the commander ([rollbacks](../../playbook/reliability/rollbacks.md)).
 - New behaviour behind a [feature flag](../../playbook/delivery/feature-flags.md) with a clear name; turning it off is the first lever.
 - Schema changes shipped separately using expand and contract, so the previous version always runs against the current schema ([database changes](../../playbook/delivery/database-changes.md)).
 - Break-glass used only through a named group, with review afterwards, not as a habit ([code review: Assured](../../playbook/delivery/code-review.md#assured)).
 - Impact on customers handled as part of the incident: double sales counted, owner named, promoter informed.
 - The error budget policy applied as written, with product and engineering both signed up to it ([service levels](../../playbook/reliability/service-levels.md)).
-- A blameless postmortem: the question is why a rename could ship with the code on a sale morning, not who approved it ([postmortems](../../playbook/reliability/postmortems.md)).
+- A blameless postmortem: the question is why a rename could ship with the code on a sale morning, and why the first errors at 09:42 did not page, not who approved it ([postmortems](../../playbook/reliability/postmortems.md)).
 
 ## Scoring rubric
 

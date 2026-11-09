@@ -67,6 +67,7 @@ The provider reports partial recovery. Half your traffic now runs in the standby
 ### Optional injects
 
 - **T+20:** An engineer proposes changing the DNS records by hand in the provider console. The DNS zone is managed by infrastructure as code, and the pipeline is down.
+- **T+35:** Engineers cannot sign in to the standby region's console: the identity provider's tenant runs in the failed region. The secrets manager in the standby region has no replica of the database credentials.
 - **T+45:** The on-call engineer who knows the failover runbook has been working since 06:00 and asks to hand over.
 - **T+75:** A journalist from a trade publication asks whether the outage affected "all your customers' money".
 
@@ -81,7 +82,8 @@ The provider reports partial recovery. Half your traffic now runs in the standby
 ## What good looks like
 
 - SEV1 within 15 minutes, communications lead posting from a status page that does not share the failed region ([incident management](../../playbook/reliability/incident-management.md)).
-- A pre-agreed decision rule for failover, for example "fail over if the provider gives no recovery estimate within 20 minutes and the error budget for this window is below 50%" ([service levels](../../playbook/reliability/service-levels.md)).
+- A pre-agreed decision rule for failover, for example "fail over if the provider gives no recovery estimate within 20 minutes and the expected outage is longer than the time to fail over plus the cost of the replication gap", written in the runbook. The error budget decides release pace between incidents; it does not decide how long customers stay down ([service levels](../../playbook/reliability/service-levels.md)).
+- Failover uses only actions that do not need the failed region: credentials provisioned in advance, DNS changed through a provider outside the region, break-glass accounts tested every quarter. This is called static stability.
 - The standby holds its own copy of images, secrets and pipeline, tested on a schedule, not only once ([cloud, on-premises and air-gapped](../../playbook/platform/cloud-on-prem-air-gapped.md)).
 - Reconciliation of in-flight payments using idempotency keys before retries are allowed ([rollbacks: when rollback is impossible](../../playbook/reliability/rollbacks.md#when-rollback-is-impossible)).
 - Regulatory classification started early by the compliance lead, with facts from the incident commander ([incident management: Assured](../../playbook/reliability/incident-management.md#assured)).
@@ -107,5 +109,6 @@ Maximum 12.
 - Replicate container images, secrets and pipeline capability to the standby region, and test a full failover in production hours at least once a year ([backup and recovery](../../playbook/reliability/backup-and-recovery.md)).
 - Move the status page to a separate provider.
 - Request and verify standby quota for 100% of Tier 1 capacity.
+- List every control-plane dependency of the failover (identity, secrets, DNS, registry, pipeline) and remove the ones that live only in the primary region. See AWS Builders' Library, "Static stability using Availability Zones": https://aws.amazon.com/builders-library/static-stability-using-availability-zones/
 - Add idempotency keys to every payment-initiating API, and a reconciliation job for replication gaps.
 - Record the hosting decision and its exit and failover conditions in an [ADR](../../templates/docs/adr.md).

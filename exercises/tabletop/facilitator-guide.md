@@ -14,6 +14,8 @@ A tabletop exercise is a rehearsal of a bad day, run around a table or a video c
 
 Use your real documents. The exercise tests your runbooks, contact lists and decision rights, not a fictional set. If a document does not exist, that is the first finding.
 
+A tabletop tests decisions; it does not test the system. To check that a failover, rollback or degraded mode works, run a game day that injects a real fault (see [resilience testing](../../playbook/reliability/resilience-testing.md)). A good pattern is a tabletop one quarter and a game day on the same scenario the next.
+
 ## Roles
 
 | Role | Does | Does not |

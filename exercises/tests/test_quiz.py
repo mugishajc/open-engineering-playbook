@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import contextlib
 import io
+import json
 import sys
 import tempfile
 import unittest
@@ -24,7 +25,7 @@ import quiz  # noqa: E402
 AREAS = (
     "strategy", "operating-model", "ways-of-working", "delivery", "quality",
     "reliability", "security", "data", "ai", "architecture", "platform",
-    "people", "measurement", "compliance", "leaders",
+    "people", "measurement", "compliance", "leaders", "business-owners",
 )
 
 
@@ -418,6 +419,80 @@ class CliTest(unittest.TestCase):
             code, _, err = run_cli("--bank", str(bad), "--list")
         self.assertEqual(code, 2)
         self.assertIn("not valid TOML", err)
+
+
+class BalanceTest(unittest.TestCase):
+    def bank(self, answers, texts=None):
+        data = {"areas": [{"id": "alpha", "title": "Alpha", "intro": "Alpha intro."}], "statements": []}
+        for i, answer in enumerate(answers):
+            text = texts[i] if texts else f"Statement {i} in alpha."
+            data["statements"].append(statement("alpha", f"s{i}", answer=answer, statement=text))
+        return quiz.parse_bank(data)
+
+    def test_balanced_bank_passes(self):
+        self.assertEqual(quiz.balance_problems(self.bank([True, False] * 5)), [])
+
+    def test_lopsided_bank_and_area_fail(self):
+        problems = quiz.balance_problems(self.bank([False] * 8 + [True] * 2))
+        self.assertTrue(any(p.startswith("bank is 20% true") for p in problems), problems)
+        self.assertTrue(any(p.startswith("area alpha is 20% true") for p in problems), problems)
+
+    def test_absolute_words_must_not_give_the_answer_away(self):
+        answers = [False] * 10 + [True] * 10
+        texts = [f"The best way number {i}." for i in range(10)] + [f"A plain claim number {i}." for i in range(10)]
+        problems = quiz.balance_problems(self.bank(answers, texts))
+        self.assertTrue(any("'best', 'only' or 'every' are false" in p for p in problems), problems)
+
+    def test_shipped_bank_is_balanced(self):
+        self.assertEqual(quiz.balance_problems(quiz.load_bank(quiz.DEFAULT_BANK)), [])
+
+
+class SaveAndRetryTest(unittest.TestCase):
+    def test_save_appends_and_retry_replays_misses(self):
+        bank = small_bank()
+        statements = list(bank.statements)
+        results = [quiz.Result(statements[0], True), quiz.Result(statements[1], True)]
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "results.jsonl"
+            quiz.save_session(path, statements, results, when="2026-11-09")
+            quiz.save_session(path, statements, results[:1], when="2026-11-10")
+            lines = path.read_text(encoding="utf-8").splitlines()
+            self.assertEqual(len(lines), 2)
+            first = json.loads(lines[0])
+            self.assertEqual(first["date"], "2026-11-09")
+            self.assertEqual((first["right"], first["answered"], first["asked"]), (1, 2, 5))
+            self.assertEqual(first["missed"], ["alpha.two"])
+            self.assertEqual(json.loads(lines[1])["missed"], [])
+            # The last session had no misses.
+            with self.assertRaises(quiz.QuizError):
+                quiz.missed_in_last_session(bank, path)
+            quiz.save_session(path, statements, results)
+            self.assertEqual([s.id for s in quiz.missed_in_last_session(bank, path)], ["alpha.two"])
+
+    def test_retry_errors(self):
+        bank = small_bank()
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaises(quiz.QuizError):
+                quiz.missed_in_last_session(bank, Path(tmp) / "none.jsonl")
+            bad = Path(tmp) / "bad.jsonl"
+            bad.write_text("not json\n", encoding="utf-8")
+            with self.assertRaises(quiz.QuizError):
+                quiz.missed_in_last_session(bank, bad)
+
+    def test_cli_save_then_retry(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "r.jsonl"
+            code, out, _ = run_cli("--area", "security", "--count", "3", "--seed", "1", "--save", str(path),
+                                   stdin="t\nt\nt\n")
+            self.assertEqual(code, 0)
+            self.assertIn("Saved to", out)
+            missed = json.loads(path.read_text(encoding="utf-8").splitlines()[-1])["missed"]
+            code, out, err = run_cli("--retry-missed", str(path), stdin="f\n" * len(missed))
+            if missed:
+                self.assertEqual(code, 0, err)
+                self.assertIn(f"[1/{len(missed)}]", out)
+            else:
+                self.assertEqual(code, 2)
 
 
 if __name__ == "__main__":

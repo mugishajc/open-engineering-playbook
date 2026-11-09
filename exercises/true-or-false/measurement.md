@@ -68,13 +68,13 @@ Read more: [playbook/measurement/metrics.md](../../playbook/measurement/metrics.
 
 </details>
 
-### 6. For a startup with no regulatory overlay, Foundation is the right target level in every practice area, including security.
+### 6. For a startup with no regulatory overlay and no payment, health or identity data, Foundation is the right starting level in every practice area.
 
 Level: Foundation
 
 <details><summary>Answer</summary>
 
-**True.** The levels are not grades. Foundation is the minimum that pays for itself immediately and is the default for solo engineers and startups. Assured adds evidence and separation of duties, which is worth its cost only where regulation, public accountability or real risk demands it.
+**True.** The levels are not grades. Foundation is the minimum that pays for itself at once and is the default for solo engineers and startups. Once a startup holds payment, health or identity data, its profile says to take security to Standard early.
 
 Read more: [playbook/measurement/maturity-model.md](../../playbook/measurement/maturity-model.md)
 

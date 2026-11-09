@@ -68,13 +68,13 @@ Read more: [playbook/ways-of-working/planning-and-forecasting.md](../../playbook
 
 </details>
 
-### 6. Most delivery delay comes from engineers working more slowly than they estimated.
+### 6. Most delivery delay comes from waiting and interruptions, not from engineers working more slowly than they estimated.
 
 Level: Foundation
 
 <details><summary>Answer</summary>
 
-**False.** Most delay comes from waiting, interruptions and work discovered along the way, not from slow typing. That is why more careful task estimates rarely fix dates. Splitting work small and removing waits does.
+**True.** Most delay comes from waiting, interruptions and work discovered along the way, not from slow typing. That is why more careful task estimates rarely fix dates. Splitting work small and removing waits does.
 
 Read more: [playbook/ways-of-working/planning-and-forecasting.md](../../playbook/ways-of-working/planning-and-forecasting.md)
 

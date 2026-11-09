@@ -80,13 +80,13 @@ Read more: [playbook/platform/cloud-native.md](../../playbook/platform/cloud-nat
 
 </details>
 
-### 7. Buying reserved capacity or savings commitments is the first step to cutting a cloud bill.
+### 7. Removing idle and oversized cloud resources should come before buying reserved capacity or savings commitments.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**False.** Committing before rightsizing locks in waste for one to three years. Rightsize first, then commit only to the stable baseline. Make cost visible to the teams that create it so the savings last.
+**True.** Committing before rightsizing locks in waste for one to three years. Rightsize first, then commit only to the stable baseline. Make cost visible to the teams that create it so the savings last.
 
 Read more: [playbook/platform/finops.md](../../playbook/platform/finops.md)
 

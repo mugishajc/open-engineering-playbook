@@ -1,6 +1,6 @@
 # Kata: error budget math
 
-Work through nine short calculations on one service's SLO: how big the error budget is, how much an incident spent, how fast it was burning, when the burn-rate alerts fire, and whether the service can meet its target at all given its dependencies. You need a calculator and the formulas below. Each answer is hidden; try first.
+Work through ten short calculations on one service's SLO: how big the error budget is, how much an incident spent, how fast it was burning, when the burn-rate alerts fire and stop, and whether the service can meet its target at all given its dependencies. You need a calculator and the formulas below. Each answer is hidden; try first.
 
 | | |
 |---|---|
@@ -77,7 +77,7 @@ time to exhaust budget  = window length / burn rate
 
 </details>
 
-**5. A slow leak.** At 09:00 a bug starts failing 1% of requests. Before 09:00 there were no errors. Does the fast-burn alert fire? The second alert pages when the burn rate exceeds 6 over both the last 6 hours and the last 30 minutes. When does it fire, and how much budget has been spent by then?
+**5. A slow leak.** At 09:00 a bug starts failing 1% of requests. Ignore the small background error rate before 09:00. Does the fast-burn alert fire? The second alert pages when the burn rate exceeds 6 over both the last 6 hours and the last 30 minutes. When does it fire, and how much budget has been spent by then?
 
 <details>
 <summary>Answer 5</summary>
@@ -136,8 +136,21 @@ time to exhaust budget  = window length / burn rate
 
 </details>
 
+**10. When the page fires and stops.** Go back to the question 2 incident: 30% of requests fail for 30 minutes, starting from no errors. When does the fast-burn alert (burn rate 14.4 over both 1 hour and 5 minutes) fire? After the fix, when does it stop?
+
+<details>
+<summary>Answer 10</summary>
+
+- Threshold: 1.44% (question 4).
+- Long window: the 1-hour average passes 1.44% once 30% x t / 60 > 1.44%, so after t = 2.88 minutes.
+- Short window: the 5-minute average passes 1.44% once 30% x t / 5 > 1.44%, so after about 15 seconds.
+- Both must be true, so the page fires about **3 minutes** after the errors start.
+- After the fix, the 1-hour average stays above 1.44% for almost another hour. The 5-minute average drops below 1.44% once less than 0.24 minutes of the bad period is left in it, about **4 minutes 46 seconds** after the fix. The alert needs both windows, so it stops then. That is why the short window exists: without it, the alert would keep firing for about an hour after the fix.
+
+</details>
+
 ## Check yourself
 
-Nine correct: you are ready to write an error budget policy. Six to eight: re-read the burn-rate table in [service levels](../../playbook/reliability/service-levels.md#standard). Fewer: work through the SRE Workbook chapter "Alerting on SLOs" (https://sre.google/workbook/alerting-on-slos/) and try again.
+Ten correct: you are ready to write an error budget policy. Seven to nine: re-read the burn-rate table in [service levels](../../playbook/reliability/service-levels.md#standard). Fewer: work through the SRE Workbook chapter "Alerting on SLOs" (https://sre.google/workbook/alerting-on-slos/) and try again.
 
 Then do it for real: take one of your own services, pull its last 28 days of request counts, and repeat questions 1, 2 and 6 with your numbers.

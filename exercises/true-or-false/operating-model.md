@@ -68,13 +68,13 @@ Read more: [playbook/operating-model/engineering-governance.md](../../playbook/o
 
 </details>
 
-### 6. For a single product, separate front end, back end and database teams are the most efficient structure.
+### 6. For a single product, teams that each own a slice of the product end to end usually deliver faster than separate front end, back end and database teams.
 
 Level: Standard
 
 <details><summary>Answer</summary>
 
-**False.** Component teams turn every feature into a hand-off between teams. Organise most engineers into stream-aligned teams that own a product or service end to end. Keep specialists as enabling or complicated-subsystem teams.
+**True.** Component teams turn every feature into a hand-off between teams. Organise most engineers into stream-aligned teams that own a product or service end to end. Keep specialists as enabling or complicated-subsystem teams.
 
 Read more: [playbook/operating-model/team-topology.md](../../playbook/operating-model/team-topology.md)
 
@@ -110,7 +110,7 @@ Level: Assured
 
 <details><summary>Answer</summary>
 
-**False.** Long packs arrive late and bury what the board needs to act on. The playbook recommends two pages with 8 to 12 measures, showing trends and thresholds. Board members can then see quickly which numbers are outside the agreed risk appetite.
+**False.** Long packs arrive late and bury what the board needs to act on. The playbook recommends two pages with no more than 12 measures, one per row, showing trends and thresholds. Board members can then see quickly which numbers are outside the agreed risk appetite.
 
 Read more: [playbook/operating-model/it-governance.md](../../playbook/operating-model/it-governance.md)
 

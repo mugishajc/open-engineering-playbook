@@ -20,7 +20,7 @@ Read more: [playbook/strategy/technical-strategy.md](../../playbook/strategy/tec
 
 </details>
 
-### 2. A technical strategy should fit on one page and name no more than seven actions.
+### 2. A technical strategy is more likely to be acted on when it fits on one page and says what the organisation will not do.
 
 Level: Foundation
 
@@ -68,7 +68,7 @@ Read more: [playbook/strategy/build-buy-adopt.md](../../playbook/strategy/build-
 
 </details>
 
-### 6. In a business case, engineering hours saved can be counted as cash savings.
+### 6. In a business case, engineering hours saved count as cash savings even if headcount and spend stay the same.
 
 Level: Standard
 

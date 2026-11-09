@@ -8,25 +8,25 @@ Ownership, classification, quality and privacy. Most data problems are ownership
 
 Prefer the terminal? From the repository root, run `python3 exercises/quiz.py --area data`.
 
-### 1. Copying the production database to staging is the best way to get realistic test data.
+### 1. Synthetic or masked data is a safer default for staging than a copy of the production database.
 
 Level: Foundation
 
 <details><summary>Answer</summary>
 
-**False.** Staging usually has weaker access controls, so personal data copied there is exposed. Use synthetic data or approved masking with a deletion date. Keep production personal data in production.
+**True.** Staging usually has weaker access controls, so personal data copied there is exposed. Use synthetic data or approved masking with a deletion date. Keep production personal data in production.
 
 Read more: [playbook/data/data-security-and-privacy.md](../../playbook/data/data-security-and-privacy.md)
 
 </details>
 
-### 2. Marking all data as confidential is the safest classification policy.
+### 2. Marking all data as confidential weakens protection, because the label stops telling people what really needs care.
 
 Level: Foundation
 
 <details><summary>Answer</summary>
 
-**False.** When everything is confidential, the label tells nobody what really needs protection. Use the definitions for public, internal, confidential and restricted. Over-classifying hides what matters and slows every request.
+**True.** When everything is confidential, the label tells nobody what really needs protection. Use the definitions for public, internal, confidential and restricted. Over-classifying hides what matters and slows every request.
 
 Read more: [playbook/data/data-governance.md](../../playbook/data/data-governance.md)
 

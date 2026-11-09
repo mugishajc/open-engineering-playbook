@@ -2,7 +2,7 @@
 
 # True or false
 
-153 statements about the playbook, in 15 areas. Some are myths that sound right; others are facts that sound wrong. Each answer explains why in a few sentences and links to the page that teaches the practice.
+163 statements about the playbook, in 16 areas. Some are myths that sound right; others are facts that sound wrong. Each answer explains why in a few sentences and links to the page that teaches the practice.
 
 Play on GitHub by opening an area below, or in a terminal from the repository root:
 
@@ -11,6 +11,8 @@ python3 exercises/quiz.py                       # 10 random statements
 python3 exercises/quiz.py --area security ai    # only these areas
 python3 exercises/quiz.py --level foundation    # only one level
 python3 exercises/quiz.py --count 0 --seed 7    # every statement, repeatable order
+python3 exercises/quiz.py --save results.jsonl  # keep a record of each session
+python3 exercises/quiz.py --retry-missed results.jsonl  # replay last session's misses
 ```
 
 The terminal quiz keeps a running score, shows your result by area and suggests three pages to read next.
@@ -32,5 +34,6 @@ The terminal quiz keeps a running score, shows your result by area and suggests 
 | [Measurement](measurement.md) | 10 | DORA metrics, SPACE and the maturity model. Metrics help teams choose what to improve, and hurt them the moment they become targets for people. |
 | [Compliance](compliance.md) | 10 | Auditors, regulators and public-sector rules. Good engineering evidence answers most of their questions without extra meetings. |
 | [Leaders](leaders.md) | 10 | For CTOs, CIOs, architects and executives: decisions, crises, boards and portfolios. Test the beliefs that shape how technology is led. |
+| [Business owners](business-owners.md) | 10 | For owners and managers of clinics, schools, shops and other businesses that use software but do not build it. No technical knowledge needed. |
 
 To add or change a statement, edit [questions.toml](questions.toml), then run `python3 exercises/quiz.py --export` and `python3 exercises/quiz.py --check`.
