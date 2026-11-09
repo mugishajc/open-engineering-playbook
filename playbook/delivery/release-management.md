@@ -32,7 +32,7 @@ Default: continuous delivery for anything you operate yourself. Pick release tra
 
 - **Automate the deploy.** One command or one button deploys a given artifact version to an environment. No hand-edited servers.
 - **Version every artifact** and tag every release in Git. See [versioning and changelogs](versioning-and-changelogs.md).
-- **Rollback first.** If a release causes a user-visible regression, roll back to the previous artifact, then debug. Fix forward only when rollback is impossible (for example after an irreversible data change) or the fix is smaller and faster than the rollback. Practise rollback at least once a quarter so it works when you need it.
+- **Rollback first.** If a user-visible regression starts during or after a recent release, roll back to the previous artifact, then debug. You do not need proof that the release caused it. Under canary delivery, abort the rollout in the controller rather than waiting for a Git revert to run every step again (see [GitOps and deployment](gitops-and-deployment.md#rolling-back-under-progressive-delivery)). Fix forward only when rollback is impossible (for example after an irreversible data change) or the fix is smaller and faster than the rollback. Practise rollback at least once a quarter so it works when you need it.
 - **Deploy and release are separate.** Deploying puts code on servers. Releasing turns behaviour on for users. Use [feature flags](feature-flags.md) to release gradually and turn off fast.
 - **Release notes for every release.** Generate them from Conventional Commits with release-please and edit the result for humans.
 - **Use a checklist** for anything not yet automated: [release checklist](../../templates/docs/release-checklist.md). Automate one checklist item per month until the list is short.
@@ -56,6 +56,7 @@ Default: continuous delivery for anything you operate yourself. Pick release tra
 - **Change records** link pull requests, approvals, test evidence and deploy logs. This gives evidence for ISO/IEC 27001:2022 Annex A 8.32 and SOC 2 CC8.1.
 - **Pre-agreed rollback criteria** in each change record: which metric, which threshold, who decides.
 - **Customer notice periods** where contracts or regulators require them, published in the support policy.
+- **Security fixes on a regulatory clock.** Since 11 September 2026, manufacturers under the EU Cyber Resilience Act report actively exploited vulnerabilities (early warning within 24 hours, notification within 72 hours). The release process must ship a security fix fast enough to support that. See [vulnerability management](../security/vulnerability-management.md).
 
 ## Release trains for shipped software
 
@@ -78,6 +79,7 @@ For software customers install, publish a support policy before the first custom
 | End-of-life notice | At least 6 months, in release notes and by direct notice to customers |
 | Upgrade path | Direct upgrade from the previous LTS to the current LTS is tested and documented |
 | Security fixes | Back-ported to every supported line |
+| Products with digital elements sold in the EU | Security updates for the product's whole support period, at least 5 years unless the product is expected to be in use for less (Cyber Resilience Act, Regulation (EU) 2024/2847, Art. 13(8)). A 24-month LTS line meets this only if customers can upgrade to a supported line for the rest of the period. Publish the end date at the time of purchase. |
 
 Every extra supported line multiplies test and back-port effort. Keep the count low and say so in contracts.
 
@@ -98,7 +100,6 @@ See [AI engineering practices](../ai/ai-engineering-practices.md) and [AI archit
 - Customers on air-gapped networks need offline bundles: packages, container images, checksums, signatures, SBOM and release notes in one archive, plus the public key or certificate to verify them.
 - Publish a verification procedure that works without internet access (cosign with a key pair, or GPG).
 - Internal deployments in air-gapped networks use GitOps tools (Argo CD or Flux) that pull from an internal Git server and registry.
-- Under the EU Cyber Resilience Act, manufacturers of products with digital elements must report actively exploited vulnerabilities from 11 September 2026 (early warning within 24 hours, notification within 72 hours). Your release process must be able to ship a security fix fast. See [vulnerability management](../security/vulnerability-management.md).
 
 ## Anti-patterns
 
@@ -126,3 +127,4 @@ See [AI engineering practices](../ai/ai-engineering-practices.md) and [AI archit
 - Martin Fowler, blue-green deployment: https://martinfowler.com/bliki/BlueGreenDeployment.html
 - release-please: https://github.com/googleapis/release-please
 - EU Cyber Resilience Act: https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act
+- Regulation (EU) 2024/2847 (Cyber Resilience Act), Article 13: https://eur-lex.europa.eu/eli/reg/2024/2847/oj

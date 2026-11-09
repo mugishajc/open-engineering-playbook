@@ -37,7 +37,7 @@ At every step, the previous application version still works against the current 
   - Add columns as nullable or with a default the database applies without rewriting the table (check this for your engine and version).
   - Never rename or drop a column or table in the same release as the code that stops using it.
   - Never change a column type in place on a large table. Add a new column and migrate.
-- **Separate step.** Run migrations from a pipeline job or a one-off task before the new application version starts. Applications do not run migrations on start-up, because several instances starting at once will race.
+- **Separate step.** Run migrations from a pipeline job or a one-off task before the new application version starts. Applications do not run migrations on start-up. A long migration blocks start-up and fails health checks, a failed one puts every instance in a crash loop, and rolling back the application cannot undo a migration that ran as a side effect.
 - **Back up before destructive steps** and test that the backup restores. See [backup and recovery](../reliability/backup-and-recovery.md).
 - **Small changes.** One logical change per migration.
 
@@ -100,6 +100,6 @@ Reviewers check: backward compatibility with the running version, lock behaviour
 - PostgreSQL, CREATE INDEX: https://www.postgresql.org/docs/current/sql-createindex.html
 - PostgreSQL, ALTER TABLE: https://www.postgresql.org/docs/current/sql-altertable.html
 - PostgreSQL, lock_timeout: https://www.postgresql.org/docs/current/runtime-config-client.html
-- MySQL, InnoDB online DDL: https://dev.mysql.com/doc/refman/8.0/en/innodb-online-ddl.html
+- MySQL 8.4 LTS, InnoDB online DDL: https://dev.mysql.com/doc/refman/8.4/en/innodb-online-ddl.html
 - gh-ost: https://github.com/github/gh-ost
 - squawk: https://squawkhq.com/

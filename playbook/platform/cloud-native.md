@@ -8,8 +8,8 @@ Starting points. Tune them to your organisation.
 
 - 100% of new services are built as signed container images (or functions) from the [golden path](golden-paths.md).
 - Every service passes the Kubernetes Pod Security Standards "restricted" profile, or has a recorded exception.
-- Cluster upgrades stay within the supported Kubernetes versions at all times (the project supports roughly the three most recent minor releases).
-- A node or zone failure causes no user-visible outage for services with an SLO of 99.9% or higher.
+- Production clusters are never more than one Kubernetes minor version behind the newest release. The project ships about three minor releases a year and patches only the three most recent, each for about 1 year.
+- A node or zone failure causes no user-visible outage for services with an SLO of 99.9% or higher. This needs capacity sized for one zone lost (see [scaling](../architecture/scaling.md#capacity-maths)), not only replicas in each zone.
 - The platform team spends less than 30% of its time on unplanned cluster work, measured quarterly.
 
 ## Choose the runtime
@@ -41,8 +41,8 @@ Every workload on Kubernetes starts from the [service baseline template](../../t
 
 - Runs as non-root with a read-only root filesystem, all Linux capabilities dropped, no privilege escalation, and the runtime default seccomp profile.
 - Resource requests and limits set from measurement, not guesses. Review after 2 weeks in production.
-- Readiness, liveness and startup probes that reflect real health.
-- At least 2 replicas spread across nodes or zones, a PodDisruptionBudget and a HorizontalPodAutoscaler.
+- Readiness, liveness and startup probes that check this instance only, never a shared dependency (see [observability](../architecture/observability.md#minimum-signals-every-service-exposes)).
+- At least one replica per zone (3 for a three-zone cluster), spread across nodes and zones, a PodDisruptionBudget with `maxUnavailable: 1`, and a HorizontalPodAutoscaler. The HPA owns the replica count, so the manifest leaves out `spec.replicas`.
 - NetworkPolicy that denies all traffic by default and allows only what the service needs.
 - Deployed by GitOps (see [GitOps and deployment](../delivery/gitops-and-deployment.md) and the [Argo CD application template](../../templates/platform/argocd-application.yaml)). Nobody runs `kubectl apply` against production by hand.
 - Cluster configuration managed as code (see [infrastructure as code](../delivery/infrastructure-as-code.md)).
@@ -66,7 +66,7 @@ Every workload on Kubernetes starts from the [service baseline template](../../t
 - Kubernetes (managed where allowed) as the default runtime for services, with the baseline template enforced by admission policy (for example Kyverno or OPA Gatekeeper).
 - Pod Security Standards "restricted" enforced per namespace. Exceptions recorded.
 - GitOps for all deployments. Clusters rebuilt from code at least twice a year as a test.
-- Kubernetes minor version upgrades at least every 6 months.
+- Upgrade to each new Kubernetes minor version within 4 months of its release, one minor version at a time (about three upgrades a year), so production is never more than one minor version behind. On managed services, upgrade before the provider's standard support ends; do not move into paid extended support by default.
 - CNCF projects as building blocks where they fit: for example Prometheus, OpenTelemetry, Argo CD or Flux, cert-manager, Harbor. Treat each as a dependency with an owner.
 
 ### Assured
@@ -91,7 +91,7 @@ Every workload on Kubernetes starts from the [service baseline template](../../t
 | Pods running as root with writable filesystems | Baseline template plus admission policy. |
 | Service mesh installed "for the future" | Adopt when a measured need exists and someone owns it. |
 | Hand-edited clusters nobody can rebuild | Infrastructure as code and GitOps. Rebuild drills. |
-| Falling several Kubernetes versions behind | Scheduled upgrades every 6 months at least. |
+| Falling several Kubernetes versions behind | Upgrade on the project's cadence, about every 4 months. Twice a year falls one more version behind each year. |
 
 ## Templates
 
@@ -103,7 +103,9 @@ Every workload on Kubernetes starts from the [service baseline template](../../t
 
 - The Twelve-Factor App: https://12factor.net/
 - Kubernetes documentation: https://kubernetes.io/docs/
-- Kubernetes version skew and support policy: https://kubernetes.io/releases/
+- Kubernetes releases and support period: https://kubernetes.io/releases/
+- Kubernetes release cycle ("approximately three times per year"): https://kubernetes.io/releases/release/
+- Kubernetes version skew policy: https://kubernetes.io/releases/version-skew-policy/
 - Kubernetes Pod Security Standards: https://kubernetes.io/docs/concepts/security/pod-security-standards/
 - CNCF projects: https://www.cncf.io/projects/
 - CIS Kubernetes Benchmark: https://www.cisecurity.org/benchmark/kubernetes

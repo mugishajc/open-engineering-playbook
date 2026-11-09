@@ -62,10 +62,15 @@ Every error response uses Problem Details for HTTP APIs (RFC 9457) with media ty
 
 ### Idempotency
 
-- Every `POST` that creates a resource, moves money or sends a message accepts an `Idempotency-Key` header. The IETF HTTPAPI working group has a draft standard for this header. Follow it.
+- Every `POST` that creates a resource accepts an `Idempotency-Key` header. A `POST` that moves money or sends a message requires it, and rejects a request without one with 400. The IETF HTTPAPI working group has a draft standard for this header. Follow it.
 - The server stores the key, a fingerprint of the request body and the response for at least 24 hours.
 - Same key, same body: return the stored response. Same key, different body: reject with an error (the draft suggests 422). Same key while the first request is still running: reject with 409.
-- Event consumers are idempotent too. Deduplicate on the CloudEvents `id` plus `source`, because brokers deliver at least once.
+- Event consumers are idempotent too. Deduplicate on the CloudEvents `id` plus `source`, because brokers deliver at least once. Record the processed ID in the same transaction as the side effect, or a crash between the two repeats the side effect.
+- A service that changes its database and publishes an event uses a transactional outbox: write the event to an outbox table in the same transaction, and relay it to the broker. Never write to the database and the broker as two separate steps. See [events and messaging](events-and-messaging.md).
+
+### Concurrent updates
+
+- Return an `ETag` on every resource that clients update. Require `If-Match` on `PUT`, `PATCH` and `DELETE` for resources that several people or systems edit, and answer a stale `ETag` with `412 Precondition Failed` (RFC 9110, conditional requests). This stops one client silently overwriting another's change.
 
 ### Rate limits
 
@@ -76,10 +81,14 @@ Every error response uses Problem Details for HTTP APIs (RFC 9457) with media ty
 ### Versioning and deprecation
 
 - Additive changes do not need a new version: new optional fields, new endpoints, new enum values that clients were told to expect.
-- Breaking changes need a new major version: removing or renaming a field, changing a type, making an optional field required, changing error `type` values, tightening validation.
+- Breaking changes need a new major version: removing or renaming a field, changing a type, making an optional field required, changing error `type` values, tightening validation. Also breaking, and often missed: changing a default, sort order, page size, rounding or null handling; a field that becomes nullable; a new required header.
+- Generated clients must treat enums as open: an unknown value maps to a default instead of failing. Many code generators produce closed enums, so a new enum value breaks them. Test this in your client SDKs.
+- Mobile and installed clients cannot be forced to upgrade by a date. Keep a minimum supported client version, return a Problem Details `type` that tells an old app to upgrade, and measure traffic by client version. Remove an old version when its traffic falls below an agreed share (starting point: 1% of requests), not only when a date passes.
 - Public HTTP APIs put the major version in the path (`/v1/`). Internal APIs may do the same or version by media type. Pick one per organisation.
 - Event schemas evolve only in backward-compatible ways. A breaking change is a new event type or a new major version in the type name.
 - Announce deprecation with the `Deprecation` header (RFC 9745) and the removal date with the `Sunset` header (RFC 8594). Link the migration guide with a `Link` header.
+
+This table is the playbook's single rule for notice periods, for APIs, events and libraries. [Versioning and changelogs](../delivery/versioning-and-changelogs.md) links here.
 
 | Consumer | Minimum notice from deprecation to removal (starting point) |
 |---|---|
@@ -91,7 +100,7 @@ Every error response uses Problem Details for HTTP APIs (RFC 9457) with media ty
 
 - Authenticate with OAuth 2.0 or OpenID Connect for users, and mutual TLS or short-lived tokens for services. No API keys in URLs.
 - Authorise every request at object level. Broken object-level authorisation tops the OWASP API Security Top 10.
-- TLS 1.2 or later on every hop, including inside the network.
+- TLS 1.3 by default on every hop, including inside the network. Allow TLS 1.2 only for named legacy clients, with an end date. Inside a service mesh with mutual TLS, the mesh provides this between services.
 
 ## Practice
 
@@ -148,6 +157,8 @@ Every error response uses Problem Details for HTTP APIs (RFC 9457) with media ty
 - RFC 6585, Additional HTTP Status Codes (429): https://www.rfc-editor.org/rfc/rfc6585
 - RFC 8594, The Sunset HTTP Header Field: https://www.rfc-editor.org/rfc/rfc8594
 - RFC 9745, The Deprecation HTTP Response Header Field: https://www.rfc-editor.org/rfc/rfc9745
+- RFC 9110, section 13, conditional requests (ETag, If-Match): https://www.rfc-editor.org/rfc/rfc9110#section-13
+- NIST SP 800-52 Rev. 2, guidelines for TLS implementations: https://csrc.nist.gov/pubs/sp/800/52/r2/final
 - IETF draft, The Idempotency-Key HTTP Header Field: https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/
 - IETF draft, RateLimit header fields for HTTP: https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/
 - OWASP API Security Top 10 (2023): https://owasp.org/API-Security/

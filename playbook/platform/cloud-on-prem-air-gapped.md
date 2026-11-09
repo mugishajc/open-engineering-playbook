@@ -58,6 +58,7 @@ Starting points. Tune them to your organisation.
 
 - Certificate validation, token expiry, log ordering and trace timing all depend on correct clocks. An isolated network drifts unless you give it a time source.
 - Run at least 2 internal time servers with an independent reference each. Configure every host with chrony or an equivalent client and alert on offsets above 100 milliseconds.
+- GNSS signals can be jammed or spoofed, and isolated sites are often the ones most exposed. Give each GNSS receiver a holdover oscillator (rubidium or OCXO) rated for your longest expected GNSS outage, and alert on loss of GNSS lock and on disagreement between the two time servers.
 
 ### Certificate revocation
 

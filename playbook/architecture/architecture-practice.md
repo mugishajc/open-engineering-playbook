@@ -49,7 +49,7 @@ A full ATAM takes several days with many stakeholders. For most decisions a 2 to
 
 ## Fitness functions
 
-A fitness function is an automated check that an architecture characteristic still holds, as described in "Building Evolutionary Architectures" (Ford, Parsons and Kua, 2017). Examples:
+A fitness function is an automated check that an architecture characteristic still holds, as described in "Building Evolutionary Architectures" (Ford, Parsons, Kua and Sadalage, 2nd edition, 2022). Examples:
 
 | Characteristic | Fitness function | Where it runs |
 |---|---|---|
@@ -153,6 +153,6 @@ Write the hosting environment into the context diagram and the quality attribute
 
 - Rick Kazman, Mark Klein and Paul Clements, "ATAM: Method for Architecture Evaluation", CMU/SEI-2000-TR-004, Software Engineering Institute, 2000: https://www.sei.cmu.edu
 - Len Bass, Paul Clements and Rick Kazman, "Software Architecture in Practice", Addison-Wesley.
-- Neal Ford, Rebecca Parsons and Patrick Kua, "Building Evolutionary Architectures", O'Reilly Media, 2017.
+- Neal Ford, Rebecca Parsons, Patrick Kua and Pramod Sadalage, "Building Evolutionary Architectures", 2nd edition, O'Reilly Media, 2022: https://www.oreilly.com/library/view/building-evolutionary-architectures/9781492097532/
 - Simon Brown, The C4 model for visualising software architecture: https://c4model.com
 - Scaled Agile Framework, Architectural Runway: https://scaledagileframework.com/architectural-runway/

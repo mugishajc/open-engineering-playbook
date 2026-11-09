@@ -57,11 +57,20 @@ The research supports a different model. The DORA programme lists test automatio
 
 Features built on language models give different answers to the same input, so an exact-match assertion cannot test them. Test them with evaluation sets and thresholds instead.
 
-- **Evaluation set per feature.** Start with 50 to 200 real or realistic inputs, each with the expected outcome or a grading rule. Include the failure cases you care about most: refusals that should happen, personal data that must not leak, prompt injection attempts, empty and very long inputs.
+- **Evaluation set per feature.** Real or realistic inputs, each with the expected outcome or a grading rule. These are the playbook's sizes; other pages link here:
+
+  | Set | Size (starting point) | When it runs |
+  |---|---|---|
+  | First set, Foundation | At least 100 cases | Before every release |
+  | Gating set | 50 to 200 cases, small enough for the 10-minute CI budget | Every change, blocks merge |
+  | Full set | 200 to 500 cases | Nightly and before launch |
+  | Grader check | A person grades at least 50 sampled cases a month per feature | Monthly |
+
+  Include the failure cases you care about most: refusals that should happen, personal data that must not leak, prompt injection attempts, empty and very long inputs.
 - **Thresholds, not single answers.** Define pass as a rate, for example "at least 95% of cases graded correct, and zero cases that leak personal data". A hard safety rule is a threshold of zero.
-- **Run it in CI.** Run the evaluation on every change to a prompt, model version, retrieval index or tool definition, and block merge when a threshold fails. Run a larger set nightly. See [continuous integration](../delivery/continuous-integration.md#in-the-ai-era).
-- **Repeat to measure variance.** Run each case 3 to 5 times, or pin sampling settings, so a pass is not luck. Track the pass rate over time, not one run.
-- **Check the graders.** Automated graders, including a model grading another model, need their own check: a person grades a sample (for example 50 cases a month) and you measure how often the grader agrees.
+- **Run it in CI.** Run the gating set on every change to a prompt, model version, retrieval index or tool definition, and block merge when a threshold fails. Run the full set nightly. See [continuous integration](../delivery/continuous-integration.md#in-the-ai-era).
+- **Repeat to measure variance.** Run each case 3 to 5 times and gate on the pass rate across runs, so a pass is not luck. Setting temperature to 0 reduces variation but does not remove it on hosted models, and some models do not accept a temperature setting at all. Track the pass rate over time, not one run.
+- **Check the graders.** Automated graders, including a model grading another model, need their own check: a person grades a sample (at least 50 cases a month per feature) and you measure how often the grader agrees.
 - **Grow the set from production.** Every user complaint, escaped defect or incident adds at least one case, the same way a bug fix adds a regression test.
 - **Assured.** Keep evaluation results per release with the model version and prompt version, as test evidence.
 

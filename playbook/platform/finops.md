@@ -34,6 +34,7 @@ Organisations move through the phases repeatedly, one product or service at a ti
 
 - Use the FOCUS specification (FinOps Open Cost and Usage Specification) as the common format where your providers support it, so cost data from several clouds and SaaS vendors can be combined.
 - For Kubernetes, allocate cluster cost to namespaces and workloads with a tool such as OpenCost (a CNCF project).
+- Allocate telemetry (log, trace and metric ingest) like compute, by owner tag. It is often a large line on the bill; see [observability](../architecture/observability.md#telemetry-cost) for ingest budgets.
 
 ### Optimisation, in order of effort
 

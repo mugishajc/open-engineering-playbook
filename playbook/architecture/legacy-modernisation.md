@@ -34,7 +34,7 @@ Martin Fowler named the pattern in 2004 after a vine that grows around a tree un
 2. **Capture current behaviour.** Write characterisation tests that record what the system does today, including its odd edge cases. Michael Feathers' "Working Effectively with Legacy Code" (2004) describes the technique.
 3. **Pick a thin first slice.** Choose a capability that is valuable, fairly self-contained and low risk: a read-only enquiry, a new product line, one region.
 4. **Build the slice on the new path.** Follow the [golden path](../platform/golden-paths.md). Give it its own data store if it can own the data.
-5. **Run in parallel or shadow.** Send copies of real requests to the new path and compare outputs with the old one before any user depends on it.
+5. **Run in parallel or shadow.** Copy read requests to the new path and compare responses with the old one before any user depends on it. For writes, either compare the computed result without committing it, or let the new path write only to its own isolated store with every external side effect (payments, messages, emails, partner calls) stubbed. A shadow request must never reach a real customer or partner.
 6. **Shift traffic gradually.** Use the facade or feature flags to move 1%, then 10%, then 50%, then 100% of traffic, with a rollback at each step.
 7. **Retire the old part.** Remove the code path, the data and the infrastructure. Update the catalogue.
 8. **Repeat** with the next slice. Re-plan every quarter.

@@ -1,6 +1,6 @@
 # Golden paths
 
-Give teams a supported, ready-made way to build and run the common kinds of software: a service template, a pipeline, a deployment target and the observability and security controls already wired in. Make it the easiest route, not the only one. Teams that follow the path get speed and support for free, and teams that leave it can, as long as they own the extra work and write down why.
+Give teams a supported, ready-made way to build and run the common kinds of software: a service template, a pipeline, a deployment target and the observability and security controls already wired in. Make it the easiest route, not the only one. Teams that follow the path get speed and support for free, and teams that leave it can, as long as they own the extra work and write down why. Some organisations call this a paved road; the playbook uses "golden path" for both.
 
 ## Outcomes
 
@@ -28,7 +28,7 @@ A golden path is opinionated, documented and maintained. For a typical backend s
 
 Build separate paths only for kinds of software you create often: backend service, web front end, data pipeline, scheduled job, library. Three good paths beat ten neglected ones.
 
-## Paved roads, not cages
+## A default, not a cage
 
 - The path is the default, not a mandate. Teams may leave it when they have a real reason.
 - Leaving the path means the team owns what the path would have given them: patching, scanning, pipeline upkeep, on-call tooling.

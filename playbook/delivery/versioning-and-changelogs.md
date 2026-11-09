@@ -9,7 +9,7 @@ Version anything other people depend on with Semantic Versioning 2.0.0, write co
 | Releases with a changelog entry | 100% |
 | Squash commits on `main` that follow Conventional Commits | 100%, enforced by the pull request title check |
 | Breaking changes shipped in a minor or patch release | Zero |
-| Deprecations announced before removal | 100%, with at least one minor release and 6 months of notice |
+| Deprecations announced before removal | 100%, with at least one minor release and the notice period for the consumer type in [API standards](../architecture/api-standards.md#versioning-and-deprecation) |
 | Time from merge to a published release (libraries) | Under 1 week |
 
 ## Choosing a scheme
@@ -54,13 +54,13 @@ With squash merge, only the pull request title must follow the format. The [pr-t
 
 ### Standard
 
-- **Automate with release-please.** On every push to `main`, release-please opens or updates a release pull request that bumps the version and the changelog from Conventional Commits. Merging that pull request creates the tag and the GitHub release. Templates: [workflow](../../templates/github/workflows/release-please.yml), [config](../../templates/github/release-please-config.json), [manifest](../../templates/github/.release-please-manifest.json).
+- **Automate with release-please.** On every push to `main`, release-please opens or updates a release pull request that bumps the version and the changelog from Conventional Commits. Merging that pull request creates the tag and the GitHub release. Run it with a GitHub App token, not the default `GITHUB_TOKEN`: required checks must run on the release pull request, and a tag created by `GITHUB_TOKEN` starts no workflow, so signing and SBOM jobs on tags would never run. The workflow template lists the 10-minute set-up. If you use release-please, delete the `Unreleased` section from the changelog template; release-please writes its own headings. Templates: [workflow](../../templates/github/workflows/release-please.yml), [config](../../templates/github/release-please-config.json), [manifest](../../templates/github/.release-please-manifest.json).
 - **Monorepos.** Version each package separately with release-please manifest mode, unless packages always release together.
 - **Breaking-change checks in CI** for published interfaces: API schema diff (OpenAPI, Protobuf), public symbol diff for libraries. A breaking change without `!` fails CI.
 - **Deprecation policy.**
   1. Mark the feature deprecated in code, docs and the changelog `Deprecated` section, in a minor release.
   2. Emit a runtime warning or response header (for HTTP APIs, the `Deprecation` and `Sunset` headers) that names the replacement and the removal date.
-  3. Keep the deprecated feature for at least one further minor release and at least 6 months (12 months for public-sector and regulated customers, as a starting point).
+  3. Keep the deprecated feature for at least one further minor release and for the notice period set by consumer type in [API standards](../architecture/api-standards.md#versioning-and-deprecation). Libraries follow the same table. Contracts with public-sector and regulated customers can set a longer period; the longer one wins.
   4. Remove it only in the next major release, listed under `Removed`.
   5. Measure use of the deprecated feature before removal. If use is still high, extend and contact users.
 - See [API standards](../architecture/api-standards.md) for API versioning.

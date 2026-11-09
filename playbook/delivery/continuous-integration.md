@@ -37,7 +37,7 @@ Starting targets. Tune them after a month of data.
 - **Hermetic builds.** A build uses only declared, pinned inputs: lockfiles, pinned base images by digest, pinned toolchains. It does not fetch "latest" anything. The same commit produces the same artifact. Aim for reproducible builds where your toolchain supports them.
 - **Pin third-party actions by full commit SHA.** Tags can move; a SHA cannot. Keep the version in a comment so update tools can bump it:
   ```yaml
-  - uses: actions/checkout@<full-40-character-sha> # v4
+  - uses: actions/checkout@<full-40-character-sha> # v7
   ```
   The playbook templates use major version tags so they work when copied; switch to SHAs before you rely on them. Renovate (`helpers:pinGitHubActionDigests`) and Dependabot can keep SHAs up to date.
 - **Least-privilege tokens.** Set `permissions: contents: read` at the top of every workflow and grant more only to the job that needs it. Set `persist-credentials: false` on checkout unless a later step pushes. On GitLab, limit the `CI_JOB_TOKEN` allowlist.
@@ -62,7 +62,7 @@ Starting targets. Tune them after a month of data.
 - **Pin the model.** CI calls a pinned model version, not an alias such as "latest", so a provider update cannot change results between two runs of the same commit. Record the model version in the build output.
 - **Control evaluation cost.** Cache model responses keyed on prompt, input and model version for unchanged cases, and set a spending limit per pipeline run.
 - **Generated tests are code.** Tests drafted by an assistant go through the same review as any other code. Check that each one fails without the change and asserts the requirement, not whatever the implementation happens to do. See [test-driven development](../quality/test-driven-development.md).
-- **Coding agents get the least privilege of all.** An agent that runs in CI or opens pull requests uses a short-lived token scoped to one repository, with `contents: write` and `pull-requests: write` at most, no access to production secrets or deployment environments, and no bypass permission on rulesets. Its pull requests pass the same required checks and human approval as anyone else's. See [code review](code-review.md#in-the-ai-era).
+- **Coding agents get the least privilege of all.** An agent that runs in CI or opens pull requests uses a short-lived token scoped to one repository, with `contents: write` and `pull-requests: write` at most, no access to production secrets or deployment environments, and no bypass permission on rulesets. Because CI runs whatever build scripts a branch contains, the agent pushes to a fork or to a branch prefix whose jobs get no secrets, and secrets live only in environments restricted to protected branches. Its pull requests pass the same required checks and human approval as anyone else's. See [code review](code-review.md#in-the-ai-era).
 - **Untrusted input reaches agents too.** Issue text, pull request descriptions and file contents can carry prompt injection. Never give an agent that reads untrusted input a token that can merge, release or read secrets.
 
 See [AI engineering practices](../ai/ai-engineering-practices.md), [AI architecture patterns](../ai/ai-architecture-patterns.md) and [code assistants](../people/code-assistants.md).

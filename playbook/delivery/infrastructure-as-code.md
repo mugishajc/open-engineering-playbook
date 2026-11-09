@@ -20,7 +20,7 @@ Starting targets. Tune them to your estate.
 | Tool | Model | Fits | Watch out for |
 |---|---|---|---|
 | Terraform | Declarative HCL, plan and apply, large provider catalogue | Multi-cloud and SaaS resources | Licence changed to the Business Source License in August 2023; check that your use is allowed |
-| OpenTofu | Open source fork of Terraform under the Linux Foundation, compatible language | Same as Terraform, with an open source licence | Check provider and feature compatibility for your version |
+| OpenTofu | Open source fork of Terraform, a CNCF project (Sandbox since April 2025), compatible language | Same as Terraform, with an open source licence | Check provider and feature compatibility for your version |
 | Pulumi | General-purpose languages (TypeScript, Python, Go, C#, Java) | Teams who want loops, types and tests in a familiar language | Discipline to keep code declarative and readable |
 | Crossplane | Kubernetes controllers that manage cloud resources as custom resources | Platforms that already run Kubernetes and GitOps | Requires a reliable management cluster |
 | Cloud-native tools (CloudFormation, AWS CDK, Azure Bicep, Google Cloud Infrastructure Manager) | Provider-specific | Single-cloud estates | Lock-in to one provider |
@@ -35,14 +35,17 @@ Record the choice in a [decision record](../architecture/decision-records.md) an
 - **Everything in code.** New infrastructure is created only through code in a repository. Console changes are for reading, not writing.
 - **Remote state with locking.** Store state in a remote backend that supports locking and encryption at rest (an object store bucket with versioning, or a managed backend). Never commit state to Git.
 - **State is a secret.** State can contain passwords, keys and connection strings. Restrict access to the people and pipelines that need it, and turn on versioning so you can recover a bad state.
-- **Secrets out of code and state where possible.** Read secrets at run time from a secret manager (Vault, OpenBao or a cloud secret manager) instead of passing them through the IaC tool. Where a value must pass through, mark it sensitive and use your tool's features that avoid writing it to state, where available. See [secrets](../security/secrets.md).
+- **Secrets out of code and state where possible.** Read secrets at run time from a secret manager (Vault, OpenBao or a cloud secret manager) instead of passing them through the IaC tool. Where a value must pass through, mark it sensitive and use ephemeral resources and write-only arguments where your tool and provider support them, so the value never reaches state. Turn on state encryption where your tool offers it (OpenTofu does natively). See [secrets](../security/secrets.md).
 - **Pin versions** of the tool, providers and modules, and commit the lock file.
 - **Format and validate in CI** (`fmt`, `validate`, a linter such as TFLint).
 
 ### Standard
 
 - **Plan in the pull request.** CI runs `plan` for each changed root module and posts the output to the pull request. Reviewers read the plan, especially every `destroy` and `replace`. Tools such as Atlantis or your CI platform can do this.
-- **Apply from the pipeline after merge**, using the plan that was reviewed, with a short-lived identity (OIDC federation, no long-lived keys). See [continuous integration](continuous-integration.md).
+- **Apply from the pipeline**, with a short-lived identity (OIDC federation, no long-lived keys). See [continuous integration](continuous-integration.md). Choose one apply model per repository and record it in an ADR:
+  - *Apply after merge.* Re-plan on `main` and apply only if the plan matches what reviewers saw; fail loudly otherwise. Risk: if apply fails, `main` describes infrastructure that does not exist until someone fixes it.
+  - *Apply before merge* (the Atlantis default). Lock the root module, apply from the pull request, then merge, so `main` always matches what is running. Risk: a locked module blocks other changes until the pull request merges.
+  - Either way, never apply a saved plan that is older than the last change to its state.
 - **Small root modules.** Split state by environment and by blast radius (network, data, compute, per service). A plan that touches hundreds of resources is hard to review and slow to lock.
 - **Reusable modules** with versioned releases, inputs validated, and examples. Keep a small internal module registry. Teams consume modules through [golden paths](../platform/golden-paths.md).
 - **Policy as code before apply.** Check plans against rules with Open Policy Agent (Conftest), or a scanner such as Checkov or Trivy: no public storage buckets, encryption on, required tags, approved regions only. For Kubernetes resources, enforce at admission with Kyverno or OPA Gatekeeper.
@@ -84,6 +87,8 @@ Record the choice in a [decision record](../architecture/decision-records.md) an
 ## Sources
 
 - OpenTofu documentation: https://opentofu.org/docs/
+- CNCF, OpenTofu project page: https://www.cncf.io/projects/opentofu/
+- Atlantis, apply requirements and workflow: https://www.runatlantis.io/docs/apply-requirements.html
 - Terraform documentation: https://developer.hashicorp.com/terraform/docs
 - Pulumi documentation: https://www.pulumi.com/docs/
 - Crossplane documentation: https://docs.crossplane.io/

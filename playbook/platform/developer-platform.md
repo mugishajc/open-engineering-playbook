@@ -7,7 +7,7 @@ Build an internal developer platform only when several teams are solving the sam
 Starting points. Tune them to your organisation.
 
 - Common requests (new service, new database, new environment, DNS record, certificate, secret) are self-service and complete in under 1 hour without a ticket.
-- Platform services meet their own published SLOs, for example 99.5% availability for CI and the deployment pipeline during working hours.
+- Platform services meet their own published SLOs, for example 99.5% availability for CI during working hours. The deploy and rollback path is held to the highest tier of any service it deploys, 24/7, because it is how teams roll back at night.
 - Developer satisfaction with the platform, surveyed every 6 months, is stable or rising. Response rate is at least 40%.
 - Time spent by stream-aligned teams on infrastructure work falls quarter on quarter, measured by survey or by work item tagging.
 
@@ -61,6 +61,7 @@ Signals that you need one: every team writes its own pipeline, teams wait days f
 - Self-service creation for the common requests in the outcomes list.
 - Platform changes that affect other teams go through an [RFC](../architecture/rfcs.md).
 - Quarterly platform review: adoption, SLOs, survey results, top support topics, next quarter's plan.
+- **Break-glass deploy path.** A documented way to deploy the previous signed artifact that does not depend on CI, for example a pull request to the GitOps repository applied by the in-cluster agent, or a written manual procedure with logged access. Test it in the quarterly rollback drill (see [rollbacks](../reliability/rollbacks.md)).
 
 ### Assured
 
@@ -93,6 +94,7 @@ The platform is where hosting differences are absorbed, so product teams see the
 | Mandating the platform before it is good | Make it optional and better. Adoption is the test of whether it is good. |
 | Portal built before the capabilities behind it | Capabilities first. A portal on top of manual steps is a slower ticket form. |
 | Platform team owns everything, including product teams' services | The platform runs the platform. Teams own and operate their services. |
+| Deploy pipeline held only to working hours | Hold the rollback path to the highest tier it deploys, 24/7, with a break-glass path. |
 
 ## Templates
 

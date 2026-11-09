@@ -157,7 +157,7 @@ Watch these at team level to improve the process:
 
 ## Cloud, on-premises and air-gapped
 
-Every practice here works on self-hosted GitLab, GitHub Enterprise Server, Gitea or Forgejo and Bitbucket Data Center. Check which approval rules your edition supports (code owner approval and last-push approval vary by edition and version). In air-gapped networks, reviewers cannot open external links, so authors paste the relevant part of any external document into the description.
+Every practice here works on self-hosted GitLab, GitHub Enterprise Server, Gitea or Forgejo and Bitbucket Data Center. Check which approval rules your edition supports (code owner approval and last-push approval vary by edition and version). On GitLab, Code Owners needs Premium or Ultimate; on the Free tier, name reviewers on each merge request and record the approval. In air-gapped networks, reviewers cannot open external links, so authors paste the relevant part of any external document into the description.
 
 ## Anti-patterns
 

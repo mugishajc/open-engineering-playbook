@@ -13,7 +13,7 @@ Starting targets. Tune them to your platform.
 | Drift between Git and a running environment | Detected within 15 minutes, resolved within 1 working day |
 | Production rollouts that use staged delivery with automatic analysis | 100% of user-facing services at Standard |
 | Configuration and content changes rolled out in stages | 100% for anything that can stop the service |
-| Rollback time (decision to previous version serving all traffic) | Under 15 minutes, the limit in [rollbacks](../reliability/rollbacks.md); a Git revert with automatic sync usually achieves under 5 |
+| Rollback time (decision to previous version serving all traffic) | Under 15 minutes, the limit in [rollbacks](../reliability/rollbacks.md), measured in the quarterly drill. Under progressive delivery, only the fast path below meets it; a plain Git revert re-runs every canary step |
 
 ## GitOps in four principles
 
@@ -44,19 +44,37 @@ Every strategy except recreate runs two versions at once, so every change must b
 
 - **Deploys are code.** Every environment is described in Git (manifests, Helm values, Compose files or IaC). A person changes Git, not the server.
 - **Build once, deploy many.** Environments reference an artifact by version or, better, by image digest. See [environments](environments.md).
-- **Rolling deploys with health checks.** A readiness check that confirms the instance can serve real requests, a liveness check that tests only the process itself, and a maximum unavailable count of 0 for services that must stay up. Never make liveness depend on a database or downstream service: when that dependency fails, every instance restarts at once and a partial outage becomes a full one.
-- **Practise rollback.** Revert the Git change and let the deploy run, at least once a quarter. See [release management](release-management.md).
+- **Rolling deploys with health checks.** A readiness check that confirms this instance can serve (started, warmed up, not overloaded, not shutting down), a liveness check that tests only the process itself, and a maximum unavailable count of 0 for services that must stay up. Never make liveness or readiness depend on a database or other dependency that every instance shares: when it fails, every instance restarts or leaves the load balancer at once and a partial outage becomes a full one. See [observability](../architecture/observability.md#minimum-signals-every-service-exposes).
+- **Practise rollback.** Roll back the last change in a drill at least once a quarter and time it from decision to previous version serving all traffic. See [release management](release-management.md).
 - **Solo and startup:** a single CI job that deploys from `main` is fine. Move to a pull-based agent when you have more than one cluster or environment to keep in sync.
 
 ### Standard
 
 - **GitOps agent per cluster or environment** (Argo CD or Flux) with automatic sync and self-heal turned on for application workloads. Templates: [Argo CD Application](../../templates/platform/argocd-application.yaml), [Kubernetes service baseline](../../templates/platform/k8s-service-baseline.yaml).
+- **Leave fields that controllers own out of Git.** When a HorizontalPodAutoscaler manages a Deployment, remove `spec.replicas` from the manifest and add an Argo CD `ignoreDifferences` rule for `/spec/replicas` with the `RespectIgnoreDifferences=true` sync option (Flux: leave the field out). Otherwise every sync and every self-heal resets the count and scales the service down at peak load. Fail CI when a Deployment sets `spec.replicas` and an HPA targets it.
+- **Trigger sync from Git.** Use a Git webhook so the agent applies a merge at once rather than at its next poll (Argo CD polls every 3 minutes by default).
 - **Repository layout.** Keep application source and environment configuration in separate repositories, or separate directories with separate owners. Use one directory per environment (for example `envs/staging`, `envs/production`) on one branch. Avoid one branch per environment: branches drift and merges between them hide changes.
 - **Promotion.** Promote by changing the image digest in the next environment's directory through a pull request, opened automatically after the previous environment passes its checks. The pull request is the record.
-- **Progressive delivery.** Use Argo Rollouts or Flagger to run canary steps (for example 1%, 10%, 50%, 100%, holding each step at least 10 minutes; start at 5% or more when 1% of traffic gives too few requests to compare) with analysis against error rate and latency from your metrics system. Abort and roll back automatically when analysis fails.
+- **Progressive delivery.** Use Argo Rollouts or Flagger to run canary steps (for example 1%, 10%, 50%, 100%, holding each step at least 10 minutes; start at 5% or more when 1% of traffic gives too few requests to compare) with analysis against error rate and latency from your metrics system. Abort and roll back automatically when analysis fails. Judge a step only after a minimum sample (for example 10,000 requests, or enough to expect 50 errors at the baseline rate), and compare the canary with a baseline of the same size started at the same time, not with the warm old fleet. A fixed "twice the error rate" rule on a few hundred requests is noise.
 - **Drift detection.** The agent alerts when live state differs from Git. Manual changes are reverted by self-heal or turned into a pull request within 1 working day.
 - **Secrets.** Do not store plain secrets in Git. Use an external secrets operator that reads from Vault, OpenBao or a cloud secret manager, or encrypt with SOPS or Sealed Secrets. See [secrets](../security/secrets.md).
-- **Sync windows** instead of freezes: block automatic production sync during agreed high-risk periods, with an override for incident fixes.
+- **Sync windows** instead of freezes: block production sync during agreed high-risk periods. In Argo CD a deny window blocks manual syncs too, so set `manualSync: true` on it; that is the override for incident fixes.
+
+#### Rolling back under progressive delivery
+
+A Git revert is a new rollout. Argo Rollouts and Flagger run every canary step and analysis again, so with 4 steps of 10 minutes a revert takes about 40 minutes. Use the fast path instead, and time it in the quarterly drill.
+
+1. **Act in the rollout controller first.** While a rollout is in progress, abort it (`kubectl argo rollouts abort <rollout>`) and traffic returns to the stable version at once. After a rollout has finished, set `rollbackWindow` (Argo Rollouts 1.4 or later, for example `revisions: 3`) so a move back to a recent revision skips the steps; in Flagger, set `skipAnalysis: true` for the rollback.
+2. **Then reconcile Git.** Revert the change in Git within the incident, so Git again describes what runs and self-heal does not bring the bad version back.
+3. **Do not wait for proof.** Roll back first and diagnose afterwards, as set out in [rollbacks](../reliability/rollbacks.md).
+
+#### Changing production during an incident
+
+Self-heal reverts any change made directly in the cluster within minutes, often without anyone noticing.
+
+1. **First choice: change Git** through an emergency pull request with one reviewer, or reviewed after the incident if the incident commander says so.
+2. **If Git is too slow,** the incident commander approves pausing auto-sync for the one Application (`argocd app set <app> --sync-policy none`, or `flux suspend` for Flux). The responder logs the pause and every manual command in the incident channel.
+3. **Before the incident closes,** put the change in Git and turn auto-sync back on. This is a required step in the incident checklist, not a follow-up action.
 
 #### Staged rollout of configuration and content
 
@@ -86,7 +104,9 @@ In July 2024, a CrowdStrike Falcon content update crashed Windows hosts worldwid
 
 | Anti-pattern | Fix |
 |---|---|
-| `kubectl apply` from a laptop | All changes through Git and the agent. |
+| `kubectl apply` from a laptop | All changes through Git and the agent. In an incident, pause auto-sync for one Application, log it, and restore it before closing. |
+| HPA and `spec.replicas` both in Git, with self-heal on | Remove `spec.replicas`; ignore it in Argo CD. |
+| Git revert as the only rollback under canary delivery | Abort or use the rollback window first, then revert Git. |
 | CI holds admin credentials to every cluster | Pull-based agent inside each cluster. |
 | One branch per environment | One directory per environment, promotion by pull request. |
 | Configuration pushed to every customer at once | Staged rollout with health checks and pause, as for code. |
@@ -105,6 +125,10 @@ In July 2024, a CrowdStrike Falcon content update crashed Windows hosts worldwid
 - Argo CD documentation: https://argo-cd.readthedocs.io/
 - Flux documentation: https://fluxcd.io/flux/
 - Argo Rollouts documentation: https://argoproj.github.io/argo-rollouts/
+- Argo Rollouts, rollback windows: https://argo-rollouts.readthedocs.io/en/stable/features/rollback/
+- Argo CD, diffing customisation and sync options: https://argo-cd.readthedocs.io/en/stable/user-guide/diffing/ and https://argo-cd.readthedocs.io/en/stable/user-guide/sync-options/
+- Argo CD, sync windows: https://argo-cd.readthedocs.io/en/stable/user-guide/sync_windows/
+- Kubernetes, horizontal pod autoscaling (removing `spec.replicas`): https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
 - Flagger documentation: https://docs.flagger.app/
 - Kubernetes, deployments: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
 - Google SRE workbook, canarying releases: https://sre.google/workbook/canarying-releases/

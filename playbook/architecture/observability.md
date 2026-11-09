@@ -17,7 +17,7 @@ Starting points. Tune them to your organisation.
 | Signal | Requirement |
 |---|---|
 | Resource attributes | `service.name`, `service.version`, `deployment.environment.name` on every span, metric and log, following OpenTelemetry semantic conventions |
-| Health | Liveness and readiness endpoints. Readiness fails when a hard dependency is unavailable. |
+| Health | Liveness checks only that the process is not stuck. Readiness checks that this instance can serve: started, warmed up, not overloaded, not shutting down. Do not fail either because a dependency that every instance shares (a database, a queue, another service) is down: every replica would fail together and the service would lose all its endpoints. Handle dependency failure in the request path with timeouts, circuit breakers and a degraded or fast error response, and show it in the dependency metrics. |
 | Request metrics | Rate, errors and duration (as a histogram) for every inbound endpoint, labelled by route template, not by raw URL |
 | Dependency metrics | The same three for every outbound call: databases, queues, other services |
 | Saturation | CPU, memory, connection pool use, queue depth: the resources that run out first |
@@ -61,14 +61,34 @@ Each unique combination of metric name and label values is a separate time serie
 - Measure series per service in the metrics backend. Alert the owning team at 80% of budget. Review the top 10 series producers every month.
 - Use the Collector to drop or aggregate labels before data leaves the cluster.
 
+## Telemetry cost
+
+Log volume and trace ingest often cost more than metrics, and most vendors charge by volume.
+
+- Give each service a monthly ingest budget (GB of logs, spans, active series) and show it to the owning team every month. Allocate telemetry cost like compute, by owner tag (see [FinOps](../platform/finops.md)).
+- Drop `DEBUG` in production at the Collector. Sample high-volume success logs. Turn log lines that repeat thousands of times an hour into metrics.
+- Tier retention: searchable for the periods below, cheaper storage after that.
+- Review the top 10 producers of logs and spans every month, as for series.
+
 ## Sampling and retention
 
 | Data | Starting point |
 |---|---|
-| Traces | Keep 100% of error and slow traces (tail sampling in the Collector), 10% of the rest. Retain 7 to 14 days. |
+| Traces | Keep 100% of error and slow traces (tail sampling in the Collector), 10% of the rest. Retain 7 to 14 days. Tail sampling needs every span of a trace in one Collector: put a tier with the load-balancing exporter, routing by trace ID, in front of the sampling gateways, and size their memory for the decision wait. |
 | Metrics | Full resolution for 30 days, downsampled for 13 months to allow year-on-year comparison |
 | Application logs | 30 days searchable. Longer only for a stated reason. |
 | Audit logs | As long as your regulator or records policy requires, often 1 year or more, in tamper-evident storage |
+| Security logs | 12 months, with the last 3 months searchable at once (starting point). See below. |
+
+## Security logging
+
+Security logs are evidence, not debugging data. Keep them apart from application logs.
+
+- **Sources.** At least: the identity provider, the cloud control plane audit log, the source control and CI audit logs, the secret manager, privileged sessions, the Kubernetes API server audit log and endpoint detection where you run it.
+- **Retention.** 12 months, 3 months immediately searchable, which matches PCI DSS v4.0.1 requirement 10.5.1. Keep longer, or in a set country, where a law or regulator requires it; list those rules next to this one.
+- **Integrity.** Write-once storage owned by a team that does not administer the systems being logged, so an administrator cannot erase their own trail.
+- **Time.** Every source synchronises to a trusted NTP or PTP source, with an alert on drift.
+- **Detection.** Each detection rule has a named owner and a test in CI that feeds it a sample event. See [zero trust](../security/zero-trust.md) for identity signals.
 
 ## Practice
 
@@ -85,6 +105,7 @@ Each unique combination of metric name and label values is a separate time serie
 - Cardinality budgets are set per service and monitored.
 - Dashboards and alert rules are stored as code in git and reviewed like code.
 - The platform team owns the observability stack, with its own SLOs.
+- **Alert on the alerting.** Silence from a broken monitoring stack looks the same as a healthy system. Run an always-firing heartbeat alert through the full path (rule, Alertmanager, paging tool) to an external dead man's switch that pages if the heartbeat stops for 10 minutes. Alert when a scrape target or Collector pipeline stops sending data (`up == 0`, `absent()`), not only when the data shows errors. Probe the paging tool and the status page from a second provider. Test the paging path end to end every month.
 
 ### Assured
 
@@ -116,6 +137,8 @@ In air-gapped networks, check every component for telemetry or licence checks th
 | Each team picks its own vendor SDK | OpenTelemetry everywhere. Change backends at the Collector. |
 | Logs full of personal data "for debugging" | Mask by default. Debug access to raw data goes through an approved, logged process. |
 | Instrumentation added after the first incident | It is part of the service template and the readiness review. |
+| Readiness fails when the shared database is down | Readiness covers this instance only; degrade in the request path. |
+| No alert when the monitoring itself stops | Heartbeat to an external dead man's switch, absent-data alerts. |
 
 ## Templates
 
@@ -132,3 +155,7 @@ In air-gapped networks, check every component for telemetry or licence checks th
 - Google SRE Workbook, "Alerting on SLOs": https://sre.google/workbook/alerting-on-slos/
 - Prometheus instrumentation practices: https://prometheus.io/docs/practices/instrumentation/
 - Brendan Gregg, The USE Method: https://www.brendangregg.com/usemethod.html
+- Kubernetes, liveness, readiness and startup probes: https://kubernetes.io/docs/concepts/configuration/liveness-readiness-startup-probes/
+- OpenTelemetry Collector, tail sampling processor and load-balancing exporter: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/tailsamplingprocessor
+- Prometheus Alertmanager: https://prometheus.io/docs/alerting/latest/alertmanager/
+- PCI DSS v4.0.1, requirement 10.5.1: https://www.pcisecuritystandards.org/document_library/
