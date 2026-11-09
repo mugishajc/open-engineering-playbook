@@ -31,7 +31,7 @@ Use your organisation's classification scheme. If you have none, start with the 
 | Public | Open source code, published docs | Any tool on the approved list |
 | Internal | Most application code, internal docs | Approved tools under an enterprise agreement that excludes your data from model training and limits retention |
 | Confidential | Security-sensitive code (authentication, cryptography, fraud rules), unreleased product code, customer configuration | Approved enterprise tools with contractual data residency and zero or minimal retention, or self-hosted models |
-| Restricted | Secrets, personal data, production data, classified material, code on air-gapped networks | Self-hosted models inside the same security boundary, or no assistant |
+| Restricted | Secrets, personal data, production data, code on air-gapped networks. Government classified information follows its national scheme | Self-hosted models inside the same security boundary, or no assistant |
 
 Self-hosted options mean open-weight models served on your own hardware with an inference server such as vLLM. They cost GPU capacity and operations effort, and model quality varies. Treat model weights as third-party software: check the licence, verify checksums, record the version and assess them before use.
 

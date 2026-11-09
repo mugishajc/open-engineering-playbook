@@ -44,7 +44,7 @@ Starting points. Tune them to your organisation.
 ### Pairing and rotation
 
 - Pair or mob on unfamiliar systems, and rotate who handles operational work so knowledge spreads.
-- Short rotations (2 to 6 weeks) between teams, or into the platform team, spread context and build trust.
+- Short rotations (2 to 6 weeks) between teams, or into the platform team, spread context and build trust. To build a new skill, use the longer rotations (4 to 12 weeks) in [skills gap](skills-gap.md).
 
 ## Practice
 

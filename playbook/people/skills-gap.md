@@ -36,7 +36,8 @@ Starting points. Tune them to your organisation.
 - **Pairing and mob programming.** Pair a specialist with a learner on real work. For a skill the whole team needs, work as a group on one problem for a few days.
 - **Hands-on labs.** Short, self-paced exercises on a safe environment: break a deployment and fix it, rotate a secret, trace a slow request.
 - **Game days.** Practise failures in a controlled way: kill a node, expire a certificate, restore a backup. Everyone learns the system and the runbooks get better (see [incident management](../reliability/incident-management.md)).
-- **Rotations.** Engineers spend 4 to 12 weeks in the platform, security or SRE team, then return to their own team with the skills.
+- **Rotations.** Engineers spend 4 to 12 weeks in the platform, security or SRE team, then return to their own team with the skills. These are longer than the 2 to 6 week rotations in [knowledge sharing](knowledge-sharing.md) on purpose: short rotations spread context, long ones build a skill.
+- **Use the playbook's exercises.** The [exercises](../../exercises/README.md) give you ready material: katas for code review, threat modelling and error budgets, tabletop scenarios for game days, and a true-or-false quiz per area.
 
 ### Structure the learning
 
