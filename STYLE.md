@@ -16,10 +16,12 @@ The playbook is read by solo engineers, CTOs, auditors, procurement officers and
 9. **No hype.** The playbook does not "revolutionise" anything. Describe what a practice does and what it costs.
 10. **No emojis** in the playbook or templates.
 11. **British or American spelling is fine**, but stay consistent within one page.
+12. **Expand acronyms.** Spell out an acronym the first time it appears on a page, for example "recovery time objective (RTO)", unless the page links to the [glossary](GLOSSARY.md). Add new terms to the glossary.
+13. **One term per idea.** Use the terms in the table below. Readers of a second language assume two words mean two things.
 
 ## Words we do not use
 
-These words are vague, overused, or signal text that was not written with care. The plain-language check in CI fails on them. The full list lives in [`tools/plain-language.txt`](tools/plain-language.txt).
+These words are vague, overused, or signal text that was not written with care. The check in CI fails on every word in [`tools/plain-language.txt`](tools/plain-language.txt). The table shows the most common ones. Some words in the table, such as "journey" and "ecosystem", have exact uses ("user journey", a package ecosystem setting), so the list leaves them out and reviewers catch the vague uses.
 
 | Instead of | Write |
 |---|---|
@@ -34,6 +36,18 @@ These words are vague, overused, or signal text that was not written with care. 
 | ecosystem | tools, projects, community: name them |
 | journey | process, plan, path |
 
+## Terms we use
+
+| Use | Not | Note |
+|---|---|---|
+| golden path | paved road | the [glossary](GLOSSARY.md) lists "paved road" as an alias |
+| decision record (ADR) | architecture decision, design record | |
+| Startup, Scale-up, SME (capital) when naming a profile | startup, scale-up | lower case for the general idea: "a startup with 12 engineers" |
+| Tier 1, Tier 2, Tier 3 | tier 1, T1 | T1 only inside tables short of space |
+| public sector (noun), public-sector (before a noun) | | "the public sector", "a public-sector body" |
+| pull request (GitHub) or merge request (GitLab) | PR, MR | write both on pages that apply to both |
+| DORA metrics; EU DORA regulation | DORA alone | always say which one |
+
 ## Page layout
 
 Every page in `playbook/` follows the same shape so readers can scan:
@@ -47,7 +61,7 @@ Opening paragraph: the decision and the reason, in three sentences or fewer.
 Measurable signs that the practice is working.
 
 ## Practice
-### Foundation   (solo, startup)
+### Foundation   (SME, solo, startup)
 ### Standard     (scale-up, enterprise)
 ### Assured      (regulated industries, public sector)
 
@@ -69,7 +83,8 @@ A section can be skipped when it does not apply. Say so in one line rather than 
 ## Checking your writing
 
 ```bash
-python3 tools/plain_lint.py
+python3 tools/plain_lint.py          # banned words and dashes
+python3 tools/check_structure.py     # every page has the sections above
 ```
 
-The check runs on every pull request.
+Both checks run on every pull request. They need Python 3.11 or later.

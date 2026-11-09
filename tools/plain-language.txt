@@ -95,3 +95,12 @@ ever-changing
 utilise
 utilize
 in the realm of
+# Added in 2026.11.1: the plain-word rules in STYLE.md (rules 6 and 8).
+# "facilitate", "simply" and "just" stay off the list: they have honest uses
+# (a workshop facilitator, "just-in-time"), so reviewers catch them instead.
+commence
+commences
+utilises
+utilizes
+in order to
+basically

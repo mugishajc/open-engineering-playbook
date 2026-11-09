@@ -165,5 +165,44 @@ class CommandLine(unittest.TestCase):
         self.assertEqual(code, 1)
 
 
+
+
+class LongSentences(unittest.TestCase):
+    def warn(self, text, limit=10, name="page.md"):
+        return list(plain_lint.long_sentences(Path(name), text, limit))
+
+    def test_long_sentence_is_warned(self):
+        text = "Short one. " + " ".join(["Word"] + ["word"] * 11) + "."
+        found = self.warn(text)
+        self.assertEqual(len(found), 1)
+        self.assertIn("12 words", found[0].message)
+        self.assertTrue(found[0].message.startswith("warning"))
+
+    def test_code_tables_and_headings_are_skipped(self):
+        long = " ".join(["word"] * 20)
+        text = f"# {long}\n| {long} |\n```\n{long}\n```\n"
+        self.assertEqual(self.warn(text), [])
+
+    def test_link_targets_do_not_count(self):
+        text = "Read [this page](a/very/long/path/with/many/parts.md) now."
+        self.assertEqual(self.warn(text, limit=4), [])
+
+    def test_only_markdown_and_off_by_default(self):
+        long = " ".join(["word"] * 20) + "."
+        self.assertEqual(self.warn(long, name="a.py"), [])
+        self.assertEqual(self.warn(long, limit=0), [])
+
+    def test_warnings_do_not_change_exit_code(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            page = Path(tmp) / "page.md"
+            page.write_text(" ".join(["word"] * 40) + ".\n", encoding="utf-8")
+            out, err = io.StringIO(), io.StringIO()
+            with contextlib.redirect_stdout(out), contextlib.redirect_stderr(err):
+                code = plain_lint.main([str(page), "--long-sentences", "30"])
+            self.assertEqual(code, 0)
+            self.assertEqual(out.getvalue(), "")
+            self.assertIn("40 words", err.getvalue())
+
+
 if __name__ == "__main__":
     unittest.main()

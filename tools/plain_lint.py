@@ -8,8 +8,14 @@ Fails when a text file contains:
 
 Usage:
   python3 tools/plain_lint.py [PATH ...]
+  python3 tools/plain_lint.py --long-sentences 30 README.md
 
 With no paths it scans the current directory. Exit code 1 means findings.
+
+--long-sentences N also prints a warning for each sentence of more than N
+words in Markdown prose (headings, tables, lists of links and code blocks are
+skipped). Warnings never change the exit code: long sentences are sometimes
+the clearest choice, but most can be split.
 Standard library only, Python 3.9 or later.
 """
 from __future__ import annotations
@@ -86,6 +92,30 @@ def check_text(path: Path, text: str, patterns: Sequence[re.Pattern]) -> Iterato
                 yield Finding(path, lineno, m.start() + 1, "emoji in Markdown")
 
 
+SENTENCE_SPLIT = re.compile(r"(?<=[.!?])[\"')]?\s+(?=[A-Z0-9\"'(\[`*])")
+LINK = re.compile(r"\[([^\]]*)\]\([^)]*\)")
+
+
+def long_sentences(path: Path, text: str, limit: int) -> Iterator[Finding]:
+    """Sentences of more than `limit` words in Markdown prose, as warnings."""
+    if path.suffix != ".md" or limit <= 0:
+        return
+    in_code = False
+    for lineno, line in enumerate(text.splitlines(), start=1):
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code or not stripped or stripped[0] in "#|<>" or stripped.startswith("    "):
+            continue
+        prose = LINK.sub(r"\1", stripped.lstrip("-*0123456789. "))
+        for sentence in SENTENCE_SPLIT.split(prose):
+            words = len(sentence.split())
+            if words > limit:
+                col = line.find(sentence[:20]) + 1 if sentence[:20] in line else 1
+                yield Finding(path, lineno, col, f"warning: sentence of {words} words (limit {limit})")
+
+
 def iter_files(paths: Iterable[Path], exclude: Sequence[Path]) -> Iterator[Path]:
     excluded = {p.resolve() for p in exclude}
     for root in paths:
@@ -119,6 +149,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("paths", nargs="*", type=Path, default=[Path(".")])
     parser.add_argument("--wordlist", type=Path, default=DEFAULT_WORDLIST)
+    parser.add_argument(
+        "--long-sentences",
+        type=int,
+        default=0,
+        metavar="N",
+        help="also warn about sentences longer than N words in Markdown (warnings only)",
+    )
     args = parser.parse_args(argv)
 
     missing = [p for p in args.paths if not p.exists()]
@@ -130,6 +167,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     findings = run(args.paths, args.wordlist)
     for f in findings:
         print(f)
+    if args.long_sentences > 0:
+        for f in iter_files(args.paths, [args.wordlist, Path(__file__)]):
+            try:
+                text = f.read_text(encoding="utf-8")
+            except (UnicodeDecodeError, OSError):
+                continue
+            for w in long_sentences(f, text, args.long_sentences):
+                print(w, file=sys.stderr)
     if findings:
         print(f"\n{len(findings)} finding(s). See STYLE.md.", file=sys.stderr)
         return 1
