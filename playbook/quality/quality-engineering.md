@@ -9,7 +9,7 @@ Starting targets. Tune them to your product and risk.
 | Signal | Starting target |
 |---|---|
 | Time work waits in a "ready for test" or "in QA" column | Under 1 working day, then remove the column |
-| Change fail rate (DORA) | Under 15% |
+| Change fail rate (DORA metrics) | Under 15% |
 | Escaped defects (found by users or in production) per month | Tracked per team, trending down |
 | Defects found by automated checks before merge, as a share of all defects found | Rising quarter on quarter |
 | Manual regression phase before release | None for services you deploy yourself |
@@ -68,13 +68,15 @@ Features built on language models give different answers to the same input, so a
 
   Include the failure cases you care about most: refusals that should happen, personal data that must not leak, prompt injection attempts, empty and very long inputs.
 - **Thresholds, not single answers.** Define pass as a rate, for example "at least 95% of cases graded correct, and zero cases that leak personal data". A hard safety rule is a threshold of zero.
+- **Know what the set size can show.** With 100 cases, an observed pass rate of 95% fits a true rate anywhere from about 89% to 98% (95% confidence interval). A small gating set catches large drops, not a fall of 2 points. To compare two prompt or model versions, run both on the same cases and count the cases that changed from pass to fail.
+- **Slice the results.** Report the pass rate per language, user group and input type, not only overall. A feature can pass at 95% overall and fail most cases in one language you serve. Set the threshold per slice for the slices you care about.
 - **Run it in CI.** Run the gating set on every change to a prompt, model version, retrieval index or tool definition, and block merge when a threshold fails. Run the full set nightly. See [continuous integration](../delivery/continuous-integration.md#in-the-ai-era).
 - **Repeat to measure variance.** Run each case 3 to 5 times and gate on the pass rate across runs, so a pass is not luck. Setting temperature to 0 reduces variation but does not remove it on hosted models, and some models do not accept a temperature setting at all. Track the pass rate over time, not one run.
 - **Check the graders.** Automated graders, including a model grading another model, need their own check: a person grades a sample (at least 50 cases a month per feature) and you measure how often the grader agrees.
 - **Grow the set from production.** Every user complaint, escaped defect or incident adds at least one case, the same way a bug fix adds a regression test.
 - **Assured.** Keep evaluation results per release with the model version and prompt version, as test evidence.
 
-See [AI engineering practices](../ai/ai-engineering-practices.md), [AI architecture patterns](../ai/ai-architecture-patterns.md) and [code assistants](../people/code-assistants.md).
+How the tester's job changes when assistants write much of the code is in [for QA and test leaders](../../leaders/for-qa-and-test-leaders.md#the-changing-role-of-testers). See also [AI engineering practices](../ai/ai-engineering-practices.md), [AI architecture patterns](../ai/ai-architecture-patterns.md) and [code assistants](../people/code-assistants.md).
 
 ## Cloud, on-premises and air-gapped
 
@@ -91,6 +93,17 @@ See [AI engineering practices](../ai/ai-engineering-practices.md), [AI architect
 | Quality measured by test cases executed or bugs logged by testers | Measure escaped defects, change fail rate and recovery time. |
 | "QA approved it" used to shift blame | The team owns quality. Postmortems are blameless. |
 | Hardening sprint before each release | Definition of done includes tests. Fix the process that creates the backlog of defects. |
+
+## See also
+
+- [Test strategy](test-strategy.md): risk-based test depth, test design techniques, release gates.
+- [Test automation](test-automation.md): layers, ownership, flakiness control, speed budgets.
+- [Performance testing](performance-testing.md): workload models, percentiles, soak and spike tests, capacity.
+- [Security testing](security-testing.md): pipeline scans, OWASP ASVS levels, penetration testing.
+- [Accessibility testing](accessibility-testing.md): automated and manual testing, assistive technology, legal duties.
+- [Exploratory and acceptance testing](exploratory-and-acceptance-testing.md): chartered sessions and UAT that is not a rubber stamp.
+- [Test data and environments](test-data-and-environments.md): synthetic data, masking, isolated environments.
+- [For QA and test leaders](../../leaders/for-qa-and-test-leaders.md): operating model, scorecard, the changing role of testers.
 
 ## Templates
 
