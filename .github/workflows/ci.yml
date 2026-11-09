@@ -26,6 +26,10 @@ jobs:
         run: python3 -m unittest discover -s assessment/tests -v
       - name: plain-language check
         run: python3 -m unittest discover -s tools/tests -v
+      - name: quiz
+        run: python3 -m unittest discover -s exercises/tests -v
+      - name: quiz bank is valid and exported pages are up to date
+        run: python3 exercises/quiz.py --check
       - name: assessment runs on the example answers
         run: python3 assessment/assess.py --questions assessment/questions.toml --answers assessment/example-answers.toml
 
