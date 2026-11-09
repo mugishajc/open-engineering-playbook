@@ -1,6 +1,6 @@
 # Scale-up profile
 
-Take every area to Standard within a year, starting with ownership, review speed and incident learning, because those are what break first when one team becomes five. A scale-up's risk is that what the founding team carried in its heads stops reaching new teams. Write it down, make the default path the easy path, and measure whether it works.
+Take at least 10 of the 14 areas to Standard within a year, starting with ownership, review speed and incident learning, because those break first when one team becomes five. A scale-up's risk is that what the founding team carried in its heads stops reaching new teams. Write it down, make the default path the easy path, and measure whether it works.
 
 ## Who this is for
 
@@ -36,7 +36,7 @@ Take every area to Standard within a year, starting with ownership, review speed
 | Run the assessment with each team lead; commit one answers file per team or one for the whole group | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 | Name one owning team for every repository and production service | [Roles](../playbook/operating-model/roles.md) | [CODEOWNERS](../templates/github/CODEOWNERS), [service-catalog-entry.yaml](../templates/docs/service-catalog-entry.yaml) |
 | Write who decides what: production changes, architecture, vendors, hiring | [Decision rights](../playbook/operating-model/decision-rights.md) | [raci.csv](../templates/strategy/raci.csv) |
-| Apply branch protection and the CI template to every active repository with `tools/adopt.sh` | [Source control](../playbook/delivery/source-control.md), [Continuous integration](../playbook/delivery/continuous-integration.md) | [default-branch.json](../templates/github/rulesets/default-branch.json), [ci.yml](../templates/github/workflows/ci.yml) |
+| Apply branch protection and the CI template to every active repository with `tools/adopt.sh`, then import the ruleset (adopt.sh prints the `gh api` command); a file in the repository does nothing | [Source control](../playbook/delivery/source-control.md), [Continuous integration](../playbook/delivery/continuous-integration.md) | [default-branch.json](../templates/github/rulesets/default-branch.json), [ci.yml](../templates/github/workflows/ci.yml) |
 | Classify every data store and check who can reach the restricted ones | [Data governance](../playbook/data/data-governance.md) | [data-classification.md](../templates/docs/data-classification.md) |
 
 ## Month 1
@@ -44,12 +44,12 @@ Take every area to Standard within a year, starting with ownership, review speed
 | Do this | Read | Template |
 |---|---|---|
 | Publish the code assistant policy and the AI use register; assess every AI feature in flight | [Code assistants](../playbook/people/code-assistants.md), [AI governance](../playbook/ai/ai-governance.md) | [code-assistant-policy.md](../templates/docs/code-assistant-policy.md), [ai-use-case-assessment.md](../templates/docs/ai-use-case-assessment.md) |
-| Measure time to first review per team; agree one working day | [Code review](../playbook/delivery/code-review.md) | [PULL_REQUEST_TEMPLATE.md](../templates/github/PULL_REQUEST_TEMPLATE.md) |
+| Measure time to first review per team; agree a median under 4 working hours and a limit of one working day | [Code review](../playbook/delivery/code-review.md) | [PULL_REQUEST_TEMPLATE.md](../templates/github/PULL_REQUEST_TEMPLATE.md) |
 | Write down each team's type and how it works with the others | [Team topology](../playbook/operating-model/team-topology.md) | |
 | One incident process for all teams; blameless postmortems within 5 working days that look for contributing factors | [Incident management](../playbook/reliability/incident-management.md), [Postmortems](../playbook/reliability/postmortems.md), [Root cause analysis](../playbook/reliability/root-cause-analysis.md) | [incident-update.md](../templates/docs/incident-update.md), [postmortem.md](../templates/docs/postmortem.md) |
-| Set on-call rules: nobody on call more than one week in four, a runbook per paging alert | [On-call](../playbook/reliability/on-call.md), [Sustainable pace](../playbook/people/sustainable-pace.md) | [runbook.md](../templates/docs/runbook.md) |
+| Set on-call rules: at least 6 people in each 24 by 7 rotation, so nobody is primary more than one week in six; a runbook per paging alert | [On-call](../playbook/reliability/on-call.md), [Sustainable pace](../playbook/people/sustainable-pace.md) | [runbook.md](../templates/docs/runbook.md) |
 | A working agreement per team | [Agile and Scrum](../playbook/ways-of-working/agile-and-scrum.md) | [team-working-agreement.md](../templates/docs/team-working-agreement.md) |
-| Quarantine or fix flaky tests within 5 working days | [Quality engineering](../playbook/quality/quality-engineering.md) | |
+| Quarantine flaky tests within 24 hours and fix or delete them within 14 days | [Testing](../playbook/delivery/testing.md) | |
 
 ## Quarter 1
 
@@ -69,7 +69,7 @@ Take every area to Standard within a year, starting with ownership, review speed
 
 | Do this | Read | Template |
 |---|---|---|
-| An engineering governance forum with a public decision log and a 10 working day answer limit | [Engineering governance](../playbook/operating-model/engineering-governance.md) | |
+| An engineering governance forum with a public decision log and a 5 working day answer limit | [Engineering governance](../playbook/operating-model/engineering-governance.md) | |
 | A transition charter and business case for each cross-team migration | [Transition playbook](../playbook/strategy/transition-playbook.md), [Business case](../playbook/strategy/business-case.md) | [transition-charter.md](../templates/strategy/transition-charter.md), [business-case.md](../templates/strategy/business-case.md) |
 | Owners and data contracts for shared datasets; quality checks on critical pipelines | [Data governance](../playbook/data/data-governance.md), [Data quality](../playbook/data/data-quality.md) | |
 | Test AI features against the OWASP Top 10 for LLM Applications; automated evaluations before every model or prompt change | [AI application security](../playbook/ai/ai-application-security.md), [Building with AI](../playbook/ai/building-with-ai.md) | |

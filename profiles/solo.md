@@ -31,15 +31,15 @@ Foundation everywhere. The right column says when one area is worth taking to St
 
 ## Week 1
 
-Run `tools/adopt.sh --target <your-repo> --platform github` (or `gitlab`) first. It copies most of the files below and never overwrites yours.
+Run `tools/adopt.sh --target <your-repo> --platform github --solo` (or `--platform gitlab`) first, for example `tools/adopt.sh --target . --platform github --solo` from inside your repository. It copies most of the files below and never overwrites yours. `--solo` copies the solo ruleset: the team ruleset needs a second person to approve, and GitHub does not let you approve your own pull request. Use the solo ruleset until a second engineer joins.
 
 | Do this | Read | Template |
 |---|---|---|
 | Turn on multi-factor authentication for source control, cloud, registrar and email | [Access control](../playbook/security/access-control.md) | |
-| Protect the default branch: no direct pushes, CI must pass before merge | [Source control](../playbook/delivery/source-control.md) | [default-branch.json](../templates/github/rulesets/default-branch.json) |
+| Protect the default branch: no direct pushes, CI must pass before merge, no approval needed. GitHub does not read the ruleset file: import it with the command adopt.sh prints, then check that a direct push to main is rejected. On a private repository, rulesets need GitHub Pro or higher; on a free plan use classic branch protection instead | [Source control](../playbook/delivery/source-control.md) | [default-branch-solo.json](../templates/github/rulesets/default-branch-solo.json) |
 | Run build, lint and tests in CI on every pull or merge request | [Continuous integration](../playbook/delivery/continuous-integration.md) | [ci.yml](../templates/github/workflows/ci.yml), [.gitlab-ci.yml](../templates/gitlab/.gitlab-ci.yml) |
 | Move every secret into a secrets manager and turn on secret scanning | [Secrets](../playbook/security/secrets.md) | [.pre-commit-config.yaml](../templates/repo/.pre-commit-config.yaml) |
-| Turn on automated dependency update pull requests | [Dependencies](../playbook/security/dependencies.md) | [dependabot.yml](../templates/github/dependabot.yml), [renovate.json](../templates/repo/renovate.json) |
+| Turn on automated dependency update pull requests, with one bot only | [Dependencies](../playbook/security/dependencies.md) | [dependabot.yml](../templates/github/dependabot.yml) or [renovate.json](../templates/repo/renovate.json) |
 | List every data store and give each a class: public, internal, confidential or restricted | [Data governance](../playbook/data/data-governance.md) | [data-classification.md](../templates/docs/data-classification.md) |
 
 Done when: a direct push to main is rejected, CI runs on every change, and the secret scanner reports no live secret in the repository or its history.
@@ -60,11 +60,11 @@ Done when: a direct push to main is rejected, CI runs on every change, and the s
 
 | Do this | Read | Template |
 |---|---|---|
-| Write a one-page technical strategy with three priorities for the next 12 months | [Technical strategy](../playbook/strategy/technical-strategy.md) | [strategy-one-pager.md](../templates/strategy/strategy-one-pager.md) |
+| Write a one-page technical strategy: the main problem and three to seven actions for the next 12 months | [Technical strategy](../playbook/strategy/technical-strategy.md) | [strategy-one-pager.md](../templates/strategy/strategy-one-pager.md) |
 | Record significant decisions as decision records in the repository | [Decision records](../playbook/architecture/decision-records.md) | [adr.md](../templates/docs/adr.md) |
 | Version releases and generate the changelog from commits | [Versioning and changelogs](../playbook/delivery/versioning-and-changelogs.md) | [release-please.yml](../templates/github/workflows/release-please.yml), [CHANGELOG.md](../templates/repo/CHANGELOG.md) |
 | Put production infrastructure in code and stop console changes | [Infrastructure as code](../playbook/delivery/infrastructure-as-code.md) | |
-| Make the README good enough that someone new runs the project in under one day | [Documentation](../playbook/people/documentation.md), [Golden paths](../playbook/platform/golden-paths.md) | [onboarding-checklist.md](../templates/docs/onboarding-checklist.md) |
+| Make the README good enough that someone new runs the project in under one hour | [Documentation](../playbook/people/documentation.md), [Golden paths](../playbook/platform/golden-paths.md) | [onboarding-checklist.md](../templates/docs/onboarding-checklist.md) |
 | List the laws and contract terms that apply to you, and add a licence check to CI | [Control mapping](../playbook/compliance/control-mapping.md) | |
 | Run the assessment and commit the answers file | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 

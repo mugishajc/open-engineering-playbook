@@ -1,6 +1,6 @@
 # SME profile
 
-For small and medium businesses that use software but do not build it: put the essential security controls in place in the first week, get your data, suppliers and backups under control in the first quarter, and run a one-page IT plan each year. Most practice areas in this playbook are for organisations with their own engineers, so this profile skips them until you have some. The leadership view is in [for small and medium businesses](../leaders/for-small-and-medium-businesses.md).
+For small and medium businesses that use software but do not build it. Put the essential security controls in place in the first week. Get your data, suppliers and backups under control in the first quarter. Then run a one-page IT plan each year. Most practice areas in this playbook are for organisations with their own engineers, so this profile skips them until you have some. The leadership view is in [for small and medium businesses](../leaders/for-small-and-medium-businesses.md).
 
 ## Who this is for
 
@@ -12,7 +12,7 @@ For small and medium businesses that use software but do not build it: put the e
 
 ## How to use this page if you are not technical
 
-You decide and check; your IT person or provider does the technical work. For each row below, ask them to do it and to show you proof: a screenshot, a short report or a demonstration. The "Read" column points first to the plain-language page for owners. Links marked "for your IT person" go to the detailed practice pages.
+You decide and check; your IT person or provider does the technical work. For each row below, ask them to do it and to show you proof: a short report from the admin console, a demonstration, or a screenshot with the date showing. The "Read" column points first to the plain-language page for owners. Links marked "for your IT person" go to the detailed practice pages.
 
 The rows in each table are in order: the first row removes the most risk for the least effort.
 
@@ -43,7 +43,7 @@ The rows in each table are in order: the first row removes the most risk for the
 | Check backups exist for files, email and key systems, and that one copy is offline or cannot be deleted | [The essential controls](../leaders/for-small-and-medium-businesses.md#the-essential-controls); for your IT person: [backup and recovery](../playbook/reliability/backup-and-recovery.md) | |
 | Turn on automatic updates on every computer and phone; list devices that no longer get updates | [The essential controls](../leaders/for-small-and-medium-businesses.md#the-essential-controls) | |
 | Make sure the business, not a person or provider, owns the domain name, email admin account and backups | [Managing an outside IT provider](../leaders/for-small-and-medium-businesses.md#managing-an-outside-it-provider) | |
-| Print the first-hour incident plan and an emergency contact list | [The first hour of an incident](../leaders/for-small-and-medium-businesses.md#the-first-hour-of-an-incident) | [incident-update.md](../templates/docs/incident-update.md) |
+| Print the first-hour incident plan and fill in the emergency contacts | [The first hour of an incident](../leaders/for-small-and-medium-businesses.md#the-first-hour-of-an-incident) | [first-hour-plan.md](../templates/sme/first-hour-plan.md) |
 
 ## Month 1
 
@@ -54,8 +54,9 @@ The rows in each table are in order: the first row removes the most risk for the
 | Give admins separate admin accounts; remove admin rights from daily accounts | [The essential controls](../leaders/for-small-and-medium-businesses.md#the-essential-controls); for your IT person: [access control](../playbook/security/access-control.md) | |
 | Turn on device encryption and remote wipe for laptops and phones | [The essential controls](../leaders/for-small-and-medium-businesses.md#the-essential-controls) | |
 | Set up email filtering and SPF, DKIM and DMARC records for your domain; change the router's factory password | [The essential controls](../leaders/for-small-and-medium-businesses.md#the-essential-controls) | |
-| List every online service the business uses, with owner, data held, cost and renewal date | [Choosing and leaving software subscriptions](../leaders/for-small-and-medium-businesses.md#choosing-and-leaving-software-subscriptions) | |
-| Write a leavers process: all access removed on the last day | [The essential controls](../leaders/for-small-and-medium-businesses.md#the-essential-controls) | |
+| List every online service the business uses, with owner, data held, cost and renewal date | [Choosing and leaving software subscriptions](../leaders/for-small-and-medium-businesses.md#choosing-and-leaving-software-subscriptions) | [online-services.csv](../templates/sme/online-services.csv) |
+| Write a leavers process: all access removed on the last working day | [The essential controls](../leaders/for-small-and-medium-businesses.md#the-essential-controls) | |
+| Write a one-page downtime procedure: how you keep seeing patients, teaching or taking payment with no computers | [The first hour of an incident](../leaders/for-small-and-medium-businesses.md#the-first-hour-of-an-incident) | [first-hour-plan.md](../templates/sme/first-hour-plan.md) |
 
 ## Quarter 1
 
@@ -63,7 +64,7 @@ The rows in each table are in order: the first row removes the most risk for the
 |---|---|---|
 | Review the IT provider contract for ownership, access, backups, incident notice and exit | [Managing an outside IT provider](../leaders/for-small-and-medium-businesses.md#managing-an-outside-it-provider) | |
 | Record what personal data you hold, why, where and for how long; publish a privacy notice | [Data protection duties](../leaders/for-small-and-medium-businesses.md#data-protection-duties) | [data-classification.md](../templates/docs/data-classification.md) |
-| Agree with staff which AI tools they may use and what data must never go into them | [Data protection duties](../leaders/for-small-and-medium-businesses.md#data-protection-duties) | adapt [code-assistant-policy.md](../templates/docs/code-assistant-policy.md) |
+| Agree with staff which AI tools they may use and what data must never go into them | [Data protection duties](../leaders/for-small-and-medium-businesses.md#data-protection-duties) | [staff-ai-use-policy.md](../templates/sme/staff-ai-use-policy.md) |
 | Send the vendor questionnaire to services that hold personal or financial data | [Choosing and leaving software subscriptions](../leaders/for-small-and-medium-businesses.md#choosing-and-leaving-software-subscriptions) | [vendor-risk-questionnaire.md](../templates/docs/vendor-risk-questionnaire.md) |
 | Write down your top five IT risks with an owner each, for example "we lose all patient records" or "our only IT person leaves" | No reading needed | [risk-register.csv](../templates/strategy/risk-register.csv) |
 | Run a 30-minute phishing and password session for all staff | [A simple yearly IT plan](../leaders/for-small-and-medium-businesses.md#a-simple-yearly-it-plan-and-budget) | |
@@ -75,7 +76,7 @@ The rows in each table are in order: the first row removes the most risk for the
 | Write a one-page IT plan and budget; review it once a year | [A simple yearly IT plan](../leaders/for-small-and-medium-businesses.md#a-simple-yearly-it-plan-and-budget) | |
 | Test a restore every 3 months and compare the time with how long the business can cope without the system | [The essential controls](../leaders/for-small-and-medium-businesses.md#the-essential-controls) | |
 | Export data from your most important service and check you can open it elsewhere | [Choosing and leaving software subscriptions](../leaders/for-small-and-medium-businesses.md#choosing-and-leaving-software-subscriptions) | |
-| Ask your IT provider or IT person the eight yearly questions, and record the answers | [Questions to ask your IT provider](../leaders/for-small-and-medium-businesses.md#questions-to-ask-your-it-provider-every-year) | |
+| Ask your IT provider or IT person the eight yearly questions, and record the answers | [Questions to ask your IT provider](../leaders/for-small-and-medium-businesses.md#questions-to-ask-your-it-provider-every-year) | [it-provider-questions.md](../templates/sme/it-provider-questions.md) |
 | Rehearse the first-hour incident plan with the people named in it, for 30 minutes: "our files are encrypted, what do we do?" | [The first hour of an incident](../leaders/for-small-and-medium-businesses.md#the-first-hour-of-an-incident) | |
 | Gain a recognised certification if customers, insurers or public contracts ask for one (for example UK Cyber Essentials) | [Recognised schemes](../leaders/for-small-and-medium-businesses.md#how-these-map-to-recognised-schemes) | |
 | Replace devices that will stop getting security updates in the next year | [A simple yearly IT plan](../leaders/for-small-and-medium-businesses.md#a-simple-yearly-it-plan-and-budget) | |
@@ -94,10 +95,11 @@ The rows in each table are in order: the first row removes the most risk for the
 
 ## Check your progress
 
-Most owners can skip the assessment: the five numbers below are enough. The [assessment](../assessment/README.md) is written mostly for software teams. If your IT person wants to use it, use the `sme` profile, answer the security, reliability, data and compliance questions, leave the others `false`, and ignore the areas this page marks Skip:
+Most owners can skip the assessment: the five numbers below are enough. If your IT person or provider wants a fuller check, the [assessment](../assessment/README.md) has an `sme` profile. It asks 18 questions written for a business without developers, leaves out the six areas this page marks Skip, and lists the essential controls first:
 
 ```bash
-python3 assessment/assess.py --questions assessment/questions.toml --init --profile sme > my-answers.toml
+python3 assessment/assess.py --init --profile sme > my-answers.toml
+python3 assessment/assess.py --answers my-answers.toml
 ```
 
 Each quarter, ask your IT person or provider for these five numbers and write them in your IT plan.

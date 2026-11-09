@@ -11,12 +11,28 @@
 #   text    the question, answered true or false
 #   action  what to do when the answer is false, in the imperative
 #   link    the playbook page that explains the practice, relative to the
-#           repository root
+#           repository root, optionally with a #section
+#   skip_profiles  optional: profiles that are not asked this question
+#   only_profiles  optional: the only profiles that are asked this question
 #
 # Numbers in the questions are starting points. Tune them in your fork and
 # keep the change in version control so scores stay comparable over time.
 
 version = 1
+
+# Profile rules.
+#   skip_areas             areas this profile does not assess; the report
+#                          lists them as not assessed
+#   area_order             areas whose gaps come first in the next actions
+#   overlays_raise_target  false keeps the profile's target when an overlay
+#                          applies
+# The SME profile is for businesses that use software but do not build it.
+# It skips the areas that need in-house engineers (see profiles/sme.md) and
+# is asked its own questions, written for an owner and an IT provider.
+[profiles.sme]
+skip_areas = ["ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"]
+area_order = ["security", "reliability", "operating-model", "data", "people", "ai", "compliance", "strategy"]
+overlays_raise_target = false
 
 [[areas]]
 id = "strategy"
@@ -79,13 +95,15 @@ title = "Compliance"
 [[questions]]
 id = "strategy.written-strategy"
 level = "foundation"
-text = "Is there a written technical strategy of no more than two pages that names the top three priorities for the next 12 months?"
-action = "Write a one-page technical strategy with the top three priorities for the next 12 months."
+skip_profiles = ["sme"]
+text = "Is there a written one-page technical strategy that names the main problem and three to seven actions, each with an owner?"
+action = "Write a one-page technical strategy: the main problem, a guiding policy and three to seven actions, each with an owner."
 link = "playbook/strategy/technical-strategy.md"
 
 [[questions]]
 id = "strategy.build-buy-rule"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Before building a new component, do you write down why you are not buying or adopting an existing product or open source project?"
 action = "Add a short build, buy or adopt note to every new component proposal."
 link = "playbook/strategy/build-buy-adopt.md"
@@ -93,6 +111,7 @@ link = "playbook/strategy/build-buy-adopt.md"
 [[questions]]
 id = "strategy.horizon-scan"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Is the technical strategy reviewed at least once a quarter, including a scan of the regulation and technology changes due in the next three years?"
 action = "Review the strategy every quarter and add a horizon scan of regulation and technology changes due in the next three years."
 link = "playbook/strategy/horizon-scan.md"
@@ -100,6 +119,7 @@ link = "playbook/strategy/horizon-scan.md"
 [[questions]]
 id = "strategy.capacity-allocation"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Is engineering capacity split between features, reliability, technical debt and platform as explicit percentages, set each quarter and checked against what was actually spent?"
 action = "Agree capacity percentages for features, reliability, debt and platform each quarter, and compare them with actual time spent."
 link = "playbook/strategy/portfolio-and-capacity.md"
@@ -107,6 +127,7 @@ link = "playbook/strategy/portfolio-and-capacity.md"
 [[questions]]
 id = "strategy.transition-charter"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Does every major transition, such as a platform migration or a new way of working, have a charter with one owner, exit criteria and a rollback plan?"
 action = "Write a transition charter with an owner, exit criteria and a rollback plan for each major change in flight."
 link = "playbook/strategy/transition-playbook.md"
@@ -123,6 +144,7 @@ link = "playbook/strategy/transition-playbook.md"
 [[questions]]
 id = "operating-model.named-owners"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Does every repository and every production service have one named owning person or team?"
 action = "Name one owner for every repository and production service, and write it in the README or CODEOWNERS."
 link = "playbook/operating-model/roles.md"
@@ -130,6 +152,7 @@ link = "playbook/operating-model/roles.md"
 [[questions]]
 id = "operating-model.decision-rights"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is it written down who can approve production changes, architecture changes and new vendors?"
 action = "Write a one-page decision rights table for production changes, architecture changes and new vendors."
 link = "playbook/operating-model/decision-rights.md"
@@ -137,6 +160,7 @@ link = "playbook/operating-model/decision-rights.md"
 [[questions]]
 id = "operating-model.team-types"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Is each team's type and its interaction mode with other teams written down and reviewed at least twice a year?"
 action = "Record each team's type and interaction modes, and review them every six months."
 link = "playbook/operating-model/team-topology.md"
@@ -144,13 +168,15 @@ link = "playbook/operating-model/team-topology.md"
 [[questions]]
 id = "operating-model.governance-forum"
 level = "standard"
-text = "Does an engineering governance forum meet on a fixed schedule, publish its decisions and answer requests within 10 working days?"
-action = "Set up a governance forum with a fixed schedule, a public decision log and a 10 working day answer limit."
+skip_profiles = ["sme"]
+text = "Does an engineering governance forum meet on a fixed schedule, publish its decisions and answer complete requests within 5 working days?"
+action = "Set up a governance forum with a fixed schedule, a public decision log and a 5 working day answer limit."
 link = "playbook/operating-model/engineering-governance.md"
 
 [[questions]]
 id = "operating-model.separation-of-duties"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Do tooling rules, not just policy, stop one person from writing, approving and deploying the same production change?"
 action = "Enforce separation of duties in source control and deployment tooling, and keep the configuration under review."
 link = "playbook/operating-model/decision-rights.md"
@@ -158,6 +184,7 @@ link = "playbook/operating-model/decision-rights.md"
 [[questions]]
 id = "operating-model.it-governance"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Does engineering report to the board or audit committee at least twice a year on a small agreed set of measures, under a named IT governance framework such as ISO/IEC 38500 or COBIT?"
 action = "Agree a short set of measures with the board or audit committee and report on them at least twice a year."
 link = "playbook/operating-model/it-governance.md"
@@ -269,9 +296,9 @@ link = "playbook/delivery/testing.md"
 [[questions]]
 id = "quality.flaky-tests"
 level = "standard"
-text = "Are flaky tests quarantined or fixed within 5 working days of being found, with the count tracked?"
-action = "Track flaky tests and quarantine or fix each one within 5 working days."
-link = "playbook/quality/quality-engineering.md"
+text = "Are flaky tests quarantined within 24 hours of the first confirmed flake and fixed or deleted within 14 days, with the count tracked?"
+action = "Track flaky tests, quarantine each one within 24 hours and fix or delete it within 14 days."
+link = "playbook/delivery/testing.md"
 
 [[questions]]
 id = "quality.test-first"
@@ -299,6 +326,7 @@ link = "playbook/quality/quality-engineering.md"
 [[questions]]
 id = "reliability.backups-restored"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Are backups automated, stored away from the primary system, and has a restore been tested in the last 90 days?"
 action = "Automate backups to a separate location and test a full restore at least every 90 days."
 link = "playbook/reliability/backup-and-recovery.md"
@@ -306,6 +334,7 @@ link = "playbook/reliability/backup-and-recovery.md"
 [[questions]]
 id = "reliability.incident-process"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is there a written incident process that says how to declare an incident, who leads it and where updates go?"
 action = "Write a one-page incident process: how to declare, who leads, where updates go."
 link = "playbook/reliability/incident-management.md"
@@ -313,6 +342,7 @@ link = "playbook/reliability/incident-management.md"
 [[questions]]
 id = "reliability.slos"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Does every user-facing service have SLOs with an error budget that the owning team reviews at least monthly?"
 action = "Set SLOs and error budgets for user-facing services and review them monthly."
 link = "playbook/reliability/service-levels.md"
@@ -320,6 +350,7 @@ link = "playbook/reliability/service-levels.md"
 [[questions]]
 id = "reliability.postmortems"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Does every major incident get a blameless postmortem within 5 working days that looks for several contributing factors, not one root cause, with actions tracked to completion?"
 action = "Hold a blameless postmortem within 5 working days of every major incident, list the contributing factors and track the actions."
 link = "playbook/reliability/root-cause-analysis.md"
@@ -327,6 +358,7 @@ link = "playbook/reliability/root-cause-analysis.md"
 [[questions]]
 id = "reliability.rollbacks"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Can every production service roll back a bad release within 15 minutes, and has each team practised a rollback in the last quarter?"
 action = "Make releases rollback-safe, automate the rollback and practise it at least once a quarter."
 link = "playbook/reliability/rollbacks.md"
@@ -334,6 +366,7 @@ link = "playbook/reliability/rollbacks.md"
 [[questions]]
 id = "reliability.dr-tested"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Is disaster recovery tested at least once a year against written recovery time and recovery point objectives, with the results recorded?"
 action = "Set recovery time and recovery point objectives and run a recorded disaster recovery test every year."
 link = "playbook/reliability/backup-and-recovery.md"
@@ -343,6 +376,7 @@ link = "playbook/reliability/backup-and-recovery.md"
 [[questions]]
 id = "security.no-secrets-in-code"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Are secrets kept out of source code, with secret scanning on every push?"
 action = "Move secrets to a secrets manager and turn on secret scanning for every push."
 link = "playbook/security/secrets.md"
@@ -350,6 +384,7 @@ link = "playbook/security/secrets.md"
 [[questions]]
 id = "security.mfa"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is multi-factor authentication required for source control, CI, cloud consoles and production access?"
 action = "Require multi-factor authentication for source control, CI, cloud consoles and production access."
 link = "playbook/security/access-control.md"
@@ -357,6 +392,7 @@ link = "playbook/security/access-control.md"
 [[questions]]
 id = "security.dependency-updates"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Are dependency updates proposed automatically and merged at least once a month?"
 action = "Turn on automated dependency update pull requests and merge them at least monthly."
 link = "playbook/security/dependencies.md"
@@ -364,6 +400,7 @@ link = "playbook/security/dependencies.md"
 [[questions]]
 id = "security.vulnerability-slas"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Are vulnerabilities fixed within written time limits by severity, with known exploited vulnerabilities handled first?"
 action = "Publish fix time limits by severity and put known exploited vulnerabilities at the top of the queue."
 link = "playbook/security/vulnerability-management.md"
@@ -371,6 +408,7 @@ link = "playbook/security/vulnerability-management.md"
 [[questions]]
 id = "security.sbom-and-signing"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Does every release ship with an SBOM and a signature or provenance attestation that is verified before deployment?"
 action = "Generate an SBOM and sign every release, and verify the signature in the deployment pipeline."
 link = "playbook/security/supply-chain.md"
@@ -378,6 +416,7 @@ link = "playbook/security/supply-chain.md"
 [[questions]]
 id = "security.crypto-inventory"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Is there an inventory of the cryptography your systems use, with a plan to move to post-quantum algorithms for data that must stay secret for 10 years or more?"
 action = "Build a cryptographic inventory and a migration plan to post-quantum algorithms, starting with long-lived secret data."
 link = "playbook/security/post-quantum-readiness.md"
@@ -387,6 +426,7 @@ link = "playbook/security/post-quantum-readiness.md"
 [[questions]]
 id = "data.classification"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is every data store labelled with a classification such as public, internal, confidential or restricted?"
 action = "Classify every data store as public, internal, confidential or restricted."
 link = "playbook/data/data-governance.md"
@@ -394,6 +434,7 @@ link = "playbook/data/data-governance.md"
 [[questions]]
 id = "data.protected-at-rest"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is confidential and restricted data encrypted in transit and at rest, with access limited to named roles?"
 action = "Encrypt confidential and restricted data in transit and at rest, and limit access to named roles."
 link = "playbook/data/data-security-and-privacy.md"
@@ -401,6 +442,7 @@ link = "playbook/data/data-security-and-privacy.md"
 [[questions]]
 id = "data.owners-and-contracts"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Does every important dataset have a named owner and a documented schema or data contract?"
 action = "Name an owner and write a schema or data contract for each important dataset."
 link = "playbook/data/data-governance.md"
@@ -408,6 +450,7 @@ link = "playbook/data/data-governance.md"
 [[questions]]
 id = "data.quality-checks"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Do critical data pipelines run automated checks for freshness, completeness and validity that alert the owner?"
 action = "Add freshness, completeness and validity checks to critical pipelines, with alerts to the owner."
 link = "playbook/data/data-quality.md"
@@ -422,6 +465,7 @@ link = "playbook/data/data-security-and-privacy.md"
 [[questions]]
 id = "data.retention-enforced"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Are retention and deletion rules enforced by automation, with deletion logs kept?"
 action = "Automate retention and deletion rules and keep the deletion logs."
 link = "playbook/data/data-governance.md"
@@ -431,6 +475,7 @@ link = "playbook/data/data-governance.md"
 [[questions]]
 id = "ai.code-assistant-policy"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is there a written code assistant policy that covers approved tools, data that must not be shared and review of generated code?"
 action = "Publish a code assistant policy covering approved tools, data limits and review of generated code."
 link = "playbook/people/code-assistants.md"
@@ -438,6 +483,7 @@ link = "playbook/people/code-assistants.md"
 [[questions]]
 id = "ai.use-register"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is there a register of every AI tool staff use and every AI feature in your products, with an owner for each?"
 action = "Start an AI use register listing each tool and feature with its owner."
 link = "playbook/ai/ai-governance.md"
@@ -445,6 +491,7 @@ link = "playbook/ai/ai-governance.md"
 [[questions]]
 id = "ai.use-case-assessment"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Does every new AI feature get a written assessment of risk, data use and human oversight before it reaches users?"
 action = "Assess each new AI feature for risk, data use and human oversight before release."
 link = "playbook/ai/ai-governance.md"
@@ -452,6 +499,7 @@ link = "playbook/ai/ai-governance.md"
 [[questions]]
 id = "ai.application-security"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Are AI features tested against the OWASP Top 10 for LLM Applications, including prompt injection and excessive agency, before release?"
 action = "Test AI features against the OWASP Top 10 for LLM Applications before release."
 link = "playbook/ai/ai-application-security.md"
@@ -459,6 +507,7 @@ link = "playbook/ai/ai-application-security.md"
 [[questions]]
 id = "ai.evaluations"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Do AI features have automated evaluations with pass thresholds that run before any model or prompt change ships?"
 action = "Write automated evaluations with pass thresholds and run them on every model or prompt change."
 link = "playbook/ai/building-with-ai.md"
@@ -466,6 +515,7 @@ link = "playbook/ai/building-with-ai.md"
 [[questions]]
 id = "ai.management-system"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Is AI risk managed under a documented framework, such as ISO/IEC 42001 or the NIST AI Risk Management Framework, with records an auditor can review?"
 action = "Adopt a documented AI risk framework and keep records an auditor can review."
 link = "playbook/ai/ai-governance.md"
@@ -517,10 +567,11 @@ link = "playbook/architecture/decision-records.md"
 # -------------------------------------------------------------- platform
 
 [[questions]]
+# The id says "one command"; it means a scripted setup from the README.
 id = "platform.one-command-setup"
 level = "foundation"
-text = "Can someone new build, test and run the main service locally by following the README, in under one day?"
-action = "Write and test README setup steps until someone new can run the main service in under one day."
+text = "Can someone new build, test and run the main service locally by following the README, in under one hour?"
+action = "Script the setup and test the README steps until someone new can run the main service in under one hour."
 link = "playbook/platform/golden-paths.md"
 
 [[questions]]
@@ -563,6 +614,7 @@ link = "playbook/platform/cloud-on-prem-air-gapped.md"
 [[questions]]
 id = "people.onboarding-checklist"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is there a written onboarding checklist that gets a new engineer to a merged change in their first week?"
 action = "Write an onboarding checklist that ends with a merged change in week one."
 link = "playbook/people/onboarding.md"
@@ -570,6 +622,7 @@ link = "playbook/people/onboarding.md"
 [[questions]]
 id = "people.skills-matrix"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Does each team keep a skills matrix showing at least two people who can run and change each critical system?"
 action = "Build a team skills matrix and pair or rotate until every critical system has at least two capable people."
 link = "playbook/people/skills-gap.md"
@@ -577,6 +630,7 @@ link = "playbook/people/skills-gap.md"
 [[questions]]
 id = "people.structured-hiring"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Do you hire engineers with structured interviews and a work-sample task, scored against a written scorecard?"
 action = "Use structured interviews and a work-sample task scored against a written scorecard."
 link = "playbook/people/hiring.md"
@@ -584,6 +638,7 @@ link = "playbook/people/hiring.md"
 [[questions]]
 id = "people.career-framework"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Is there a written career framework with levels and expectations that every engineer can read?"
 action = "Publish a career framework with levels and expectations."
 link = "playbook/people/career-framework.md"
@@ -591,13 +646,15 @@ link = "playbook/people/career-framework.md"
 [[questions]]
 id = "people.sustainable-pace"
 level = "standard"
-text = "Is nobody on call more than one week in four, and do you track out-of-hours work and pages per person and act when anyone goes over an agreed limit?"
-action = "Grow the on-call rota to at least four people, track out-of-hours work and pages per person, and act when anyone goes over the limit."
+skip_profiles = ["sme"]
+text = "Does every 24 by 7 on-call rotation have at least 6 people, so nobody is primary more than one week in six, and do you track out-of-hours pages per person and act when anyone goes over an agreed limit?"
+action = "Grow each 24 by 7 rotation to at least 6 people (8 if the same people also cover backup), or move to business-hours cover, and track out-of-hours pages per person."
 link = "playbook/people/sustainable-pace.md"
 
 [[questions]]
 id = "people.training-records"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Do engineers complete secure coding and data protection training when they join and every year after, with completion recorded?"
 action = "Add secure coding and data protection training to onboarding and repeat it yearly, with records."
 link = "playbook/people/onboarding.md"
@@ -614,8 +671,8 @@ link = "playbook/measurement/metrics.md"
 [[questions]]
 id = "measurement.quarterly-assessment"
 level = "foundation"
-text = "Do you run this assessment at least once a quarter and keep the answers in version control?"
-action = "Commit this answers file and repeat the assessment every quarter."
+text = "Are this assessment's answers kept in version control, with the next review set for no more than 3 months from now?"
+action = "Commit this answers file and put the next quarterly review in the calendar."
 link = "playbook/measurement/maturity-model.md"
 
 [[questions]]
@@ -651,6 +708,7 @@ link = "playbook/measurement/maturity-model.md"
 [[questions]]
 id = "compliance.obligations-register"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Is there a list of the laws, regulations and contracts that apply to your software, with an owner for each?"
 action = "List the laws, regulations and contract terms that apply to your software and name an owner for each."
 link = "playbook/compliance/control-mapping.md"
@@ -658,6 +716,7 @@ link = "playbook/compliance/control-mapping.md"
 [[questions]]
 id = "compliance.licence-check"
 level = "foundation"
+skip_profiles = ["sme"]
 text = "Do you check the licences of open source dependencies before you ship?"
 action = "Add a licence check for dependencies to CI and agree which licences are allowed."
 link = "playbook/security/dependencies.md"
@@ -665,6 +724,7 @@ link = "playbook/security/dependencies.md"
 [[questions]]
 id = "compliance.control-map"
 level = "standard"
+skip_profiles = ["sme"]
 text = "Is there a control map that links each relevant control, for example from ISO/IEC 27001 or SOC 2, to a practice and to the evidence for it?"
 action = "Build a control map from your relevant standards to the playbook practices and their evidence."
 link = "playbook/compliance/control-mapping.md"
@@ -679,6 +739,7 @@ link = "playbook/security/third-party-and-saas-risk.md"
 [[questions]]
 id = "compliance.automated-evidence"
 level = "assured"
+skip_profiles = ["sme"]
 text = "Is control evidence collected automatically from pipelines and kept in tamper-evident storage for the required retention period?"
 action = "Collect control evidence from pipelines automatically and keep it in tamper-evident storage."
 link = "playbook/compliance/control-mapping.md"
@@ -689,3 +750,119 @@ level = "assured"
 text = "Do you have a tested process that meets the incident and vulnerability reporting deadlines that apply to you?"
 action = "List your reporting deadlines, such as the 24 hour early warning under the EU Cyber Resilience Act, and test the process."
 link = "playbook/compliance/regulated-industries.md"
+
+# ------------------------------------------------------------------- sme
+# Questions for the SME profile only. Each replaces engineering questions
+# that a business without its own developers cannot answer honestly.
+
+[[questions]]
+id = "strategy.sme-it-plan"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Is there a one-page IT plan and budget for the year, reviewed by the owner or managers at least once a year?"
+action = "Write a one-page IT plan and budget for the year and review it every year."
+link = "leaders/for-small-and-medium-businesses.md#a-simple-yearly-it-plan-and-budget"
+
+[[questions]]
+id = "operating-model.sme-business-owns-accounts"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Does the business, not one person or an IT provider, own the domain name, the email admin account and the backups?"
+action = "Put the domain name, the email admin account and the backups in the business's name, with two people in the business able to sign in."
+link = "leaders/for-small-and-medium-businesses.md#managing-an-outside-it-provider"
+
+[[questions]]
+id = "operating-model.sme-service-owners"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Is there a list of every online service the business uses, with a named owner in the business, the data it holds, the cost and the renewal date?"
+action = "List every online service with its owner in the business, the data it holds, the cost and the renewal date."
+link = "leaders/for-small-and-medium-businesses.md#choosing-and-leaving-software-subscriptions"
+
+[[questions]]
+id = "reliability.sme-offline-backup"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Are files, email and key systems backed up automatically, with one copy offline or impossible to delete, and a restore tested in the last 90 days?"
+action = "Back up files, email and key systems automatically, keep one copy offline or impossible to delete, and test a restore every 3 months."
+link = "leaders/for-small-and-medium-businesses.md#the-essential-controls"
+
+[[questions]]
+id = "reliability.sme-first-hour-plan"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Is there a printed first-hour incident plan with emergency contacts and a way to keep working without your systems, rehearsed in the last 12 months?"
+action = "Print a first-hour incident plan with emergency contacts and a downtime procedure (paper forms, phone bookings, manual receipts), and rehearse it once a year."
+link = "leaders/for-small-and-medium-businesses.md#the-first-hour-of-an-incident"
+
+[[questions]]
+id = "security.sme-mfa"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Is multi-factor authentication on for every staff email account and for every banking, accounting and admin account?"
+action = "Turn on multi-factor authentication for every email account first, then for banking, accounting and every admin account."
+link = "leaders/for-small-and-medium-businesses.md#the-essential-controls"
+
+[[questions]]
+id = "security.sme-updates"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Do all computers and phones install security updates automatically, with no device in use that no longer gets updates?"
+action = "Turn on automatic updates on every computer and phone, and replace devices that no longer get security updates."
+link = "leaders/for-small-and-medium-businesses.md#the-essential-controls"
+
+[[questions]]
+id = "security.sme-passwords-and-admin"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Do staff use a business password manager, and do admins use a separate admin account with no admin rights on their daily account?"
+action = "Give staff a business password manager and give each admin a separate admin account."
+link = "leaders/for-small-and-medium-businesses.md#the-essential-controls"
+
+[[questions]]
+id = "data.sme-personal-data-list"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Is there a written record of the personal data you hold, why, where and for how long, and a published privacy notice?"
+action = "Record what personal data you hold, why, where and for how long, and publish a privacy notice."
+link = "leaders/for-small-and-medium-businesses.md#data-protection-duties"
+
+[[questions]]
+id = "data.sme-device-encryption"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Are laptops and phones that hold business data encrypted, with remote wipe turned on?"
+action = "Turn on encryption and remote wipe for every laptop and phone that holds business data."
+link = "leaders/for-small-and-medium-businesses.md#the-essential-controls"
+
+[[questions]]
+id = "ai.sme-staff-ai-rules"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Have staff been told in writing which AI tools they may use, and that patient, pupil, customer and staff records must never go into other tools?"
+action = "Give staff a one-page AI use policy: approved tools, data that must never go into other tools, and who to ask."
+link = "leaders/for-small-and-medium-businesses.md#data-protection-duties"
+
+[[questions]]
+id = "people.sme-joiners-leavers"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Is there a written joiners and leavers checklist, and was every leaver's access removed on their last working day?"
+action = "Write a joiners and leavers checklist and remove all access on each leaver's last working day."
+link = "leaders/for-small-and-medium-businesses.md#the-essential-controls"
+
+[[questions]]
+id = "people.sme-phishing-session"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Have all staff had a short session on phishing and passwords in the last 12 months?"
+action = "Run a 30-minute session on phishing and passwords for all staff every year."
+link = "leaders/for-small-and-medium-businesses.md#a-simple-yearly-it-plan-and-budget"
+
+[[questions]]
+id = "compliance.sme-supplier-contracts"
+level = "foundation"
+only_profiles = ["sme"]
+text = "Do the contracts with your IT provider and with services that hold personal or financial data cover data ownership, incident notice, backups and exit?"
+action = "Check the IT provider and key service contracts for data ownership, incident notice, backups and exit, and close gaps at renewal."
+link = "leaders/for-small-and-medium-businesses.md#managing-an-outside-it-provider"

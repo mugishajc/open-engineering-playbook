@@ -13,7 +13,7 @@
 # Set an answer to true only when you can point to the evidence.
 # Commit this file and repeat the assessment every quarter.
 
-# One of: solo, startup, scale-up, enterprise.
+# One of: solo, sme, startup, scale-up, enterprise.
 profile = "startup"
 # Add "public-sector" and/or "regulated" when they apply.
 overlays = []
@@ -22,7 +22,7 @@ overlays = []
 [answers]
 
 # Strategy
-# [foundation] Is there a written technical strategy of no more than two pages that names the top three priorities for the next 12 months?
+# [foundation] Is there a written one-page technical strategy that names the main problem and three to seven actions, each with an owner?
 "strategy.written-strategy" = true
 # [foundation] Before building a new component, do you write down why you are not buying or adopting an existing product or open source project?
 "strategy.build-buy-rule" = true
@@ -42,7 +42,7 @@ overlays = []
 "operating-model.decision-rights" = false
 # [standard] Is each team's type and its interaction mode with other teams written down and reviewed at least twice a year?
 "operating-model.team-types" = false
-# [standard] Does an engineering governance forum meet on a fixed schedule, publish its decisions and answer requests within 10 working days?
+# [standard] Does an engineering governance forum meet on a fixed schedule, publish its decisions and answer complete requests within 5 working days?
 "operating-model.governance-forum" = false
 # [assured] Do tooling rules, not just policy, stop one person from writing, approving and deploying the same production change?
 "operating-model.separation-of-duties" = false
@@ -82,7 +82,7 @@ overlays = []
 "quality.regression-tests" = true
 # [foundation] Does the test suite that gates a merge finish in under 10 minutes?
 "quality.fast-feedback" = true
-# [standard] Are flaky tests quarantined or fixed within 5 working days of being found, with the count tracked?
+# [standard] Are flaky tests quarantined within 24 hours of the first confirmed flake and fixed or deleted within 14 days, with the count tracked?
 "quality.flaky-tests" = false
 # [standard] Do engineers write tests before or alongside new logic, and do reviewers check that changed lines are tested?
 "quality.test-first" = false
@@ -162,7 +162,7 @@ overlays = []
 "architecture.decision-approvals" = false
 
 # Platform
-# [foundation] Can someone new build, test and run the main service locally by following the README, in under one day?
+# [foundation] Can someone new build, test and run the main service locally by following the README, in under one hour?
 "platform.one-command-setup" = true
 # [foundation] Is production infrastructure defined as code in version control, with plans reviewed in pull requests and no manual changes in consoles?
 "platform.infrastructure-as-code" = true
@@ -184,7 +184,7 @@ overlays = []
 "people.structured-hiring" = false
 # [standard] Is there a written career framework with levels and expectations that every engineer can read?
 "people.career-framework" = false
-# [standard] Is nobody on call more than one week in four, and do you track out-of-hours work and pages per person and act when anyone goes over an agreed limit?
+# [standard] Does every 24 by 7 on-call rotation have at least 6 people, so nobody is primary more than one week in six, and do you track out-of-hours pages per person and act when anyone goes over an agreed limit?
 "people.sustainable-pace" = false
 # [assured] Do engineers complete secure coding and data protection training when they join and every year after, with completion recorded?
 "people.training-records" = false
@@ -192,7 +192,7 @@ overlays = []
 # Measurement
 # [foundation] Do you track at least deployment frequency and change lead time, even by hand?
 "measurement.delivery-basics" = true
-# [foundation] Do you run this assessment at least once a quarter and keep the answers in version control?
+# [foundation] Are this assessment's answers kept in version control, with the next review set for no more than 3 months from now?
 "measurement.quarterly-assessment" = true
 # [standard] Do you measure all five DORA delivery metrics from tooling rather than by hand?
 "measurement.five-dora-metrics" = false

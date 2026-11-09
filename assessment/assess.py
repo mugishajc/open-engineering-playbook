@@ -17,6 +17,11 @@ Exit codes:
   1  --check was given and at least one area is below its target
   2  the input files are invalid
 
+Profiles can skip whole areas, keep their target when an overlay applies,
+and put some areas first in the next actions. The rules live in the question
+bank under [profiles.<name>]. A question can also carry only_profiles or
+skip_profiles, so a profile such as SME gets questions written for it.
+
 Standard library only. Python 3.11 or later (uses tomllib).
 """
 from __future__ import annotations
@@ -33,7 +38,13 @@ from typing import Any
 try:
     import tomllib
 except ModuleNotFoundError:  # pragma: no cover
-    sys.exit("assess.py needs Python 3.11 or later (tomllib).")
+    sys.exit(
+        "assess.py needs Python 3.11 or later (it uses tomllib); this is Python "
+        + ".".join(str(n) for n in sys.version_info[:3])
+        + ".\nRun it with a newer Python if you have one: python3.12 or python3.11 on "
+        "macOS and Linux, py -3 on Windows.\nOtherwise install the current release "
+        "from https://www.python.org/downloads/ or your package manager."
+    )
 
 LEVELS = ("foundation", "standard", "assured")
 LEVEL_RANK = {"none": 0, "foundation": 1, "standard": 2, "assured": 3}
@@ -50,6 +61,7 @@ PROFILE_TARGET = {
     "scale-up": "standard",
     "enterprise": "standard",
 }
+PROFILE_PAGE = "profiles/{profile}.md"
 PROFILE_LABEL = {
     "solo": "Solo",
     "sme": "SME",
@@ -66,6 +78,10 @@ ID_RE = re.compile(rf"^{SLUG}\.{SLUG}$")
 AREA_RE = re.compile(rf"^{SLUG}$")
 DEFAULT_QUESTIONS = Path(__file__).with_name("questions.toml")
 DEFAULT_ACTIONS = 5
+REPO_ROOT = Path(__file__).resolve().parent.parent
+# Used for report links when the answers file lives outside this repository,
+# where links relative to the playbook root would be broken.
+PUBLIC_LINK_BASE = "https://github.com/mugishajc/open-engineering-playbook/blob/main/"
 
 
 class AssessError(Exception):
@@ -88,18 +104,58 @@ class Question:
     action: str
     link: str
     index: int
+    only_profiles: tuple[str, ...] = ()
+    skip_profiles: tuple[str, ...] = ()
+
+    def applies_to(self, profile: str) -> bool:
+        if self.only_profiles and profile not in self.only_profiles:
+            return False
+        return profile not in self.skip_profiles
+
+
+@dataclass(frozen=True)
+class ProfileRule:
+    """How one profile differs from the default scoring."""
+
+    skip_areas: tuple[str, ...] = ()
+    area_order: tuple[str, ...] = ()
+    overlays_raise_target: bool = True
+
+
+NO_RULE = ProfileRule()
 
 
 @dataclass(frozen=True)
 class Bank:
     areas: tuple[Area, ...]
     questions: tuple[Question, ...]
+    rules: tuple[tuple[str, ProfileRule], ...] = ()
 
     def by_id(self) -> dict[str, Question]:
         return {q.id: q for q in self.questions}
 
-    def in_area(self, area_id: str) -> list[Question]:
-        return [q for q in self.questions if q.area == area_id]
+    def rule(self, profile: str) -> ProfileRule:
+        return dict(self.rules).get(profile, NO_RULE)
+
+    def areas_for(self, profile: str | None = None) -> list[Area]:
+        """Areas assessed for a profile, in bank order. None means all."""
+        if profile is None:
+            return list(self.areas)
+        skip = set(self.rule(profile).skip_areas)
+        return [a for a in self.areas if a.id not in skip]
+
+    def in_area(self, area_id: str, profile: str | None = None) -> list[Question]:
+        """Questions in one area, lowest level first, then bank order."""
+        qs = [
+            q
+            for q in self.questions
+            if q.area == area_id and (profile is None or q.applies_to(profile))
+        ]
+        return sorted(qs, key=lambda q: (LEVEL_RANK.get(q.level, 0), q.index))
+
+    def questions_for(self, profile: str) -> list[Question]:
+        assessed = {a.id for a in self.areas_for(profile)}
+        return [q for q in self.questions if q.area in assessed and q.applies_to(profile)]
 
 
 @dataclass(frozen=True)
@@ -158,6 +214,10 @@ def parse_bank(data: dict[str, Any]) -> Bank:
         for field in ("text", "action", "link"):
             if not isinstance(raw.get(field), str) or not raw[field].strip():
                 errors.append(f"{where}: missing {field}")
+        only = _profile_list(raw, "only_profiles", where, errors)
+        skip = _profile_list(raw, "skip_profiles", where, errors)
+        if only and skip:
+            errors.append(f"{where}: use only_profiles or skip_profiles, not both")
         questions.append(
             Question(
                 id=qid,
@@ -167,6 +227,8 @@ def parse_bank(data: dict[str, Any]) -> Bank:
                 action=str(raw.get("action", "")).strip(),
                 link=str(raw.get("link", "")).strip(),
                 index=len(questions),
+                only_profiles=only,
+                skip_profiles=skip,
             )
         )
 
@@ -175,9 +237,68 @@ def parse_bank(data: dict[str, Any]) -> Bank:
             errors.append(f"area {area.id!r} has no questions")
     if not areas:
         errors.append("no [[areas]] defined")
+
+    rules = _parse_rules(data.get("profiles", {}), seen_areas, errors)
+    bank = Bank(tuple(areas), tuple(questions), tuple(sorted(rules.items())))
+    if not errors:
+        # Every area a profile assesses must be able to reach Foundation.
+        for profile in PROFILE_TARGET:
+            for area in bank.areas_for(profile):
+                if not any(q.level == "foundation" for q in bank.in_area(area.id, profile)):
+                    errors.append(
+                        f"profile {profile!r}: area {area.id!r} has no Foundation question; "
+                        "add one or skip the area for this profile"
+                    )
     if errors:
         raise AssessError("Invalid question bank:\n  " + "\n  ".join(errors))
-    return Bank(tuple(areas), tuple(questions))
+    return bank
+
+
+def _profile_list(raw: dict[str, Any], field: str, where: str, errors: list[str]) -> tuple[str, ...]:
+    value = raw.get(field, [])
+    if not isinstance(value, list) or not all(isinstance(v, str) for v in value):
+        errors.append(f"{where}: {field} must be a list of profile names")
+        return ()
+    for name in value:
+        if name not in PROFILE_TARGET:
+            errors.append(f"{where}: unknown profile {name!r} in {field}")
+    return tuple(value)
+
+
+def _parse_rules(raw: Any, area_ids: set[str], errors: list[str]) -> dict[str, ProfileRule]:
+    if not isinstance(raw, dict):
+        errors.append("[profiles] must be a table, for example [profiles.sme]")
+        return {}
+    rules: dict[str, ProfileRule] = {}
+    for name, table in raw.items():
+        where = f"profiles.{name}"
+        if name not in PROFILE_TARGET:
+            errors.append(f"{where}: unknown profile; allowed: {', '.join(PROFILE_TARGET)}")
+            continue
+        if not isinstance(table, dict):
+            errors.append(f"{where}: must be a table")
+            continue
+        unknown = sorted(set(table) - {"skip_areas", "area_order", "overlays_raise_target"})
+        if unknown:
+            errors.append(f"{where}: unknown keys {', '.join(unknown)}")
+        lists: dict[str, tuple[str, ...]] = {}
+        for key in ("skip_areas", "area_order"):
+            value = table.get(key, [])
+            if not isinstance(value, list) or not all(isinstance(v, str) for v in value):
+                errors.append(f"{where}: {key} must be a list of area ids")
+                value = []
+            for area_id in value:
+                if area_id not in area_ids:
+                    errors.append(f"{where}: unknown area {area_id!r} in {key}")
+            lists[key] = tuple(value)
+        if area_ids and set(lists["skip_areas"]) >= area_ids:
+            errors.append(f"{where}: skip_areas cannot skip every area")
+        raise_target = table.get("overlays_raise_target", True)
+        if not isinstance(raise_target, bool):
+            errors.append(f"{where}: overlays_raise_target must be true or false")
+            raise_target = True
+        rules[name] = ProfileRule(lists["skip_areas"], lists["area_order"], raise_target)
+    return rules
 
 
 def load_bank(path: Path) -> Bank:
@@ -237,7 +358,11 @@ def parse_answers(data: dict[str, Any], bank: Bank, allow_missing: bool = False)
             continue
         values[key] = value
 
-    missing = [q.id for q in bank.questions if q.id not in flat]
+    # Only the questions this profile is asked count as missing. Answers to
+    # questions the profile skips are accepted and ignored, so a team can
+    # change profile without deleting lines.
+    asked = bank.questions_for(profile) if profile in PROFILE_TARGET else list(bank.questions)
+    missing = [q.id for q in asked if q.id not in flat]
     if missing and not allow_missing:
         errors.append(
             f"{len(missing)} question(s) have no answer: {', '.join(missing)}. "
@@ -245,6 +370,8 @@ def parse_answers(data: dict[str, Any], bank: Bank, allow_missing: bool = False)
         )
     for qid in missing:
         values[qid] = False
+    for q in bank.questions:
+        values.setdefault(q.id, False)
 
     if errors:
         raise AssessError("Invalid answers file:\n  " + "\n  ".join(errors))
@@ -258,10 +385,14 @@ def load_answers(path: Path, bank: Bank, allow_missing: bool = False) -> Answers
 # ------------------------------------------------------------------ scoring
 
 
-def target_level(profile: str, overlays: tuple[str, ...] | list[str] = ()) -> str:
+def target_level(
+    profile: str,
+    overlays: tuple[str, ...] | list[str] = (),
+    rule: ProfileRule = NO_RULE,
+) -> str:
     if profile not in PROFILE_TARGET:
         raise AssessError(f"unknown profile {profile!r}")
-    if overlays:
+    if overlays and rule.overlays_raise_target:
         return OVERLAY_TARGET
     return PROFILE_TARGET[profile]
 
@@ -283,15 +414,19 @@ def area_level(questions: list[Question], values: dict[str, bool]) -> str:
 
 
 def assess(bank: Bank, answers: Answers, max_actions: int = DEFAULT_ACTIONS) -> dict[str, Any]:
-    target = target_level(answers.profile, answers.overlays)
+    profile = answers.profile
+    rule = bank.rule(profile)
+    target = target_level(profile, answers.overlays, rule)
     target_rank = LEVEL_RANK[target]
     values = answers.values
+    assessed = bank.areas_for(profile)
+    asked = bank.questions_for(profile)
 
     areas: list[dict[str, Any]] = []
     area_rank: dict[str, int] = {}
     area_share: dict[str, float] = {}
-    for area in bank.areas:
-        qs = bank.in_area(area.id)
+    for area in assessed:
+        qs = bank.in_area(area.id, profile)
         reached = area_level(qs, values)
         yes = sum(1 for q in qs if values.get(q.id))
         area_rank[area.id] = LEVEL_RANK[reached]
@@ -309,13 +444,16 @@ def assess(bank: Bank, answers: Answers, max_actions: int = DEFAULT_ACTIONS) -> 
             }
         )
 
-    area_index = {a.id: a.index for a in bank.areas}
+    # A profile's area_order puts its most important areas first; the other
+    # areas follow in bank order.
+    first = {a: i for i, a in enumerate(rule.area_order)}
+    area_index = {a.id: first.get(a.id, len(first) + a.index) for a in assessed}
 
     def priority(q: Question) -> tuple:
-        # Lowest level first, then the weakest area, then file order.
+        # Lowest level first, then the weakest area, then area order, then file order.
         return (LEVEL_RANK[q.level], area_rank[q.area], area_share[q.area], area_index[q.area], q.index)
 
-    open_qs = [q for q in bank.questions if not values.get(q.id)]
+    open_qs = [q for q in asked if not values.get(q.id)]
     within = sorted((q for q in open_qs if LEVEL_RANK[q.level] <= target_rank), key=priority)
     beyond = sorted((q for q in open_qs if LEVEL_RANK[q.level] > target_rank), key=priority)
     titles = {a.id: a.title for a in bank.areas}
@@ -334,18 +472,21 @@ def assess(bank: Bank, answers: Answers, max_actions: int = DEFAULT_ACTIONS) -> 
 
     lowest_rank = min(area_rank.values())
     lowest = next(k for k, v in LEVEL_RANK.items() if v == lowest_rank)
-    in_scope = [q for q in bank.questions if LEVEL_RANK[q.level] <= target_rank]
-    total_yes = sum(1 for q in bank.questions if values.get(q.id))
+    in_scope = [q for q in asked if LEVEL_RANK[q.level] <= target_rank]
+    total_yes = sum(1 for q in asked if values.get(q.id))
+    assessed_ids = {a.id for a in assessed}
     return {
-        "profile": answers.profile,
+        "profile": profile,
         "overlays": list(answers.overlays),
         "target": target,
+        "overlays_raise_target": rule.overlays_raise_target,
+        "skipped_areas": [{"id": a.id, "title": a.title} for a in bank.areas if a.id not in assessed_ids],
         "summary": {
             "areas_total": len(areas),
             "areas_at_target": sum(1 for a in areas if a["gap"] == 0),
             "lowest_level": lowest,
             "lowest_areas": [a["id"] for a in areas if LEVEL_RANK[a["reached"]] == lowest_rank],
-            "questions_total": len(bank.questions),
+            "questions_total": len(asked),
             "questions_yes": total_yes,
             "target_questions_total": len(in_scope),
             "target_questions_yes": sum(1 for q in in_scope if values.get(q.id)),
@@ -379,10 +520,27 @@ def render_markdown(result: dict[str, Any], bank: Bank, link_base: str = "") -> 
     def link(path: str) -> str:
         return f"[{path}]({link_base}{path})"
 
+    skipped = result.get("skipped_areas", [])
+    if skipped:
+        scope = f"{target} in the {s['areas_total']} areas this profile assesses."
+    else:
+        scope = f"{target} in every area."
     out: list[str] = [
         "# Maturity report",
         "",
-        f"Profile: {profile}. Overlays: {overlays}. Target: {target} in every area.",
+        f"Profile: {profile}. Overlays: {overlays}. Target: {scope}",
+    ]
+    if skipped:
+        out.append(
+            f"Not assessed for this profile: {', '.join(a['title'] for a in skipped)}. "
+            f"See {link(PROFILE_PAGE.format(profile=result['profile']))} for when to add them."
+        )
+    if result["overlays"] and not result.get("overlays_raise_target", True):
+        out.append(
+            f"Overlays do not raise the target for the {profile} profile. "
+            "Use the short section for this profile on each overlay page instead."
+        )
+    out += [
         "",
         "## Summary",
         "",
@@ -445,15 +603,19 @@ def render_init(bank: Bank, profile: str = "startup") -> str:
         "# Commit this file and repeat the assessment every quarter.",
         "",
         "# One of: " + ", ".join(PROFILE_TARGET) + ".",
+        "# The questions below are the ones this profile is asked. If you change",
+        "# the profile, run --init again or score with --allow-missing.",
         f'profile = "{profile}"',
         "# Add " + " and/or ".join(f'"{o}"' for o in OVERLAYS) + " when they apply.",
         "overlays = []",
-        "",
-        "[answers]",
     ]
-    for area in bank.areas:
+    skipped = [a.title for a in bank.areas if a not in bank.areas_for(profile)]
+    if skipped:
+        out.append(f"# Not assessed for the {PROFILE_LABEL[profile]} profile: {', '.join(skipped)}.")
+    out += ["", "[answers]"]
+    for area in bank.areas_for(profile):
         out += ["", f"# {area.title}"]
-        for q in bank.in_area(area.id):
+        for q in bank.in_area(area.id, profile):
             out.append(f"# [{q.level}] {q.text}")
             out.append(f'"{q.id}" = false')
     return "\n".join(out) + "\n"
@@ -472,6 +634,14 @@ def _write(text: str, output: Path | None, force: bool = True) -> None:
     print(f"Wrote {output}", file=sys.stderr)
 
 
+def _inside(path: Path, root: Path) -> bool:
+    try:
+        path.resolve().relative_to(root)
+        return True
+    except ValueError:
+        return False
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -485,7 +655,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--force", action="store_true", help="let --init replace an existing --output file")
     p.add_argument("--allow-missing", action="store_true", help="count unanswered questions as false")
     p.add_argument("--actions", type=int, default=DEFAULT_ACTIONS, help="how many next actions to list")
-    p.add_argument("--link-base", default="", help="prefix for playbook links, for example a repository URL ending in /")
+    p.add_argument(
+        "--link-base",
+        default=None,
+        help="prefix for playbook links, for example a repository URL ending in /. "
+        "Default: none when the answers file is inside this repository, the public "
+        "repository URL when it is not",
+    )
     p.add_argument("--check", action="store_true", help="exit 1 when any area is below its target")
     return p
 
@@ -504,7 +680,10 @@ def main(argv: list[str] | None = None) -> int:
         if args.format == "json":
             text = render_json(result)
         else:
-            text = render_markdown(result, bank, args.link_base)
+            link_base = args.link_base
+            if link_base is None:
+                link_base = "" if _inside(args.answers, REPO_ROOT) else PUBLIC_LINK_BASE
+            text = render_markdown(result, bank, link_base)
         _write(text, args.output)
     except AssessError as exc:
         print(f"error: {exc}", file=sys.stderr)

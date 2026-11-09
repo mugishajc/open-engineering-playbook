@@ -1,0 +1,3 @@
+service,purpose,owner_in_business,admin_accounts,data_held,personal_data,cost_per_year,renewal_date,mfa_on,data_export_tested,notes
+Email and files,"Email, calendar and shared files",Office manager,"2 named admins",Staff and customer emails; contracts,yes,,,yes,,
+Accounting,Invoices and payroll,Owner,1 named admin,Financial records; staff salaries,yes,,,yes,,

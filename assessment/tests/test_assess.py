@@ -8,6 +8,7 @@ from __future__ import annotations
 import contextlib
 import io
 import json
+import re
 import sys
 import tempfile
 import tomllib
@@ -114,7 +115,12 @@ class TargetLevel(unittest.TestCase):
             self.assertEqual(ka.target_level(profile, ["public-sector", "regulated"]), "assured")
 
     def test_sme_profile_targets_foundation(self):
-        self.assertEqual(ka.target_level("sme", []), "foundation")
+        rule = ka.load_bank(QUESTIONS).rule("sme")
+        self.assertEqual(ka.target_level("sme", [], rule), "foundation")
+        # The SME profile keeps Foundation when an overlay applies; the
+        # overlay pages have a short SME section instead.
+        self.assertEqual(ka.target_level("sme", ["regulated"], rule), "foundation")
+        # Without the rule, an overlay still means Assured.
         self.assertEqual(ka.target_level("sme", ["regulated"]), "assured")
 
     def test_unknown_profile(self):
@@ -183,7 +189,7 @@ class InitRoundTrip(unittest.TestCase):
     def test_init_has_question_text_as_comments(self):
         bank = ka.load_bank(QUESTIONS)
         text = ka.render_init(bank)
-        for q in bank.questions:
+        for q in bank.questions_for("startup"):
             self.assertIn(f"# [{q.level}] {q.text}", text)
             self.assertIn(f'"{q.id}" = false', text)
 
@@ -274,6 +280,168 @@ class Errors(unittest.TestCase):
             ]})
 
 
+class ProfileRules(unittest.TestCase):
+    """Profiles that skip areas, keep their target or ask their own questions."""
+
+    def setUp(self):
+        self.bank = ka.load_bank(QUESTIONS)
+
+    def blank(self, profile, overlays=()):
+        values = {q.id: False for q in self.bank.questions}
+        return ka.Answers(profile, tuple(overlays), values)
+
+    def test_sme_report_skips_engineering_areas(self):
+        r = ka.assess(self.bank, self.blank("sme"))
+        ids = [a["id"] for a in r["areas"]]
+        self.assertEqual(
+            ids, ["strategy", "operating-model", "reliability", "security", "data", "ai", "people", "compliance"]
+        )
+        self.assertEqual(
+            [a["id"] for a in r["skipped_areas"]],
+            ["ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"],
+        )
+        self.assertEqual(r["summary"]["areas_total"], 8)
+
+    def test_sme_next_actions_start_with_the_essential_controls(self):
+        r = ka.assess(self.bank, self.blank("sme"))
+        ids = [a["id"] for a in r["next_actions"]]
+        self.assertEqual(ids[0], "security.sme-mfa")
+        self.assertEqual(
+            ids,
+            [
+                "security.sme-mfa",
+                "security.sme-updates",
+                "security.sme-passwords-and-admin",
+                "reliability.sme-offline-backup",
+                "reliability.sme-first-hour-plan",
+            ],
+        )
+        # No engineering question is ever suggested to an SME.
+        r = ka.assess(self.bank, self.blank("sme"), max_actions=100)
+        for act in r["next_actions"]:
+            q = self.bank.by_id()[act["id"]]
+            self.assertTrue(q.applies_to("sme"), q.id)
+            self.assertNotIn(q.area, self.bank.rule("sme").skip_areas)
+
+    def test_sme_keeps_foundation_with_an_overlay(self):
+        r = ka.assess(self.bank, self.blank("sme", ["regulated"]))
+        self.assertEqual(r["target"], "foundation")
+        text = ka.render_markdown(r, self.bank)
+        self.assertIn("Overlays do not raise the target for the SME profile", text)
+
+    def test_sme_all_true_reaches_target(self):
+        values = {q.id: q.applies_to("sme") and q.level == "foundation" for q in self.bank.questions}
+        r = ka.assess(self.bank, ka.Answers("sme", (), values))
+        self.assertEqual(r["summary"]["areas_at_target"], r["summary"]["areas_total"])
+
+    def test_other_profiles_never_see_sme_questions(self):
+        for profile in ("solo", "startup", "scale-up", "enterprise"):
+            text = ka.render_init(self.bank, profile)
+            self.assertNotIn(".sme-", text, profile)
+            r = ka.assess(self.bank, self.blank(profile), max_actions=200)
+            self.assertFalse(any(".sme-" in a["id"] for a in r["next_actions"]), profile)
+            self.assertEqual(r["skipped_areas"], [])
+
+    def test_sme_init_round_trip(self):
+        text = ka.render_init(self.bank, "sme")
+        self.assertIn("Not assessed for the SME profile: Ways of working", text)
+        self.assertNotIn('"delivery.', text)
+        self.assertIn('"security.sme-mfa" = false', text)
+        parsed = ka.parse_answers(tomllib.loads(text), self.bank)
+        self.assertEqual(parsed.profile, "sme")
+
+    def test_answers_for_skipped_questions_are_accepted(self):
+        # A startup answers file switched to the SME profile: engineering
+        # answers are ignored, the SME questions are reported missing.
+        data = tomllib.loads(ka.render_init(self.bank, "startup").replace('profile = "startup"', 'profile = "sme"'))
+        with self.assertRaises(ka.AssessError) as ctx:
+            ka.parse_answers(data, self.bank)
+        self.assertIn("security.sme-mfa", str(ctx.exception))
+        self.assertNotIn("delivery.protected-default-branch", str(ctx.exception))
+        parsed = ka.parse_answers(data, self.bank, allow_missing=True)
+        self.assertFalse(parsed.values["security.sme-mfa"])
+
+    def test_area_order_breaks_ties(self):
+        data = {
+            "profiles": {"solo": {"area_order": ["beta"]}},
+            "areas": [{"id": "alpha", "title": "Alpha"}, {"id": "beta", "title": "Beta"}],
+            "questions": [
+                {"id": "alpha.one", "level": "foundation", "text": "t", "action": "a", "link": "l"},
+                {"id": "beta.one", "level": "foundation", "text": "t", "action": "a", "link": "l"},
+            ],
+        }
+        bank = ka.parse_bank(data)
+        values = {"alpha.one": False, "beta.one": False}
+        r = ka.assess(bank, ka.Answers("solo", (), values))
+        self.assertEqual([a["id"] for a in r["next_actions"]], ["beta.one", "alpha.one"])
+        r = ka.assess(bank, ka.Answers("startup", (), values))
+        self.assertEqual([a["id"] for a in r["next_actions"]], ["alpha.one", "beta.one"])
+
+    def test_invalid_profile_rules(self):
+        base = {
+            "areas": [{"id": "alpha", "title": "Alpha"}, {"id": "beta", "title": "Beta"}],
+            "questions": [
+                {"id": "alpha.one", "level": "foundation", "text": "t", "action": "a", "link": "l"},
+                {"id": "beta.one", "level": "foundation", "text": "t", "action": "a", "link": "l",
+                 "skip_profiles": ["sme"]},
+            ],
+        }
+        cases = {
+            "unknown area 'gamma'": {"sme": {"skip_areas": ["gamma"]}},
+            "unknown profile": {"huge": {"skip_areas": []}},
+            "unknown keys weight": {"sme": {"weight": 2}},
+            "cannot skip every area": {"sme": {"skip_areas": ["alpha", "beta"]}},
+            "area 'beta' has no Foundation question": {},
+        }
+        for message, rules in cases.items():
+            with self.subTest(message=message):
+                with self.assertRaises(ka.AssessError) as ctx:
+                    ka.parse_bank({**base, "profiles": rules})
+                self.assertIn(message, str(ctx.exception))
+        # Skipping the area fixes the last case.
+        ka.parse_bank({**base, "profiles": {"sme": {"skip_areas": ["beta"]}}})
+
+    def test_question_profile_fields_are_checked(self):
+        data = {
+            "areas": [{"id": "alpha", "title": "Alpha"}],
+            "questions": [
+                {"id": "alpha.one", "level": "foundation", "text": "t", "action": "a", "link": "l",
+                 "only_profiles": ["sme"], "skip_profiles": ["solo"]},
+                {"id": "alpha.two", "level": "foundation", "text": "t", "action": "a", "link": "l",
+                 "skip_profiles": ["tiny"]},
+            ],
+        }
+        with self.assertRaises(ka.AssessError) as ctx:
+            ka.parse_bank(data)
+        msg = str(ctx.exception)
+        self.assertIn("not both", msg)
+        self.assertIn("unknown profile 'tiny'", msg)
+
+    def test_markdown_for_sme_passes_plain_language_check(self):
+        r = ka.assess(self.bank, self.blank("sme"))
+        text = ka.render_markdown(r, self.bank)
+        self.assertIn("Not assessed for this profile: Ways of working", text)
+        patterns = plain_lint.compile_phrases(plain_lint.load_phrases(plain_lint.DEFAULT_WORDLIST))
+        findings = list(plain_lint.check_text(Path("report.md"), text, patterns))
+        self.assertEqual(findings, [], "\n".join(str(f) for f in findings))
+
+
+class LinkBase(unittest.TestCase):
+    def test_answers_outside_the_repository_get_public_links(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "a.toml"
+            path.write_text(EXAMPLE.read_text(encoding="utf-8"), encoding="utf-8")
+            _, out, _ = run_cli("--questions", str(QUESTIONS), "--answers", str(path))
+            self.assertIn(f"]({ka.PUBLIC_LINK_BASE}playbook/", out)
+            _, out, _ = run_cli("--questions", str(QUESTIONS), "--answers", str(path), "--link-base", "")
+            self.assertNotIn(ka.PUBLIC_LINK_BASE, out)
+
+    def test_answers_inside_the_repository_get_relative_links(self):
+        _, out, _ = run_cli("--questions", str(QUESTIONS), "--answers", str(EXAMPLE))
+        self.assertNotIn(ka.PUBLIC_LINK_BASE, out)
+        self.assertIn("](playbook/", out)
+
+
 class Formats(unittest.TestCase):
     def test_json_format(self):
         code, out, _ = run_cli("--questions", str(QUESTIONS), "--answers", str(EXAMPLE), "--format", "json")
@@ -316,18 +484,44 @@ class QuestionBank(unittest.TestCase):
         self.assertEqual(tuple(a.id for a in self.bank.areas), AREAS)
 
     def test_four_to_six_questions_per_area_covering_every_level(self):
-        for area in AREAS:
-            qs = self.bank.in_area(area)
-            self.assertTrue(4 <= len(qs) <= 6, f"{area} has {len(qs)} questions")
-            self.assertEqual({q.level for q in qs}, set(ka.LEVELS), area)
+        for profile in ("solo", "startup", "scale-up", "enterprise"):
+            for area in AREAS:
+                qs = self.bank.in_area(area, profile)
+                self.assertTrue(4 <= len(qs) <= 6, f"{profile}: {area} has {len(qs)} questions")
+                self.assertEqual({q.level for q in qs}, set(ka.LEVELS), f"{profile}: {area}")
 
-    def test_links_point_at_playbook_pages(self):
+    def test_sme_profile_has_its_own_questions(self):
+        skipped = set(self.bank.rule("sme").skip_areas)
+        self.assertEqual(
+            skipped,
+            {"ways-of-working", "delivery", "quality", "architecture", "platform", "measurement"},
+        )
+        for area in self.bank.areas_for("sme"):
+            qs = self.bank.in_area(area.id, "sme")
+            self.assertTrue(1 <= len(qs) <= 4, f"sme: {area.id} has {len(qs)} questions")
+            self.assertIn("foundation", {q.level for q in qs}, area.id)
+            # Every SME Foundation question is written for the SME profile.
+            for q in qs:
+                if q.level == "foundation":
+                    self.assertEqual(q.only_profiles, ("sme",), q.id)
+
+    def test_links_point_at_pages_that_exist(self):
         for q in self.bank.questions:
-            self.assertRegex(q.link, r"^playbook/[a-z-]+/[a-z0-9-]+\.md$", q.id)
+            self.assertRegex(q.link, r"^(playbook/[a-z-]+|leaders)/[a-z0-9-]+\.md(#[a-z0-9-]+)?$", q.id)
+            path, _, anchor = q.link.partition("#")
+            page = REPO / path
+            self.assertTrue(page.is_file(), q.link)
+            if anchor:
+                headings = {
+                    re.sub(r"[^a-z0-9 -]", "", line.lstrip("#").strip().lower()).replace(" ", "-")
+                    for line in page.read_text(encoding="utf-8").splitlines()
+                    if line.startswith("#")
+                }
+                self.assertIn(anchor, headings, q.link)
 
     def test_shipped_text_passes_plain_language_check(self):
         patterns = plain_lint.compile_phrases(plain_lint.load_phrases(plain_lint.DEFAULT_WORDLIST))
-        text = ka.render_init(self.bank)
+        text = ka.render_init(self.bank) + ka.render_init(self.bank, "sme")
         findings = list(plain_lint.check_text(Path("answers.md"), text, patterns))
         self.assertEqual(findings, [], "\n".join(str(f) for f in findings))
 

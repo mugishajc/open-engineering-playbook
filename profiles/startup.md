@@ -34,10 +34,10 @@ Run `tools/adopt.sh --target <repo> --platform github --with-security` on your m
 | Do this | Read | Template |
 |---|---|---|
 | Require multi-factor authentication everywhere; remove leavers' access | [Access control](../playbook/security/access-control.md) | |
-| Protect the default branch and require a passing CI run and one approval | [Source control](../playbook/delivery/source-control.md) | [default-branch.json](../templates/github/rulesets/default-branch.json) |
+| Protect the default branch and require a passing CI run and one approval. Import the ruleset (adopt.sh prints the `gh api` command); a file in the repository does nothing | [Source control](../playbook/delivery/source-control.md) | [default-branch.json](../templates/github/rulesets/default-branch.json) |
 | Run build, lint and tests in CI on every pull or merge request | [Continuous integration](../playbook/delivery/continuous-integration.md) | [ci.yml](../templates/github/workflows/ci.yml), [.gitlab-ci.yml](../templates/gitlab/.gitlab-ci.yml) |
 | Add a pull request template and CODEOWNERS with real names | [Code review](../playbook/delivery/code-review.md) | [PULL_REQUEST_TEMPLATE.md](../templates/github/PULL_REQUEST_TEMPLATE.md), [CODEOWNERS](../templates/github/CODEOWNERS) |
-| Move secrets out of code; turn on secret scanning and dependency updates | [Secrets](../playbook/security/secrets.md), [Dependencies](../playbook/security/dependencies.md) | [dependabot.yml](../templates/github/dependabot.yml), [renovate.json](../templates/repo/renovate.json) |
+| Move secrets out of code; turn on secret scanning and one dependency update bot | [Secrets](../playbook/security/secrets.md), [Dependencies](../playbook/security/dependencies.md) | [dependabot.yml](../templates/github/dependabot.yml) or [renovate.json](../templates/repo/renovate.json) |
 | Classify every data store: public, internal, confidential or restricted | [Data governance](../playbook/data/data-governance.md) | [data-classification.md](../templates/docs/data-classification.md) |
 
 ## Month 1
@@ -58,7 +58,7 @@ Run `tools/adopt.sh --target <repo> --platform github --with-security` on your m
 | Do this | Read | Template |
 |---|---|---|
 | Write a one-page technical strategy and a one-page decision rights table | [Technical strategy](../playbook/strategy/technical-strategy.md), [Decision rights](../playbook/operating-model/decision-rights.md) | [strategy-one-pager.md](../templates/strategy/strategy-one-pager.md), [raci.csv](../templates/strategy/raci.csv) |
-| Measure time to first review; aim for one working day | [Code review](../playbook/delivery/code-review.md) | |
+| Measure time to first review; aim for a median under 4 working hours and every review started within one working day | [Code review](../playbook/delivery/code-review.md) | |
 | Automate versioning, changelog and release | [Release management](../playbook/delivery/release-management.md) | [release-please.yml](../templates/github/workflows/release-please.yml), [release-checklist.md](../templates/docs/release-checklist.md) |
 | Hold a blameless postmortem within 5 working days of every major incident; list contributing factors, not one root cause | [Postmortems](../playbook/reliability/postmortems.md), [Root cause analysis](../playbook/reliability/root-cause-analysis.md) | [postmortem.md](../templates/docs/postmortem.md) |
 | Threat model the product's riskiest flow (login, payments or data export) | [Secure development](../playbook/security/secure-development.md) | [threat-model.md](../templates/docs/threat-model.md) |
@@ -70,7 +70,7 @@ Run `tools/adopt.sh --target <repo> --platform github --with-security` on your m
 | Do this | Read | Template |
 |---|---|---|
 | Set SLOs for the two most used user-facing flows and review the error budget monthly | [Service levels](../playbook/reliability/service-levels.md) | |
-| Start an on-call rota once 4 people can share it; write a runbook per paging alert | [On-call](../playbook/reliability/on-call.md) | [runbook.md](../templates/docs/runbook.md) |
+| Start a 24 by 7 on-call rota once 6 people can share it; before that, cover business hours only and say so in customer terms. Write a runbook per paging alert | [On-call](../playbook/reliability/on-call.md) | [runbook.md](../templates/docs/runbook.md) |
 | Roll out code and configuration in stages with automatic rollback; practise a rollback every quarter | [GitOps and deployment](../playbook/delivery/gitops-and-deployment.md), [Rollbacks](../playbook/reliability/rollbacks.md), [Feature flags](../playbook/delivery/feature-flags.md) | |
 | Set fix time limits for vulnerabilities by severity | [Vulnerability management](../playbook/security/vulnerability-management.md) | [vulnerability-disclosure-policy.md](../templates/docs/vulnerability-disclosure-policy.md) |
 | Review every SaaS tool that holds customer data | [Third-party and SaaS risk](../playbook/security/third-party-and-saas-risk.md) | [vendor-risk-questionnaire.md](../templates/docs/vendor-risk-questionnaire.md) |

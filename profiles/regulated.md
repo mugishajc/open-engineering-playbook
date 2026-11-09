@@ -11,6 +11,8 @@ Apply this overlay on top of your size profile when a regulator can fine you, st
 
 You can apply both overlays. A state-owned bank or a public health service applies regulated and [public sector](public-sector.md) together.
 
+Levels never lower a legal duty. The reporting deadlines, registers, records of processing, impact assessments and contract terms that a law sets apply from the day the law applies to you, whatever level you are working towards. See the [legal floor](../playbook/data/data-security-and-privacy.md#legal-floor-applies-at-every-level) for data protection.
+
 ## With the SME profile
 
 A clinic, pharmacy, insurance broker or other small regulated business that does not build software does not need most of this page. Assured applies to the controls your regulator inspects, not to engineering practices you do not run. Add only these rows to the [SME profile](sme.md):
@@ -19,7 +21,7 @@ A clinic, pharmacy, insurance broker or other small regulated business that does
 |---|---|
 | Week 1 | List the rules that apply to you, the regulator for each, and every reporting deadline, for example a data breach report within 72 hours |
 | Month 1 | Name who reports an incident to the regulator, including out of hours, and put the deadlines in the printed first-hour plan |
-| Quarter 1 | Check that every supplier holding regulated data (for example patient records) has a contract with breach notice, data location and exit terms |
+| Quarter 1 | Check that every supplier holding regulated data (for example patient records) has a contract with breach notice within 24 hours of the supplier becoming aware, data location and exit terms |
 | Year 1 | Restore your most important system from backup, compare the time with your recovery target, and keep the written result as evidence |
 
 Ask your sector body or regulator whether it publishes guidance for small firms, and follow that first.
@@ -39,11 +41,13 @@ Examples, not legal advice. Check the current text with your compliance team.
 |---|---|
 | EU Digital Operational Resilience Act, Regulation (EU) 2022/2554, applies from 17 January 2025. It is unrelated to the DORA delivery metrics. | ICT risk management, incident reporting, resilience testing and oversight of ICT third parties for financial entities |
 | EU NIS2 Directive (EU) 2022/2555, national laws due by 17 October 2024 | Risk management and incident reporting for essential and important entities |
-| EU Cyber Resilience Act, Regulation (EU) 2024/2847 | Manufacturers report actively exploited vulnerabilities and severe incidents from 11 September 2026: early warning within 24 hours, notification within 72 hours. Most other obligations apply from 11 December 2027. |
-| EU AI Act, Regulation (EU) 2024/1689 | Prohibited practices apply from 2 February 2025. Dates for high-risk systems have been revised; check EUR-Lex for the current ones. |
+| EU Cyber Resilience Act, Regulation (EU) 2024/2847 | Since 11 September 2026, manufacturers report actively exploited vulnerabilities and severe incidents: early warning within 24 hours of becoming aware, notification within 72 hours, and a final report 14 days after a fix is available (vulnerabilities) or 1 month after the notification (incidents). This covers products placed on the market before 11 December 2027 too. Most other obligations apply from 11 December 2027. See [vulnerability management](../playbook/security/vulnerability-management.md). |
+| EU AI Act, Regulation (EU) 2024/1689 | Prohibited practices apply from 2 February 2025. After Regulation (EU) 2026/1744, high-risk obligations apply from 2 December 2027 (Annex III) and 2 August 2028 (Annex I products), and new prohibitions on non-consensual intimate imagery and child sexual abuse material from 2 December 2026. See [AI governance](../playbook/ai/ai-governance.md). |
 | ISO/IEC 27001:2022 Annex A, controls 8.25 to 8.33 | Secure development life cycle, secure coding, security testing, separation of environments, change management |
 | SOC 2 Trust Services Criteria, CC8.1 and CC7 | Change management, system operations and incident response |
-| Data protection law, such as EU GDPR, Kenya Data Protection Act 2019, Rwanda Law No 058/2021, Nigeria Data Protection Act 2023, Brazil LGPD, India DPDP Act 2023 | Privacy by design, impact assessments, breach notification |
+| Data protection law, such as EU GDPR, Kenya Data Protection Act 2019, Rwanda Law No 058/2021, Nigeria Data Protection Act 2023, Brazil LGPD, India DPDP Act 2023 | Records of processing, privacy by design, impact assessments, breach notification and a breach register, and a transfer mechanism for data leaving the country. See [data security and privacy](../playbook/data/data-security-and-privacy.md). |
+| India CERT-In Directions of 28 April 2022 (IT Act section 70B(6)) | Service providers, intermediaries, data centres and body corporates report listed cyber incidents to CERT-In within 6 hours of noticing them, and keep ICT system logs for a rolling 180 days within India |
+| EU NIS2 Implementing Regulation (EU) 2024/2690 | For cloud, data centre, managed service and managed security providers, DNS and similar digital providers: detailed technical measures and significant incident criteria that apply directly |
 
 ## What it adds by area
 
@@ -52,7 +56,7 @@ Examples, not legal advice. Check the current text with your compliance team.
 | Strategy | Technical risks in the enterprise risk register, reviewed every 90 days |
 | Operating model | Separation of duties enforced in tooling; regular reporting to the board or audit committee |
 | Ways of working | Every change traceable to an approved requirement or risk item |
-| Delivery | Change evidence (request, reviewer, CI result, deployer) retrievable within one hour for 12 months or longer |
+| Delivery | Change evidence (request, reviewer, CI result, deployer) for any single change retrievable within 1 hour, and a sample of 25 changes within 1 working day, for 12 months or longer |
 | Quality | Test results kept as release evidence |
 | Reliability | Yearly disaster recovery test against written recovery time and recovery point objectives |
 | Security | SBOM and signed releases verified before deploy; cryptographic inventory and post-quantum plan |
@@ -104,7 +108,7 @@ Examples, not legal advice. Check the current text with your compliance team.
 | Postmortems that trace contributing factors across detection, response and recovery | [Root cause analysis](../playbook/reliability/root-cause-analysis.md) | [postmortem.md](../templates/docs/postmortem.md) |
 | Adopt an AI management framework for AI used in decisions about customers | [AI governance](../playbook/ai/ai-governance.md) | |
 | A post-quantum migration plan for the systems in the inventory | [Post-quantum readiness](../playbook/security/post-quantum-readiness.md) | |
-| Exit plans for critical ICT suppliers, tested on paper | [Third-party and SaaS risk](../playbook/security/third-party-and-saas-risk.md) | |
+| Exit plans for critical ICT suppliers, reviewed every year and tested with a real, timed data export and import (paper walk-throughs count only for less critical suppliers) | [Third-party and SaaS risk](../playbook/security/third-party-and-saas-risk.md) | |
 | Internal mirrors for packages and images in the release path | [Cloud, on-premises and air-gapped](../playbook/platform/cloud-on-prem-air-gapped.md) | |
 | Four committed assessments; every in-scope system at Assured or with recorded exceptions | [Maturity model](../playbook/measurement/maturity-model.md) | [assessment](../assessment/README.md) |
 
@@ -123,6 +127,8 @@ Examples, not legal advice. Check the current text with your compliance team.
 - Regulation (EU) 2022/2554, Digital Operational Resilience Act: https://eur-lex.europa.eu/eli/reg/2022/2554/oj
 - Directive (EU) 2022/2555, NIS2: https://eur-lex.europa.eu/eli/dir/2022/2555/oj
 - Regulation (EU) 2024/2847, Cyber Resilience Act: https://digital-strategy.ec.europa.eu/en/policies/cyber-resilience-act
-- Regulation (EU) 2024/1689, AI Act: https://eur-lex.europa.eu/eli/reg/2024/1689/oj
+- Regulation (EU) 2024/1689, AI Act: https://eur-lex.europa.eu/eli/reg/2024/1689/oj, as amended by Regulation (EU) 2026/1744: https://eur-lex.europa.eu/eli/reg/2026/1744/oj
+- Commission Implementing Regulation (EU) 2024/2690 (NIS2 technical measures): https://eur-lex.europa.eu/eli/reg_impl/2024/2690/oj
+- CERT-In, Directions under section 70B(6) of the IT Act, 28 April 2022: https://www.cert-in.org.in/PDF/CERT-In_Directions_70B_28.04.2022.pdf
 - NIST Secure Software Development Framework: https://csrc.nist.gov/projects/ssdf
 - OpenSSF Scorecard: https://scorecard.dev
