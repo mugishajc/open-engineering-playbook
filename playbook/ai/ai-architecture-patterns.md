@@ -93,6 +93,8 @@ The Model Context Protocol (MCP) is an open protocol for connecting models and a
 - Record which MCP specification version each client and server uses, and test an upgrade like any other API change.
 - Do not let one agent combine untrusted input, access to sensitive data and a way to send data out. Remove at least one of the three.
 
+At scale, manage MCP servers as platform infrastructure. Keep a registry of approved servers with version, owner and health endpoint. Rotate credentials centrally. Alert on servers that stop responding or change their tool descriptions. Treat MCP server management like dependency management: an unreviewed update or an unmonitored server is an unmanaged risk.
+
 ### Self-hosted and on-premises models
 
 Run open-weight models on your own hardware when data cannot leave, the network is air-gapped, or steady high volume makes per-call pricing expensive. Use an inference server (vLLM is one example), a model registry with checksums and licences, and capacity plans for GPUs. Smaller or quantised models cut cost and latency at some loss of quality: measure the loss with your evaluation set, not a public benchmark.

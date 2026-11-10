@@ -17,7 +17,7 @@ Starting points. Tune them to your organisation.
 | When | Goals |
 |---|---|
 | Before day one | Accounts created through the identity provider from a role template. Laptop imaged and shipped. Buddy named. First-week calendar sent. |
-| Day one | Meet manager and buddy. Log in everywhere. Clone, build and run tests for the main repository. Read the team's README, [principles](../principles.md) and the on-call overview. |
+| Day one | Meet manager and buddy. Log in everywhere. Clone, build and run tests for the main repository. Set up approved code assistants and review the repository's agent instructions file. Read the team's README, [principles](../principles.md) and the on-call overview. |
 | First week | First pull request merged: a small, real fix chosen in advance (a "good first issue"). Sit with the buddy through one code review and one deploy. Complete required security and privacy training. |
 | First 30 days | Ship at least 3 changes to production. Read the team's architecture decision records (ADRs) and the architecture overview. Join code review as a second reviewer. Fix something in the onboarding docs. Take the [true-or-false quiz](../../exercises/true-or-false/README.md) for the team's areas and discuss the misses with the buddy. |
 | First 60 days | Own a small feature from design to production. Review pull requests as a primary reviewer. Shadow one on-call rotation. |

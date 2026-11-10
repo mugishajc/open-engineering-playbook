@@ -44,7 +44,8 @@ Signals that you need one: every team writes its own pipeline, teams wait days f
 | 4 | Secrets and identity | HashiCorp Vault or OpenBao, cloud KMS, Keycloak or the corporate identity provider |
 | 5 | Observability | OpenTelemetry Collector, Prometheus, Grafana, Loki, Tempo, or a managed service |
 | 6 | Self-service data stores and queues | Operators on Kubernetes, or managed cloud databases behind a request form |
-| 7 | Compliance evidence collection | Pipeline attestations, policy-as-code reports, catalogue metadata |
+| 7 | AI gateway | Model routing, quotas, cost allocation, logging, prompt and response redaction, fallback between providers. Built or bought; one per organisation. See [AI architecture patterns](../ai/ai-architecture-patterns.md). |
+| 8 | Compliance evidence collection | Pipeline attestations, policy-as-code reports, catalogue metadata |
 
 ## Practice
 

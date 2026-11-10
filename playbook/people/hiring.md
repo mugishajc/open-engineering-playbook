@@ -28,6 +28,7 @@ Starting points. Tune them to your organisation.
 ## Work samples
 
 - Base the task on real work: review a pull request with planted problems, extend a small service, debug a failing test, design a system on a whiteboard with real constraints, write an incident update.
+- Include at least one exercise where the candidate reviews or debugs code produced by a code assistant. Plant errors that generated code commonly introduces: invented API calls, missing authorisation checks, tests that assert what the code does rather than what it should do, and stale dependency usage.
 - Give every candidate the same task and the same scoring guide.
 - Respect people's time. A take-home task should take no more than 2 hours. Pay candidates for longer exercises or offer a live alternative. Long unpaid tasks screen out people with caring duties and second jobs.
 - Discuss the work sample in the next interview. How the candidate explains choices and trade-offs often tells you more than the code.

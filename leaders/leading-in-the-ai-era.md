@@ -47,6 +47,18 @@ Fund AI like any uncertain investment: small bets with stop points, then shared 
 
 Most pilot failures are decided before the pilot starts: no baseline, no eval set, no owner for production. Refuse to fund a pilot without all three.
 
+### Where to invest first
+
+Not every task benefits equally. Prioritise by how well the task fits today's tools.
+
+| Tier | Task shape | Examples | Controls needed |
+|---|---|---|---|
+| 1. High volume, narrow scope, clear right answer | Work where a correct output is easy to verify | Support triage, test generation, documentation updates, data entry checks | Eval set with pass threshold, sampling audit |
+| 2. High volume, judgement needed, human review feasible | Work where a person checks each output before it acts | Code review assist, incident summarisation, draft communications | Human approval before action, confidence-based routing |
+| 3. Low volume, high stakes, human decides | Work where the cost of a wrong answer is severe | Architecture decisions, hiring, incident response, regulatory filings | AI prepares options and evidence; a person decides |
+
+Start with tier 1. Move to tier 2 once the team has built review habits and the measurement baseline from tier 1. Tier 3 is support, not automation: the AI assembles the briefing, the person makes the call.
+
 ### Before you approve an AI use case
 
 1. Is it in the AI register with a risk tier from [AI governance](../playbook/ai/ai-governance.md#risk-tiers)?

@@ -55,7 +55,8 @@ Test effort follows product risk. ISO/IEC/IEEE 29119 takes this risk-based appro
    One override: a risk with impact 3 always gets at least one automated check and a production alert, even when its likelihood is 1. Multiplying hides rare events that you cannot afford.
 
 4. **Pick the layer.** Use the cheapest test that would catch the defect earliest. A tax rule belongs in a unit test; a broken database constraint in an integration test; a changed API field in a contract test; a confusing form in exploratory and usability testing; a changed prompt or model version in the evaluation set (see [quality engineering](quality-engineering.md#in-the-ai-era)). The layers and their time budgets are in [testing](../delivery/testing.md) and [test automation](test-automation.md).
-5. **Rescore after every escaped defect** above your severity threshold, as part of the "learn from escapes" review in [quality engineering](quality-engineering.md#standard).
+5. **When agents or assistants generate tests,** verify that each test asserts a requirement, not the implementation. Generated unit tests often mirror what the code does rather than what it should do, which makes them pass by definition and catch nothing. Shift test investment toward integration, contract and evaluation tests that catch the errors generated code actually introduces.
+6. **Rescore after every escaped defect** above your severity threshold, as part of the "learn from escapes" review in [quality engineering](quality-engineering.md#standard).
 
 ## Test design techniques the team should know
 

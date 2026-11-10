@@ -11,6 +11,7 @@ Jump to: [A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#
 | AARRR | Dave McClure's five product funnel measures: acquisition, activation, retention, referral and revenue. | [Product metrics and experiments](playbook/product/product-metrics-and-experiments.md#choosing-what-to-measure) |
 | A/B test | A controlled experiment that randomly shows users the current version or a change and compares what they do. | [Product metrics and experiments](playbook/product/product-metrics-and-experiments.md#experiment-design) |
 | ADR (architecture decision record) | A short file in the repository that records one significant technical decision: the context, the options, the choice and its consequences. The playbook also says "decision record". | [Decision records](playbook/architecture/decision-records.md) |
+| Agentic | A system or workflow where an AI model plans and executes multi-step tasks with tool access and limited human oversight at defined checkpoints, rather than answering a single prompt. | [AI engineering practices](playbook/ai/ai-engineering-practices.md) |
 | AI Act | The EU's Regulation (EU) 2024/1689 on artificial intelligence, amended by Regulation (EU) 2026/1744. Duties depend on the risk of the AI system. | [AI governance](playbook/ai/ai-governance.md) |
 | API (application programming interface) | The defined way one program asks another for data or actions. | [API standards](playbook/architecture/api-standards.md) |
 | Assured | The highest of the playbook's three levels: Standard plus the evidence, separation of duties and audit trail that regulators ask for. | [Maturity model](playbook/measurement/maturity-model.md) |
@@ -78,6 +79,8 @@ Jump to: [A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#
 | Term | Meaning | Read more |
 |---|---|---|
 | ECDH, RSA | Public-key cryptography in wide use today. A large enough quantum computer could break both, so they are being replaced. | [Post-quantum readiness](playbook/security/post-quantum-readiness.md) |
+| Eval (evaluation set) | A fixed set of inputs and expected outputs used to measure whether an AI feature meets its quality bar. Run before and after every change. | [Building with AI](playbook/ai/building-with-ai.md) |
+| Eval-driven development | Building AI features by writing the evaluation set and its pass threshold first, then iterating on prompts, models or retrieval until the set passes. | [Building with AI](playbook/ai/building-with-ai.md) |
 | EPSS (Exploit Prediction Scoring System) | An estimate of the probability that a vulnerability will be exploited in the next 30 days. | [Vulnerability management](playbook/security/vulnerability-management.md) |
 | Error budget | The amount of unreliability an SLO allows in a period. A 99.9% monthly target allows about 43 minutes of failure a month. | [Service levels](playbook/reliability/service-levels.md) |
 | EVM (earned value management) | A method, standardised in SAE EIA-748, that compares the budgeted value of accepted work with its actual cost and its plan. | [Planning fixed scope and budget](playbook/project-management/planning-fixed-scope-and-budget.md#earned-value-without-fiction) |
