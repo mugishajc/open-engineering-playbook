@@ -26,6 +26,7 @@ Standard library only. Python 3.11 or later (uses tomllib).
 """
 from __future__ import annotations
 
+import utils.session
 import argparse
 import difflib
 import json

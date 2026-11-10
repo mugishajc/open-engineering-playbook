@@ -6,7 +6,7 @@ Writing code got cheap. Deciding what to build, proving it is safe, shipping it 
 
 Most engineering handbooks describe how one company works. This one is written to be adopted. Every practice comes at three levels and every target is measurable. Everything works on public cloud, on-premises and air-gapped networks, and every template is ready to copy. New to a term? See the [glossary](GLOSSARY.md).
 
-**107** practice pages in 16 areas · **8** regional compliance guides · **18** toolkits for leaders · **92** ready-to-copy templates · **130** real problems mapped to answers · **112**-question self-assessment (19 for small businesses) · **189** true-or-false statements · **19** tabletop exercises, katas and decision games
+**111** practice pages in 16 areas · **8** regional compliance guides · **18** toolkits for leaders · **92** ready-to-copy templates · **136** real problems mapped to answers · **112**-question self-assessment (19 for small businesses) · **189** true-or-false statements · **19** tabletop exercises, katas and decision games
 
 ## Three ways in
 
