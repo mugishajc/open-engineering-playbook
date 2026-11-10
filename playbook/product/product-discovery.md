@@ -92,7 +92,9 @@ In business-to-business (B2B) products sold to organisations, the person who buy
 - **Prototypes become the discovery tool.** An assistant can produce a working prototype on real data in hours. That lets you test value with behaviour instead of opinions. It also tempts teams to ship the prototype. Label prototypes as throwaway, keep them out of production repositories, and rebuild what survives to the normal standard. See [AI engineering practices](../ai/ai-engineering-practices.md).
 - **Building is no longer proof of commitment.** Stakeholders may see a demo and assume the feature is coming. Say before every demo what it is for and what decision it informs.
 - **Discovery capacity becomes the constraint.** If delivery speeds up and discovery does not, the team ships more unvalidated work. Protect the trio's weekly discovery time before adding delivery capacity.
-- **Synthetic users are not users.** A language model asked to play a customer returns the average of what it has read, politely. Use it to draft interview guides or rehearse, never as evidence of a need, a price or usability.
+- **AI-assisted interview analysis.** Record interviews (with consent), transcribe them, then use a language model to pull quotes, group themes and flag contradictions across sessions. Always check the summary against the recording; models drop outlier opinions and soften negative feedback.
+- **Synthetic users are not users.** A language model asked to play a customer returns the average of what it has read, politely. Use it to draft interview guides, rehearse a sales pitch or generate edge-case scenarios before a real session, never as evidence of a need, a price or usability.
+- **Prototype generation from specs.** Use a code assistant to turn a one-page spec into a clickable prototype in hours instead of days. This shrinks the cost of testing an idea with real users but does not replace the test itself.
 - **For AI features, the eval set is part of discovery.** Writing 50 real examples with expected answers forces the team to define "good" with users before building. See [building with AI](../ai/building-with-ai.md).
 
 ## Cloud, on-premises and air-gapped

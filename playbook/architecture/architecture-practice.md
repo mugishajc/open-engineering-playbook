@@ -59,6 +59,10 @@ A fitness function is an automated check that an architecture characteristic sti
 | Security | no container runs as root; no public storage buckets | CI and policy as code |
 | Data residency | no resource created outside approved regions | infrastructure plan check, see [infrastructure as code](../delivery/infrastructure-as-code.md) |
 | Operability | every service has SLOs, dashboards and a runbook | [production readiness](../reliability/production-readiness.md) checks |
+| AI quality | evaluation score above threshold on the gating eval set | CI on every prompt, model or retrieval change (see [quality engineering](../quality/quality-engineering.md#in-the-ai-era)) |
+| AI latency | model call p95 under budget (for example 2 seconds per turn) | load test or synthetic probe |
+| AI cost | cost per request below cap (for example $0.05 per API call) | nightly cost report from the AI gateway |
+| AI retrieval | retrieval recall above floor on the reference set | CI on every index or chunking change |
 
 Start with three fitness functions for the qualities that hurt most when they break. Each one replaces part of a manual review.
 

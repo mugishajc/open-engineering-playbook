@@ -75,6 +75,10 @@ Keep the README under about 200 lines. Move depth into `docs/`.
 - Public-facing documentation meets WCAG 2.2 level AA. That covers WCAG 2.1 level AA, which EN 301 549 (the European standard used under the Web Accessibility Directive and the European Accessibility Act) currently references, and adds six success criteria at levels A and AA.
 - Documentation of the system is part of the [production readiness review](../reliability/production-readiness.md) and of release sign-off.
 
+### Keeping docs current with agents
+
+An agent can watch for merged changes to API schemas, infrastructure definitions or configuration and open a pull request that updates the affected documentation page. A person reviews every documentation PR before merge. Set the agent to run on a schedule (daily or on merge to main) and assign the PR to the code owner of the docs directory.
+
 ## Cloud, on-premises and air-gapped
 
 - Host the docs site internally. Build it from internal mirrors of the generator and its plugins.

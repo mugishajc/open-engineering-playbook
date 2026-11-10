@@ -59,6 +59,7 @@ Write a decision record for every one-way door and every medium or heavy decisio
 - **Do not wait for certainty on two-way doors.** Bezos's 2016 shareholder letter suggests deciding with about 70% of the information you wish you had. Waiting costs more than a reversible mistake.
 - **Disagree and commit.** Andy Grove's High Output Management describes a process of free discussion, a clear decision, then full support from everyone, including those who argued against it. Bezos's 2016 shareholder letter uses the phrase "disagree and commit". Dissent goes on the record in the decision record; after that, people support the decision in their work.
 - **Reopen only with new evidence.** A decision is reopened when its review date arrives or when a fact listed in the record changes, not because someone lost the argument.
+- **Match decision speed to agent speed.** When an agent can implement a decision in hours, match the process to the reversibility. A reversible decision (a feature behind a flag, a configuration change) gets a lightweight spec and goes. An irreversible decision (a schema migration, a public API contract) still gets an RFC. Default to reversible.
 
 ## Investment decisions under uncertainty
 

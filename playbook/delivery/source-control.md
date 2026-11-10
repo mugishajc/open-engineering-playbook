@@ -89,6 +89,10 @@ Starting rule: one repository per independently deployed service or library, unl
 - **Signing without internet.** Keyless `gitsign` needs a reachable Sigstore instance. Air-gapped teams use SSH or GPG signing keys, or run a private Sigstore deployment.
 - **Backups.** A self-hosted Git server is a production system. Back it up and test restores. See [backup and recovery](../reliability/backup-and-recovery.md).
 
+### Agent branches
+
+When agents open pull requests, use a naming convention so reviewers can see the origin at a glance: `agent/<task-id>` or `agent/<short-description>`. Do not pass CI secrets to agent branches. Require the same review and merge rules as any other branch. Set a stale-branch policy to delete agent branches automatically after merge or after 7 days without activity.
+
 ## Anti-patterns
 
 | Anti-pattern | Fix |
