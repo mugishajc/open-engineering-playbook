@@ -21,7 +21,7 @@ Evidence on AI and delivery speed is mixed, so do not plan headcount or dates on
 
 - A randomised controlled trial by METR (July 2025) with 16 experienced open source developers, using early-2025 tools on their own repositories, found they took about 19% longer with AI tools, while believing they had been about 20% faster.
 - DORA's 2024 report found that each 25% increase in AI adoption was associated with an estimated 1.5% fall in delivery throughput and a 7.2% fall in delivery stability.
-- DORA's 2025 report found the association with throughput had turned positive, while the association with instability had not. It describes AI as an amplifier of the organisation's existing strengths and weaknesses.
+- DORA's 2025 report surveyed nearly 5,000 professionals and found that 90% now use AI tools. AI adoption is now associated with higher throughput, reversing the 2024 finding, but the association with delivery instability has not reversed. Only 24% of developers say they firmly trust AI output. The report describes AI as an amplifier of the organisation's existing strengths and weaknesses.
 
 Use these as reasons to measure, not as forecasts. Record your own baseline before rollout and compare against it (see [leading in the AI era](../../leaders/leading-in-the-ai-era.md)).
 
@@ -57,7 +57,7 @@ Make review and verification a named line in the team's capacity plan. A startin
 
 ## What fast and efficient looks like
 
-- **Small cross-functional teams** that own an outcome, not a list of tickets. See [product partnership](product-partnership.md).
+- **Small cross-functional teams** of 3 to 5 engineers with agent support, smaller than the traditional 5 to 9 person Scrum team. Fewer people means fewer coordination costs and faster decisions. Agents handle work that previously needed more people. Each team owns an outcome, not a list of tickets. See [product partnership](product-partnership.md).
 - **Continuous flow** with WIP limits (Kanban), not fixed batches. Pull the next item when one finishes.
 - **Shaped bets with an appetite** (Shape Up) for work bigger than a few days: decide how much time the problem is worth, then shape a solution to fit.
 - **Spec-first and eval-first.** Acceptance examples and, for AI features, evaluation sets exist before the code. See [AI engineering practices](../ai/ai-engineering-practices.md).

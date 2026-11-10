@@ -30,6 +30,19 @@ Starting points. Tune them to your organisation.
 - **Online evals** after launch: user feedback, task success rate, escalation to a human, and a weekly human review of a random sample of outputs.
 - Add every production failure to the eval set. The eval set is the regression test suite for model behaviour.
 
+## Building the eval set from production
+
+The strongest eval sets grow from real use, not only from pre-launch imagination. Some practitioners call this eval-driven development. The term is useful, but the practice works best when the eval set grows from real failures rather than from guesses about what might go wrong.
+
+1. **Start small.** Write 20 to 50 cases by hand covering the happy path, known edge cases and obvious adversarial inputs.
+2. **Launch to a small group** behind a feature flag. Collect prompts, outputs and user feedback.
+3. **Sample production weekly.** Pull a random sample of inputs and outputs from the previous week's logs. Have a person label each output as correct, partly correct or wrong, with a short reason.
+4. **Add every failure.** When a user reports a bad output or the weekly sample finds one, add it to the eval set with the expected answer. The eval set becomes the regression suite for model behaviour.
+5. **Grow to launch size.** By the time you reach 200 to 500 labelled cases, you have a set that reflects how real users use the feature, not only how you imagined they would.
+6. **Keep growing after launch.** Sample and label monthly. Retire cases that no longer represent current use. Version the set in git so you can compare scores over time.
+
+The eval set is never finished. It grows with the product.
+
 ## Prompting, retrieval or fine-tuning
 
 | Approach | Use it when | Cost and risk |

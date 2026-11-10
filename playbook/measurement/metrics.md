@@ -30,7 +30,7 @@ Throughput and stability move together in DORA's research: teams do not have to 
 - **Error budget consumed.** Per service, per window. Drives the decision to slow releases or invest in reliability.
 - **Incidents by severity** and **time to detect**. Useful for trend, not for comparison between teams.
 
-## Developer experience: SPACE
+## Developer experience: SPACE and DX Core 4
 
 The SPACE framework (Forsgren, Storey, Maddila, Zimmermann, Houck and Butler, 2021) says productivity has five dimensions and that no single metric captures it. Use at least three dimensions, and mix survey data with system data.
 
@@ -41,6 +41,10 @@ The SPACE framework (Forsgren, Storey, Maddila, Zimmermann, Houck and Butler, 20
 | Activity | Counts used only as context: deployments, reviews completed. Never alone. |
 | Communication and collaboration | Review turnaround time, time waiting on other teams, quality of docs (survey) |
 | Efficiency and flow | Change lead time, CI duration, time in review, interruptions per week (survey) |
+
+DX Core 4 (getdx.com, December 2024) builds on SPACE by combining DORA delivery metrics with developer experience signals into four dimensions: speed, effectiveness, quality and impact. It is designed to work alongside AI adoption and is now the most widely adopted structured developer experience measurement framework. Use it when you want a single instrument that ties delivery data to experience data.
+
+When AI tools generate a large share of code, activity metrics such as commits, lines changed and pull requests opened become unreliable. The volume goes up but the signal goes down. Weight satisfaction, flow state and the ability to focus over raw activity counts. If you track activity at all, pair it with rework rate and escaped defects so that faster output is not mistaken for better output.
 
 Keep the survey short: 10 to 15 questions, the same each time, with one free-text question. Publish the results and what you will do about them within 30 days.
 
@@ -149,4 +153,5 @@ Do not count lines of code generated, suggestion acceptance rate or "share of co
 - Forsgren et al., "The SPACE of Developer Productivity", ACM Queue (2021): https://queue.acm.org/detail.cfm?id=3454124
 - Google SRE book, "Service Level Objectives": https://sre.google/sre-book/service-level-objectives/
 - GitLab DORA metrics documentation: https://docs.gitlab.com/user/analytics/dora_metrics/
+- DX Core 4: https://getdx.com/research/measuring-developer-productivity-with-the-dx-core-4/
 - Marilyn Strathern, "Improving ratings: audit in the British University system", European Review 5(3), 1997

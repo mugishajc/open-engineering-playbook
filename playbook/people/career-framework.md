@@ -55,7 +55,17 @@ Small organisations need fewer levels. A startup can start with L1 to L4 and add
 - **Pay bands per level**, reviewed against the market once a year. Publish them internally. Many jurisdictions now require pay transparency; for example the EU Pay Transparency Directive (EU) 2023/970 had a transposition deadline of 7 June 2026 for member states. Check your local law.
 - **Staff-plus roles have a shape.** Name the common archetypes (tech lead for a team area, architect for a domain, solver for hard problems, right hand to a senior leader) so people can see different ways to work at that level.
 - **Manager track starts with a trial.** Offer a 6 to 12 month trial in the manager role, with a clear, no-penalty route back to the individual contributor track.
-- **Skills shift.** Update expectations as tools change. With code assistants doing more routine typing, weight judgement, review quality, system design, testing and clear writing more heavily at every level. See [code assistants](code-assistants.md).
+- **Skills shift.** Update expectations as tools change. With code assistants and agents handling more routine implementation, the skills that define each level shift. The table below shows the direction.
+
+| Level | Traditional primary skill | Emerging primary skill | Example evidence |
+|---|---|---|---|
+| L1 | Implement well-defined tasks with guidance | Specify, verify and explain tasks an agent drafted | Reviewed 10 agent PRs, caught a missing auth check, wrote the test that proved it |
+| L2 | Deliver features within a team | Write clear specs an agent can act on, verify the output against requirements | Spec for the search feature, eval set, review log showing 3 corrections before merge |
+| L3 | Design and implement large features | Decompose ambiguous problems into agent-sized specs, review cross-cutting concerns, own production behaviour | Broke the billing rewrite into 12 specs, reviewed each agent PR for data integrity, carried the on-call |
+| L4 | Own a team's technical direction | Define the system boundaries agents work within, set quality gates, decide what stays manual | Architecture decision on which services agents may change, review policy, cost-per-change dashboard |
+
+  Weight judgement, review quality, system design, testing and clear writing more heavily at every level. See [code assistants](code-assistants.md).
+
 - **Junior growth.** Keep hiring and growing early-career engineers. Pair them on real work, and make sure they still learn to read, debug and reason about code, not only to prompt tools.
 
 ### Assured
