@@ -96,6 +96,10 @@ Government systems follow MLPS 2.0 at level 3 or above, classified and filed wit
 | Rolling | MLPS testing cycle: level 3 and above tested yearly |
 | 2027 onward | US connected vehicles software ban begins model year 2027 (BIS rule, 17 Mar 2025) |
 | 2 Jan 2025 onward | US Outbound Investment Security Program covers semiconductors, quantum and AI investments involving China |
+| Ongoing | US EAR Entity List additions may restrict specific Chinese entities from receiving controlled items |
+| Ongoing | PIPL compliance audits for processors with more than 10 million people's data (every 2 years) |
+
+**Sanctions and export controls.** The US DOJ Data Security Program (28 CFR part 202, in force 8 Apr 2025) restricts transactions that give countries of concern access to bulk US sensitive personal data. China is on the list of countries of concern. Due diligence, audit and reporting duties apply from 6 Oct 2025. The US Outbound Investment Security Program (31 CFR part 850, in force 2 Jan 2025) covers semiconductors, quantum and AI investments involving China. The US BIS connected vehicles rule (17 Mar 2025) bans software from countries of concern starting model year 2027. EU dual-use Regulation (EU) 2021/821 controls encryption and surveillance exports. Screen suppliers, customers and investment targets against the relevant lists before any transaction.
 
 ## Sources
 

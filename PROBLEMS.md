@@ -133,6 +133,12 @@ If your problem is not here, [open an issue](https://github.com/mugishajc/open-e
 | Estimates are always wrong and deadlines always slip | [Planning and forecasting](playbook/ways-of-working/planning-and-forecasting.md) |
 | Product and engineering argue about priorities | [Product partnership](playbook/ways-of-working/product-partnership.md) |
 | Knowledge sits in three people's heads | [Knowledge sharing](playbook/people/knowledge-sharing.md), [documentation](playbook/people/documentation.md) |
+| Decisions happen in meetings and nobody writes them down | [Written culture](playbook/ways-of-working/written-culture.md), [decision records](playbook/architecture/decision-records.md) |
+| Too many meetings and not enough deep work | [Written culture](playbook/ways-of-working/written-culture.md), [sustainable pace](playbook/people/sustainable-pace.md) |
+| On-call is unfair and burning out the same people | [On-call](playbook/reliability/on-call.md) |
+| We do not know if our developer experience is getting better or worse | [Developer experience](playbook/measurement/developer-experience.md), [metrics](playbook/measurement/metrics.md) |
+| A team owns too many services and everything is slow | [Cognitive load](playbook/operating-model/cognitive-load.md), [team topology](playbook/operating-model/team-topology.md) |
+| A new service launched without monitoring and caused an outage | [Launch review](playbook/reliability/launch-review.md), [production readiness](playbook/reliability/production-readiness.md) |
 
 ## Strategy, governance and compliance
 
