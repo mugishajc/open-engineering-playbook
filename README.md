@@ -6,7 +6,7 @@ Writing code got cheap. Deciding what to build, proving it is safe, shipping it 
 
 Most engineering handbooks describe how one company works. This one is written to be adopted. Every practice comes at three levels and every target is measurable. Everything works on public cloud, on-premises and air-gapped networks, and every template is ready to copy. New to a term? See the [glossary](GLOSSARY.md).
 
-**105** practice pages in 16 areas · **18** toolkits for leaders · **92** ready-to-copy templates · **130** real problems mapped to answers · **97**-question self-assessment (19 for small businesses) · **189** true-or-false statements · **19** tabletop exercises, katas and decision games
+**107** practice pages in 16 areas · **8** regional compliance guides · **18** toolkits for leaders · **92** ready-to-copy templates · **130** real problems mapped to answers · **112**-question self-assessment (19 for small businesses) · **189** true-or-false statements · **19** tabletop exercises, katas and decision games
 
 ## Three ways in
 
@@ -47,7 +47,7 @@ Terms and acronyms are explained in the [glossary](GLOSSARY.md).
 | A chief data officer | [For data and digital officers](leaders/for-data-and-digital-officers.md) |
 | A chief digital officer (services, channels, digital transformation) | [For data and digital officers](leaders/for-data-and-digital-officers.md#chief-digital-officers), the [transition playbook](playbook/strategy/transition-playbook.md) and [product partnership](playbook/ways-of-working/product-partnership.md) |
 | A CISO or security lead | [Supply chain](playbook/security/supply-chain.md), [AI application security](playbook/ai/ai-application-security.md) and [control mapping](playbook/compliance/control-mapping.md) |
-| An auditor or compliance officer | [Control mapping](playbook/compliance/control-mapping.md) and [change management](playbook/reliability/change-management.md) |
+| An auditor or compliance officer | [Control mapping](playbook/compliance/control-mapping.md), [change management](playbook/reliability/change-management.md) and [regional guides](playbook/compliance/regions/) |
 | An engineering manager or team lead | [Agile in the AI era](playbook/ways-of-working/agile-in-the-ai-era.md) and [AI engineering practices](playbook/ai/ai-engineering-practices.md) |
 | A platform, DevOps or SRE engineer | [Golden paths](playbook/platform/golden-paths.md), [cloud native](playbook/platform/cloud-native.md) and [service levels](playbook/reliability/service-levels.md) |
 | A technical evangelist or advocate | [Stakeholders and communication](playbook/strategy/stakeholders-and-communication.md) |
@@ -132,6 +132,7 @@ playbook/      16 areas, 105 pages, each practice at three levels
                      hiring, skills gap, career framework, sustainable pace
   measurement/       metrics (DORA, SLOs, SPACE), maturity model
   compliance/        control mapping, public sector, regulated industries
+    regions/          US, UK, India, UAE/Saudi, China, Russia, Rwanda, Africa
 leaders/       toolkits for CTOs, CIOs, product, programme and QA leaders, data and digital officers,
                architects, strategists, government, banks, small businesses and business executives: operating rhythm, decisions, board reporting,
                first 90 days, leading in the AI era, crisis leadership, due diligence, reading list

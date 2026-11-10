@@ -115,6 +115,21 @@ Using cloud for a critical or important function is usually treated as outsourci
 - [Production readiness review](../../templates/docs/production-readiness-review.md)
 - [Vendor risk questionnaire](../../templates/docs/vendor-risk-questionnaire.md)
 
+## Regional guides
+
+Country-specific regulatory requirements, reporting clocks and enforcement bodies are in the regional guides.
+
+| Region | Guide |
+|---|---|
+| United States | [United States](regions/united-states.md) |
+| United Kingdom | [United Kingdom](regions/united-kingdom.md) |
+| India | [India](regions/india.md) |
+| UAE and Saudi Arabia | [UAE and Saudi Arabia](regions/uae-and-saudi-arabia.md) |
+| China | [China](regions/china.md) |
+| Russia | [Russia](regions/russia.md) |
+| Rwanda | [Rwanda](regions/rwanda.md) |
+| Africa (continent-wide) | [Africa](regions/africa.md) |
+
 ## Sources
 
 - Regulation (EU) 2022/2554 (Digital Operational Resilience Act): https://eur-lex.europa.eu/eli/reg/2022/2554/oj
