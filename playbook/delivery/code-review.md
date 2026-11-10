@@ -143,6 +143,25 @@ Code assistants and coding agents change who types the code. They do not change 
 - **Watch the load.** Track review hours per engineer, pull requests waiting for review, and rework rate (share of deployments that are unplanned fixes for production problems, the fifth DORA metric). If generated volume rises while rework rises too, review has become the bottleneck: cut batch size before adding more generation.
 - Follow your organisation's [code assistant page](../people/code-assistants.md) and [policy template](../../templates/docs/code-assistant-policy.md) on what data may be shared with which tools. For AI features in the product itself, see [AI engineering practices](../ai/ai-engineering-practices.md) and [AI architecture patterns](../ai/ai-architecture-patterns.md).
 
+### Tiered review for high-volume agent output
+
+When agents open many pull requests per day, human review becomes the binding constraint. Not every change needs the same depth. Assign a tier by file path (using CODEOWNERS or a label), and match the review effort to the risk.
+
+| Tier | Change type | Review requirement |
+|---|---|---|
+| 1 - Low risk | Configuration, documentation, dependency version bumps, generated lockfiles | AI-assisted review plus one human who checks the diff is limited to the claimed scope |
+| 2 - Feature code | Application logic, tests, UI changes | One human reviewer who checks spec match, test quality and design fit |
+| 3 - High risk | Authentication, authorisation, payments, personal data handling, infrastructure, CI pipelines, cryptography | Two human reviewers, at least one a domain specialist. Same rules as [Assured](#assured). |
+
+**How to implement it.**
+
+- Map paths to tiers in CODEOWNERS or in a review-assignment configuration file. Default to Tier 2 for any path not explicitly mapped.
+- Label agent-originated pull requests (for example with an `agent` label or the `agent/` branch prefix). The label triggers the tier lookup.
+- Track review hours per tier. If Tier 1 reviews take significant time, automate more of the check (for example, a CI job that verifies a dependency bump passes all tests and has no licence change).
+- Re-tier paths quarterly based on incident data. A path that caused an incident moves up one tier.
+
+Tiered review does not lower the bar. It focuses human attention where it matters most.
+
 ## Metrics
 
 Watch these at team level to improve the process:

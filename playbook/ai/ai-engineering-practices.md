@@ -76,11 +76,54 @@ Several coding agents read a Markdown file at the repository root, commonly name
 
 The person who starts an agent is the author of its pull request. Issue text, comments and file contents can carry prompt injection, so an agent that reads untrusted input never holds a token that can merge, release or read secrets. A narrow token is not enough on its own: an identity that can push a branch to the repository can change the `Makefile` or test scripts that CI runs, and on GitHub, workflows started from a branch in the same repository receive the repository's secrets. The branch and CI secrets rows above close that path. See [continuous integration](../delivery/continuous-integration.md#in-the-ai-era).
 
+## Delegating tasks to agent loops
+
+When agents can draft, test and propose a complete change, oversight shifts from watching every keystroke to reviewing at defined checkpoints. A task contract makes this safe.
+
+**Task contract.** Before you start an agent on a task, write:
+
+- **Inputs.** The spec, the files in scope and any constraints (performance budget, modules not to touch).
+- **Acceptance criteria.** Concrete conditions the result must satisfy, written so the agent and the reviewer check the same list.
+- **Constraints.** Security rules, dependency policy, size limit, maximum run time, maximum spend.
+
+**Checkpoint-based oversight.** The agent works through stages. A person reviews at each gate, not at each step.
+
+| Checkpoint | The agent has | The reviewer checks |
+|---|---|---|
+| Design | A proposed file list, API surface and test plan | Scope, fit with the system, missing edge cases |
+| Tests green | Working code with passing tests and a clean lint | Spec match, test quality, no invented APIs or packages |
+| Security scan | Static analysis, dependency audit and secret scan results | Findings triaged, no new high-severity items |
+| Ready for review | A pull request under 400 lines with a filled description | Everything in [code review](../delivery/code-review.md) |
+
+If a checkpoint fails, the agent revises. If it fails twice at the same gate, a person takes over.
+
+**Metrics for agent-delegated tasks.** Track these per team, not per agent.
+
+| Metric | What it tells you |
+|---|---|
+| Task success rate | Share of agent tasks that reach merge without a person rewriting them |
+| Rework after merge | Unplanned fixes within 7 days of a merge that came from an agent task |
+| Cost per completed task | Model API cost, compute cost and human review time combined |
+| Time from spec to merge | End-to-end cycle time, comparable to the team's manual baseline |
+
 ## Review, tests and evaluation
 
 - **Review the spec match first, then the tests, then the code.** If the tests do not prove the acceptance examples, stop there. Full rules are in [code review](../delivery/code-review.md#in-the-ai-era).
 - **Tests for code, evaluations for model behaviour.** Deterministic code gets ordinary tests. Features built on a model get an evaluation set with thresholds. See [quality engineering](../quality/quality-engineering.md#in-the-ai-era).
 - **Check generated tests.** Each new test must fail without the change and assert the requirement, not whatever the code happens to return.
+
+### Structured AI-assisted review
+
+A model-based reviewer can run before any person looks at a change. Used well, it shortens human review by surfacing the obvious problems early. Used badly, it becomes noise that reviewers learn to ignore.
+
+**How to set it up.**
+
+1. Configure the model reviewer to emit typed findings: `security`, `correctness`, `style`, `test-quality`. Each finding carries a confidence score.
+2. Route findings by confidence. High-confidence style findings that the formatter or linter confirms can be auto-resolved. Everything else goes to the human reviewer, grouped by type.
+3. The model reviewer posts its findings as non-blocking comments with a clear label (for example `bot:suggestion:` or `bot:question:`). It never approves and never counts towards the two-person rule or any required approval.
+4. Track the false positive rate weekly. If more than 30% of findings are dismissed without action, tighten the rules or raise the confidence threshold.
+
+**What it does not replace.** A model reviewer cannot judge whether the change fits the system, whether the spec is right, or whether the test proves the requirement rather than mirroring the implementation. Those stay with a person.
 
 ## Versioning and release
 

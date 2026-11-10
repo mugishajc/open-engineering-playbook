@@ -69,6 +69,17 @@ The 2025 DORA report, "State of AI-assisted Software Development", found that AI
 - Do not use suggestion acceptance rates, "share of code generated" or lines of code as success measures. They count activity, not outcomes.
 - Never track individuals' assistant use for performance ratings.
 
+**What to measure.** Track these at team level against the team's own pre-adoption baseline.
+
+| Metric | What it tells you |
+|---|---|
+| Cost per merged change | Total cost of the tool licence, model API calls and human review time, divided by merged pull requests. Compare to the pre-adoption cost of the same work. |
+| Time from spec to merged pull request | End-to-end cycle time. A tool that speeds drafting but slows review may not improve it. |
+| Rework rate | Share of deployments that are unplanned fixes for production problems (the fifth DORA metric). A rise means quality is falling faster than speed is rising. |
+| Change fail rate | Share of deployments causing a failure in production. Track alongside rework rate. |
+| Developer satisfaction | A short quarterly survey with the same questions each time. Ask where the tool helps and where it costs time. |
+| Review wait time | Time from review request to first response. If it rises as output rises, review is the bottleneck. See [code review](../delivery/code-review.md#tiered-review-for-high-volume-agent-output). |
+
 ## Practice
 
 ### Foundation
